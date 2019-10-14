@@ -1,0 +1,7 @@
+.ftpconfig
+.DS_Store
+wp-config.php
+images/
+settings/
+test.php
+front/error_log
