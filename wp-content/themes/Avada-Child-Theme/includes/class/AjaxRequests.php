@@ -35,7 +35,13 @@ class AjaxRequests
       'missing' => 0,
       'passed_params' => false
     );
+
+    parse_str($_POST['input'], $inputs);
+
+    $_POST['input'] = $inputs;
     $return['passed_params'] = $_POST;
+
+    $calculators = new Calculators();
 
     switch ( $calculator )
     {
@@ -49,7 +55,9 @@ class AjaxRequests
 
       break;
       case 'cegauto_ado':
-
+        $result = $calculators->calculate( $calculator, $inputs );
+        $return['data'] = $result;
+        $this->returnJSON($return);
       break;
       default:
         // code...
