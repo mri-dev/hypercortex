@@ -35,11 +35,8 @@ class AjaxRequests
       'missing' => 0,
       'passed_params' => false
     );
-
-    parse_str($_POST['input'], $inputs);
-
-    $_POST['input'] = $inputs;
     $return['passed_params'] = $_POST;
+    $inputs = $_POST['input'];
 
     $calculators = new Calculators();
 

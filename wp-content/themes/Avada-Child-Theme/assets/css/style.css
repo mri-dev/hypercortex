@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=latin-ext");
+/* line 1, E:/Munka/Git/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+#fusion-gmap-container, #main, #sliders-container, #wrapper, .fusion-separator .icon-wrapper, body, html {
+  background-color: transparent;
+}
+
+/* line 4, E:/Munka/Git/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+.fusion-header-wrapper {
+  background: white;
+}
