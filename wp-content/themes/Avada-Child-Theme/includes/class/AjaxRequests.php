@@ -52,9 +52,48 @@ class AjaxRequests
 
       break;
       case 'cegauto_ado':
-        $result = $calculators->calculate( $calculator, $inputs );
-        $return['data'] = $result;
-        $this->returnJSON($return);
+        // Require field validation
+        if ( empty($inputs['emission']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'emission';
+        }
+
+        if ( empty($inputs['kw']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'kw';
+        }
+
+        // Error fields
+        /*
+        if ( $inputs['emission'] < 4 ) {
+          $return['error'] = 1;
+          $return['error_elements']['emission'] = 'Emisszió kisebb, mint 4';
+        }*/
+
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calculate( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
       break;
       default:
         // code...

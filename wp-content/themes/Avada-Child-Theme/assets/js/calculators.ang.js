@@ -7,11 +7,17 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
   $scope.error = false;
   $scope.form = {};
   $scope.result = {};
+  $scope.missing = [];
+  $scope.error_elements = [];
 
   $scope.calculate = function( view )
   {
     $scope.loaded = false;
     $scope.loading = true;
+    $scope.missing = [];
+    $scope.error_elements = [];
+    $scope.error = false;
+    
 		$http({
 			method: 'POST',
 			url: '/wp-admin/admin-ajax.php?action=calc_api_interface',
@@ -23,11 +29,16 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
 		}).then(function successCallback(r) {
       $scope.loading = false;
       var data = r.data.data;
-
       if (r.data.error == 1) {
         $scope.loaded = false;
         $scope.error = r.data.msg;
         $scope.result = {};
+        if (r.data.missing_elements) {
+          $scope.missing = r.data.missing_elements;
+        }
+        if (r.data.error_elements) {
+          $scope.error_elements = r.data.error_elements;
+        }
       } else {
         $scope.result = data;
         $scope.loaded = true;
@@ -39,7 +50,7 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
 	}
 
 }]);
-
+app.filter('unsafe', function($sce){ return $sce.trustAsHtml; });
 app.filter('cash', function(){
 	return function(cash, text, aftertext){
 		if (cash) {
