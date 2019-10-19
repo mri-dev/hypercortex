@@ -25,11 +25,25 @@ class Calculators
       case 'cegauto_ado':
         return $this->load_cegauto_ado_resources();
       break;
+      case 'belepo_szabadsag':
+        return $this->load_belepo_szabadsag_resources();
+      break;
     }
 
     return false;
   }
 
+  private function load_belepo_szabadsag_resources()
+  {
+    $res = array();
+
+    // Form resources
+    $forms = array();
+
+    $res['forms'] = $forms;
+
+    return $res;
+  }
 
   private function load_cegauto_ado_resources()
   {

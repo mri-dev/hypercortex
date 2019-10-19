@@ -31,7 +31,7 @@ class CalculatorFrontendSC
         $settings = $calculators->loadSettings( $attr['view'] );
         $pass_data['settings'] = $settings;
 
-        $output = '<div ng-app="Hypercortex" ng-controller="Calculators" class="'.self::SCTAG.'-holder view_of_'.$attr['view'].'">';
+        $output = '<div ng-app="Hypercortex" ng-init="init(\''.$attr['view'].'\')" ng-controller="Calculators" class="'.self::SCTAG.'-holder view_of_'.$attr['view'].'">';
         $output .= (new ShortcodeTemplates('calculator-'.$attr['view']))->load_template( $pass_data );
         $output .= '</div>';
 

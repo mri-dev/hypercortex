@@ -9,11 +9,6 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
   $scope.result = {};
   $scope.missing = [];
   $scope.error_elements = [];
-  $scope.settings = {};
-
-  $scope.init = function( calc ) {
-    $scope.predefineFormSettings(calc);
-  }
 
   $scope.calculate = function( view )
   {
@@ -22,7 +17,7 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
     $scope.missing = [];
     $scope.error_elements = [];
     $scope.error = false;
-
+    
 		$http({
 			method: 'POST',
 			url: '/wp-admin/admin-ajax.php?action=calc_api_interface',
@@ -53,28 +48,6 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
     }, function errorCallback(response) {
     });
 	}
-
-  $scope.predefineFormSettings = function( calc ) {
-    switch (calc)
-    {
-      case 'belepo_szabadsag':
-        $scope.settings.select_yesno = $scope.select_yesno();
-        $scope.form.iden_kezdett_dolgozni = 'Nem';
-        $scope.form.athozott_szabadsagok = 0;
-      break;
-    }
-
-    console.log($scope.form);
-  }
-
-  $scope.select_yesno = function() {
-    var yn = [];
-
-    yn[0] = 'Nem';
-    yn[1] = 'Igen';
-
-    return yn;
-  }
 
 }]);
 app.filter('unsafe', function($sce){ return $sce.trustAsHtml; });
