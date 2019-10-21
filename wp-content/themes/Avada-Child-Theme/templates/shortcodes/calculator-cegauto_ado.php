@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="inputs">
-    <div class="line" ng-class="{missing:missing.indexOf('kw')!==-1, error:error_elements.indexOf('kw')!==-1}">
+    <div class="line" ng-class="{missing:missing.indexOf('kw')!==-1, error:error_elements['kw']}">
       <div class="head">
         Gépjármű teljesítménye *
         <div class="error-hint" ng-if="error_elements.indexOf('kw')!==-1">{{error_elements['kw']}}</div>
@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="line" ng-class="{missing:missing.indexOf('emission')!==-1, error:error_elements.indexOf('emission')!==-1}">
+    <div class="line" ng-class="{missing:missing.indexOf('emission')!==-1, error:error_elements['emission']}">
       <div class="head">
         Környezetvédelmi osztály *
         <div class="error-hint" ng-if="error_elements.indexOf('emission')!==-1">{{error_elements['emission']}}</div>

@@ -43,13 +43,89 @@ class AjaxRequests
     switch ( $calculator )
     {
       case 'netto_ber':
+        if ( empty($inputs['brutto_ber']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'brutto_ber';
+          $return['error_elements']['brutto_ber'] = 'Írja be a bruttó bérét a kalkulációhoz!';
+        }
 
+        if ( $inputs['csaladkedvezmenyre_jogosult'] == 'Igen' && empty($inputs['csalad_eltartott_gyermek']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'csalad_eltartott_gyermek';
+        }
+
+        if ( $inputs['csaladkedvezmenyre_jogosult'] == 'Igen' && empty($inputs['csalad_eltartott_gyermek_kedvezmenyezett']) && $inputs['csalad_eltartott_gyermek_kedvezmenyezett'] != '0' ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'csalad_eltartott_gyermek_kedvezmenyezett';
+        }
+
+
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calculate( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
       break;
       case 'teljes_berkoltseg':
 
       break;
       case 'belepo_szabadsag':
+        // Require field validation
+        if ( empty($inputs['szuletesi_ev']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'szuletesi_ev';
+          $return['error_elements']['szuletesi_ev'] = 'Pótolja a születési évét a kalkulációhoz!';
+        }
 
+        if ( $inputs['iden_kezdett_dolgozni'] == 'Igen' && empty($inputs['belepes_datuma']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'belepes_datuma';
+          $return['error_elements']['belepes_datuma'] = 'A munkába állás első napját kötelező megadnia abban az esetben, ha idén kezdett el dolgozni munkahelyén!';
+        }
+
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calculate( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
       break;
       case 'cegauto_ado':
         // Require field validation

@@ -23,13 +23,24 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
     $scope.error_elements = [];
     $scope.error = false;
 
+    var form = {};
+    angular.copy($scope.form, form);
+
+    if ( view == 'belepo_szabadsag' && form.iden_kezdett_dolgozni == 'Igen' && typeof $scope.form.belepes_datuma !== 'undefined' ) {
+      var date = new Date($scope.form.belepes_datuma);
+      var belepes = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+      form.belepes_datuma = belepes;
+    } else {
+      form.belepes_datuma = '';
+    }
+
 		$http({
 			method: 'POST',
 			url: '/wp-admin/admin-ajax.php?action=calc_api_interface',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			data: jQuery.param({
         calculator: view,
-        input: $scope.form
+        input: form
 			})
 		}).then(function successCallback(r) {
       $scope.loading = false;
@@ -57,10 +68,20 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
   $scope.predefineFormSettings = function( calc ) {
     switch (calc)
     {
+      case 'netto_ber':
+        $scope.settings.select_yesno = $scope.select_yesno();
+        $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
+        $scope.form.frisshazas_jogosult = 'Nem';
+        $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
+        $scope.form.brutto_ber = 500000;
+      break;
       case 'belepo_szabadsag':
         $scope.settings.select_yesno = $scope.select_yesno();
         $scope.form.iden_kezdett_dolgozni = 'Nem';
+        $scope.form.gyerek16ev_fiatalabb_fogyatekos = 'Nem';
+        $scope.form.megvaltozott_munkakepessegu = 'Nem';
         $scope.form.athozott_szabadsagok = 0;
+        $scope.form.gyerek16ev_fiatalabb = 0;
       break;
     }
 
@@ -96,4 +117,16 @@ app.filter('cash', function(){
 			return '0'+" "+text+" "+aftertext;
 		}
 	};
+});
+app.filter('range', function() {
+  return function(input, start, end) {
+    start = parseInt(start);
+    end = parseInt(end);
+    var direction = (start <= end) ? 1 : -1;
+    while (start != end) {
+        input.push(start);
+        start += direction;
+    }
+    return input;
+  };
 });
