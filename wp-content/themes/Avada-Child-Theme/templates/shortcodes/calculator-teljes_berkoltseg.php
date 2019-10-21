@@ -73,6 +73,34 @@
       </div>
     </div>
 
+    <div class="line" ng-class="{missing:missing.indexOf('ceg_kisvallalati_ado_alany')!==-1, error:error_elements['ceg_kisvallalati_ado_alany']}">
+      <div class="head">
+        A cég Kisvállalati adó alanya? *
+        <div class="error-hint" ng-if="error_elements.indexOf('ceg_kisvallalati_ado_alany')!==-1">{{error_elements['ceg_kisvallalati_ado_alany']}}</div>
+      </div>
+      <div class="val">
+        <div class="inp-wrapper">
+          <select class="" ng-model="form.ceg_kisvallalati_ado_alany" ng-options="item for item in settings.select_yesno"></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="line two-line" ng-class="{missing:missing.indexOf('munkavallalo_kedvezmeny')!==-1, error:error_elements['munkavallalo_kedvezmeny']}">
+      <div class="head">
+        A munkavállaló után a vállalkozás jogosult kedvezményre? *
+        <div class="error-hint" ng-if="error_elements.indexOf('munkavallalo_kedvezmeny')!==-1">{{error_elements['munkavallalo_kedvezmeny']}}</div>
+      </div>
+      <div class="val">
+        <div class="inp-wrapper">
+          <select class="" ng-model="form.munkavallalo_kedvezmeny">
+            <?php foreach ((array)$settings['forms']['munkavallalo_kedvezmenyek'] as $i => $kedv): ?>
+            <option value="<?=$i?>" ng-selected="<?=$i?>==0"><?=$kedv['title']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <div class="line action-line" ng-if="!loading">
       <div class="val">
         <button type="button" ng-click="calculate('<?=$view?>')" name="button"><?=__('Kalkuláció indítása', 'hc')?></button>
@@ -118,6 +146,26 @@
           <tr>
             <td class="h"><strong>Nettó bér</strong></td>
             <td class="v">{{result.netto_ber|cash:'Ft':''}}</td>
+          </tr>
+          <tr>
+            <td class="h">Fizetendő szociális hozzájárulási adó</td>
+            <td class="v">{{result.ado_szocialis_hozzajarulas|cash:'Ft':''}}</td>
+          </tr>
+          <tr>
+            <td class="h">Fizetendő szakképzési hozzájárulás</td>
+            <td class="v">{{result.ado_szakkepzesi_hozzajarulas|cash:'Ft':''}}</td>
+          </tr>
+          <tr>
+            <td class="h">Fizetendő kisvállalati adó</td>
+            <td class="v">{{result.ado_kisvallalati|cash:'Ft':''}}</td>
+          </tr>
+          <tr>
+            <td class="h"><strong>Teljes bérköltség nem KIVA alany cég esetén</strong></td>
+            <td class="v">{{result.berkoltseg_nem_KIVA|cash:'Ft':''}}</td>
+          </tr>
+          <tr>
+            <td class="h"><strong>Teljes bérköltség KIVA alany cég esetén</strong></td>
+            <td class="v">{{result.berkoltseg_KIVA|cash:'Ft':''}}</td>
           </tr>
         </tbody>
       </table>

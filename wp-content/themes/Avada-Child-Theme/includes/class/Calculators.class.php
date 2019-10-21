@@ -10,6 +10,102 @@ class Calculators
   {
     switch ( $calc )
     {
+      case 'teljes_berkoltseg':
+        $ret = array(
+          'brutto_ber' => 0
+        );
+        $settings = $this->loadSettings( $calc );
+
+        $brutto_ber = $data['brutto_ber'];
+
+        $ret['brutto_ber'] = $brutto_ber;
+
+        $csaladi_adokedvezmeny_osszege = 0;
+        if ($data['csaladkedvezmenyre_jogosult'] == 'Igen') {
+          $csaladi_adokedvezmeny_osszege = $this->csaladiAdokedvezmenyOsszege( (int)$data['csalad_eltartott_gyermek'], (int)$data['csalad_eltartott_gyermek_kedvezmenyezett'], $settings );
+        }
+
+        $ervenyesitheto_jarulekkedvezmeny = 0;
+        $friss_hazasok_kedvezmeny = 0;
+        $szemelyi_kedvezmeny = 0;
+        $ervenyesitheto_termeszetbeni_kedvezmeny = 0;
+        $ervenyesitheto_penzbeni_kedvezmeny = 0;
+
+        if ($data['frisshazas_jogosult'] == 'Igen') {
+          $friss_hazasok_kedvezmeny = $settings['adokedvezmeny_frisshazasok'];
+        }
+
+        if ($data['szemelyikedvezmeny_jogosult'] == 'Igen') {
+          $szemelyi_kedvezmeny = $settings['adokedvezmeny_szemelyi'];
+        }
+
+        $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege+$friss_hazasok_kedvezmeny-$brutto_ber;
+        $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
+
+        $ervenyesitheto_jarulekkedvezmeny = $csaladi_adokedvezmeny_maradekalap * 0.15;
+        $ervenyesitheto_jarulekkedvezmeny = ($ervenyesitheto_jarulekkedvezmeny < 0) ? 0 : $ervenyesitheto_jarulekkedvezmeny;
+
+        $ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
+        $ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
+
+        $ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
+        $ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
+
+        $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
+        $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
+        $ret['ado_szja'] = round($ret['ado_szja']);
+
+        $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
+        $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
+        $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
+
+        $ret['ado_penzbeli_egeszseg'] = ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100)) - $ervenyesitheto_termeszetbeni_kedvezmeny;
+        $ret['ado_penzbeli_egeszseg'] = ($ret['ado_penzbeli_egeszseg'] < 0) ? 0 : $ret['ado_penzbeli_egeszseg'];
+        $ret['ado_penzbeli_egeszseg'] = round($ret['ado_penzbeli_egeszseg']);
+
+        $ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
+        $ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
+        $ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
+
+        $ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
+        $ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
+
+        $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
+
+        $ret['sum_minusbrutto'] = $sum_minusbrutto;
+        $netto_ber = $brutto_ber-$sum_minusbrutto;
+        $ret['netto_ber'] = $netto_ber;
+
+        $values['csaladi_adokedvezmeny_osszege'] = $csaladi_adokedvezmeny_osszege;
+        $values['frisshazas_jogosult'] = $friss_hazasok_kedvezmeny;
+        $values['szemelyikedvezmeny_jogosult'] = $szemelyi_kedvezmeny;
+        $values['csaladi_adokedvezmeny_maradekalap'] = $csaladi_adokedvezmeny_maradekalap;
+        $values['ervenyesitheto_jarulekkedvezmeny'] = $ervenyesitheto_jarulekkedvezmeny;
+        $values['ervenyesitheto_termeszetbeni_kedvezmeny'] = $ervenyesitheto_termeszetbeni_kedvezmeny;
+        $values['ervenyesitheto_penzbeni_kedvezmeny'] = $ervenyesitheto_penzbeni_kedvezmeny;
+
+        // Nettó bér alap vége
+
+        // Teljes bérköltség számítások
+        $minimalber = $settings['minimalber'];
+        $minimalber_ketszeres = $minimalber * 2;
+        $szocho_es_kiva_kedvezmeny_alap = 0;
+        $szokho_kedvezmeny_alap = 0;
+
+        $ret['ado_szocialis_hozzajarulas'] = 0;
+        $ret['ado_szakkepzesi_hozzajarulas'] = 0;
+        $ret['ado_kisvallalati'] = 0;
+        $ret['berkoltseg_nem_KIVA'] = 0;
+        $ret['berkoltseg_KIVA'] = 0;
+
+        $values['szocho_es_kiva_kedvezmeny_alap'] = $szocho_es_kiva_kedvezmeny_alap;
+        $values['szokho_kedvezmeny_alap'] = $szokho_kedvezmeny_alap;
+
+
+        $ret['values'] = $values;
+
+        return $ret;
+      break;
       case 'netto_ber':
         $ret = array(
           'brutto_ber' => 0
@@ -163,6 +259,9 @@ class Calculators
   {
     switch ( $calc )
     {
+      case 'teljes_berkoltseg':
+        return $this->load_teljes_berkoltseg_resources();
+      break;
       case 'netto_ber':
         return $this->load_netto_ber_resources();
       break;
@@ -193,6 +292,9 @@ class Calculators
     $res['ado_penzbeli_egeszseg'] = 3;
     $res['ado_nyugdij'] = 10;
     $res['ado_munkaerppiac'] = 1.5;
+    $res['ado_szocialis_hozzajarulas'] = 17.5;
+    $res['ado_szakkepzesi_hozzajarulas'] = 1.5;
+    $res['ado_kisvallalati'] = 13;
 
     $res['adokedvezmeny_frisshazasok'] = 33335;
     $res['adokedvezmeny_szemelyi'] = 7450;
@@ -200,9 +302,41 @@ class Calculators
     $res['adokedvezmeny_csalad_gyermek2'] = 133330;
     $res['adokedvezmeny_csalad_gyermek3'] = 220000;
 
+    $res['minimalber'] = 149000;
+
     $value = $res[$key];
 
     return $value;
+  }
+
+  private function load_teljes_berkoltseg_resources()
+  {
+    $res = array();
+
+    $res['minimalber'] = $this->getSettingsValue('minimalber');
+
+    $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_termeszetegeszseg'] = $this->getSettingsValue('ado_termeszetegeszseg');
+    $res['ado_penzbeli_egeszseg'] = $this->getSettingsValue('ado_penzbeli_egeszseg');
+    $res['ado_nyugdij'] = $this->getSettingsValue('ado_nyugdij');
+    $res['ado_munkaerppiac'] = $this->getSettingsValue('ado_munkaerppiac');
+
+    $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
+    $res['ado_szakkepzesi_hozzajarulas'] = $this->getSettingsValue('ado_szakkepzesi_hozzajarulas');
+    $res['ado_kisvallalati'] = $this->getSettingsValue('ado_kisvallalati');
+
+    $res['adokedvezmeny_frisshazasok'] = $this->getSettingsValue('adokedvezmeny_frisshazasok');
+    $res['adokedvezmeny_szemelyi'] = $this->getSettingsValue('adokedvezmeny_szemelyi');
+    $res['adokedvezmeny_csalad_gyermek1'] = $this->getSettingsValue('adokedvezmeny_csalad_gyermek1');
+    $res['adokedvezmeny_csalad_gyermek2'] = $this->getSettingsValue('adokedvezmeny_csalad_gyermek2');
+    $res['adokedvezmeny_csalad_gyermek3'] = $this->getSettingsValue('adokedvezmeny_csalad_gyermek3');
+
+    // Form resources
+    $forms = array();
+    $forms['munkavallalo_kedvezmenyek'] = $this->loadMunkavallaloKedvezmenyek();
+    $res['forms'] = $forms;
+
+    return $res;
   }
 
   private function load_netto_ber_resources()
@@ -358,6 +492,153 @@ class Calculators
     }
 
     return $price;
+  }
+
+  protected function loadMunkavallaloKedvezmenyek()
+  {
+    $row = array();
+
+    $row[] = array(
+      'title' => 'Kedvezményre nem jogosult',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 0,
+          'kedvezmeny_max' => 0
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 0,
+          'kedvezmeny_max' => 0
+        )
+      )
+    );
+
+    $row[] = array(
+      'title' => 'Szakképzettséget nem igénylő munkakör',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 50,
+          'kedvezmeny_max' => '{minimalber}'
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 0,
+          'kedvezmeny_max' => '{minimalber}'
+        )
+      )
+    );
+
+    $row[] = array(
+      'title' => 'Munkaerő piacra lépő a foglalkoztatás első 2 évében',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 100,
+          'kedvezmeny_max' => '{minimalber}'
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 100,
+          'kedvezmeny_max' => '{minimalber}'
+        )
+      )
+    );
+
+    $row[] = array(
+      'title' => 'Munkaerő piacra lépő a foglalkoztatás 3. évében',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 50,
+          'kedvezmeny_max' => '{minimalber}'
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 0,
+          'kedvezmeny_max' => '{minimalber}'
+        )
+      )
+    );
+
+    $row[] = array(
+      'title' => '3 v. több gyermeket nevelő munkaerőpiacra lépő nő a foglalkoztatás első 3 évében',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 100,
+          'kedvezmeny_max' => '{minimalber}'
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 100,
+          'kedvezmeny_max' => '{minimalber}'
+        )
+      )
+    );
+
+    $row[] = array(
+      'title' => '3 v. több gyermeket nevelő munkaerőpiacra lépő nő a foglalkoztatás első 4-5. évében',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 50,
+          'kedvezmeny_max' => '{minimalber}'
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 0,
+          'kedvezmeny_max' => '{minimalber}'
+        )
+      )
+    );
+
+    $row[] = array(
+      'title' => 'Megváltozott munkaképességű munkavállaló',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 100,
+          'kedvezmeny_max' => '{minimalber}'
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 100,
+          'kedvezmeny_max' => '{minimalber_ketszeres}'
+        )
+      )
+    );
+
+    $row[] = array(
+      'title' => 'Doktori fokozattal rendelkező kutató',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 100,
+          'kedvezmeny_max' => 500000
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 100,
+          'kedvezmeny_max' => 500000
+        )
+      )
+    );
+
+    $row[] = array(
+      'title' => 'Doktori képzésben résztvevő hallgató, doktorjelölt',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 50,
+          'kedvezmeny_max' => 200000
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 0,
+          'kedvezmeny_max' => 200000
+        )
+      )
+    );
+
+    $row[] = array(
+      'title' => 'Kutató-fejlesztő munkakörben foglalkoztatott',
+      'calc' => array(
+        'szochokiva' => array(
+          'kedvezmeny_mertek' => 50,
+          'kedvezmeny_max' => -1
+        ),
+        'szokho' => array(
+          'kedvezmeny_mertek' => 0,
+          'kedvezmeny_max' => -1
+        )
+      )
+    );
+
+    return $row;
   }
 
   protected function loadGepjarmuTeljesitmenyOsztalyok()

@@ -94,6 +94,7 @@
       padding: 0 12px;
       outline: none;
       font-size: 1.1rem;
+      width: 100%;
     }
 
     .ihint{
@@ -109,6 +110,7 @@
     align-items: center;
     color: black;
     justify-content: space-between;
+    flex-wrap: wrap;
     .head{
       font-weight: bold;
       line-height: 1.2;
@@ -116,6 +118,13 @@
     }
     & > div {
       padding: 10px 20px;
+    }
+
+    &.two-line{
+      .head,
+      .val{
+        flex-basis: 100%;
+      }
     }
   }
   .line.missing,

@@ -69,6 +69,12 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
     switch (calc)
     {
       case 'netto_ber':
+        $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
+        $scope.form.frisshazas_jogosult = 'Nem';
+        $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
+        $scope.form.brutto_ber = 500000;
+      break;
+      case 'teljes_berkoltseg':
         $scope.settings.select_yesno = $scope.select_yesno();
         $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
         $scope.form.frisshazas_jogosult = 'Nem';

@@ -109,14 +109,15 @@
   padding: 0 12px;
   outline: none;
   font-size: 1.1rem;
+  width: 100%;
 }
-/* line 99, sass/_base.scss */
+/* line 100, sass/_base.scss */
 .calculator-holder .inp-wrapper .ihint {
   color: black;
   position: relative;
   padding: 0 15px;
 }
-/* line 105, sass/_base.scss */
+/* line 106, sass/_base.scss */
 .calculator-holder .line {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -124,42 +125,48 @@
   align-items: center;
   color: black;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
-/* line 112, sass/_base.scss */
+/* line 114, sass/_base.scss */
 .calculator-holder .line .head {
   font-weight: bold;
   line-height: 1.2;
   font-size: 1rem;
 }
-/* line 117, sass/_base.scss */
+/* line 119, sass/_base.scss */
 .calculator-holder .line > div {
   padding: 10px 20px;
 }
-/* line 123, sass/_base.scss */
+/* line 125, sass/_base.scss */
+.calculator-holder .line.two-line .head,
+.calculator-holder .line.two-line .val {
+  flex-basis: 100%;
+}
+/* line 132, sass/_base.scss */
 .calculator-holder .line.missing .inp-wrapper,
 .calculator-holder .line.error .inp-wrapper {
   border: 2px solid #ffc5c5;
 }
-/* line 127, sass/_base.scss */
+/* line 136, sass/_base.scss */
 .calculator-holder .error-hint {
   color: #ef1212;
   font-size: 0.7rem;
   margin: 0 0 5px 0;
   font-weight: 400;
 }
-/* line 133, sass/_base.scss */
+/* line 142, sass/_base.scss */
 .calculator-holder .head-hint {
   color: #808080;
   font-size: 0.7rem;
   line-height: 1.2;
   font-weight: 400;
 }
-/* line 140, sass/_base.scss */
+/* line 149, sass/_base.scss */
 .calculator-holder .action-line .val {
   flex-basis: 100%;
   text-align: right;
 }
-/* line 144, sass/_base.scss */
+/* line 153, sass/_base.scss */
 .calculator-holder .action-line button {
   outline: none;
   background: #5a4934;
@@ -169,57 +176,57 @@
   color: white;
   cursor: pointer;
 }
-/* line 155, sass/_base.scss */
+/* line 164, sass/_base.scss */
 .calculator-holder .inputs .line:nth-child(even) {
   background: #f7f1e8;
 }
-/* line 160, sass/_base.scss */
+/* line 169, sass/_base.scss */
 .calculator-holder table.result-table {
   border: 5px solid #cec1ae;
   border-collapse: collapse;
   width: 100%;
 }
-/* line 164, sass/_base.scss */
+/* line 173, sass/_base.scss */
 .calculator-holder table.result-table td {
   padding: 10px;
   border: 1px solid #c9c9c9;
 }
-/* line 168, sass/_base.scss */
+/* line 177, sass/_base.scss */
 .calculator-holder table.result-table td.h {
   color: #343434;
 }
-/* line 171, sass/_base.scss */
+/* line 180, sass/_base.scss */
 .calculator-holder table.result-table td.v {
   font-weight: bold;
   color: black;
   text-align: center;
 }
-/* line 176, sass/_base.scss */
+/* line 185, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr > td:last-child {
   background: #f8f8f8;
 }
-/* line 180, sass/_base.scss */
+/* line 189, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td {
   background: #f7f1e8;
 }
-/* line 183, sass/_base.scss */
+/* line 192, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td:last-child {
   background: #ece3d5;
 }
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
-  /* line 191, sass/_base.scss */
+  /* line 200, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 192, sass/_base.scss */
+  /* line 201, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 193, sass/_base.scss */
+  /* line 202, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
@@ -227,17 +234,17 @@
 
 /* Standard syntax */
 @keyframes loaderbgchange {
-  /* line 198, sass/_base.scss */
+  /* line 207, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 199, sass/_base.scss */
+  /* line 208, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 200, sass/_base.scss */
+  /* line 209, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
