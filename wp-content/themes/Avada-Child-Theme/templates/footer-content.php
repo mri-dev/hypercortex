@@ -19,7 +19,11 @@ $display_footer = get_post_meta( $c_page_id, 'pyre_display_footer', true );
 ?>
 <?php if ( ( Avada()->settings->get( 'footer_widgets' ) && 'no' !== $display_footer ) || ( ! Avada()->settings->get( 'footer_widgets' ) && 'yes' === $display_footer ) ) : ?>
 	<?php $footer_widget_area_center_class = ( Avada()->settings->get( 'footer_widgets_center_content' ) ) ? ' fusion-footer-widget-area-center' : ''; ?>
-
+	<div class="footer-menu">		
+		<?php echo wp_nav_menu(array(
+			'menu' => 'Lábléc'
+		)); ?>
+	</div>
 	<footer role="contentinfo" class="fusion-footer-widget-area fusion-widget-area<?php echo esc_attr( $footer_widget_area_center_class ); ?>">
     <div class="footer-wrap">
       <div class="fusion-row">
