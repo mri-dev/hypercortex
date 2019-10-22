@@ -73,7 +73,6 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
         $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
         $scope.form.frisshazas_jogosult = 'Nem';
         $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
-        $scope.form.brutto_ber = 500000;
       break;
       case 'teljes_berkoltseg':
         $scope.settings.select_yesno = $scope.select_yesno();
@@ -81,7 +80,6 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
         $scope.form.frisshazas_jogosult = 'Nem';
         $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
         $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
-        $scope.form.brutto_ber = 500000;
       break;
       case 'belepo_szabadsag':
         $scope.settings.select_yesno = $scope.select_yesno();
