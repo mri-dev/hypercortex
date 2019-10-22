@@ -30,7 +30,7 @@
       </div>
       <div class="val">
         <div class="inp-wrapper">
-          <input type="number" style="width: 80px;" min="0" ng-model="form.athozott_szabadsagok">
+          <input type="number" min="0" ng-model="form.athozott_szabadsagok">
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
       </div>
       <div class="val">
         <div class="inp-wrapper">
-          <input type="number" style="width: 80px;" min="0" ng-model="form.szuletesi_ev">
+          <input type="number" min="0" ng-model="form.szuletesi_ev">
         </div>
       </div>
     </div>
@@ -54,7 +54,7 @@
       </div>
       <div class="val">
         <div class="inp-wrapper">
-          <input type="number" style="width: 80px;" min="0" ng-model="form.gyerek16ev_fiatalabb">
+          <input type="number" min="0" ng-model="form.gyerek16ev_fiatalabb">
         </div>
       </div>
     </div>
@@ -105,7 +105,7 @@
           </tr>
           <tr>
             <td class="h"><strong>Időarányos szabadság</strong></td>
-            <td class="v">{{result.szabadsag_idoaranyos}}</td>
+            <td class="v"><strong>{{result.szabadsag_idoaranyos}}</strong></td>
           </tr>
           <tr>
             <td class="h">Éves betegszabadságok száma</td>
@@ -113,7 +113,7 @@
           </tr>
           <tr>
             <td class="h"><strong>Időarányos betegszabadság</strong></td>
-            <td class="v">{{result.betegszabadsag_idoaranyos}}</td>
+            <td class="v"><strong>{{result.betegszabadsag_idoaranyos}}</strong></td>
           </tr>
         </tbody>
       </table>

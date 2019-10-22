@@ -8,7 +8,7 @@
       </div>
       <div class="val">
         <div class="inp-wrapper">
-          <input type="number" style="width: 105px;" min="0" ng-model="form.brutto_ber">
+          <input type="number" min="0" ng-model="form.brutto_ber">
         </div>
       </div>
     </div>
@@ -88,36 +88,36 @@
       <table class="result-table">
         <tbody>
           <tr>
-            <td class="h">Bruttó havi munkabér</td>
-            <td class="v">{{result.brutto_ber|cash:'Ft':''}}</td>
+            <td class="h"><strong>Bruttó havi munkabér</strong></td>
+            <td class="v"><strong>{{result.brutto_ber|cash:'Ft':''}}</strong></td>
           </tr>
-          <tr>
+          <tr class="sm">
             <td class="h">- Személyi jövedelemadó</td>
             <td class="v">{{result.ado_szja|cash:'Ft':''}}</td>
           </tr>
-          <tr>
+          <tr class="sm">
             <td class="h">- Természetbeni egészségbiztosítási járulék</td>
             <td class="v">{{result.ado_termeszetegeszseg|cash:'Ft':''}}</td>
           </tr>
-          <tr>
+          <tr class="sm">
             <td class="h">- Pénzbeli egészségbiztosítási járulék</td>
             <td class="v">{{result.ado_penzbeli_egeszseg|cash:'Ft':''}}</td>
-          </tr>
+          </tr class="sm">
           <tr>
             <td class="h">- Nyugdíjjárulék</td>
             <td class="v">{{result.ado_nyugdij|cash:'Ft':''}}</td>
           </tr>
-          <tr>
+          <tr class="sm">
             <td class="h">- Munkaerő piaci hozzájárulás</td>
             <td class="v">{{result.ado_munkaerppiac|cash:'Ft':''}}</td>
           </tr>
           <tr>
             <td class="h"><strong>Összes levonás bruttó bérből</strong></td>
-            <td class="v">{{result.sum_minusbrutto|cash:'Ft':''}}</td>
+            <td class="v"><strong>-{{result.sum_minusbrutto|cash:'Ft':''}}</strong></td>
           </tr>
-          <tr>
+          <tr class="hl">
             <td class="h"><strong>Nettó bér</strong></td>
-            <td class="v">{{result.netto_ber|cash:'Ft':''}}</td>
+            <td class="v"><strong>{{result.netto_ber|cash:'Ft':''}}</strong></td>
           </tr>
         </tbody>
       </table>

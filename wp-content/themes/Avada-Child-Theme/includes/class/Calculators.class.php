@@ -87,20 +87,69 @@ class Calculators
         // Nettó bér alap vége
 
         // Teljes bérköltség számítások
+        $mk = $settings['forms']['munkavallalo_kedvezmenyek'];
         $minimalber = $settings['minimalber'];
         $minimalber_ketszeres = $minimalber * 2;
         $szocho_es_kiva_kedvezmeny_alap = 0;
         $szokho_kedvezmeny_alap = 0;
 
-        $ret['ado_szocialis_hozzajarulas'] = 0;
-        $ret['ado_szakkepzesi_hozzajarulas'] = 0;
-        $ret['ado_kisvallalati'] = 0;
-        $ret['berkoltseg_nem_KIVA'] = 0;
-        $ret['berkoltseg_KIVA'] = 0;
+
+        $sel_mk = (int)$data['munkavallalo_kedvezmeny'];
+        $mk_obj = $mk[$sel_mk];
+
+        // szocho kiva alapszámítás
+        $kedvezmeny_mertek = $mk_obj['calc']['szochokiva']['kedvezmeny_mertek'];
+        $kedvezmeny_max = $mk_obj['calc']['szochokiva']['kedvezmeny_max'];
+        $kedvezmeny_max = (float)str_replace(array('{minimalber}', '{minimalber_ketszeres}'), array($minimalber, $minimalber_ketszeres), $kedvezmeny_max);
+
+        $values['szochokiva_kedvezmeny_mertek'] = $kedvezmeny_mertek;
+        $values['szochokiva_kedvezmeny_max'] = $kedvezmeny_max;
+
+        if ( $kedvezmeny_mertek > 0 ) {
+          if ($kedvezmeny_max > 0) {
+            $szocho_es_kiva_kedvezmeny_alap_row = array();
+            $szocho_es_kiva_kedvezmeny_alap_row[] = $brutto_ber * ($kedvezmeny_mertek/100);
+            $szocho_es_kiva_kedvezmeny_alap_row[] = $kedvezmeny_max * ($kedvezmeny_mertek/100);
+            $szocho_es_kiva_kedvezmeny_alap = min($szocho_es_kiva_kedvezmeny_alap_row);
+          } else {
+            $szocho_es_kiva_kedvezmeny_alap = $brutto_ber * ($kedvezmeny_mertek/100);
+          }
+        }
+
+        // szokho alapszámítás
+        $kedvezmeny_mertek = $mk_obj['calc']['szokho']['kedvezmeny_mertek'];
+        $kedvezmeny_max = $mk_obj['calc']['szokho']['kedvezmeny_max'];
+        $kedvezmeny_max = (float)str_replace(array('{minimalber}', '{minimalber_ketszeres}'), array($minimalber, $minimalber_ketszeres), $kedvezmeny_max);
+
+        $values['szokho_kedvezmeny_mertek'] = $kedvezmeny_mertek;
+        $values['szokho_kedvezmeny_max'] = $kedvezmeny_max;
+
+        if ( $kedvezmeny_mertek > 0 ) {
+          if ($kedvezmeny_max > 0) {
+            $szokho_kedvezmeny_alap_row = array();
+            $szokho_kedvezmeny_alap_row[] = $brutto_ber * ($kedvezmeny_mertek/100);
+            $szokho_kedvezmeny_alap_row[] = $kedvezmeny_max * ($kedvezmeny_mertek/100);
+            $szokho_kedvezmeny_alap = min($szokho_kedvezmeny_alap_row);
+          } else {
+            $szokho_kedvezmeny_alap = $brutto_ber * ($kedvezmeny_mertek/100);
+          }
+        }
+
+        $ret['ado_szocialis_hozzajarulas'] = ($brutto_ber - $szocho_es_kiva_kedvezmeny_alap) * ($settings['ado_szocialis_hozzajarulas']/100);
+        $ret['ado_szocialis_hozzajarulas'] = round($ret['ado_szocialis_hozzajarulas']);
+
+        $ret['ado_szakkepzesi_hozzajarulas'] = ($brutto_ber - $szokho_kedvezmeny_alap) * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+        $ret['ado_szakkepzesi_hozzajarulas'] = round($ret['ado_szakkepzesi_hozzajarulas']);
+
+        $ret['ado_kisvallalati'] = ($brutto_ber - $szocho_es_kiva_kedvezmeny_alap) * ($settings['ado_kisvallalati']/100);
+        $ret['ado_kisvallalati'] = round($ret['ado_kisvallalati']);
+
+        $ret['berkoltseg_nem_KIVA'] = $brutto_ber + $ret['ado_szocialis_hozzajarulas'] + $ret['ado_szakkepzesi_hozzajarulas'];
+        $ret['berkoltseg_KIVA'] = $brutto_ber + $ret['ado_kisvallalati'];
 
         $values['szocho_es_kiva_kedvezmeny_alap'] = $szocho_es_kiva_kedvezmeny_alap;
         $values['szokho_kedvezmeny_alap'] = $szokho_kedvezmeny_alap;
-
+        $values['kiva_adoalany'] = $data['ceg_kisvallalati_ado_alany'];
 
         $ret['values'] = $values;
 

@@ -85,7 +85,10 @@
     overflow: hidden;
     padding: 1px;
 
-    input, select{
+    input[type=text],
+    input[type=number],
+    input[type=date],
+    select{
       background: #ffffff;
       border: none;
       line-height: 42px;
@@ -115,6 +118,11 @@
       font-weight: bold;
       line-height: 1.2;
       font-size: 1rem;
+      flex: 1;
+    }
+
+    .val{
+      flex-basis: 30%;
     }
     & > div {
       padding: 10px 20px;
@@ -177,8 +185,15 @@
     td.h{
       color: #343434;
     }
+    td.head{
+      text-align: center;
+      color: #bdbcbc;
+      text-transform: uppercase;
+      background: #454444 !important;
+      padding: 10px;
+      font-size: 0.7rem;
+    }
     td.v{
-      font-weight: bold;
       color: black;
       text-align: center;
     }
@@ -191,6 +206,19 @@
     }
     tbody > tr:nth-child(even) > td:last-child {
       background: #ece3d5;
+    }
+    tr.sm td{
+      font-size: 0.9rem !important;
+    }
+
+    tr.hl td{
+      background: #a99270 !important;
+      color: white;
+    }
+    tr.lt td{
+      text-decoration: line-through !important;
+      font-style: italic !important;
+      color: #707070 !important;
     }
   }
 }
