@@ -1,5 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=latin-ext");
-@import url("https://fonts.googleapis.com/css?family=Cormorant+Infant:300,300i,400,400i,700&display=swap");
+@font-face {
+  font-family: 'Bauer Bodoni';
+  src: url("../fonts/bauerbodoni/BauerBodD-Regu.eot");
+  src: url("../fonts/bauerbodoni/BauerBodD-Regu.eot#iefix") format("embedded-opentype"), url("../fonts/bauerbodoni/BauerBodD-Regu.woff") format("woff"), url("../fonts/bauerbodoni/BauerBodD-Regu.ttf") format("truetype"), url("../fonts/bauerbodoni/BauerBodD-Regu.svg#Name") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bauer Bodoni';
+  src: url("../fonts/bauerbodoni/Bauer Bodoni D Italic.eot");
+  src: url("../fonts/bauerbodoni/Bauer Bodoni D Italic.eot#iefix") format("embedded-opentype"), url("../fonts/bauerbodoni/BauerBodD-ReguItal.woff") format("woff"), url("../fonts/bauerbodoni/BauerBodD-ReguItal.ttf") format("truetype"), url("../fonts/bauerbodoni/BauerBodD-ReguItal.svg#Name") format("svg");
+  font-weight: normal;
+  font-style: italic;
+}
+
 /* line 1, sass/_base.scss */
 #fusion-gmap-container, #main, #sliders-container, #wrapper, .fusion-separator .icon-wrapper, body, html {
   background-color: transparent;
@@ -12,7 +27,7 @@ body, html {
 
 /* line 7, sass/_base.scss */
 h1, h2, h3, h4, h5 {
-  font-family: 'Cormorant Infant', serif !important;
+  font-family: 'Bauer Bodoni', serif !important;
   line-height: 1.2;
   margin: 0.9rem 0 1rem 0;
 }
@@ -48,21 +63,143 @@ h4 {
 }
 
 /* line 23, sass/_base.scss */
+footer .fusion-columns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+}
+/* line 28, sass/_base.scss */
+footer .fusion-columns .divider {
+  height: 1px;
+  background: #c9b07d;
+  margin: 15px 0;
+  width: 100%;
+}
+/* line 34, sass/_base.scss */
+footer .fusion-columns iframe {
+  width: 100%;
+}
+/* line 37, sass/_base.scss */
+footer .fusion-columns > .fusion-column {
+  width: auto;
+  float: none;
+  padding: 0 !important;
+}
+/* line 41, sass/_base.scss */
+footer .fusion-columns > .fusion-column h2, footer .fusion-columns > .fusion-column h3 {
+  font-size: 2.65rem !important;
+  line-height: 1.3;
+  color: #7a6740;
+}
+/* line 47, sass/_base.scss */
+footer .fusion-columns > .fusion-column-last {
+  flex-basis: 480px;
+}
+/* line 50, sass/_base.scss */
+footer .fusion-columns > div:not(.fusion-column-last) {
+  flex-basis: calc(100% - 480px);
+  padding-right: 45px !important;
+}
+
+/* line 57, sass/_base.scss */
+.custom-templates-sc.view-uzenjen_nekunk a {
+  font-family: 'Bauer Bodoni', serif !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  font-size: 4rem;
+  font-style: italic;
+  color: #7a6740 !important;
+}
+/* line 68, sass/_base.scss */
+.custom-templates-sc.view-uzenjen_nekunk a:hover {
+  color: #c9b07d !important;
+}
+/* line 72, sass/_base.scss */
+.custom-templates-sc.view-uzenjen_nekunk .img {
+  flex-basis: 90px;
+  padding: 0 10px;
+}
+
+/* line 80, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+/* line 87, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper {
+  background: #444444;
+  height: 10vw;
+  position: relative;
+}
+/* line 91, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper a {
+  display: block;
+  height: 100%;
+}
+/* line 95, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper .inside {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 105, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title {
+  text-align: center;
+}
+/* line 107, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title h2 {
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 1rem !important;
+  color: white;
+  font-weight: bold;
+  line-height: 1;
+}
+/* line 117, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(1) > .wrapper {
+  background: #c9b07d !important;
+}
+/* line 120, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(2) > .wrapper {
+  background: #c4a16e !important;
+}
+/* line 123, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(3) > .wrapper {
+  background: #8f5b2b !important;
+}
+/* line 126, sass/_base.scss */
+.szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(4) > .wrapper {
+  background: #50100f !important;
+}
+
+/* line 132, sass/_base.scss */
 .footer-menu {
   background: #443a32;
 }
-/* line 25, sass/_base.scss */
+/* line 134, sass/_base.scss */
 .footer-menu .menu-lablec-container {
   width: 1250px;
   margin: 0 auto;
 }
-/* line 28, sass/_base.scss */
+/* line 137, sass/_base.scss */
 .footer-menu .menu-lablec-container ul, .footer-menu .menu-lablec-container li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 34, sass/_base.scss */
+/* line 143, sass/_base.scss */
 .footer-menu .menu-lablec-container ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -70,7 +207,7 @@ h4 {
   flex-wrap: wrap;
   justify-content: center;
 }
-/* line 42, sass/_base.scss */
+/* line 151, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a {
   display: block;
   color: #b59a63;
@@ -80,18 +217,18 @@ h4 {
   font-size: 0.85rem;
   padding: 15px 25px;
 }
-/* line 50, sass/_base.scss */
+/* line 159, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a:hover {
   color: white;
 }
 
-/* line 58, sass/_base.scss */
+/* line 167, sass/_base.scss */
 .fusion-main-menu > ul > li > a {
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
 }
 
-/* line 62, sass/_base.scss */
+/* line 171, sass/_base.scss */
 .calculator-holder {
   border: 10px solid #f1f1f1;
   border-left: none;
@@ -99,11 +236,11 @@ h4 {
   padding: 15px 0;
   display: none;
 }
-/* line 69, sass/_base.scss */
+/* line 178, sass/_base.scss */
 .calculator-holder.ng-scope {
   display: block;
 }
-/* line 73, sass/_base.scss */
+/* line 182, sass/_base.scss */
 .calculator-holder .not-resulted {
   color: #989898;
   border-radius: 5px;
@@ -111,13 +248,13 @@ h4 {
   margin: 5px 0;
   text-align: center;
 }
-/* line 79, sass/_base.scss */
+/* line 188, sass/_base.scss */
 .calculator-holder .not-resulted i {
   display: block;
   margin: 0 0 5px 0;
   font-size: 2rem;
 }
-/* line 85, sass/_base.scss */
+/* line 194, sass/_base.scss */
 .calculator-holder .error-msg {
   color: white;
   background: #d15b4f;
@@ -126,11 +263,11 @@ h4 {
   padding: 10px;
   margin: 5px 0;
 }
-/* line 92, sass/_base.scss */
+/* line 201, sass/_base.scss */
 .calculator-holder .error-msg .head {
   margin: 5px 0 3px 0;
 }
-/* line 96, sass/_base.scss */
+/* line 205, sass/_base.scss */
 .calculator-holder .loader {
   color: white;
   background: #75bf75;
@@ -146,22 +283,22 @@ h4 {
   animation-duration: 4s;
   animation-iteration-count: infinite;
 }
-/* line 110, sass/_base.scss */
+/* line 219, sass/_base.scss */
 .calculator-holder > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
 }
-/* line 117, sass/_base.scss */
+/* line 226, sass/_base.scss */
 .calculator-holder > .wrapper > .inputs, .calculator-holder > .wrapper > .result-view {
   flex-basis: 50%;
 }
-/* line 120, sass/_base.scss */
+/* line 229, sass/_base.scss */
 .calculator-holder > .wrapper .result-view {
   padding: 0 0 0 25px;
 }
-/* line 123, sass/_base.scss */
+/* line 232, sass/_base.scss */
 .calculator-holder > .wrapper .result-view .line-header {
   font-size: 1.3rem;
   font-weight: bold;
@@ -169,7 +306,7 @@ h4 {
   color: black;
   text-align: center;
 }
-/* line 132, sass/_base.scss */
+/* line 241, sass/_base.scss */
 .calculator-holder .inp-wrapper {
   border: 0.5px solid #c3c3c3;
   display: -webkit-box;
@@ -181,7 +318,7 @@ h4 {
   overflow: hidden;
   padding: 1px;
 }
-/* line 146, sass/_base.scss */
+/* line 255, sass/_base.scss */
 .calculator-holder .inp-wrapper input[type=text],
 .calculator-holder .inp-wrapper input[type=number],
 .calculator-holder .inp-wrapper input[type=date],
@@ -196,13 +333,13 @@ h4 {
   font-size: 1.1rem;
   width: 100%;
 }
-/* line 158, sass/_base.scss */
+/* line 267, sass/_base.scss */
 .calculator-holder .inp-wrapper .ihint {
   color: black;
   position: relative;
   padding: 0 15px;
 }
-/* line 164, sass/_base.scss */
+/* line 273, sass/_base.scss */
 .calculator-holder .line {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -212,51 +349,51 @@ h4 {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-/* line 172, sass/_base.scss */
+/* line 281, sass/_base.scss */
 .calculator-holder .line .head {
   font-weight: bold;
   line-height: 1.2;
   font-size: 1rem;
   flex: 1;
 }
-/* line 179, sass/_base.scss */
+/* line 288, sass/_base.scss */
 .calculator-holder .line .val {
   flex-basis: 30%;
 }
-/* line 182, sass/_base.scss */
+/* line 291, sass/_base.scss */
 .calculator-holder .line > div {
   padding: 10px 20px;
 }
-/* line 188, sass/_base.scss */
+/* line 297, sass/_base.scss */
 .calculator-holder .line.two-line .head,
 .calculator-holder .line.two-line .val {
   flex-basis: 100%;
 }
-/* line 195, sass/_base.scss */
+/* line 304, sass/_base.scss */
 .calculator-holder .line.missing .inp-wrapper,
 .calculator-holder .line.error .inp-wrapper {
   border: 2px solid #ffc5c5;
 }
-/* line 199, sass/_base.scss */
+/* line 308, sass/_base.scss */
 .calculator-holder .error-hint {
   color: #ef1212;
   font-size: 0.7rem;
   margin: 0 0 5px 0;
   font-weight: 400;
 }
-/* line 205, sass/_base.scss */
+/* line 314, sass/_base.scss */
 .calculator-holder .head-hint {
   color: #808080;
   font-size: 0.7rem;
   line-height: 1.2;
   font-weight: 400;
 }
-/* line 212, sass/_base.scss */
+/* line 321, sass/_base.scss */
 .calculator-holder .action-line .val {
   flex-basis: 100%;
   text-align: right;
 }
-/* line 216, sass/_base.scss */
+/* line 325, sass/_base.scss */
 .calculator-holder .action-line button {
   outline: none;
   background: #443a32;
@@ -266,26 +403,26 @@ h4 {
   color: white;
   cursor: pointer;
 }
-/* line 227, sass/_base.scss */
+/* line 336, sass/_base.scss */
 .calculator-holder .inputs .line:nth-child(even) {
   background: #f7f1e8;
 }
-/* line 232, sass/_base.scss */
+/* line 341, sass/_base.scss */
 .calculator-holder table.result-table {
   border: 5px solid #cec1ae;
   border-collapse: collapse;
   width: 100%;
 }
-/* line 236, sass/_base.scss */
+/* line 345, sass/_base.scss */
 .calculator-holder table.result-table td {
   padding: 10px;
   border: 1px solid #c9c9c9;
 }
-/* line 240, sass/_base.scss */
+/* line 349, sass/_base.scss */
 .calculator-holder table.result-table td.h {
   color: #343434;
 }
-/* line 243, sass/_base.scss */
+/* line 352, sass/_base.scss */
 .calculator-holder table.result-table td.head {
   text-align: center;
   color: #bdbcbc;
@@ -294,33 +431,33 @@ h4 {
   padding: 10px;
   font-size: 0.7rem;
 }
-/* line 251, sass/_base.scss */
+/* line 360, sass/_base.scss */
 .calculator-holder table.result-table td.v {
   color: black;
   text-align: center;
 }
-/* line 255, sass/_base.scss */
+/* line 364, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr > td:last-child {
   background: #f8f8f8;
 }
-/* line 259, sass/_base.scss */
+/* line 368, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td {
   background: #f7f1e8;
 }
-/* line 262, sass/_base.scss */
+/* line 371, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td:last-child {
   background: #ece3d5;
 }
-/* line 265, sass/_base.scss */
+/* line 374, sass/_base.scss */
 .calculator-holder table.result-table tr.sm td {
   font-size: 0.9rem !important;
 }
-/* line 269, sass/_base.scss */
+/* line 378, sass/_base.scss */
 .calculator-holder table.result-table tr.hl td {
   background: #a99270 !important;
   color: white;
 }
-/* line 273, sass/_base.scss */
+/* line 382, sass/_base.scss */
 .calculator-holder table.result-table tr.lt td {
   text-decoration: line-through !important;
   font-style: italic !important;
@@ -329,17 +466,17 @@ h4 {
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
-  /* line 283, sass/_base.scss */
+  /* line 392, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 284, sass/_base.scss */
+  /* line 393, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 285, sass/_base.scss */
+  /* line 394, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
@@ -347,17 +484,17 @@ h4 {
 
 /* Standard syntax */
 @keyframes loaderbgchange {
-  /* line 290, sass/_base.scss */
+  /* line 399, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 291, sass/_base.scss */
+  /* line 400, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 292, sass/_base.scss */
+  /* line 401, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
