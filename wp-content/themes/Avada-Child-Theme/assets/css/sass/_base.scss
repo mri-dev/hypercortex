@@ -19,12 +19,42 @@ h4 { font-size: 1.4rem !important; }
 }
 .fusion-header{
   background: #f9ebbb;
+  background-image:
+    url('#{$imgroot}/head-bg-overlay-cloud.png'),
+    url('#{$imgroot}/header-overlay-bg.jpg');
+  background-repeat: no-repeat, repeat-x;
+  background-position: 59% center, top center;
+  background-size: contain, contain;
+  box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0.7);
+}
+.fusion-logo img{
+  margin-left: -75px;
 }
 footer .fusion-columns{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
+  a.button{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
+    background: #5d422a; /* Old browsers */
+    background: -moz-linear-gradient(left,  #5d422a 0%, #c5ac7a 50%, #5d422a 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 ); /* IE6-9 */
+    font-family: 'Roboto', sans-serif;
+    padding: 12px 28px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    text-transform: uppercase;
+    font-size: 0.8vw;
+    float: right;
+    cursor: pointer;
+    &:hover{
+      color: white !important;
+    }
+  }
   .divider{
     height: 1px;
     background: $color-brown-light;
@@ -39,8 +69,8 @@ footer .fusion-columns{
     float: none;
     padding: 0 !important;
     h2, h3{
-      font-size: 2.65rem !important;
-      line-height: 1.3;
+      font-size: 1.9rem !important;
+      line-height: 1.2;
       color: #7a6740;
     }
   }
@@ -76,13 +106,101 @@ footer .fusion-columns{
   }
 }
 .szolgaltatas-block-holder{
-  &.view-of-footer-block{
+  &.view-of-big{
     & > .wrapper{
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      & > .block{
+        padding: 4px;
+        & > .wrapper{
+          background: #444444;
+          height: 10vw;
+          position: relative;
+          a{
+            display: block;
+            height: 100%;
+          }
+          .inside{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            padding: 20px;
+            -webkit-transform:translate(-50%,-50%);
+            -moz-transform:translate(-50%,-50%);
+            transform:translate(-50%,-50%);
+          }
+        }
+        .ico{
+          text-align: center;
+          margin: 0 0 20px 0;
+          img {
+            height: 60px;
+          }
+        }
+        .title {
+          text-align: center;
+          h2 {
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif !important;
+            font-size: 1.40vw !important;
+            color: white;
+            font-weight: 700 !important;
+            line-height: 1;
+          }
+        }
+        .abs{
+          font-size: 1vw;
+          color: white;
+          text-align: center;
+          line-height: 1.35;
+        }
+        .fakebtn{
+          padding: 25px 0 0 0;
+          text-align: center;
+
+          button{
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
+background: #5d422a; /* Old browsers */
+background: -moz-linear-gradient(left,  #5d422a 0%, #c5ac7a 50%, #5d422a 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 ); /* IE6-9 */
+
+            padding: 12px 28px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            text-transform: uppercase;
+            font-size: 0.9vw;
+            cursor: pointer;
+          }
+        }
+      }
+      & > .block:nth-child(1) > .wrapper{
+        background: #c9b07d !important;
+      }
+      & > .block:nth-child(2) > .wrapper{
+        background: #c4a16e !important;
+      }
+      & > .block:nth-child(3) > .wrapper{
+        background: #8f5b2b !important;
+      }
+      & > .block:nth-child(4) > .wrapper{
+        background: #50100f !important;
+      }
+    }
+  }
+  &.view-of-footer-block{
+    & > .wrapper{
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
       & > .block{
         & > .wrapper{
           background: #444444;
@@ -102,12 +220,22 @@ footer .fusion-columns{
             transform:translate(-50%,-50%);
           }
         }
+
+        .ico{
+          text-align: center;
+          margin: 0 0 20px 0;
+          img {
+            height: 45px;
+            margin-top: 25px;
+          }
+        }
         .title {
           text-align: center;
           h2 {
             text-transform: uppercase;
             font-family: 'Roboto', sans-serif !important;
-            font-size: 1rem !important;
+            font-size: 0.75rem !important;
+            height: 22px;
             color: white;
             font-weight: bold;
             line-height: 1;
@@ -154,7 +282,7 @@ footer .fusion-columns{
           text-transform: uppercase;
           text-decoration: none;
           font-weight: bold;
-          font-size: 0.85rem;
+          font-size: 0.8rem;
           padding: 15px 25px;
           &:hover{
             color: white;
@@ -164,9 +292,23 @@ footer .fusion-columns{
     }
   }
 }
+.fusion-main-menu > ul > li{
+  padding: 10px 0;
+}
 .fusion-main-menu > ul > li > a{
   font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem !important;
   text-transform: uppercase;
+  padding: 0 15px;
+  border: 1px solid transparent;
+}
+.fusion-main-menu > ul > li:hover > a{
+  border: 0.8px solid $color-brown-light;
+  color: $color-brown !important;
+}
+.fusion-main-menu .sub-menu{
+  border: 0.8px solid $color-brown-light;
+  margin-top: 2px;
 }
 .calculator-holder{
   border: 10px solid #f1f1f1;
