@@ -8,6 +8,7 @@ h1, h2, h3, h4, h5 {
   font-family: 'Bauer Bodoni', serif !important;
   line-height: 1.2;
   margin: 0.9rem 0 1rem 0;
+  color: #513621 !important;
 }
 h1 { font-size: 3.4rem !important; }
 h2 { font-size: 2rem !important; }
@@ -29,6 +30,34 @@ h4 { font-size: 1.4rem !important; }
 }
 .fusion-logo img{
   margin-left: -75px;
+}
+.grad-button, .grad-button:hover{
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
+  background: #5d422a; /* Old browsers */
+  background: -moz-linear-gradient(left,  #5d422a 0%, #c5ac7a 50%, #5d422a 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 ); /* IE6-9 */
+  font-family: 'Roboto', sans-serif;
+  padding: 12px 28px;
+  font-weight: bold;
+  color: white !important;
+  border: none;
+  text-transform: uppercase;
+  font-size: 0.8vw !important;
+  cursor: pointer;
+  & > .fusion-button-text {
+    color: white !important;
+  }
+}
+.partner-slide{
+  border-top: 1px solid #E2DBCF;
+  .testimonial-image{
+    height: 50px;
+    img {
+      max-height: 100%;
+    }
+  }
 }
 footer .fusion-columns{
   display: -webkit-box;
@@ -147,7 +176,7 @@ footer .fusion-columns{
             text-transform: uppercase;
             font-family: 'Roboto', sans-serif !important;
             font-size: 1.40vw !important;
-            color: white;
+            color: white !important;
             font-weight: 700 !important;
             line-height: 1;
           }
@@ -236,7 +265,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
             font-family: 'Roboto', sans-serif !important;
             font-size: 0.75rem !important;
             height: 22px;
-            color: white;
+            color: white !important;
             font-weight: bold;
             line-height: 1;
           }
