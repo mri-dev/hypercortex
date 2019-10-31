@@ -27,6 +27,41 @@ h4 { font-size: 1.4rem !important; }
   background-position: 59% center, top center;
   background-size: contain, contain;
   box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0.7);
+  position: relative;
+  .searcher{
+    position: absolute;
+    bottom: 25px;
+    right: -55px;
+    .wrapper{
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      flex-wrap: nowrap;
+      border: 1px solid #7A6740;
+      font-size: 0.8rem;
+
+      input[type=text],
+      input[type=submit]{
+        height: 30px;
+        line-height: 3px;
+        padding: 0;
+      }
+      input[type=text]{
+        padding: 0 8px;
+        margin: 0;
+        border: none;
+        color: $color-brown-light;
+        outline: none;
+        background: white;
+      }
+      input[type=submit]{
+        padding: 0 8px;
+        border: none;
+        background: #7A6740;
+        color: white;
+      }
+    }
+  }
 }
 .fusion-logo img{
   margin-left: -75px;
@@ -59,7 +94,35 @@ h4 { font-size: 1.4rem !important; }
     }
   }
 }
-
+.partnerek{
+  width: $partner-width;
+  margin: 15px auto 0 auto;
+  .partner{
+    height: 80px;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+    outline: none;
+    img{
+      margin: 0 auto;
+      max-height: 100%;
+    }
+  }
+}
+.testimonials-holder{
+  .slick-prev:before, .slick-next:before{
+    font-family: cursive !important;
+    color: #9c7a5e !important;
+    font-weight: bold !important;
+    font-size: 1.8rem !important;
+  }
+  .slick-prev:before{
+    content: "<";
+  }
+  .slick-next:before{
+    content: ">";
+  }
+}
 .fake-arrow-down,
 .fusion-secondary-main-menu{
   position: relative;
