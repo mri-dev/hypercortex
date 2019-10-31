@@ -59,6 +59,33 @@ h4 { font-size: 1.4rem !important; }
     }
   }
 }
+
+.fake-arrow-down,
+.fusion-secondary-main-menu{
+  position: relative;
+  &:after{
+    content: "";
+    width: 105%;
+    height: 50px;
+    pointer-events: none;
+    left: 50%;
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+    background-image: url('#{$imgroot}arrowdown.svg'), url('#{$imgroot}arrowdown-shadow.png');
+    background-position: center top, center -3px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 100;
+  }
+  &.arrow-down-cream:after{
+    background-image: url('#{$imgroot}arrowdown-cream.svg'), url('#{$imgroot}arrowdown-shadow.png');
+  }
+
+  &.arrow-down-lightcream:after{
+    background-image: url('#{$imgroot}arrowdown-lightcream.svg'), url('#{$imgroot}arrowdown-shadow.png');
+  }
+}
 footer .fusion-columns{
   display: -webkit-box;
   display: -ms-flexbox;

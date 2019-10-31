@@ -5,6 +5,4 @@
 	 require_once "DividerSC.php";
 	 require_once "TemplatesSC.php";
 	 require_once "SzolgaltatasBlockSC.php";
-	 require_once "TestimonialsSC.php";
-
 ?>

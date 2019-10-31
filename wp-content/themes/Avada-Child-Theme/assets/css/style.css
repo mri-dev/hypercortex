@@ -116,7 +116,43 @@ h4 {
   max-height: 100%;
 }
 
-/* line 62, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 63, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+.fake-arrow-down,
+.fusion-secondary-main-menu {
+  position: relative;
+}
+
+/* line 66, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+.fake-arrow-down:after,
+.fusion-secondary-main-menu:after {
+  content: "";
+  width: 105%;
+  height: 50px;
+  pointer-events: none;
+  left: 50%;
+  -moz-transform: translateX(-50%);
+  transform: translateX(-50%);
+  background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
+  background-position: center top, center -3px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 100;
+}
+
+/* line 81, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+.fake-arrow-down.arrow-down-cream:after,
+.fusion-secondary-main-menu.arrow-down-cream:after {
+  background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-cream.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
+}
+
+/* line 85, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+.fake-arrow-down.arrow-down-lightcream:after,
+.fusion-secondary-main-menu.arrow-down-lightcream:after {
+  background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-lightcream.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
+}
+
+/* line 89, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 footer .fusion-columns {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -124,7 +160,7 @@ footer .fusion-columns {
   flex-wrap: wrap;
 }
 
-/* line 67, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 94, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 footer .fusion-columns a.button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -148,12 +184,12 @@ footer .fusion-columns a.button {
   cursor: pointer;
 }
 
-/* line 83, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 110, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 footer .fusion-columns a.button:hover {
   color: white !important;
 }
 
-/* line 87, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 114, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 footer .fusion-columns .divider {
   height: 1px;
   background: #c9b07d;
@@ -161,37 +197,37 @@ footer .fusion-columns .divider {
   width: 100%;
 }
 
-/* line 93, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 120, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 footer .fusion-columns iframe {
   width: 100%;
 }
 
-/* line 96, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 123, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 footer .fusion-columns > .fusion-column {
   width: auto;
   float: none;
   padding: 0 !important;
 }
 
-/* line 100, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 127, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 footer .fusion-columns > .fusion-column h2, footer .fusion-columns > .fusion-column h3 {
   font-size: 1.9rem !important;
   line-height: 1.2;
   color: #7a6740;
 }
 
-/* line 106, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 133, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 footer .fusion-columns > .fusion-column-last {
   flex-basis: 480px;
 }
 
-/* line 109, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 136, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 footer .fusion-columns > div:not(.fusion-column-last) {
   flex-basis: calc(100% - 480px);
   padding-right: 45px !important;
 }
 
-/* line 116, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 143, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk a {
   font-family: 'Bauer Bodoni', serif !important;
   display: -webkit-box;
@@ -205,18 +241,18 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   color: #7a6740 !important;
 }
 
-/* line 127, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 154, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk a:hover {
   color: #c9b07d !important;
 }
 
-/* line 131, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 158, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk .img {
   flex-basis: 90px;
   padding: 0 10px;
 }
 
-/* line 139, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 166, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -225,25 +261,25 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   align-items: center;
 }
 
-/* line 145, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 172, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block {
   padding: 4px;
 }
 
-/* line 147, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 174, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper {
   background: #444444;
   height: 10vw;
   position: relative;
 }
 
-/* line 151, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 178, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper a {
   display: block;
   height: 100%;
 }
 
-/* line 155, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 182, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper .inside {
   position: absolute;
   top: 50%;
@@ -255,23 +291,23 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   transform: translate(-50%, -50%);
 }
 
-/* line 166, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 193, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico {
   text-align: center;
   margin: 0 0 20px 0;
 }
 
-/* line 169, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 196, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img {
   height: 60px;
 }
 
-/* line 173, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 200, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title {
   text-align: center;
 }
 
-/* line 175, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 202, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
@@ -281,7 +317,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   line-height: 1;
 }
 
-/* line 184, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 211, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .abs {
   font-size: 1vw;
   color: white;
@@ -289,13 +325,13 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   line-height: 1.35;
 }
 
-/* line 190, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 217, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn {
   padding: 25px 0 0 0;
   text-align: center;
 }
 
-/* line 194, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 221, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -317,27 +353,27 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   cursor: pointer;
 }
 
-/* line 212, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 239, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(1) > .wrapper {
   background: #c9b07d !important;
 }
 
-/* line 215, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 242, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(2) > .wrapper {
   background: #c4a16e !important;
 }
 
-/* line 218, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 245, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(3) > .wrapper {
   background: #8f5b2b !important;
 }
 
-/* line 221, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 248, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(4) > .wrapper {
   background: #50100f !important;
 }
 
-/* line 227, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 254, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -346,20 +382,20 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   align-items: flex-start;
 }
 
-/* line 234, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 261, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper {
   background: #444444;
   height: 10vw;
   position: relative;
 }
 
-/* line 238, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 265, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper a {
   display: block;
   height: 100%;
 }
 
-/* line 242, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 269, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper .inside {
   position: absolute;
   top: 50%;
@@ -370,24 +406,24 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   transform: translate(-50%, -50%);
 }
 
-/* line 253, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 280, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico {
   text-align: center;
   margin: 0 0 20px 0;
 }
 
-/* line 256, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 283, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico img {
   height: 45px;
   margin-top: 25px;
 }
 
-/* line 261, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 288, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title {
   text-align: center;
 }
 
-/* line 263, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 290, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
@@ -398,45 +434,45 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   line-height: 1;
 }
 
-/* line 274, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 301, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(1) > .wrapper {
   background: #c9b07d !important;
 }
 
-/* line 277, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 304, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(2) > .wrapper {
   background: #c4a16e !important;
 }
 
-/* line 280, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 307, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(3) > .wrapper {
   background: #8f5b2b !important;
 }
 
-/* line 283, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 310, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(4) > .wrapper {
   background: #50100f !important;
 }
 
-/* line 289, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 316, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .footer-menu {
   background: #443a32;
 }
 
-/* line 291, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 318, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .footer-menu .menu-lablec-container {
   width: 1050px;
   margin: 0 auto;
 }
 
-/* line 294, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 321, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .footer-menu .menu-lablec-container ul, .footer-menu .menu-lablec-container li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* line 300, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 327, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .footer-menu .menu-lablec-container ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -445,7 +481,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   justify-content: center;
 }
 
-/* line 308, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 335, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a {
   display: block;
   color: #b59a63;
@@ -456,17 +492,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 15px 25px;
 }
 
-/* line 316, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 343, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a:hover {
   color: white;
 }
 
-/* line 324, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 351, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .fusion-main-menu > ul > li {
   padding: 10px 0;
 }
 
-/* line 327, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 354, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .fusion-main-menu > ul > li > a {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.8rem !important;
@@ -475,19 +511,19 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border: 1px solid transparent;
 }
 
-/* line 334, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 361, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .fusion-main-menu > ul > li:hover > a {
   border: 0.8px solid #c9b07d;
   color: #443a32 !important;
 }
 
-/* line 338, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 365, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .fusion-main-menu .sub-menu {
   border: 0.8px solid #c9b07d;
   margin-top: 2px;
 }
 
-/* line 342, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 369, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder {
   border: 10px solid #f1f1f1;
   border-left: none;
@@ -496,12 +532,12 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   display: none;
 }
 
-/* line 349, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 376, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder.ng-scope {
   display: block;
 }
 
-/* line 353, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 380, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .not-resulted {
   color: #989898;
   border-radius: 5px;
@@ -510,14 +546,14 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   text-align: center;
 }
 
-/* line 359, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 386, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .not-resulted i {
   display: block;
   margin: 0 0 5px 0;
   font-size: 2rem;
 }
 
-/* line 365, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 392, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .error-msg {
   color: white;
   background: #d15b4f;
@@ -527,12 +563,12 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   margin: 5px 0;
 }
 
-/* line 372, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 399, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .error-msg .head {
   margin: 5px 0 3px 0;
 }
 
-/* line 376, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 403, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .loader {
   color: white;
   background: #75bf75;
@@ -549,7 +585,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   animation-iteration-count: infinite;
 }
 
-/* line 390, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 417, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -557,18 +593,18 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
 }
 
-/* line 396, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 423, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder > .wrapper > .inputs,
 .calculator-holder > .wrapper > .result-view {
   flex-basis: 50%;
 }
 
-/* line 400, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 427, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder > .wrapper .result-view {
   padding: 0 0 0 25px;
 }
 
-/* line 403, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 430, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder > .wrapper .result-view .line-header {
   font-size: 1.3rem;
   font-weight: bold;
@@ -577,7 +613,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   text-align: center;
 }
 
-/* line 412, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 439, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .inp-wrapper {
   border: 0.5px solid #c3c3c3;
   display: -webkit-box;
@@ -590,7 +626,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 1px;
 }
 
-/* line 423, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 450, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .inp-wrapper input[type=text],
 .calculator-holder .inp-wrapper input[type=number],
 .calculator-holder .inp-wrapper input[type=date],
@@ -606,14 +642,14 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   width: 100%;
 }
 
-/* line 438, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 465, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .inp-wrapper .ihint {
   color: black;
   position: relative;
   padding: 0 15px;
 }
 
-/* line 444, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 471, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .line {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -624,7 +660,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
 }
 
-/* line 452, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 479, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .line .head {
   font-weight: bold;
   line-height: 1.2;
@@ -632,29 +668,29 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex: 1;
 }
 
-/* line 459, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 486, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .line .val {
   flex-basis: 30%;
 }
 
-/* line 462, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 489, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .line > div {
   padding: 10px 20px;
 }
 
-/* line 467, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 494, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .line.two-line .head,
 .calculator-holder .line.two-line .val {
   flex-basis: 100%;
 }
 
-/* line 475, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 502, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .line.missing .inp-wrapper,
 .calculator-holder .line.error .inp-wrapper {
   border: 2px solid #ffc5c5;
 }
 
-/* line 479, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 506, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .error-hint {
   color: #ef1212;
   font-size: 0.7rem;
@@ -662,7 +698,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-weight: 400;
 }
 
-/* line 485, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 512, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .head-hint {
   color: #808080;
   font-size: 0.7rem;
@@ -670,13 +706,13 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-weight: 400;
 }
 
-/* line 492, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 519, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .action-line .val {
   flex-basis: 100%;
   text-align: right;
 }
 
-/* line 496, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 523, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .action-line button {
   outline: none;
   background: #443a32;
@@ -687,30 +723,30 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   cursor: pointer;
 }
 
-/* line 507, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 534, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder .inputs .line:nth-child(even) {
   background: #f7f1e8;
 }
 
-/* line 512, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 539, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table {
   border: 5px solid #cec1ae;
   border-collapse: collapse;
   width: 100%;
 }
 
-/* line 516, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 543, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table td {
   padding: 10px;
   border: 1px solid #c9c9c9;
 }
 
-/* line 520, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 547, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table td.h {
   color: #343434;
 }
 
-/* line 523, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 550, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table td.head {
   text-align: center;
   color: #bdbcbc;
@@ -720,39 +756,39 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.7rem;
 }
 
-/* line 531, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 558, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table td.v {
   color: black;
   text-align: center;
 }
 
-/* line 535, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 562, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table tbody > tr > td:last-child {
   background: #f8f8f8;
 }
 
-/* line 539, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 566, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td {
   background: #f7f1e8;
 }
 
-/* line 542, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 569, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td:last-child {
   background: #ece3d5;
 }
 
-/* line 545, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 572, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table tr.sm td {
   font-size: 0.9rem !important;
 }
 
-/* line 549, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 576, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table tr.hl td {
   background: #a99270 !important;
   color: white;
 }
 
-/* line 553, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 580, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
 .calculator-holder table.result-table tr.lt td {
   text-decoration: line-through !important;
   font-style: italic !important;
