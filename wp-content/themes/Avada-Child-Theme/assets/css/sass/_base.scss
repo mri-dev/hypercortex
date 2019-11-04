@@ -25,7 +25,7 @@ h4 { font-size: 1.4rem !important; }
     url('#{$imgroot}/header-overlay-bg.jpg');
   background-repeat: no-repeat, repeat-x;
   background-position: 59% center, top center;
-  background-size: contain, contain;
+  background-size: contain, cover;
   box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0.7);
   position: relative;
   .searcher{
@@ -94,6 +94,110 @@ h4 { font-size: 1.4rem !important; }
     }
   }
 }
+.bloglist-holder{
+  position: relative;
+  .more{
+    position: absolute;
+    right: 0;
+    top: -60px;
+    a{
+      color: $color-brown;
+      padding-right: 10px;
+    }
+    a:after{
+      font-family: cursive;
+      font-weight: bold;
+      content: ">";
+      font-size: 1.3rem;
+    }
+  }
+  & > .wrapper{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -25px;
+    & > div {
+      flex-basis: calc(100% / 3);
+    }
+
+    .cikk {
+      padding: 0 25px;
+      & > .wrapper{
+        background: white;
+        height: 100%;
+        border: 1px solid #f0e3c8;
+      }
+
+      .image{
+        height: 13vw;
+        background: #ebe6dc;
+        overflow: hidden;
+        position: relative;
+        img {
+          position: absolute;
+          height: 105%;
+          width: auto;
+          max-width: initial;
+          left: 50%;
+          top: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      .content{
+        padding: 15px;
+        padding-bottom: 35px;
+        color: #513621;
+        .author {
+          font-size: 0.7rem;
+          font-style: italic;
+        }
+        .title{
+          margin: 10px 0 25px 0;
+        }
+        .title a{
+          font-family: 'Bauer Bodoni', serif !important;
+          font-size: 1.8rem;
+          color: #513621;
+          font-style: italic;
+
+          &:hover{
+            color: $color-bordo;
+          }
+        }
+        .desc {
+          line-height: 1.5;
+          font-size: 0.9rem;
+          height: 128px;
+          overflow: hidden;
+        }
+        .nextbtn{
+          margin: 35px 0 0 0;
+          a{
+            border: 3px solid $color-bordo;
+            color: $color-bordo;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+          }
+        }
+      }
+    }
+  }
+
+  .no-posts{
+    font-family: 'Bauer Bodoni', serif !important;
+    font-size: 1.34rem;
+    color: #918275;
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    flex-basis: 100% !important;
+  }
+}
 .partnerek{
   width: $partner-width;
   margin: 15px auto 0 auto;
@@ -135,7 +239,7 @@ h4 { font-size: 1.4rem !important; }
     -moz-transform: translateX(-50%);
     transform: translateX(-50%);
     background-image: url('#{$imgroot}arrowdown.svg'), url('#{$imgroot}arrowdown-shadow.png');
-    background-position: center top, center -3px;
+    background-position: center top, center 3px;
     background-size: cover;
     background-repeat: no-repeat;
     position: absolute;
@@ -430,22 +534,34 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
   margin-top: 2px;
 }
 .calculator-holder{
-  border: 10px solid #f1f1f1;
-  border-left: none;
-  border-right: none;
-  padding: 15px 0;
+  padding: 4vw 0 6vw 0px;
   display: none;
+  background-image:
+  url('#{$imgroot}calc-arrow-top.svg'),
+  url('#{$imgroot}calc-arrow-bottom.svg');
+  background-repeat: no-repeat;
+  background-position: center top, center bottom;
 
   &.ng-scope{
     display: block;
   }
 
+  .line-header,
+  .inputs > .header {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 20px 0 20px 0;
+    color: #82735c;
+    text-align: center;
+  }
+
   .not-resulted{
-    color: #989898;
+    color: #993534;
     border-radius: 5px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin: 5px 0;
     text-align: center;
+    font-weight: bold;
     i{
       display: block;
       margin: 0 0 5px 0;
@@ -482,47 +598,82 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
     display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
+    width: $page-width;
+    margin: 0 auto;
+
+    & > .inputs .inp-body{
+      border: 5px solid #cec1ae;
+    }
 
     & > .inputs,
     & > .result-view{
       flex-basis: 50%;
     }
     .result-view{
-      padding: 0 0 0 25px;
+      padding: 0 0 0 15px;
+    }
 
-      .line-header{
-        font-size: 1.3rem;
-        font-weight: bold;
-        margin: 0 0 20px 0;
-        color: black;
-        text-align: center;
-      }
+    .inputs{
+      padding: 0 15px 0 0;
     }
   }
   .inp-wrapper{
-    border: 0.5px solid #c3c3c3;
+    border: 0.5px solid #cec1ae;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
-    background: #f5f5f5;
+    background: #fff9ed;
     overflow: hidden;
     padding: 1px;
+
+    &.select-wrapper{
+      position: relative;
+      &:after{
+        pointer-events: none;
+        position: absolute;
+        width: 25px;
+        right: 0;
+        top: 0;
+        background: #cec1ae;
+        height: 100%;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f0d7";
+        color: white;
+        text-align: center;
+        line-height: 35px;
+      }
+    }
 
     input[type=text],
     input[type=number],
     input[type=date],
     select{
-      background: #ffffff;
+      background: #fff9ed;
       border: none;
-      line-height: 42px;
-      height: 42px;
-      color: black;
+      line-height: 35px;
+      height: 35px;
+      color: #82735c;
       padding: 0 12px;
       outline: none;
       font-size: 1.1rem;
       width: 100%;
+    }
+
+    select {
+      cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      text-indent: 1px;
+      text-overflow: '';
+      position: relative;
+      padding-right: 35px;
+      &::-ms-expand {
+        display: none;
+      }
     }
 
     .ihint{
@@ -540,17 +691,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
     justify-content: space-between;
     flex-wrap: wrap;
     .head{
-      font-weight: bold;
       line-height: 1.2;
-      font-size: 1rem;
+      font-size: 0.9rem;
       flex: 1;
+      color: #513621;
     }
 
     .val{
       flex-basis: 30%;
     }
     & > div {
-      padding: 10px 20px;
+      padding: 8px 10px;
     }
 
     &.two-line{
@@ -579,27 +730,50 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
     font-weight: 400;
   }
   .action-line{
+    background: #e8decf !important;
     .val{
       flex-basis: 100%;
       text-align: right;
     }
     button {
-      outline: none;
-      background: $color-brown;
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
+      background: #5d422a; /* Old browsers */
+      background: -moz-linear-gradient(left,  #5d422a 0%, #c5ac7a 50%, #5d422a 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(left,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 ); /* IE6-9 */
+      font-family: 'Roboto', sans-serif;
+      padding: 12px 28px;
+      font-weight: 400;
+      color: white !important;
       border: none;
-      padding: 15px;
       text-transform: uppercase;
-      color: white;
+      font-size: 0.8vw !important;
       cursor: pointer;
+      & > .fusion-button-text {
+        color: white !important;
+      }
     }
   }
   .inputs{
-    .line:nth-child(even){
-      background: #f7f1e8;
+    .line{
+      background: #fefefe;
+      border: 0.5px solid #cec1ae;
+      border-left: none;
+      border-right: none;
+      margin-bottom: 10px;
+    }
+    .line:first-child{
+      border-top: none;
+    }
+    .line:last-child{
+      margin-bottom: 0;
+      border-bottom: none;
     }
   }
 
   table.result-table{
+    background: white;
     border: 5px solid #cec1ae;
     border-collapse: collapse;
     width: 100%;
@@ -623,7 +797,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
       text-align: center;
     }
     tbody > tr > td:last-child {
-      background: #f8f8f8;
+      background: #fefbf4;
     }
 
     tbody > tr:nth-child(even) > td {

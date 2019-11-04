@@ -6,5 +6,5 @@
 	 require_once "TemplatesSC.php";
 	 require_once "SzolgaltatasBlockSC.php";
 	 require_once "TestimonialsSC.php";
-
+	 require_once "BlogListSC.php";
 ?>

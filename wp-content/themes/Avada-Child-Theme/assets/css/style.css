@@ -15,17 +15,17 @@
   font-style: italic;
 }
 
-/* line 1, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 1, sass/_base.scss */
 #fusion-gmap-container, #main, #sliders-container, #wrapper, .fusion-separator .icon-wrapper, body, html {
   background-color: transparent;
 }
 
-/* line 4, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 4, sass/_base.scss */
 body, html {
   background: #ffffff;
 }
 
-/* line 7, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 7, sass/_base.scss */
 h1, h2, h3, h4, h5 {
   font-family: 'Bauer Bodoni', serif !important;
   line-height: 1.2;
@@ -33,50 +33,48 @@ h1, h2, h3, h4, h5 {
   color: #513621 !important;
 }
 
-/* line 13, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 13, sass/_base.scss */
 h1 {
   font-size: 3.4rem !important;
 }
 
-/* line 14, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 14, sass/_base.scss */
 h2 {
   font-size: 2rem !important;
 }
 
-/* line 15, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 15, sass/_base.scss */
 h3 {
   font-size: 1.8rem !important;
 }
 
-/* line 16, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 16, sass/_base.scss */
 h4 {
   font-size: 1.4rem !important;
 }
 
-/* line 18, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 18, sass/_base.scss */
 .fusion-header-wrapper {
   background: white;
 }
 
-/* line 21, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 21, sass/_base.scss */
 .fusion-header {
   background: #f9ebbb;
   background-image: url("/wp-content/themes/Avada-Child-Theme/images//head-bg-overlay-cloud.png"), url("/wp-content/themes/Avada-Child-Theme/images//header-overlay-bg.jpg");
   background-repeat: no-repeat, repeat-x;
   background-position: 59% center, top center;
-  background-size: contain, contain;
+  background-size: contain, cover;
   box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0.7);
   position: relative;
 }
-
-/* line 31, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 31, sass/_base.scss */
 .fusion-header .searcher {
   position: absolute;
   bottom: 25px;
   right: -55px;
 }
-
-/* line 35, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 35, sass/_base.scss */
 .fusion-header .searcher .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -85,16 +83,14 @@ h4 {
   border: 1px solid #7A6740;
   font-size: 0.8rem;
 }
-
-/* line 43, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 44, sass/_base.scss */
 .fusion-header .searcher .wrapper input[type=text],
 .fusion-header .searcher .wrapper input[type=submit] {
   height: 30px;
   line-height: 3px;
   padding: 0;
 }
-
-/* line 49, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 49, sass/_base.scss */
 .fusion-header .searcher .wrapper input[type=text] {
   padding: 0 8px;
   margin: 0;
@@ -103,8 +99,7 @@ h4 {
   outline: none;
   background: white;
 }
-
-/* line 57, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 57, sass/_base.scss */
 .fusion-header .searcher .wrapper input[type=submit] {
   padding: 0 8px;
   border: none;
@@ -112,12 +107,12 @@ h4 {
   color: white;
 }
 
-/* line 66, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 66, sass/_base.scss */
 .fusion-logo img {
   margin-left: -75px;
 }
 
-/* line 69, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 69, sass/_base.scss */
 .grad-button, .grad-button:hover {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -128,7 +123,7 @@ h4 {
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, #5d422a 0%, #c5ac7a 50%, #5d422a 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 );
   /* IE6-9 */
   font-family: 'Roboto', sans-serif;
   padding: 12px 28px;
@@ -139,34 +134,149 @@ h4 {
   font-size: 0.8vw !important;
   cursor: pointer;
 }
-
-/* line 84, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 84, sass/_base.scss */
 .grad-button > .fusion-button-text, .grad-button:hover > .fusion-button-text {
   color: white !important;
 }
 
-/* line 88, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 88, sass/_base.scss */
 .partner-slide {
   border-top: 1px solid #E2DBCF;
 }
-
-/* line 90, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 90, sass/_base.scss */
 .partner-slide .testimonial-image {
   height: 50px;
 }
-
-/* line 92, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 92, sass/_base.scss */
 .partner-slide .testimonial-image img {
   max-height: 100%;
 }
 
-/* line 97, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 97, sass/_base.scss */
+.bloglist-holder {
+  position: relative;
+}
+/* line 99, sass/_base.scss */
+.bloglist-holder .more {
+  position: absolute;
+  right: 0;
+  top: -60px;
+}
+/* line 103, sass/_base.scss */
+.bloglist-holder .more a {
+  color: #443a32;
+  padding-right: 10px;
+}
+/* line 107, sass/_base.scss */
+.bloglist-holder .more a:after {
+  font-family: cursive;
+  font-weight: bold;
+  content: ">";
+  font-size: 1.3rem;
+}
+/* line 114, sass/_base.scss */
+.bloglist-holder > .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -25px;
+}
+/* line 120, sass/_base.scss */
+.bloglist-holder > .wrapper > div {
+  flex-basis: calc(100% / 3);
+}
+/* line 124, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk {
+  padding: 0 25px;
+}
+/* line 126, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk > .wrapper {
+  background: white;
+  height: 100%;
+  border: 1px solid #f0e3c8;
+}
+/* line 132, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .image {
+  height: 13vw;
+  background: #ebe6dc;
+  overflow: hidden;
+  position: relative;
+}
+/* line 137, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .image img {
+  position: absolute;
+  height: 105%;
+  width: auto;
+  max-width: initial;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 149, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .content {
+  padding: 15px;
+  padding-bottom: 35px;
+  color: #513621;
+}
+/* line 153, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .content .author {
+  font-size: 0.7rem;
+  font-style: italic;
+}
+/* line 157, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .content .title {
+  margin: 10px 0 25px 0;
+}
+/* line 160, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .content .title a {
+  font-family: 'Bauer Bodoni', serif !important;
+  font-size: 1.8rem;
+  color: #513621;
+  font-style: italic;
+}
+/* line 166, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .content .title a:hover {
+  color: #50100f;
+}
+/* line 170, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .content .desc {
+  line-height: 1.5;
+  font-size: 0.9rem;
+  height: 128px;
+  overflow: hidden;
+}
+/* line 176, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .content .nextbtn {
+  margin: 35px 0 0 0;
+}
+/* line 178, sass/_base.scss */
+.bloglist-holder > .wrapper .cikk .content .nextbtn a {
+  border: 3px solid #50100f;
+  color: #50100f;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+}
+/* line 191, sass/_base.scss */
+.bloglist-holder .no-posts {
+  font-family: 'Bauer Bodoni', serif !important;
+  font-size: 1.34rem;
+  color: #918275;
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  flex-basis: 100% !important;
+}
+
+/* line 201, sass/_base.scss */
 .partnerek {
   width: 1250px;
   margin: 15px auto 0 auto;
 }
-
-/* line 100, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 204, sass/_base.scss */
 .partnerek .partner {
   height: 80px;
   position: relative;
@@ -174,38 +284,34 @@ h4 {
   text-align: center;
   outline: none;
 }
-
-/* line 106, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 210, sass/_base.scss */
 .partnerek .partner img {
   margin: 0 auto;
   max-height: 100%;
 }
 
-/* line 113, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 217, sass/_base.scss */
 .testimonials-holder .slick-prev:before, .testimonials-holder .slick-next:before {
   font-family: cursive !important;
   color: #9c7a5e !important;
   font-weight: bold !important;
   font-size: 1.8rem !important;
 }
-
-/* line 119, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 223, sass/_base.scss */
 .testimonials-holder .slick-prev:before {
   content: "<";
 }
-
-/* line 122, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 226, sass/_base.scss */
 .testimonials-holder .slick-next:before {
   content: ">";
 }
 
-/* line 126, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 231, sass/_base.scss */
 .fake-arrow-down,
 .fusion-secondary-main-menu {
   position: relative;
 }
-
-/* line 129, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 233, sass/_base.scss */
 .fake-arrow-down:after,
 .fusion-secondary-main-menu:after {
   content: "";
@@ -216,34 +322,31 @@ h4 {
   -moz-transform: translateX(-50%);
   transform: translateX(-50%);
   background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
-  background-position: center top, center -3px;
+  background-position: center top, center 3px;
   background-size: cover;
   background-repeat: no-repeat;
   position: absolute;
   z-index: 100;
 }
-
-/* line 144, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 248, sass/_base.scss */
 .fake-arrow-down.arrow-down-cream:after,
 .fusion-secondary-main-menu.arrow-down-cream:after {
   background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-cream.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
 }
-
-/* line 148, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 252, sass/_base.scss */
 .fake-arrow-down.arrow-down-lightcream:after,
 .fusion-secondary-main-menu.arrow-down-lightcream:after {
   background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-lightcream.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
 }
 
-/* line 152, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 256, sass/_base.scss */
 footer .fusion-columns {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
 }
-
-/* line 157, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 261, sass/_base.scss */
 footer .fusion-columns a.button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -254,7 +357,7 @@ footer .fusion-columns a.button {
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, #5d422a 0%, #c5ac7a 50%, #5d422a 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 );
   /* IE6-9 */
   font-family: 'Roboto', sans-serif;
   padding: 12px 28px;
@@ -266,51 +369,44 @@ footer .fusion-columns a.button {
   float: right;
   cursor: pointer;
 }
-
-/* line 173, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 277, sass/_base.scss */
 footer .fusion-columns a.button:hover {
   color: white !important;
 }
-
-/* line 177, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 281, sass/_base.scss */
 footer .fusion-columns .divider {
   height: 1px;
   background: #c9b07d;
   margin: 15px 0;
   width: 100%;
 }
-
-/* line 183, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 287, sass/_base.scss */
 footer .fusion-columns iframe {
   width: 100%;
 }
-
-/* line 186, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 290, sass/_base.scss */
 footer .fusion-columns > .fusion-column {
   width: auto;
   float: none;
   padding: 0 !important;
 }
-
-/* line 190, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 294, sass/_base.scss */
 footer .fusion-columns > .fusion-column h2, footer .fusion-columns > .fusion-column h3 {
   font-size: 1.9rem !important;
   line-height: 1.2;
   color: #7a6740;
 }
-
-/* line 196, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 300, sass/_base.scss */
 footer .fusion-columns > .fusion-column-last {
   flex-basis: 480px;
 }
-
-/* line 199, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 303, sass/_base.scss */
 footer .fusion-columns > div:not(.fusion-column-last) {
   flex-basis: calc(100% - 480px);
   padding-right: 45px !important;
 }
 
-/* line 206, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 310, sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk a {
   font-family: 'Bauer Bodoni', serif !important;
   display: -webkit-box;
@@ -323,19 +419,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-style: italic;
   color: #7a6740 !important;
 }
-
-/* line 217, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 321, sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk a:hover {
   color: #c9b07d !important;
 }
-
-/* line 221, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 325, sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk .img {
   flex-basis: 90px;
   padding: 0 10px;
 }
 
-/* line 229, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 333, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -343,26 +437,22 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
   align-items: center;
 }
-
-/* line 235, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 339, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block {
   padding: 4px;
 }
-
-/* line 237, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 341, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper {
   background: #444444;
   height: 10vw;
   position: relative;
 }
-
-/* line 241, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 345, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper a {
   display: block;
   height: 100%;
 }
-
-/* line 245, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 349, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper .inside {
   position: absolute;
   top: 50%;
@@ -373,24 +463,20 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-
-/* line 256, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 360, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico {
   text-align: center;
   margin: 0 0 20px 0;
 }
-
-/* line 259, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 363, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img {
   height: 60px;
 }
-
-/* line 263, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 367, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title {
   text-align: center;
 }
-
-/* line 265, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 369, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
@@ -399,22 +485,19 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-weight: 700 !important;
   line-height: 1;
 }
-
-/* line 274, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 378, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .abs {
   font-size: 1vw;
   color: white;
   text-align: center;
   line-height: 1.35;
 }
-
-/* line 280, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 384, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn {
   padding: 25px 0 0 0;
   text-align: center;
 }
-
-/* line 284, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 388, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -425,7 +508,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, #5d422a 0%, #c5ac7a 50%, #5d422a 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 );
   /* IE6-9 */
   padding: 12px 28px;
   font-weight: bold;
@@ -435,28 +518,23 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.9vw;
   cursor: pointer;
 }
-
-/* line 302, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 406, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(1) > .wrapper {
   background: #c9b07d !important;
 }
-
-/* line 305, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 409, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(2) > .wrapper {
   background: #c4a16e !important;
 }
-
-/* line 308, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 412, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(3) > .wrapper {
   background: #8f5b2b !important;
 }
-
-/* line 311, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 415, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(4) > .wrapper {
   background: #50100f !important;
 }
-
-/* line 317, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 421, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -464,21 +542,18 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
   align-items: flex-start;
 }
-
-/* line 324, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 428, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper {
   background: #444444;
   height: 10vw;
   position: relative;
 }
-
-/* line 328, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 432, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper a {
   display: block;
   height: 100%;
 }
-
-/* line 332, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 436, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper .inside {
   position: absolute;
   top: 50%;
@@ -488,25 +563,21 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-
-/* line 343, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 447, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico {
   text-align: center;
   margin: 0 0 20px 0;
 }
-
-/* line 346, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 450, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico img {
   height: 45px;
   margin-top: 25px;
 }
-
-/* line 351, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 455, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title {
   text-align: center;
 }
-
-/* line 353, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 457, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
@@ -516,46 +587,39 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-weight: bold;
   line-height: 1;
 }
-
-/* line 364, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 468, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(1) > .wrapper {
   background: #c9b07d !important;
 }
-
-/* line 367, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 471, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(2) > .wrapper {
   background: #c4a16e !important;
 }
-
-/* line 370, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 474, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(3) > .wrapper {
   background: #8f5b2b !important;
 }
-
-/* line 373, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 477, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(4) > .wrapper {
   background: #50100f !important;
 }
 
-/* line 379, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 483, sass/_base.scss */
 .footer-menu {
   background: #443a32;
 }
-
-/* line 381, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 485, sass/_base.scss */
 .footer-menu .menu-lablec-container {
   width: 1050px;
   margin: 0 auto;
 }
-
-/* line 384, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 488, sass/_base.scss */
 .footer-menu .menu-lablec-container ul, .footer-menu .menu-lablec-container li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
-/* line 390, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 494, sass/_base.scss */
 .footer-menu .menu-lablec-container ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -563,8 +627,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
   justify-content: center;
 }
-
-/* line 398, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 502, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a {
   display: block;
   color: #b59a63;
@@ -574,18 +637,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.8rem;
   padding: 15px 25px;
 }
-
-/* line 406, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 510, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a:hover {
   color: white;
 }
 
-/* line 414, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 518, sass/_base.scss */
 .fusion-main-menu > ul > li {
   padding: 10px 0;
 }
 
-/* line 417, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 521, sass/_base.scss */
 .fusion-main-menu > ul > li > a {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.8rem !important;
@@ -594,49 +656,55 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border: 1px solid transparent;
 }
 
-/* line 424, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 528, sass/_base.scss */
 .fusion-main-menu > ul > li:hover > a {
   border: 0.8px solid #c9b07d;
   color: #443a32 !important;
 }
 
-/* line 428, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 532, sass/_base.scss */
 .fusion-main-menu .sub-menu {
   border: 0.8px solid #c9b07d;
   margin-top: 2px;
 }
 
-/* line 432, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 536, sass/_base.scss */
 .calculator-holder {
-  border: 10px solid #f1f1f1;
-  border-left: none;
-  border-right: none;
-  padding: 15px 0;
+  padding: 4vw 0 6vw 0px;
   display: none;
+  background-image: url("/wp-content/themes/Avada-Child-Theme/images/calc-arrow-top.svg"), url("/wp-content/themes/Avada-Child-Theme/images/calc-arrow-bottom.svg");
+  background-repeat: no-repeat;
+  background-position: center top, center bottom;
 }
-
-/* line 439, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 545, sass/_base.scss */
 .calculator-holder.ng-scope {
   display: block;
 }
-
-/* line 443, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
-.calculator-holder .not-resulted {
-  color: #989898;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  margin: 5px 0;
+/* line 550, sass/_base.scss */
+.calculator-holder .line-header,
+.calculator-holder .inputs > .header {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 20px 0 20px 0;
+  color: #82735c;
   text-align: center;
 }
-
-/* line 449, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 558, sass/_base.scss */
+.calculator-holder .not-resulted {
+  color: #993534;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: bold;
+}
+/* line 565, sass/_base.scss */
 .calculator-holder .not-resulted i {
   display: block;
   margin: 0 0 5px 0;
   font-size: 2rem;
 }
-
-/* line 455, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 571, sass/_base.scss */
 .calculator-holder .error-msg {
   color: white;
   background: #d15b4f;
@@ -645,13 +713,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px;
   margin: 5px 0;
 }
-
-/* line 462, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 578, sass/_base.scss */
 .calculator-holder .error-msg .head {
   margin: 5px 0 3px 0;
 }
-
-/* line 466, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 582, sass/_base.scss */
 .calculator-holder .loader {
   color: white;
   background: #75bf75;
@@ -667,72 +733,100 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   animation-duration: 4s;
   animation-iteration-count: infinite;
 }
-
-/* line 480, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 596, sass/_base.scss */
 .calculator-holder > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
+  width: 1050px;
+  margin: 0 auto;
 }
-
-/* line 486, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
-.calculator-holder > .wrapper > .inputs,
-.calculator-holder > .wrapper > .result-view {
+/* line 605, sass/_base.scss */
+.calculator-holder > .wrapper > .inputs .inp-body {
+  border: 5px solid #cec1ae;
+}
+/* line 610, sass/_base.scss */
+.calculator-holder > .wrapper > .inputs, .calculator-holder > .wrapper > .result-view {
   flex-basis: 50%;
 }
-
-/* line 490, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 613, sass/_base.scss */
 .calculator-holder > .wrapper .result-view {
-  padding: 0 0 0 25px;
+  padding: 0 0 0 15px;
 }
-
-/* line 493, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
-.calculator-holder > .wrapper .result-view .line-header {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin: 0 0 20px 0;
-  color: black;
-  text-align: center;
+/* line 617, sass/_base.scss */
+.calculator-holder > .wrapper .inputs {
+  padding: 0 15px 0 0;
 }
-
-/* line 502, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 621, sass/_base.scss */
 .calculator-holder .inp-wrapper {
-  border: 0.5px solid #c3c3c3;
+  border: 0.5px solid #cec1ae;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  background: #f5f5f5;
+  background: #fff9ed;
   overflow: hidden;
   padding: 1px;
 }
-
-/* line 513, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 632, sass/_base.scss */
+.calculator-holder .inp-wrapper.select-wrapper {
+  position: relative;
+}
+/* line 634, sass/_base.scss */
+.calculator-holder .inp-wrapper.select-wrapper:after {
+  pointer-events: none;
+  position: absolute;
+  width: 25px;
+  right: 0;
+  top: 0;
+  background: #cec1ae;
+  height: 100%;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0d7";
+  color: white;
+  text-align: center;
+  line-height: 35px;
+}
+/* line 654, sass/_base.scss */
 .calculator-holder .inp-wrapper input[type=text],
 .calculator-holder .inp-wrapper input[type=number],
 .calculator-holder .inp-wrapper input[type=date],
 .calculator-holder .inp-wrapper select {
-  background: #ffffff;
+  background: #fff9ed;
   border: none;
-  line-height: 42px;
-  height: 42px;
-  color: black;
+  line-height: 35px;
+  height: 35px;
+  color: #82735c;
   padding: 0 12px;
   outline: none;
   font-size: 1.1rem;
   width: 100%;
 }
-
-/* line 528, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 666, sass/_base.scss */
+.calculator-holder .inp-wrapper select {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  position: relative;
+  padding-right: 35px;
+}
+/* line 674, sass/_base.scss */
+.calculator-holder .inp-wrapper select::-ms-expand {
+  display: none;
+}
+/* line 679, sass/_base.scss */
 .calculator-holder .inp-wrapper .ihint {
   color: black;
   position: relative;
   padding: 0 15px;
 }
-
-/* line 534, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 685, sass/_base.scss */
 .calculator-holder .line {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -742,94 +836,114 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
-/* line 542, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 693, sass/_base.scss */
 .calculator-holder .line .head {
-  font-weight: bold;
   line-height: 1.2;
-  font-size: 1rem;
+  font-size: 0.9rem;
   flex: 1;
+  color: #513621;
 }
-
-/* line 549, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 700, sass/_base.scss */
 .calculator-holder .line .val {
   flex-basis: 30%;
 }
-
-/* line 552, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 703, sass/_base.scss */
 .calculator-holder .line > div {
-  padding: 10px 20px;
+  padding: 8px 10px;
 }
-
-/* line 557, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 709, sass/_base.scss */
 .calculator-holder .line.two-line .head,
 .calculator-holder .line.two-line .val {
   flex-basis: 100%;
 }
-
-/* line 565, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 716, sass/_base.scss */
 .calculator-holder .line.missing .inp-wrapper,
 .calculator-holder .line.error .inp-wrapper {
   border: 2px solid #ffc5c5;
 }
-
-/* line 569, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 720, sass/_base.scss */
 .calculator-holder .error-hint {
   color: #ef1212;
   font-size: 0.7rem;
   margin: 0 0 5px 0;
   font-weight: 400;
 }
-
-/* line 575, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 726, sass/_base.scss */
 .calculator-holder .head-hint {
   color: #808080;
   font-size: 0.7rem;
   line-height: 1.2;
   font-weight: 400;
 }
-
-/* line 582, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 732, sass/_base.scss */
+.calculator-holder .action-line {
+  background: #e8decf !important;
+}
+/* line 734, sass/_base.scss */
 .calculator-holder .action-line .val {
   flex-basis: 100%;
   text-align: right;
 }
-
-/* line 586, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 738, sass/_base.scss */
 .calculator-holder .action-line button {
-  outline: none;
-  background: #443a32;
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
+  background: #5d422a;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #5d422a 0%, #c5ac7a 50%, #5d422a 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #5d422a 0%, #c5ac7a 50%, #5d422a 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #5d422a 0%, #c5ac7a 50%, #5d422a 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 );
+  /* IE6-9 */
+  font-family: 'Roboto', sans-serif;
+  padding: 12px 28px;
+  font-weight: 400;
+  color: white !important;
   border: none;
-  padding: 15px;
   text-transform: uppercase;
-  color: white;
+  font-size: 0.8vw !important;
   cursor: pointer;
 }
-
-/* line 597, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
-.calculator-holder .inputs .line:nth-child(even) {
-  background: #f7f1e8;
+/* line 753, sass/_base.scss */
+.calculator-holder .action-line button > .fusion-button-text {
+  color: white !important;
 }
-
-/* line 602, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 759, sass/_base.scss */
+.calculator-holder .inputs .line {
+  background: #fefefe;
+  border: 0.5px solid #cec1ae;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 10px;
+}
+/* line 766, sass/_base.scss */
+.calculator-holder .inputs .line:first-child {
+  border-top: none;
+}
+/* line 769, sass/_base.scss */
+.calculator-holder .inputs .line:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+/* line 775, sass/_base.scss */
 .calculator-holder table.result-table {
+  background: white;
   border: 5px solid #cec1ae;
   border-collapse: collapse;
   width: 100%;
 }
-
-/* line 606, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 780, sass/_base.scss */
 .calculator-holder table.result-table td {
   padding: 10px;
   border: 1px solid #c9c9c9;
 }
-
-/* line 610, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 784, sass/_base.scss */
 .calculator-holder table.result-table td.h {
   color: #343434;
 }
-
-/* line 613, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 787, sass/_base.scss */
 .calculator-holder table.result-table td.head {
   text-align: center;
   color: #bdbcbc;
@@ -838,40 +952,33 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px;
   font-size: 0.7rem;
 }
-
-/* line 621, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 795, sass/_base.scss */
 .calculator-holder table.result-table td.v {
   color: black;
   text-align: center;
 }
-
-/* line 625, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 799, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr > td:last-child {
-  background: #f8f8f8;
+  background: #fefbf4;
 }
-
-/* line 629, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 803, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td {
   background: #f7f1e8;
 }
-
-/* line 632, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 806, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td:last-child {
   background: #ece3d5;
 }
-
-/* line 635, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 809, sass/_base.scss */
 .calculator-holder table.result-table tr.sm td {
   font-size: 0.9rem !important;
 }
-
-/* line 639, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 813, sass/_base.scss */
 .calculator-holder table.result-table tr.hl td {
   background: #a99270 !important;
   color: white;
 }
-
-/* line 643, /Users/MolnarIstvan/Documents/Munka/hypercortex/wp-content/themes/Avada-Child-Theme/assets/css/sass/_base.scss */
+/* line 817, sass/_base.scss */
 .calculator-holder table.result-table tr.lt td {
   text-decoration: line-through !important;
   font-style: italic !important;
@@ -880,12 +987,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
+  /* line 827, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
+
+  /* line 828, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
+
+  /* line 829, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
@@ -893,15 +1005,18 @@ footer .fusion-columns > div:not(.fusion-column-last) {
 
 /* Standard syntax */
 @keyframes loaderbgchange {
+  /* line 834, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
+
+  /* line 835, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
+
+  /* line 836, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
 }
-
-/*# sourceMappingURL=../style.map */
