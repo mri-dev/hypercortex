@@ -7,4 +7,5 @@
 	 require_once "SzolgaltatasBlockSC.php";
 	 require_once "TestimonialsSC.php";
 	 require_once "BlogListSC.php";
+	 require_once "AjanlatkeresSzalagSC.php";	 
 ?>

@@ -1,5 +1,45 @@
 var app = angular.module('Hypercortex', []);
 
+/**
+* Contact Form
+**/
+app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
+{
+  $scope.loading = false;
+  $scope.form = {};
+  $scope.error = false;
+  $scope.missing = [];
+  $scope.error_elements = [];
+  $scope.button_text = 'Üzenet küldése';
+  $scope.button_class = 'grad-button';
+
+  $scope.send = function()
+  {
+    $scope.loading = true;
+    $scope.missing = [];
+    $scope.error_elements = [];
+    $scope.error = false;
+
+    var form = {};
+    angular.copy($scope.form, form);
+
+    $http({
+			method: 'POST',
+			url: '/wp-admin/admin-ajax.php?action=contact_form',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			data: jQuery.param({
+        form: form
+			})
+		}).then(function successCallback(r) {
+      $scope.loading = false;
+      console.log(r.data);
+    }, function errorCallback(response){});
+  }
+}]);
+
+/**
+* Calculator
+**/
 app.controller('Calculators', ['$scope', '$http', function($scope, $http)
 {
   $scope.loaded = false;

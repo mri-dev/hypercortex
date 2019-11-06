@@ -406,7 +406,60 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding-right: 45px !important;
 }
 
-/* line 310, sass/_base.scss */
+/* line 308, sass/_base.scss */
+.ajanlatkeres-szalag-holder {
+  background: url("/wp-content/themes/Avada-Child-Theme/images/ajbg-szalag.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png"), url("/wp-content/themes/Avada-Child-Theme/images/arrowup-shadow.png");
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center, center 38px, center -15px;
+  background-size: cover, cover, cover;
+  color: white;
+  height: 200px;
+}
+/* line 315, sass/_base.scss */
+.ajanlatkeres-szalag-holder > .wrapper {
+  width: 1050px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 100%;
+}
+/* line 326, sass/_base.scss */
+.ajanlatkeres-szalag-holder > .wrapper .arrow img {
+  height: 38px;
+}
+/* line 331, sass/_base.scss */
+.ajanlatkeres-szalag-holder > .wrapper .ajbutton {
+  padding: 0 0 0 20px;
+}
+/* line 333, sass/_base.scss */
+.ajanlatkeres-szalag-holder > .wrapper .ajbutton a {
+  border: 1px solid white;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 15px;
+  display: block;
+}
+/* line 343, sass/_base.scss */
+.ajanlatkeres-szalag-holder > .wrapper h2 {
+  font-weight: bold !important;
+  font-size: 2.7rem !important;
+  letter-spacing: 1px !important;
+}
+/* line 349, sass/_base.scss */
+.ajanlatkeres-szalag-holder > .wrapper h2, .ajanlatkeres-szalag-holder > .wrapper a {
+  color: white !important;
+}
+/* line 353, sass/_base.scss */
+.ajanlatkeres-szalag-holder > .wrapper > div {
+  flex-basis: calc(100% / 3);
+  text-align: center;
+}
+
+/* line 361, sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk a {
   font-family: 'Bauer Bodoni', serif !important;
   display: -webkit-box;
@@ -419,17 +472,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-style: italic;
   color: #7a6740 !important;
 }
-/* line 321, sass/_base.scss */
+/* line 372, sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk a:hover {
   color: #c9b07d !important;
 }
-/* line 325, sass/_base.scss */
+/* line 376, sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk .img {
   flex-basis: 90px;
   padding: 0 10px;
 }
 
-/* line 333, sass/_base.scss */
+/* line 384, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -437,22 +490,22 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
   align-items: center;
 }
-/* line 339, sass/_base.scss */
+/* line 390, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block {
   padding: 4px;
 }
-/* line 341, sass/_base.scss */
+/* line 392, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper {
   background: #444444;
   height: 10vw;
   position: relative;
 }
-/* line 345, sass/_base.scss */
+/* line 396, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper a {
   display: block;
   height: 100%;
 }
-/* line 349, sass/_base.scss */
+/* line 400, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper .inside {
   position: absolute;
   top: 50%;
@@ -463,20 +516,20 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 360, sass/_base.scss */
+/* line 411, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico {
   text-align: center;
   margin: 0 0 20px 0;
 }
-/* line 363, sass/_base.scss */
+/* line 414, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img {
   height: 60px;
 }
-/* line 367, sass/_base.scss */
+/* line 418, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title {
   text-align: center;
 }
-/* line 369, sass/_base.scss */
+/* line 420, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
@@ -485,19 +538,19 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-weight: 700 !important;
   line-height: 1;
 }
-/* line 378, sass/_base.scss */
+/* line 429, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .abs {
   font-size: 1vw;
   color: white;
   text-align: center;
   line-height: 1.35;
 }
-/* line 384, sass/_base.scss */
+/* line 435, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn {
   padding: 25px 0 0 0;
   text-align: center;
 }
-/* line 388, sass/_base.scss */
+/* line 439, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -518,23 +571,23 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.9vw;
   cursor: pointer;
 }
-/* line 406, sass/_base.scss */
+/* line 457, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(1) > .wrapper {
   background: #c9b07d !important;
 }
-/* line 409, sass/_base.scss */
+/* line 460, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(2) > .wrapper {
   background: #c4a16e !important;
 }
-/* line 412, sass/_base.scss */
+/* line 463, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(3) > .wrapper {
   background: #8f5b2b !important;
 }
-/* line 415, sass/_base.scss */
+/* line 466, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(4) > .wrapper {
   background: #50100f !important;
 }
-/* line 421, sass/_base.scss */
+/* line 472, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -542,18 +595,18 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
   align-items: flex-start;
 }
-/* line 428, sass/_base.scss */
+/* line 479, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper {
   background: #444444;
   height: 10vw;
   position: relative;
 }
-/* line 432, sass/_base.scss */
+/* line 483, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper a {
   display: block;
   height: 100%;
 }
-/* line 436, sass/_base.scss */
+/* line 487, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper .inside {
   position: absolute;
   top: 50%;
@@ -563,21 +616,21 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 447, sass/_base.scss */
+/* line 498, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico {
   text-align: center;
   margin: 0 0 20px 0;
 }
-/* line 450, sass/_base.scss */
+/* line 501, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico img {
   height: 45px;
   margin-top: 25px;
 }
-/* line 455, sass/_base.scss */
+/* line 506, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title {
   text-align: center;
 }
-/* line 457, sass/_base.scss */
+/* line 508, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
@@ -587,39 +640,192 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-weight: bold;
   line-height: 1;
 }
-/* line 468, sass/_base.scss */
+/* line 519, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(1) > .wrapper {
   background: #c9b07d !important;
 }
-/* line 471, sass/_base.scss */
+/* line 522, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(2) > .wrapper {
   background: #c4a16e !important;
 }
-/* line 474, sass/_base.scss */
+/* line 525, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(3) > .wrapper {
   background: #8f5b2b !important;
 }
-/* line 477, sass/_base.scss */
+/* line 528, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(4) > .wrapper {
   background: #50100f !important;
 }
 
-/* line 483, sass/_base.scss */
+/* line 535, sass/_base.scss */
+.contact-form > .wrapper {
+  background: #f0eadd;
+  border: 5px solid #cec1ae;
+}
+/* line 538, sass/_base.scss */
+.contact-form > .wrapper .divider {
+  height: 5px;
+}
+/* line 541, sass/_base.scss */
+.contact-form > .wrapper .divider-text {
+  text-align: center;
+  padding: 10px 0 5px 0;
+}
+/* line 545, sass/_base.scss */
+.contact-form > .wrapper .radio-selectors {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
+}
+/* line 552, sass/_base.scss */
+.contact-form > .wrapper .radio-selectors > div {
+  padding: 0 10px;
+  text-align: center;
+}
+/* line 555, sass/_base.scss */
+.contact-form > .wrapper .radio-selectors > div label {
+  color: black !important;
+  cursor: pointer;
+  font-weight: 400 !important;
+}
+/* line 560, sass/_base.scss */
+.contact-form > .wrapper .radio-selectors > div input[type=radio] {
+  text-align: center;
+  margin: 0;
+  cursor: pointer;
+}
+/* line 565, sass/_base.scss */
+.contact-form > .wrapper .radio-selectors > div input[type=radio]:checked + label {
+  color: #d6a42e !important;
+  font-weight: bold !important;
+}
+/* line 570, sass/_base.scss */
+.contact-form > .wrapper .radio-selectors > div input[type=radio][value='igen']:checked + label,
+.contact-form > .wrapper .radio-selectors > div input[type=radio][value='gyakran']:checked + label {
+  color: #6dbd6d !important;
+  font-weight: bold !important;
+}
+/* line 575, sass/_base.scss */
+.contact-form > .wrapper .radio-selectors > div input[type=radio][value='nem']:checked + label,
+.contact-form > .wrapper .radio-selectors > div input[type=radio][value='nincsen']:checked + label {
+  color: #ec7776 !important;
+  font-weight: bold !important;
+}
+/* line 581, sass/_base.scss */
+.contact-form > .wrapper .flextbl {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+/* line 588, sass/_base.scss */
+.contact-form > .wrapper .flextbl > .h {
+  flex-basis: 40%;
+  padding: 0 10px 0 0;
+}
+/* line 592, sass/_base.scss */
+.contact-form > .wrapper .flextbl > .inp {
+  flex: 1;
+}
+/* line 597, sass/_base.scss */
+.contact-form > .wrapper .flextbl.auto-width > .h {
+  flex: 1;
+}
+/* line 600, sass/_base.scss */
+.contact-form > .wrapper .flextbl.auto-width > .inp {
+  flex: initial;
+}
+/* line 605, sass/_base.scss */
+.contact-form > .wrapper > .line {
+  background: #fefefe;
+  margin: 5px 0;
+  border: 0.5px solid #cec1ae;
+  border-left: none;
+  border-right: none;
+}
+/* line 612, sass/_base.scss */
+.contact-form > .wrapper > .line .accepts {
+  font-size: 0.8rem;
+  padding: 10px;
+}
+/* line 615, sass/_base.scss */
+.contact-form > .wrapper > .line .accepts > div {
+  line-height: 1;
+}
+/* line 618, sass/_base.scss */
+.contact-form > .wrapper > .line .accepts > div + div {
+  margin: 10px 0 0 0;
+}
+/* line 623, sass/_base.scss */
+.contact-form > .wrapper > .line .form-input-holder {
+  padding: 10px;
+}
+/* line 626, sass/_base.scss */
+.contact-form > .wrapper > .line .form-input-holder label {
+  display: block;
+  margin: 0 0 8px 0;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #6c5c4d;
+}
+/* line 634, sass/_base.scss */
+.contact-form > .wrapper > .line .form-input-holder .flextbl label {
+  margin: 0 !important;
+}
+/* line 641, sass/_base.scss */
+.contact-form > .wrapper > .line .form-input-holder input[type=text],
+.contact-form > .wrapper > .line .form-input-holder input[type=number],
+.contact-form > .wrapper > .line .form-input-holder input[type=date],
+.contact-form > .wrapper > .line .form-input-holder textarea {
+  width: 100%;
+  background: white !important;
+  border: 0.5px solid #c2bcb0;
+  line-height: 38px;
+  height: 38px;
+  padding: 0 12px;
+  color: #b29765;
+  font-size: 1rem;
+}
+/* line 651, sass/_base.scss */
+.contact-form > .wrapper > .line .form-input-holder textarea {
+  width: 100%;
+  height: 130px;
+}
+/* line 657, sass/_base.scss */
+.contact-form > .wrapper > .line:first-child {
+  margin-top: 0;
+}
+/* line 661, sass/_base.scss */
+.contact-form > .wrapper .btns {
+  padding: 10px;
+  text-align: right;
+}
+/* line 664, sass/_base.scss */
+.contact-form > .wrapper .btns .alert {
+  text-align: left;
+}
+
+/* line 670, sass/_base.scss */
 .footer-menu {
   background: #443a32;
 }
-/* line 485, sass/_base.scss */
+/* line 672, sass/_base.scss */
 .footer-menu .menu-lablec-container {
   width: 1050px;
   margin: 0 auto;
 }
-/* line 488, sass/_base.scss */
+/* line 675, sass/_base.scss */
 .footer-menu .menu-lablec-container ul, .footer-menu .menu-lablec-container li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 494, sass/_base.scss */
+/* line 681, sass/_base.scss */
 .footer-menu .menu-lablec-container ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -627,7 +833,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
   justify-content: center;
 }
-/* line 502, sass/_base.scss */
+/* line 689, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a {
   display: block;
   color: #b59a63;
@@ -637,17 +843,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.8rem;
   padding: 15px 25px;
 }
-/* line 510, sass/_base.scss */
+/* line 697, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a:hover {
   color: white;
 }
 
-/* line 518, sass/_base.scss */
+/* line 705, sass/_base.scss */
 .fusion-main-menu > ul > li {
   padding: 10px 0;
 }
 
-/* line 521, sass/_base.scss */
+/* line 708, sass/_base.scss */
 .fusion-main-menu > ul > li > a {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.8rem !important;
@@ -656,56 +862,21 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border: 1px solid transparent;
 }
 
-/* line 528, sass/_base.scss */
+/* line 715, sass/_base.scss */
 .fusion-main-menu > ul > li:hover > a {
   border: 0.8px solid #c9b07d;
   color: #443a32 !important;
 }
 
-/* line 532, sass/_base.scss */
+/* line 719, sass/_base.scss */
 .fusion-main-menu .sub-menu {
   border: 0.8px solid #c9b07d;
   margin-top: 2px;
 }
 
-/* line 536, sass/_base.scss */
-.calculator-holder {
-  padding: 4vw 0 6vw 0px;
-  display: none;
-  background-image: url("/wp-content/themes/Avada-Child-Theme/images/calc-arrow-top.svg"), url("/wp-content/themes/Avada-Child-Theme/images/calc-arrow-bottom.svg");
-  background-repeat: no-repeat;
-  background-position: center top, center bottom;
-}
-/* line 545, sass/_base.scss */
-.calculator-holder.ng-scope {
-  display: block;
-}
-/* line 550, sass/_base.scss */
-.calculator-holder .line-header,
-.calculator-holder .inputs > .header {
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin: 20px 0 20px 0;
-  color: #82735c;
-  text-align: center;
-}
-/* line 558, sass/_base.scss */
-.calculator-holder .not-resulted {
-  color: #993534;
-  border-radius: 5px;
-  font-size: 1rem;
-  margin: 5px 0;
-  text-align: center;
-  font-weight: bold;
-}
-/* line 565, sass/_base.scss */
-.calculator-holder .not-resulted i {
-  display: block;
-  margin: 0 0 5px 0;
-  font-size: 2rem;
-}
-/* line 571, sass/_base.scss */
-.calculator-holder .error-msg {
+/* line 726, sass/_base.scss */
+.calculator-holder .error-msg,
+.contact-form .error-msg {
   color: white;
   background: #d15b4f;
   border-radius: 5px;
@@ -713,12 +884,14 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px;
   margin: 5px 0;
 }
-/* line 578, sass/_base.scss */
-.calculator-holder .error-msg .head {
+/* line 733, sass/_base.scss */
+.calculator-holder .error-msg .head,
+.contact-form .error-msg .head {
   margin: 5px 0 3px 0;
 }
-/* line 582, sass/_base.scss */
-.calculator-holder .loader {
+/* line 737, sass/_base.scss */
+.calculator-holder .loader,
+.contact-form .loader {
   color: white;
   background: #75bf75;
   border-radius: 5px;
@@ -733,7 +906,44 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   animation-duration: 4s;
   animation-iteration-count: infinite;
 }
-/* line 596, sass/_base.scss */
+
+/* line 752, sass/_base.scss */
+.calculator-holder {
+  padding: 4vw 0 6vw 0px;
+  display: none;
+  background-image: url("/wp-content/themes/Avada-Child-Theme/images/calc-arrow-top.svg"), url("/wp-content/themes/Avada-Child-Theme/images/calc-arrow-bottom.svg");
+  background-repeat: no-repeat;
+  background-position: center top, center bottom;
+}
+/* line 761, sass/_base.scss */
+.calculator-holder.ng-scope {
+  display: block;
+}
+/* line 766, sass/_base.scss */
+.calculator-holder .line-header,
+.calculator-holder .inputs > .header {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 20px 0 20px 0;
+  color: #82735c;
+  text-align: center;
+}
+/* line 774, sass/_base.scss */
+.calculator-holder .not-resulted {
+  color: #993534;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: bold;
+}
+/* line 781, sass/_base.scss */
+.calculator-holder .not-resulted i {
+  display: block;
+  margin: 0 0 5px 0;
+  font-size: 2rem;
+}
+/* line 788, sass/_base.scss */
 .calculator-holder > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -743,23 +953,23 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   width: 1050px;
   margin: 0 auto;
 }
-/* line 605, sass/_base.scss */
+/* line 797, sass/_base.scss */
 .calculator-holder > .wrapper > .inputs .inp-body {
   border: 5px solid #cec1ae;
 }
-/* line 610, sass/_base.scss */
+/* line 802, sass/_base.scss */
 .calculator-holder > .wrapper > .inputs, .calculator-holder > .wrapper > .result-view {
   flex-basis: 50%;
 }
-/* line 613, sass/_base.scss */
+/* line 805, sass/_base.scss */
 .calculator-holder > .wrapper .result-view {
   padding: 0 0 0 15px;
 }
-/* line 617, sass/_base.scss */
+/* line 809, sass/_base.scss */
 .calculator-holder > .wrapper .inputs {
   padding: 0 15px 0 0;
 }
-/* line 621, sass/_base.scss */
+/* line 813, sass/_base.scss */
 .calculator-holder .inp-wrapper {
   border: 0.5px solid #cec1ae;
   display: -webkit-box;
@@ -771,11 +981,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   overflow: hidden;
   padding: 1px;
 }
-/* line 632, sass/_base.scss */
+/* line 824, sass/_base.scss */
 .calculator-holder .inp-wrapper.select-wrapper {
   position: relative;
 }
-/* line 634, sass/_base.scss */
+/* line 826, sass/_base.scss */
 .calculator-holder .inp-wrapper.select-wrapper:after {
   pointer-events: none;
   position: absolute;
@@ -791,7 +1001,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   text-align: center;
   line-height: 35px;
 }
-/* line 654, sass/_base.scss */
+/* line 846, sass/_base.scss */
 .calculator-holder .inp-wrapper input[type=text],
 .calculator-holder .inp-wrapper input[type=number],
 .calculator-holder .inp-wrapper input[type=date],
@@ -806,7 +1016,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 1.1rem;
   width: 100%;
 }
-/* line 666, sass/_base.scss */
+/* line 858, sass/_base.scss */
 .calculator-holder .inp-wrapper select {
   cursor: pointer;
   -webkit-appearance: none;
@@ -816,17 +1026,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   position: relative;
   padding-right: 35px;
 }
-/* line 674, sass/_base.scss */
+/* line 866, sass/_base.scss */
 .calculator-holder .inp-wrapper select::-ms-expand {
   display: none;
 }
-/* line 679, sass/_base.scss */
+/* line 871, sass/_base.scss */
 .calculator-holder .inp-wrapper .ihint {
   color: black;
   position: relative;
   padding: 0 15px;
 }
-/* line 685, sass/_base.scss */
+/* line 877, sass/_base.scss */
 .calculator-holder .line {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -836,55 +1046,55 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-/* line 693, sass/_base.scss */
+/* line 885, sass/_base.scss */
 .calculator-holder .line .head {
   line-height: 1.2;
   font-size: 0.9rem;
   flex: 1;
   color: #513621;
 }
-/* line 700, sass/_base.scss */
+/* line 892, sass/_base.scss */
 .calculator-holder .line .val {
   flex-basis: 30%;
 }
-/* line 703, sass/_base.scss */
+/* line 895, sass/_base.scss */
 .calculator-holder .line > div {
   padding: 8px 10px;
 }
-/* line 709, sass/_base.scss */
+/* line 901, sass/_base.scss */
 .calculator-holder .line.two-line .head,
 .calculator-holder .line.two-line .val {
   flex-basis: 100%;
 }
-/* line 716, sass/_base.scss */
+/* line 908, sass/_base.scss */
 .calculator-holder .line.missing .inp-wrapper,
 .calculator-holder .line.error .inp-wrapper {
   border: 2px solid #ffc5c5;
 }
-/* line 720, sass/_base.scss */
+/* line 912, sass/_base.scss */
 .calculator-holder .error-hint {
   color: #ef1212;
   font-size: 0.7rem;
   margin: 0 0 5px 0;
   font-weight: 400;
 }
-/* line 726, sass/_base.scss */
+/* line 918, sass/_base.scss */
 .calculator-holder .head-hint {
   color: #808080;
   font-size: 0.7rem;
   line-height: 1.2;
   font-weight: 400;
 }
-/* line 732, sass/_base.scss */
+/* line 924, sass/_base.scss */
 .calculator-holder .action-line {
   background: #e8decf !important;
 }
-/* line 734, sass/_base.scss */
+/* line 926, sass/_base.scss */
 .calculator-holder .action-line .val {
   flex-basis: 100%;
   text-align: right;
 }
-/* line 738, sass/_base.scss */
+/* line 930, sass/_base.scss */
 .calculator-holder .action-line button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -906,11 +1116,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.8vw !important;
   cursor: pointer;
 }
-/* line 753, sass/_base.scss */
+/* line 945, sass/_base.scss */
 .calculator-holder .action-line button > .fusion-button-text {
   color: white !important;
 }
-/* line 759, sass/_base.scss */
+/* line 951, sass/_base.scss */
 .calculator-holder .inputs .line {
   background: #fefefe;
   border: 0.5px solid #cec1ae;
@@ -918,32 +1128,32 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border-right: none;
   margin-bottom: 10px;
 }
-/* line 766, sass/_base.scss */
+/* line 958, sass/_base.scss */
 .calculator-holder .inputs .line:first-child {
   border-top: none;
 }
-/* line 769, sass/_base.scss */
+/* line 961, sass/_base.scss */
 .calculator-holder .inputs .line:last-child {
   margin-bottom: 0;
   border-bottom: none;
 }
-/* line 775, sass/_base.scss */
+/* line 967, sass/_base.scss */
 .calculator-holder table.result-table {
   background: white;
   border: 5px solid #cec1ae;
   border-collapse: collapse;
   width: 100%;
 }
-/* line 780, sass/_base.scss */
+/* line 972, sass/_base.scss */
 .calculator-holder table.result-table td {
   padding: 10px;
   border: 1px solid #c9c9c9;
 }
-/* line 784, sass/_base.scss */
+/* line 976, sass/_base.scss */
 .calculator-holder table.result-table td.h {
   color: #343434;
 }
-/* line 787, sass/_base.scss */
+/* line 979, sass/_base.scss */
 .calculator-holder table.result-table td.head {
   text-align: center;
   color: #bdbcbc;
@@ -952,33 +1162,33 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px;
   font-size: 0.7rem;
 }
-/* line 795, sass/_base.scss */
+/* line 987, sass/_base.scss */
 .calculator-holder table.result-table td.v {
   color: black;
   text-align: center;
 }
-/* line 799, sass/_base.scss */
+/* line 991, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr > td:last-child {
   background: #fefbf4;
 }
-/* line 803, sass/_base.scss */
+/* line 995, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td {
   background: #f7f1e8;
 }
-/* line 806, sass/_base.scss */
+/* line 998, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td:last-child {
   background: #ece3d5;
 }
-/* line 809, sass/_base.scss */
+/* line 1001, sass/_base.scss */
 .calculator-holder table.result-table tr.sm td {
   font-size: 0.9rem !important;
 }
-/* line 813, sass/_base.scss */
+/* line 1005, sass/_base.scss */
 .calculator-holder table.result-table tr.hl td {
   background: #a99270 !important;
   color: white;
 }
-/* line 817, sass/_base.scss */
+/* line 1009, sass/_base.scss */
 .calculator-holder table.result-table tr.lt td {
   text-decoration: line-through !important;
   font-style: italic !important;
@@ -987,17 +1197,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
-  /* line 827, sass/_base.scss */
+  /* line 1019, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 828, sass/_base.scss */
+  /* line 1020, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 829, sass/_base.scss */
+  /* line 1021, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
@@ -1005,17 +1215,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
 
 /* Standard syntax */
 @keyframes loaderbgchange {
-  /* line 834, sass/_base.scss */
+  /* line 1026, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 835, sass/_base.scss */
+  /* line 1027, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 836, sass/_base.scss */
+  /* line 1028, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
