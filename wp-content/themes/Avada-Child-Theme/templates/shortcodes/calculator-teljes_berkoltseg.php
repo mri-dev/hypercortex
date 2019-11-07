@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="line" ng-if="form.csaladkedvezmenyre_jogosult=='Igen'"  ng-class="{missing:missing.indexOf('csalad_eltartott_gyermek')!==-1, error:error_elements['csalad_eltartott_gyermek']}">
+      <div class="line" ng-if="form.csaladkedvezmenyre_jogosult=='Igen'" ng-class="{missing:missing.indexOf('csalad_eltartott_gyermek')!==-1, error:error_elements['csalad_eltartott_gyermek']}">
         <div class="head">
           - Eltartott gyermekek száma *
           <div class="error-hint" ng-if="error_elements.indexOf('csalad_eltartott_gyermek')!==-1">{{error_elements['csalad_eltartott_gyermek']}}</div>

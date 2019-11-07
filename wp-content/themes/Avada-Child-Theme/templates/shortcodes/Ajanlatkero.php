@@ -299,7 +299,7 @@
     </div>
 
     <div class="btns">
-      <div class="error-msg" ng-if="error">{{error}}</div>
+      <div class="error-msg" ng-if="error" ng-bind-html="error|unsafe"></div>
       <div class="loader" ng-if="loading" style="text-align:center;"><?=__('Üzenet küldése folyamatban...', 'hc')?></div>
       <button type="button" ng-if="!loading" class="{{button_class}}" ng-click="send()">{{button_text}}</button>
     </div>

@@ -37,6 +37,12 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
 
       } else {
         $scope.error = d.msg;
+        if (d.missing_elements) {
+          $scope.missing = d.missing_elements;
+        }
+        if (d.error_elements) {
+          $scope.error_elements = d.error_elements;
+        }
       }
       console.log(r.data);
     }, function errorCallback(response){});
