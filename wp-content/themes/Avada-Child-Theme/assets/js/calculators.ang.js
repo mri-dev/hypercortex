@@ -32,6 +32,12 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
 			})
 		}).then(function successCallback(r) {
       $scope.loading = false;
+      var d = r.data;
+      if (d.error == 0) {
+
+      } else {
+        $scope.error = d.msg;
+      }
       console.log(r.data);
     }, function errorCallback(response){});
   }

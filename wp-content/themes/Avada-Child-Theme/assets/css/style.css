@@ -806,7 +806,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   text-align: right;
 }
 /* line 664, sass/_base.scss */
-.contact-form > .wrapper .btns .alert {
+.contact-form > .wrapper .btns .error-msg {
   text-align: left;
 }
 

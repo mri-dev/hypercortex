@@ -11,8 +11,8 @@ define('FB_APP_ID', '1900170110285208');
 define('METAKEY_PREFIX', 'hc_'); // Textdomain
 define('DEFAULT_LANGUAGE', 'hu_HU');
 define('TD', 'buso');
-define('CAPTCHA_SITE_KEY', '6LceE7UUAAAAAMIjeQCZzP8biZQ1kRETBLdmaQ9O');
-define('CAPTCHA_SECRET_KEY', '6LceE7UUAAAAACVjjUMb-tGwrzouUsZuEJt1Ey01');
+define('CAPTCHA_SITE_KEY', '6LeGfsEUAAAAAHUc28uWCC24RdXyfw8LSU55pEEG');
+define('CAPTCHA_SECRET_KEY', '6LeGfsEUAAAAAOKxmdJ8b_JSYlI5Wv0JmA8dEB--');
 
 // Includes
 require_once "includes/include.php";
