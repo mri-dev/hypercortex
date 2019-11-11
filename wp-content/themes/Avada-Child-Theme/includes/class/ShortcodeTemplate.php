@@ -4,8 +4,11 @@ class ShortcodeTemplates
   public $template_root = '/templates/shortcodes/';
   public $template = null;
 
-  public function __construct($template)
+  public function __construct($template, $root = false)
   {
+    if ($root) {
+      $this->template_root = $root;
+    }
     $this->template_root = get_stylesheet_directory() . $this->template_root;
     $this->template = $template;
 

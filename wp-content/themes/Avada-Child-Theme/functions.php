@@ -245,9 +245,14 @@ function rd_init()
 {
   date_default_timezone_set('Europe/Budapest');
   setlocale(LC_TIME, "hu_HU");
+  
   add_rewrite_rule('^jelentkezes/([0-9]+)/?', 'index.php?custom_page=jelentkezes&ac_id=$matches[1]', 'top');
   create_custom_posttypes();
   add_post_type_support( 'page', 'excerpt' );
+
+  // Kalkulátor admin settings
+  $calculator = new Calculators();
+  $calculator->adminSettings();
 }
 add_action('init', 'rd_init');
 

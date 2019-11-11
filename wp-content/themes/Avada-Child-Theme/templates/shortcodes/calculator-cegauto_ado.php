@@ -1,36 +1,39 @@
 <div class="wrapper">
   <div class="inputs">
-    <div class="line" ng-class="{missing:missing.indexOf('kw')!==-1, error:error_elements['kw']}">
-      <div class="head">
-        Gépjármű teljesítménye *
-        <div class="error-hint" ng-if="error_elements.indexOf('kw')!==-1">{{error_elements['kw']}}</div>
-      </div>
-      <div class="val">
-        <div class="inp-wrapper">
-          <input type="number" step="10" min="0" style="width: 80px; text-align:center;" ng-model="form.kw" value="">
-          <div class="ihint">kW</div>
+    <div class="header">Cégautóadó kalkulátor</div>
+    <div class="inp-body">
+      <div class="line" ng-class="{missing:missing.indexOf('kw')!==-1, error:error_elements['kw']}">
+        <div class="head">
+          Gépjármű teljesítménye *
+          <div class="error-hint" ng-if="error_elements.indexOf('kw')!==-1">{{error_elements['kw']}}</div>
+        </div>
+        <div class="val">
+          <div class="inp-wrapper">
+            <input type="number" step="10" min="0" style="width: 80px; text-align:center;" ng-model="form.kw" value="">
+            <div class="ihint">kW</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="line" ng-class="{missing:missing.indexOf('emission')!==-1, error:error_elements['emission']}">
-      <div class="head">
-        Környezetvédelmi osztály *
-        <div class="error-hint" ng-if="error_elements.indexOf('emission')!==-1">{{error_elements['emission']}}</div>
-      </div>
-      <div class="val">
-        <div class="inp-wrapper">
-          <select class="" ng-model="form.emission">
-            <option value="">-- válasszon --</option>
-            <?php foreach ((array)$settings['forms']['kornyezetvedelmi_osztalyok'] as $okey => $osztraly): ?>
-            <option value="<?=$okey?>"><?=$osztraly?></option>
-            <?php endforeach; ?>
-          </select>
+      <div class="line" ng-class="{missing:missing.indexOf('emission')!==-1, error:error_elements['emission']}">
+        <div class="head">
+          Környezetvédelmi osztály *
+          <div class="error-hint" ng-if="error_elements.indexOf('emission')!==-1">{{error_elements['emission']}}</div>
+        </div>
+        <div class="val">
+          <div class="inp-wrapper select-wrapper">
+            <select class="" ng-model="form.emission">
+              <option value="">-- válasszon --</option>
+              <?php foreach ((array)$settings['forms']['kornyezetvedelmi_osztalyok'] as $okey => $osztraly): ?>
+              <option value="<?=$okey?>"><?=$osztraly?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="line action-line" ng-if="!loading">
-      <div class="val">
-        <button type="button" ng-click="calculate('<?=$view?>')" name="button"><?=__('Kalkuláció indítása', 'hc')?></button>
+      <div class="line action-line" ng-if="!loading">
+        <div class="val">
+          <button type="button" ng-click="calculate('<?=$view?>')" name="button"><?=__('Kalkuláció indítása', 'hc')?></button>
+        </div>
       </div>
     </div>
   </div>

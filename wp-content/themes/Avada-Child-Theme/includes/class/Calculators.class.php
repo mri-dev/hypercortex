@@ -1,9 +1,104 @@
 <?php
 class Calculators
 {
+  const DEFAULT_VERSION = 2019;
+  public $year_version = 2019;
+  protected $avaiable_versions = array(2019);
+
   function __construct()
   {
+    $this->year_version = get_option(\METAKEY_PREFIX.'calc_version', self::DEFAULT_VERSION);
     return $this;
+  }
+
+  public function getVersion( $metakeyed = false )
+  {
+    if ($metakeyed) {
+      return \METAKEY_PREFIX.'ref_v'.$this->year_version.'_';
+    } else {
+      return $this->year_version;
+    }
+  }
+
+  function adminSettings()
+  {
+    add_action( 'admin_menu', array( &$this , 'add_settings' ) );
+  }
+
+  function add_settings()
+  {
+    add_options_page('Kalkulátor beállítások', 'Kalkulátor beállítások', 'manage_options', 'calc_settings', array( &$this , 'calc_settings_cb' ));
+  }
+
+  function calc_settings_cb()
+  {
+    $settings = array();
+    // $this->getVersion(true).'
+    $settings[] = $this->getVersion(true).'minimalber';
+    $settings[] = $this->getVersion(true).'alapszabadsag';
+    $settings[] = $this->getVersion(true).'betegszabadsag';
+    $settings[] = $this->getVersion(true).'potszabi_ha16evnelfiatalabbgyereketnevel';
+    $settings[] = $this->getVersion(true).'potszabi_megvaltozott_munkakepessegu';
+
+    $settings[] = $this->getVersion(true).'adokedvezmeny_frisshazasok';
+    $settings[] = $this->getVersion(true).'adokedvezmeny_szemelyi';
+    $settings[] = $this->getVersion(true).'adokedvezmeny_csalad_gyermek1';
+    $settings[] = $this->getVersion(true).'adokedvezmeny_csalad_gyermek2';
+    $settings[] = $this->getVersion(true).'adokedvezmeny_csalad_gyermek3';
+    $settings[] = $this->getVersion(true).'ado_szja';
+    $settings[] = $this->getVersion(true).'ado_nyugdij';
+    $settings[] = $this->getVersion(true).'ado_termeszetegeszseg';
+    $settings[] = $this->getVersion(true).'ado_penzbeli_egeszseg';
+
+    $settings[] = $this->getVersion(true).'ado_munkaerppiac';
+    $settings[] = $this->getVersion(true).'ado_szocialis_hozzajarulas';
+    $settings[] = $this->getVersion(true).'ado_szakkepzesi_hozzajarulas';
+    $settings[] = $this->getVersion(true).'ado_kisvallalati';
+
+    if (isset($_POST['save_calc_settings']))
+    {
+      $nonce = $_REQUEST['_wpnonce'];
+      if ( ! wp_verify_nonce( $nonce, 'calc_settings_nonce' ) )
+      {
+          die( __( 'Security check', 'hc' ) );
+      }  else {
+        if (!current_user_can('manage_options')) {
+            wp_die('Unauthorized user');
+        }
+
+        foreach ($settings as $s) {
+          if (!empty($_POST[$s])) {
+            update_option($s, $_POST[$s]);
+          } else {
+            delete_option($s);
+          }
+        }
+      }
+    }
+
+    // Verzió váltás
+    if (isset($_POST['change_calc_version']))
+    {
+      $nonce = $_REQUEST['_wpnonce'];
+      if ( ! wp_verify_nonce( $nonce, 'calc_version_switch_nonce' ) )
+      {
+          die( __( 'Security check', 'hc' ) );
+      }  else {
+        if (!current_user_can('manage_options')) {
+            wp_die('Unauthorized user');
+        }
+        update_option(\METAKEY_PREFIX.'calc_version', $_POST['version']);
+        $this->year_version = $_POST['version'];
+      }
+    }
+
+
+    $pass_data = array();
+    $pass_data['metaprefix'] = $this->getVersion(true);
+    $pass_data['versions'] = $this->avaiable_versions;
+    $pass_data['current_version'] = $this->year_version;
+    $output = (new ShortcodeTemplates('calculator-settings', '/templates/settings/'))->load_template( $pass_data );
+    echo $output;
   }
 
   public function calculate( $calc, $data )
@@ -237,11 +332,12 @@ class Calculators
         $ret = array(
           'szabadsag_eves' => 0,
           'szabadsag_idoaranyos' => 0,
-          'betegszabadsag_eves' => 15,
+          'betegszabadsag_eves' => 0,
           'betegszabadsag_idoaranyos' => 0
         );
         $values = array();
         $settings = $this->loadSettings( $calc );
+        $ret['betegszabadsag_eves'] = $settings['betegszabadsag'];
         $targyev = (int)date('Y');
         $ev_elso_napja = date('Y').'-01-01';
         $ev_utolso_napja = date('Y-m-d', strtotime('last day of december this year'));
@@ -277,7 +373,7 @@ class Calculators
         $szabadsag_idoaranyos = $szabadsag_eves/$ev_naptari_napok*$ev_vegeig_hatralevo_napok;
         $ret['szabadsag_idoaranyos'] = (int)$szabadsag_idoaranyos;
 
-        $betegszabadsag_eves = 15;
+        $betegszabadsag_eves = $settings['betegszabadsag'];
         $betegszabadsag_idoaranyos = $betegszabadsag_eves/$ev_naptari_napok*$ev_vegeig_hatralevo_napok;
 
         $ret['betegszabadsag_eves'] = $betegszabadsag_eves;
@@ -332,26 +428,27 @@ class Calculators
     $value = false;
 
     // temp
-    $res['alapszabadsag'] = 20;
-    $res['potszabi_ha16evnelfiatalabbgyereketnevel'] = 2;
-    $res['potszabi_megvaltozott_munkakepessegu'] = 5;
+    $res['alapszabadsag'] = (float)get_option( \METAKEY_PREFIX.'ref_alapszabadsag', 0 );
+    $res['betegszabadsag'] = (float)get_option( \METAKEY_PREFIX.'ref_betegszabadsag', 0 );
+    $res['potszabi_ha16evnelfiatalabbgyereketnevel'] = (float)get_option( \METAKEY_PREFIX.'ref_potszabi_ha16evnelfiatalabbgyereketnevel', 0 );
+    $res['potszabi_megvaltozott_munkakepessegu'] = (float)get_option( \METAKEY_PREFIX.'ref_potszabi_megvaltozott_munkakepessegu', 0 );
 
-    $res['ado_szja'] = 15;
-    $res['ado_termeszetegeszseg'] = 4;
-    $res['ado_penzbeli_egeszseg'] = 3;
-    $res['ado_nyugdij'] = 10;
-    $res['ado_munkaerppiac'] = 1.5;
-    $res['ado_szocialis_hozzajarulas'] = 17.5;
-    $res['ado_szakkepzesi_hozzajarulas'] = 1.5;
-    $res['ado_kisvallalati'] = 13;
+    $res['ado_szja'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_szja', 0 );
+    $res['ado_termeszetegeszseg'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_termeszetegeszseg', 0 );
+    $res['ado_penzbeli_egeszseg'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_penzbeli_egeszseg', 0 );
+    $res['ado_nyugdij'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_nyugdij', 0 );
+    $res['ado_munkaerppiac'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_munkaerppiac', 0 );
+    $res['ado_szocialis_hozzajarulas'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_szocialis_hozzajarulas', 0 );
+    $res['ado_szakkepzesi_hozzajarulas'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_szakkepzesi_hozzajarulas', 0 );
+    $res['ado_kisvallalati'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_kisvallalati', 0 );
 
-    $res['adokedvezmeny_frisshazasok'] = 33335;
-    $res['adokedvezmeny_szemelyi'] = 7450;
-    $res['adokedvezmeny_csalad_gyermek1'] = 66670;
-    $res['adokedvezmeny_csalad_gyermek2'] = 133330;
-    $res['adokedvezmeny_csalad_gyermek3'] = 220000;
+    $res['adokedvezmeny_frisshazasok'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_frisshazasok', 0 );
+    $res['adokedvezmeny_szemelyi'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_szemelyi', 0 );
+    $res['adokedvezmeny_csalad_gyermek1'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_csalad_gyermek1', 0 );
+    $res['adokedvezmeny_csalad_gyermek2'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_csalad_gyermek2', 0 );
+    $res['adokedvezmeny_csalad_gyermek3'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_csalad_gyermek3', 0 );
 
-    $res['minimalber'] = 149000;
+    $res['minimalber'] = (float)get_option( \METAKEY_PREFIX.'ref_minimalber', 0 );
 
     $value = $res[$key];
 
@@ -416,6 +513,7 @@ class Calculators
     $res = array();
 
     $res['alapszabadsag'] = $this->getSettingsValue('alapszabadsag');
+    $res['betegszabadsag'] = $this->getSettingsValue('betegszabadsag');
     $res['potszabi_ha16evnelfiatalabbgyereketnevel'] = $this->getSettingsValue('potszabi_ha16evnelfiatalabbgyereketnevel');
     $res['potszabi_megvaltozott_munkakepessegu'] = $this->getSettingsValue('potszabi_megvaltozott_munkakepessegu');
 
@@ -458,6 +556,7 @@ class Calculators
     return $value;
   }
 
+  // Pótszabadság 16 évnél fiatalabb gyermek szerint
   public function potszabadasg16evfiatalabbGyerekSzerint( $gyermek )
   {
     $potszabi = 0;
@@ -477,6 +576,7 @@ class Calculators
     return $potszabi;
   }
 
+  // Pótszabadság kor szerint
   public function potszabadasgKorSzerint( $kor )
   {
     $potszabi = 0;
