@@ -618,6 +618,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
         & > div + div {
           margin: 10px 0 0 0;
         }
+
+        &.error{
+          color: red;
+        }
+      }
+
+      .error-hint{
+        padding: 5px 0 0 0;
+        font-style: italic;
+        font-size: 0.7rem;
+        color: #db1400;
+        flex-basis: 100%;
       }
 
       .form-input-holder{
@@ -653,7 +665,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
           height: 130px;
         }
       }
+      .form-input-holder.missing{
+        label {
+          color: #be4646;
+        }
+        input[type=text],
+        input[type=number],
+        input[type=date],
+        textarea{
+          outline: 3px solid #ffee6b;
+        }
+      }
+      .form-input-holder.error{
+        input[type=text],
+        input[type=number],
+        input[type=date],
+        textarea{
+          outline: 3px solid #f67a65;
+        }
+      }
     }
+
     & > .line:first-child{
       margin-top: 0;
     }
@@ -661,7 +693,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
     .btns{
       padding: 10px;
       text-align: right;
-      .error-msg{
+      .error-msg,
+      .success-msg{
         text-align: left;
       }
     }
@@ -726,6 +759,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
   .error-msg{
     color: white;
     background: #d15b4f;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 10px;
+    margin: 5px 0;
+    .head{
+      margin: 5px 0 3px 0;
+    }
+  }
+  .success-msg{
+    color: white;
+    background: #3ebf71;
     border-radius: 5px;
     font-size: 1rem;
     padding: 10px;

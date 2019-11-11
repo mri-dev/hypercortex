@@ -761,11 +761,23 @@ footer .fusion-columns > div:not(.fusion-column-last) {
 .contact-form > .wrapper > .line .accepts > div + div {
   margin: 10px 0 0 0;
 }
-/* line 623, sass/_base.scss */
+/* line 622, sass/_base.scss */
+.contact-form > .wrapper > .line .accepts.error {
+  color: red;
+}
+/* line 627, sass/_base.scss */
+.contact-form > .wrapper > .line .error-hint {
+  padding: 5px 0 0 0;
+  font-style: italic;
+  font-size: 0.7rem;
+  color: #db1400;
+  flex-basis: 100%;
+}
+/* line 635, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder {
   padding: 10px;
 }
-/* line 626, sass/_base.scss */
+/* line 638, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder label {
   display: block;
   margin: 0 0 8px 0;
@@ -773,11 +785,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.8rem;
   color: #6c5c4d;
 }
-/* line 634, sass/_base.scss */
+/* line 646, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder .flextbl label {
   margin: 0 !important;
 }
-/* line 641, sass/_base.scss */
+/* line 653, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder input[type=text],
 .contact-form > .wrapper > .line .form-input-holder input[type=number],
 .contact-form > .wrapper > .line .form-input-holder input[type=date],
@@ -791,41 +803,60 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   color: #b29765;
   font-size: 1rem;
 }
-/* line 651, sass/_base.scss */
+/* line 663, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder textarea {
   width: 100%;
   height: 130px;
 }
-/* line 657, sass/_base.scss */
+/* line 669, sass/_base.scss */
+.contact-form > .wrapper > .line .form-input-holder.missing label {
+  color: #be4646;
+}
+/* line 675, sass/_base.scss */
+.contact-form > .wrapper > .line .form-input-holder.missing input[type=text],
+.contact-form > .wrapper > .line .form-input-holder.missing input[type=number],
+.contact-form > .wrapper > .line .form-input-holder.missing input[type=date],
+.contact-form > .wrapper > .line .form-input-holder.missing textarea {
+  outline: 3px solid #ffee6b;
+}
+/* line 683, sass/_base.scss */
+.contact-form > .wrapper > .line .form-input-holder.error input[type=text],
+.contact-form > .wrapper > .line .form-input-holder.error input[type=number],
+.contact-form > .wrapper > .line .form-input-holder.error input[type=date],
+.contact-form > .wrapper > .line .form-input-holder.error textarea {
+  outline: 3px solid #f67a65;
+}
+/* line 689, sass/_base.scss */
 .contact-form > .wrapper > .line:first-child {
   margin-top: 0;
 }
-/* line 661, sass/_base.scss */
+/* line 693, sass/_base.scss */
 .contact-form > .wrapper .btns {
   padding: 10px;
   text-align: right;
 }
-/* line 664, sass/_base.scss */
-.contact-form > .wrapper .btns .error-msg {
+/* line 697, sass/_base.scss */
+.contact-form > .wrapper .btns .error-msg,
+.contact-form > .wrapper .btns .success-msg {
   text-align: left;
 }
 
-/* line 670, sass/_base.scss */
+/* line 703, sass/_base.scss */
 .footer-menu {
   background: #443a32;
 }
-/* line 672, sass/_base.scss */
+/* line 705, sass/_base.scss */
 .footer-menu .menu-lablec-container {
   width: 1050px;
   margin: 0 auto;
 }
-/* line 675, sass/_base.scss */
+/* line 708, sass/_base.scss */
 .footer-menu .menu-lablec-container ul, .footer-menu .menu-lablec-container li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 681, sass/_base.scss */
+/* line 714, sass/_base.scss */
 .footer-menu .menu-lablec-container ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -833,7 +864,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
   justify-content: center;
 }
-/* line 689, sass/_base.scss */
+/* line 722, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a {
   display: block;
   color: #b59a63;
@@ -843,17 +874,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.8rem;
   padding: 15px 25px;
 }
-/* line 697, sass/_base.scss */
+/* line 730, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a:hover {
   color: white;
 }
 
-/* line 705, sass/_base.scss */
+/* line 738, sass/_base.scss */
 .fusion-main-menu > ul > li {
   padding: 10px 0;
 }
 
-/* line 708, sass/_base.scss */
+/* line 741, sass/_base.scss */
 .fusion-main-menu > ul > li > a {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.8rem !important;
@@ -862,19 +893,19 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border: 1px solid transparent;
 }
 
-/* line 715, sass/_base.scss */
+/* line 748, sass/_base.scss */
 .fusion-main-menu > ul > li:hover > a {
   border: 0.8px solid #c9b07d;
   color: #443a32 !important;
 }
 
-/* line 719, sass/_base.scss */
+/* line 752, sass/_base.scss */
 .fusion-main-menu .sub-menu {
   border: 0.8px solid #c9b07d;
   margin-top: 2px;
 }
 
-/* line 726, sass/_base.scss */
+/* line 759, sass/_base.scss */
 .calculator-holder .error-msg,
 .contact-form .error-msg {
   color: white;
@@ -884,12 +915,27 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px;
   margin: 5px 0;
 }
-/* line 733, sass/_base.scss */
+/* line 766, sass/_base.scss */
 .calculator-holder .error-msg .head,
 .contact-form .error-msg .head {
   margin: 5px 0 3px 0;
 }
-/* line 737, sass/_base.scss */
+/* line 770, sass/_base.scss */
+.calculator-holder .success-msg,
+.contact-form .success-msg {
+  color: white;
+  background: #3ebf71;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 10px;
+  margin: 5px 0;
+}
+/* line 777, sass/_base.scss */
+.calculator-holder .success-msg .head,
+.contact-form .success-msg .head {
+  margin: 5px 0 3px 0;
+}
+/* line 781, sass/_base.scss */
 .calculator-holder .loader,
 .contact-form .loader {
   color: white;
@@ -907,7 +953,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   animation-iteration-count: infinite;
 }
 
-/* line 752, sass/_base.scss */
+/* line 796, sass/_base.scss */
 .calculator-holder {
   padding: 4vw 0 6vw 0px;
   display: none;
@@ -915,11 +961,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   background-repeat: no-repeat;
   background-position: center top, center bottom;
 }
-/* line 761, sass/_base.scss */
+/* line 805, sass/_base.scss */
 .calculator-holder.ng-scope {
   display: block;
 }
-/* line 766, sass/_base.scss */
+/* line 810, sass/_base.scss */
 .calculator-holder .line-header,
 .calculator-holder .inputs > .header {
   font-size: 1.2rem;
@@ -928,7 +974,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   color: #82735c;
   text-align: center;
 }
-/* line 774, sass/_base.scss */
+/* line 818, sass/_base.scss */
 .calculator-holder .not-resulted {
   color: #993534;
   border-radius: 5px;
@@ -937,13 +983,13 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   text-align: center;
   font-weight: bold;
 }
-/* line 781, sass/_base.scss */
+/* line 825, sass/_base.scss */
 .calculator-holder .not-resulted i {
   display: block;
   margin: 0 0 5px 0;
   font-size: 2rem;
 }
-/* line 788, sass/_base.scss */
+/* line 832, sass/_base.scss */
 .calculator-holder > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -953,23 +999,23 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   width: 1050px;
   margin: 0 auto;
 }
-/* line 797, sass/_base.scss */
+/* line 841, sass/_base.scss */
 .calculator-holder > .wrapper > .inputs .inp-body {
   border: 5px solid #cec1ae;
 }
-/* line 802, sass/_base.scss */
+/* line 846, sass/_base.scss */
 .calculator-holder > .wrapper > .inputs, .calculator-holder > .wrapper > .result-view {
   flex-basis: 50%;
 }
-/* line 805, sass/_base.scss */
+/* line 849, sass/_base.scss */
 .calculator-holder > .wrapper .result-view {
   padding: 0 0 0 15px;
 }
-/* line 809, sass/_base.scss */
+/* line 853, sass/_base.scss */
 .calculator-holder > .wrapper .inputs {
   padding: 0 15px 0 0;
 }
-/* line 813, sass/_base.scss */
+/* line 857, sass/_base.scss */
 .calculator-holder .inp-wrapper {
   border: 0.5px solid #cec1ae;
   display: -webkit-box;
@@ -981,11 +1027,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   overflow: hidden;
   padding: 1px;
 }
-/* line 824, sass/_base.scss */
+/* line 868, sass/_base.scss */
 .calculator-holder .inp-wrapper.select-wrapper {
   position: relative;
 }
-/* line 826, sass/_base.scss */
+/* line 870, sass/_base.scss */
 .calculator-holder .inp-wrapper.select-wrapper:after {
   pointer-events: none;
   position: absolute;
@@ -1001,7 +1047,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   text-align: center;
   line-height: 35px;
 }
-/* line 846, sass/_base.scss */
+/* line 890, sass/_base.scss */
 .calculator-holder .inp-wrapper input[type=text],
 .calculator-holder .inp-wrapper input[type=number],
 .calculator-holder .inp-wrapper input[type=date],
@@ -1016,7 +1062,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 1.1rem;
   width: 100%;
 }
-/* line 858, sass/_base.scss */
+/* line 902, sass/_base.scss */
 .calculator-holder .inp-wrapper select {
   cursor: pointer;
   -webkit-appearance: none;
@@ -1026,17 +1072,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   position: relative;
   padding-right: 35px;
 }
-/* line 866, sass/_base.scss */
+/* line 910, sass/_base.scss */
 .calculator-holder .inp-wrapper select::-ms-expand {
   display: none;
 }
-/* line 871, sass/_base.scss */
+/* line 915, sass/_base.scss */
 .calculator-holder .inp-wrapper .ihint {
   color: black;
   position: relative;
   padding: 0 15px;
 }
-/* line 877, sass/_base.scss */
+/* line 921, sass/_base.scss */
 .calculator-holder .line {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1046,55 +1092,55 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-/* line 885, sass/_base.scss */
+/* line 929, sass/_base.scss */
 .calculator-holder .line .head {
   line-height: 1.2;
   font-size: 0.9rem;
   flex: 1;
   color: #513621;
 }
-/* line 892, sass/_base.scss */
+/* line 936, sass/_base.scss */
 .calculator-holder .line .val {
   flex-basis: 30%;
 }
-/* line 895, sass/_base.scss */
+/* line 939, sass/_base.scss */
 .calculator-holder .line > div {
   padding: 8px 10px;
 }
-/* line 901, sass/_base.scss */
+/* line 945, sass/_base.scss */
 .calculator-holder .line.two-line .head,
 .calculator-holder .line.two-line .val {
   flex-basis: 100%;
 }
-/* line 908, sass/_base.scss */
+/* line 952, sass/_base.scss */
 .calculator-holder .line.missing .inp-wrapper,
 .calculator-holder .line.error .inp-wrapper {
   border: 2px solid #ffc5c5;
 }
-/* line 912, sass/_base.scss */
+/* line 956, sass/_base.scss */
 .calculator-holder .error-hint {
   color: #ef1212;
   font-size: 0.7rem;
   margin: 0 0 5px 0;
   font-weight: 400;
 }
-/* line 918, sass/_base.scss */
+/* line 962, sass/_base.scss */
 .calculator-holder .head-hint {
   color: #808080;
   font-size: 0.7rem;
   line-height: 1.2;
   font-weight: 400;
 }
-/* line 924, sass/_base.scss */
+/* line 968, sass/_base.scss */
 .calculator-holder .action-line {
   background: #e8decf !important;
 }
-/* line 926, sass/_base.scss */
+/* line 970, sass/_base.scss */
 .calculator-holder .action-line .val {
   flex-basis: 100%;
   text-align: right;
 }
-/* line 930, sass/_base.scss */
+/* line 974, sass/_base.scss */
 .calculator-holder .action-line button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -1116,11 +1162,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.8vw !important;
   cursor: pointer;
 }
-/* line 945, sass/_base.scss */
+/* line 989, sass/_base.scss */
 .calculator-holder .action-line button > .fusion-button-text {
   color: white !important;
 }
-/* line 951, sass/_base.scss */
+/* line 995, sass/_base.scss */
 .calculator-holder .inputs .line {
   background: #fefefe;
   border: 0.5px solid #cec1ae;
@@ -1128,32 +1174,32 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border-right: none;
   margin-bottom: 10px;
 }
-/* line 958, sass/_base.scss */
+/* line 1002, sass/_base.scss */
 .calculator-holder .inputs .line:first-child {
   border-top: none;
 }
-/* line 961, sass/_base.scss */
+/* line 1005, sass/_base.scss */
 .calculator-holder .inputs .line:last-child {
   margin-bottom: 0;
   border-bottom: none;
 }
-/* line 967, sass/_base.scss */
+/* line 1011, sass/_base.scss */
 .calculator-holder table.result-table {
   background: white;
   border: 5px solid #cec1ae;
   border-collapse: collapse;
   width: 100%;
 }
-/* line 972, sass/_base.scss */
+/* line 1016, sass/_base.scss */
 .calculator-holder table.result-table td {
   padding: 10px;
   border: 1px solid #c9c9c9;
 }
-/* line 976, sass/_base.scss */
+/* line 1020, sass/_base.scss */
 .calculator-holder table.result-table td.h {
   color: #343434;
 }
-/* line 979, sass/_base.scss */
+/* line 1023, sass/_base.scss */
 .calculator-holder table.result-table td.head {
   text-align: center;
   color: #bdbcbc;
@@ -1162,33 +1208,33 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px;
   font-size: 0.7rem;
 }
-/* line 987, sass/_base.scss */
+/* line 1031, sass/_base.scss */
 .calculator-holder table.result-table td.v {
   color: black;
   text-align: center;
 }
-/* line 991, sass/_base.scss */
+/* line 1035, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr > td:last-child {
   background: #fefbf4;
 }
-/* line 995, sass/_base.scss */
+/* line 1039, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td {
   background: #f7f1e8;
 }
-/* line 998, sass/_base.scss */
+/* line 1042, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td:last-child {
   background: #ece3d5;
 }
-/* line 1001, sass/_base.scss */
+/* line 1045, sass/_base.scss */
 .calculator-holder table.result-table tr.sm td {
   font-size: 0.9rem !important;
 }
-/* line 1005, sass/_base.scss */
+/* line 1049, sass/_base.scss */
 .calculator-holder table.result-table tr.hl td {
   background: #a99270 !important;
   color: white;
 }
-/* line 1009, sass/_base.scss */
+/* line 1053, sass/_base.scss */
 .calculator-holder table.result-table tr.lt td {
   text-decoration: line-through !important;
   font-style: italic !important;
@@ -1197,17 +1243,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
-  /* line 1019, sass/_base.scss */
+  /* line 1063, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 1020, sass/_base.scss */
+  /* line 1064, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 1021, sass/_base.scss */
+  /* line 1065, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
@@ -1215,17 +1261,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
 
 /* Standard syntax */
 @keyframes loaderbgchange {
-  /* line 1026, sass/_base.scss */
+  /* line 1070, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 1027, sass/_base.scss */
+  /* line 1071, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 1028, sass/_base.scss */
+  /* line 1072, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }

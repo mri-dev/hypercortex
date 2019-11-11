@@ -8,6 +8,7 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
   $scope.loading = false;
   $scope.form = {};
   $scope.error = false;
+  $scope.success = false;
   $scope.missing = [];
   $scope.error_elements = [];
   $scope.button_text = 'Üzenet küldése';
@@ -34,7 +35,8 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
       $scope.loading = false;
       var d = r.data;
       if (d.error == 0) {
-
+        $scope.success = d.msg;
+        $scope.form = {};
       } else {
         $scope.error = d.msg;
         if (d.missing_elements) {

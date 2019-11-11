@@ -237,14 +237,48 @@ class AjaxRequests
     $return['passed_params'] = $_POST;
 
     // Require field validation
-    if ( empty($inputs['cegnev']) ) { $return['missing_elements'][] = 'cegnev'; }
+    if ( empty($form['cegnev']) ) { $return['missing_elements'][] = 'cegnev'; }
+    if ( empty($form['munkavallalo_letszam']) ) { $return['missing_elements'][] = 'munkavallalo_letszam'; }
+    if ( $form['munkavallalo_letszam'] < 100 && empty($form['munkavallalo_meghalad100']) ) { $return['missing_elements'][] = 'munkavallalo_meghalad100'; }
 
-    // Error fields
-    /*
-    if ( $inputs['emission'] < 4 ) {
-      $return['error'] = 1;
-      $return['error_elements']['emission'] = 'Emisszió kisebb, mint 4';
-    }*/
+    if ( empty($form['almalmi_munkavallalok']) ) { $return['missing_elements'][] = 'almalmi_munkavallalok'; }
+    if ( empty($form['megbizasi_jogviszonyu_szemelyek']) ) { $return['missing_elements'][] = 'megbizasi_jogviszonyu_szemelyek'; }
+    if ( empty($form['berenkivuli_juttatas']) ) { $return['missing_elements'][] = 'berenkivuli_juttatas'; }
+    if ( empty($form['specialis_foglalkoztatasi_modozatok']) ) { $return['missing_elements'][] = 'specialis_foglalkoztatasi_modozatok'; }
+    if ( empty($form['kikuldetes']) ) { $return['missing_elements'][] = 'kikuldetes'; }
+
+
+    if ( empty($form['feladat_kapcsolatfelvetel']) ) { $return['missing_elements'][] = 'feladat_kapcsolatfelvetel'; }
+    if ( empty($form['feladat_nav_bejelentes']) ) { $return['missing_elements'][] = 'feladat_nav_bejelentes'; }
+    if ( empty($form['feladat_hokozi_szamfejtes']) ) { $return['missing_elements'][] = 'feladat_hokozi_szamfejtes'; }
+    if ( empty($form['feladat_konyveles_feladas']) ) { $return['missing_elements'][] = 'feladat_konyveles_feladas'; }
+    if ( empty($form['feladat_eveleji_szja_beker']) ) { $return['missing_elements'][] = 'feladat_eveleji_szja_beker'; }
+    if ( empty($form['feladat_jovedelemigazolas']) ) { $return['missing_elements'][] = 'feladat_jovedelemigazolas'; }
+    if ( empty($form['feladat_munkaszerzodes']) ) { $return['missing_elements'][] = 'feladat_munkaszerzodes'; }
+    if ( empty($form['feladat_ksh_adatszolgaltatas']) ) { $return['missing_elements'][] = 'feladat_ksh_adatszolgaltatas'; }
+
+    if ( empty($form['integralt_rendszer_hasznalat']) ) { $return['missing_elements'][] = 'integralt_rendszer_hasznalat'; }
+    if ( $form['integralt_rendszer_hasznalat'] == 'igen' && empty($form['integralt_rendszer']) ) { $return['missing_elements'][] = 'integralt_rendszer'; }
+    if ( $form['integralt_rendszer_hasznalat'] == 'igen' && empty($form['integralt_rendszer_hasznalat_jovoben']) ) { $return['missing_elements'][] = 'integralt_rendszer_hasznalat_jovoben'; }
+    if ( $form['integralt_rendszer_hasznalat'] == 'igen' && empty($form['integralt_rendszer_hasznalat_hozzaferes']) ) { $return['missing_elements'][] = 'integralt_rendszer_hasznalat_hozzaferes'; }
+
+    if ( empty($form['berkifizetes_datum']) ) { $return['missing_elements'][] = 'berkifizetes_datum'; }
+
+    if ( empty($form['contact_name']) ) { $return['missing_elements'][] = 'contact_name'; }
+    if ( empty($form['contact_phone']) ) { $return['missing_elements'][] = 'contact_phone'; }
+    // phone validate
+    $phone_valid = preg_match('/^([0-9]+)$/', trim($form['contact_phone']));
+    if ( !empty($form['contact_phone']) && !$phone_valid ) { $return['error_elements']['contact_phone'] = __('A telefonszám nem megfelelő. Kérjük, hogy csak számokat használjon!'); }
+
+    if ( empty($form['contact_email']) ) { $return['missing_elements'][] = 'contact_email'; }
+    $email_valid = filter_var($form['contact_email'], \FILTER_VALIDATE_EMAIL);
+    if ( !empty($form['contact_email']) && !$email_valid ) { $return['error_elements']['contact_email'] = __('Érvényes e-mail címet adjon meg. Pl.: mail@example.com'); }
+
+
+    if ( empty($form['cb_adatvedelem']) ) {
+      $return['missing_elements'][] = 'cb_adatvedelem';
+      $return['error_elements']['cb_adatvedelem'] = __('Az adatvédelmi nyilatkozat elolvasása és elfogadása kötelező!');
+    }
 
     // Handling missing
     if (!empty($return['missing_elements']))
@@ -295,7 +329,7 @@ class AjaxRequests
     }
 
     $to = get_option('admin_email');
-    $subject = sprintf(__('Új kapcsolatüzenet érkezett: %s','hc'), $contact_type, $name);
+    $subject = sprintf(__('Új kapcsolat üzenet érkezett: %s - %s','hc'), $form['cegnev'], $form['contact_name']);
 
     ob_start();
   	  include(locate_template('templates/mails/contactform.php'));
@@ -306,12 +340,15 @@ class AjaxRequests
     add_filter( 'wp_mail_from_name', array($this, 'getMailSenderName') );
     add_filter( 'wp_mail_content_type', array($this, 'getMailFormat') );
 
+    $name = $form['contact_name'];
+    $email = $form['contact_email'];
+
     $headers    = array();
     if (!empty($email)) {
       $headers[]  = 'Reply-To: '.$name.' <'.$email.'>';
     }
 
-    //$alert = wp_mail( $to, $subject, $message, $headers );
+    $alert = wp_mail( $to, $subject, $message, $headers );
 
     /* * /
     if (!empty($email)) {
@@ -331,6 +368,8 @@ class AjaxRequests
       $return['msg']    = __('Az üzenetet jelenleg nem tudtuk elküldeni. Próbálja meg később.',  'hc');
       $this->returnJSON($return);
     }
+
+    $return['msg'] = __('<strong>Sikeresen elküldte az üzenetetét!</strong><br>Köszönjük, hogy felvette velünk a kapcsolatot. Levelére hamasoan válaszolunk!');
 
     echo json_encode($return);
     die();
