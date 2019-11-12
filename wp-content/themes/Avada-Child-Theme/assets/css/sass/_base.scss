@@ -197,7 +197,91 @@ h4 { font-size: 1.4rem !important; }
     font-style: italic;
     flex-basis: 100% !important;
   }
+  &.view-of-archive{
+    width: $page-width;
+    max-width: $page-width;
+    margin: 0 auto;
+    & > .wrapper{
+      margin: 0 -5px;
+    }
+    & > .wrapper > div{
+      flex-basis: calc(100% / 4);
+    }
+    & > .wrapper .cikk{
+      padding: 0 5px;
+    }
+  }
 }
+
+body.archive.category,
+body.archive.tag{
+  .tag-filter{
+    background: #f5efe4;
+    padding: 25px 0;
+    & > h1 {
+      text-align: center;
+      font-style: italic;
+      font-weight: normal;
+    }
+    & > .wrapper{
+      width: $page-width;
+      max-width: $page-width;
+      margin: 0 auto;
+      .tags{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: wrap;
+
+        & > .tag{
+          flex-basis: calc(100% / 7);
+          padding: 2px;
+          & > .wrap{
+            background: $color-gold;
+            a{
+              display: block;
+              padding: 5px 10px;
+              color: white;
+              text-decoration: none;
+              font-size: 0.75rem;
+              text-align: center;
+            }
+            &:hover{
+              background: $color-bordo;
+            }
+          }
+
+          &.active{
+            & > .wrap{
+              background: $color-bordo;
+            }
+          }
+        }
+      }
+    }
+  }
+  main#main{
+    background: #fffcf7;
+    padding: 45px 0 0 0 !important;
+    & > .fusion-row{
+      width: 100% !important;
+      max-width: initial !important;
+    }
+  }
+  .fusion-page-title-bar{
+    display: none !important;
+  }
+  h1.post-title{
+    font-style: italic;
+    text-align: center;
+    font-weight: normal;
+  }
+  .post-title-info{
+    text-align: center;
+    margin: 0 0 15px 0;
+  }
+}
+
 .partnerek{
   width: $partner-width;
   margin: 15px auto 0 auto;

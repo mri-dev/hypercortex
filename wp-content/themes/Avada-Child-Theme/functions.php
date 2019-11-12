@@ -245,7 +245,7 @@ function rd_init()
 {
   date_default_timezone_set('Europe/Budapest');
   setlocale(LC_TIME, "hu_HU");
-  
+
   add_rewrite_rule('^jelentkezes/([0-9]+)/?', 'index.php?custom_page=jelentkezes&ac_id=$matches[1]', 'top');
   create_custom_posttypes();
   add_post_type_support( 'page', 'excerpt' );
@@ -261,6 +261,14 @@ function app_query_vars($aVars) {
   return $aVars;
 }
 add_filter('query_vars', 'app_query_vars');
+
+function prepost_limit_change( $query ){
+    if( !is_admin() && $query->is_main_query() && $query->is_category() ){
+      $query->set( 'posts_per_page', 8 );
+    }
+    return $query;
+}
+add_action( 'pre_get_posts', 'prepost_limit_change', 999 );
 
 function create_custom_posttypes()
 {
