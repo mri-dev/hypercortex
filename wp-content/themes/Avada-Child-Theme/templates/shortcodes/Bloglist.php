@@ -13,6 +13,7 @@
           <div class="author"><?=__('Szerző')?>: <?php echo get_the_author_meta('display_name'); ?></div>
           <div class="title"><a href="<?php echo the_permalink(); ?>"><?php echo the_title(); ?></a></div>
           <div class="desc"><?php echo the_excerpt(); ?></div>
+          <div class="published"><?php echo get_the_date(); ?></div>
           <div class="nextbtn">
             <a href="<?php echo the_permalink(); ?>"><?=__('Tovább')?></a>
           </div>
@@ -24,6 +25,6 @@
 <?php else: ?>
   <div class="no-posts">
     <?php echo __('Nincs jelenleg megjeleníthető cikk.'); ?>
-  </div>  
+  </div>
 <?php endif; ?>
 </div>

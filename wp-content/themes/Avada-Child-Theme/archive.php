@@ -55,6 +55,7 @@ $total_post = $wp_query->post_count;
 							<?php endif; ?>
 		          <div class="title"><a href="<?php echo the_permalink(); ?>"><?php echo the_title(); ?></a></div>
 		          <div class="desc"><?php echo the_excerpt(); ?></div>
+		          <div class="published"><?php echo get_the_date(); ?></div>
 		          <div class="nextbtn">
 		            <a href="<?php echo the_permalink(); ?>"><?=__('Tovább')?></a>
 		          </div>
@@ -70,7 +71,7 @@ $total_post = $wp_query->post_count;
 		</div>
   </div>
   <div class="pagination">
-    <?php echo paginate_links(); ?>
+    <?php echo the_posts_pagination(); ?>
   </div>
 </section>
 <?php do_action( 'avada_after_content' ); ?>

@@ -170,8 +170,17 @@ h4 { font-size: 1.4rem !important; }
         .desc {
           line-height: 1.5;
           font-size: 0.9rem;
-          height: 128px;
+          height: 125px;
           overflow: hidden;
+          p{
+            margin: 0 !important;
+          }
+        }
+        .published{
+          color: #7d7567;
+          font-weight: bold;
+          margin: 10px 0 5px 0;
+          font-size: 0.7rem;
         }
         .nextbtn{
           margin: 35px 0 0 0;
@@ -203,12 +212,52 @@ h4 { font-size: 1.4rem !important; }
     margin: 0 auto;
     & > .wrapper{
       margin: 0 -5px;
+      .cikk .content .title{
+        margin: 3px 0 5px 0 !important;
+      }
+      .cikk .content .title a{
+        font-size: 1.3rem !important;
+      }
     }
     & > .wrapper > div{
       flex-basis: calc(100% / 4);
     }
     & > .wrapper .cikk{
       padding: 0 5px;
+    }
+  }
+}
+
+.pagination{
+  margin: 10px auto !important;
+  width: 100%;
+  .nav-links{
+    margin: 0 auto;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    & > *{
+      display: block;
+      margin: 0 3px;
+    }
+    .page-numbers:not(.next):not(.prev){
+      background: #dbc599;
+      color: $color-brown;
+      border-radius: 30px;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      padding: 0;
+      text-align: center;
+
+      &.current{
+        background: #997c64;
+        color: white;
+      }
     }
   }
 }

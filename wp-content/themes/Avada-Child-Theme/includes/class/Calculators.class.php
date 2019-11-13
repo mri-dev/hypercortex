@@ -428,27 +428,27 @@ class Calculators
     $value = false;
 
     // temp
-    $res['alapszabadsag'] = (float)get_option( \METAKEY_PREFIX.'ref_alapszabadsag', 0 );
-    $res['betegszabadsag'] = (float)get_option( \METAKEY_PREFIX.'ref_betegszabadsag', 0 );
-    $res['potszabi_ha16evnelfiatalabbgyereketnevel'] = (float)get_option( \METAKEY_PREFIX.'ref_potszabi_ha16evnelfiatalabbgyereketnevel', 0 );
-    $res['potszabi_megvaltozott_munkakepessegu'] = (float)get_option( \METAKEY_PREFIX.'ref_potszabi_megvaltozott_munkakepessegu', 0 );
+    $res['alapszabadsag'] = (float)get_option($this->getVersion(true).'alapszabadsag', 0 );
+    $res['betegszabadsag'] = (float)get_option($this->getVersion(true).'betegszabadsag', 0 );
+    $res['potszabi_ha16evnelfiatalabbgyereketnevel'] = (float)get_option($this->getVersion(true).'potszabi_ha16evnelfiatalabbgyereketnevel', 0 );
+    $res['potszabi_megvaltozott_munkakepessegu'] = (float)get_option($this->getVersion(true).'potszabi_megvaltozott_munkakepessegu', 0 );
 
-    $res['ado_szja'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_szja', 0 );
-    $res['ado_termeszetegeszseg'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_termeszetegeszseg', 0 );
-    $res['ado_penzbeli_egeszseg'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_penzbeli_egeszseg', 0 );
-    $res['ado_nyugdij'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_nyugdij', 0 );
-    $res['ado_munkaerppiac'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_munkaerppiac', 0 );
-    $res['ado_szocialis_hozzajarulas'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_szocialis_hozzajarulas', 0 );
-    $res['ado_szakkepzesi_hozzajarulas'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_szakkepzesi_hozzajarulas', 0 );
-    $res['ado_kisvallalati'] = (float)get_option( \METAKEY_PREFIX.'ref_ado_kisvallalati', 0 );
+    $res['ado_szja'] = (float)get_option($this->getVersion(true).'ado_szja', 0 );
+    $res['ado_termeszetegeszseg'] = (float)get_option($this->getVersion(true).'ado_termeszetegeszseg', 0 );
+    $res['ado_penzbeli_egeszseg'] = (float)get_option($this->getVersion(true).'ado_penzbeli_egeszseg', 0 );
+    $res['ado_nyugdij'] = (float)get_option($this->getVersion(true).'ado_nyugdij', 0 );
+    $res['ado_munkaerppiac'] = (float)get_option($this->getVersion(true).'ado_munkaerppiac', 0 );
+    $res['ado_szocialis_hozzajarulas'] = (float)get_option($this->getVersion(true).'ado_szocialis_hozzajarulas', 0 );
+    $res['ado_szakkepzesi_hozzajarulas'] = (float)get_option($this->getVersion(true).'ado_szakkepzesi_hozzajarulas', 0 );
+    $res['ado_kisvallalati'] = (float)get_option($this->getVersion(true).'ado_kisvallalati', 0 );
 
-    $res['adokedvezmeny_frisshazasok'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_frisshazasok', 0 );
-    $res['adokedvezmeny_szemelyi'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_szemelyi', 0 );
-    $res['adokedvezmeny_csalad_gyermek1'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_csalad_gyermek1', 0 );
-    $res['adokedvezmeny_csalad_gyermek2'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_csalad_gyermek2', 0 );
-    $res['adokedvezmeny_csalad_gyermek3'] = (float)get_option( \METAKEY_PREFIX.'ref_adokedvezmeny_csalad_gyermek3', 0 );
+    $res['adokedvezmeny_frisshazasok'] = (float)get_option($this->getVersion(true).'adokedvezmeny_frisshazasok', 0 );
+    $res['adokedvezmeny_szemelyi'] = (float)get_option($this->getVersion(true).'adokedvezmeny_szemelyi', 0 );
+    $res['adokedvezmeny_csalad_gyermek1'] = (float)get_option($this->getVersion(true).'adokedvezmeny_csalad_gyermek1', 0 );
+    $res['adokedvezmeny_csalad_gyermek2'] = (float)get_option($this->getVersion(true).'adokedvezmeny_csalad_gyermek2', 0 );
+    $res['adokedvezmeny_csalad_gyermek3'] = (float)get_option($this->getVersion(true).'adokedvezmeny_csalad_gyermek3', 0 );
 
-    $res['minimalber'] = (float)get_option( \METAKEY_PREFIX.'ref_minimalber', 0 );
+    $res['minimalber'] = (float)get_option($this->getVersion(true).'minimalber', 0 );
 
     $value = $res[$key];
 
