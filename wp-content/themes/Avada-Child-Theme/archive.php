@@ -48,7 +48,7 @@ $total_post = $wp_query->post_count;
 		        <div class="image autocorrett-height-by-width" data-image-ratio="4:3"><a href="<?php echo the_permalink(); ?>"><img src="<?=$img?>" alt="<? echo the_title(); ?>" title="<? echo the_title(); ?>"></a></div>
 		        <div class="content">
 							<?php if ($ts): ?>
-								<?php $tsx = ''; foreach ((array)$ts as $t): $tsx .= '<a href="/tag/'.$t->slug.'">'.$t->name.'</a>, '; endforeach; $tsx = rtrim($tsx, ', '); ?>
+								<?php $tsx = ''; foreach ((array)$ts as $t): $tsx .= '<a href="/tag/'.$t->slug.'">'.ucfirst($t->name).'</a>, '; endforeach; $tsx = rtrim($tsx, ', '); ?>
 								<div class="author"><?php echo $tsx; ?></div>
 							<?php else: ?>
 								<div class="author">&nbsp;</div>
