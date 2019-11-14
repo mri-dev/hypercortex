@@ -18,7 +18,8 @@ class SzolgaltatasBlockSC
         $defaults = apply_filters(
             self::SCTAG.'_defaults',
             array(
-              'view' => 'big'
+              'view' => 'big',
+              'autopageparent' => 0
             )
         );
 
@@ -44,7 +45,7 @@ class SzolgaltatasBlockSC
 
         $pass_data = $attr;
 
-        $output = '<div class="'.self::SCTAG.'-holder view-of-'.$attr['view'].'">';
+        $output = '<div class="'.self::SCTAG.'-holder view-of-'.$attr['view'].(($attr['autopageparent'] == 1)?' autopager':'').'">';
 
         $output .= (new ShortcodeTemplates('SzolgaltatasBlock/'.$attr['view']))->load_template( $pass_data );
         $output .= '</div>';

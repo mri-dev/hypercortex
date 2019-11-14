@@ -31,9 +31,12 @@ class CikkSidebarSC
 
       $arg = array(
         'post_type' => 'post',
-        'posts_per_page' => 3,
-        'post__not_in' => array($post->ID)
+        'posts_per_page' => 3
       );
+
+      if (!is_search()) {
+        $arg['post__not_in'] = array($post->ID);
+      }
 
       if (!empty($cat_data)) {
         $arg['category_name'] = trim($cat_data->name);

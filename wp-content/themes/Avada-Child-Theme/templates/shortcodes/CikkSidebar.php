@@ -1,8 +1,13 @@
 <div class="wrapper">
   <?php if ($posts->have_posts()): ?>
-  <?php if ($cat): ?>
+  <?php if (!is_wp_error($cat)): ?>
   <div class="header">
     <h3><?php echo $cat->name; ?><br><?=__('további cikkei', 'hc')?></h3>
+  </div>
+  <?php endif; ?>
+  <?php if (is_search()): ?>
+  <div class="header">
+    <h3><?=__('Legfrissebb cikkek', 'hc')?></h3>
   </div>
   <?php endif; ?>
   <div class="simple-sidebar-posts">
@@ -22,7 +27,7 @@
   <?php endwhile; wp_reset_postdata(); ?>
   </div>
   <?php endif; ?>
-  <?php if ($cat): ?>
+  <?php if (!is_wp_error($cat)): ?>
   <div class="footer">
     <a href="<?php echo get_category_link($cat); ?>" class="grad-button"><?=__('Tovább a(z)', 'hc')?> <?php echo $cat->name; ?> <?=__('cikkeihez', 'hc')?></a>
   </div>
