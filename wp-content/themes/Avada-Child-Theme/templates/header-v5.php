@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php endif; ?>
 			<?php avada_logo(); ?>
 			<div class="searcher">
-				<form class="" action="" method="get">
+				<form class="" action="/" method="get">
 					<div class="wrapper">
 						<input type="text" name="s" placeholder="<?=__('Keresés','hc')?>" value="<?=$_GET['s']?>">
 						<input type="submit" name="" value="Mehet">

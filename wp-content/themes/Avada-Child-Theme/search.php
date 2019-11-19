@@ -33,6 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php get_search_form(); ?>
 			</div>
 		<?php endif; ?>
+		<h2><?php esc_html_e( 'Találati lista', 'hc' ); ?></h2>
 
 		<?php if ( 'top' == Avada()->settings->get( 'search_new_search_position' ) || 'hidden' == Avada()->settings->get( 'search_new_search_position' ) ) : ?>
 			<?php get_template_part( 'templates/listing' ); ?>

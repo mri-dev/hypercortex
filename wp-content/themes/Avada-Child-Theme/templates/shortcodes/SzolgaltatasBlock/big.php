@@ -1,5 +1,10 @@
 <div class="wrapper">
-  <?php $bcount = count($blocks); ?>
+  <?php
+  $bcount = count($blocks);
+  if ($autopageparent == 1 && $bcount <= 3) {
+    $bcount = 3;
+  } 
+  ?>
   <?php foreach ((array)$blocks as $s):
     $post_id = $s->ID;
     ?>

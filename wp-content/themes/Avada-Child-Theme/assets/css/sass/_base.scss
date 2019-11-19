@@ -590,6 +590,10 @@ footer .fusion-columns{
     }
   }
 }
+.fake-parent-divider {
+    height: 63px;
+    background: #c9b07d;
+}
 .szolgaltatas-block-holder{
   &.view-of-big{
     & > .wrapper{
@@ -598,6 +602,7 @@ footer .fusion-columns{
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
       & > .block{
         padding: 4px;
         & > .wrapper{
@@ -649,12 +654,11 @@ footer .fusion-columns{
 
           button{
             /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
-background: #5d422a; /* Old browsers */
-background: -moz-linear-gradient(left,  #5d422a 0%, #c5ac7a 50%, #5d422a 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 ); /* IE6-9 */
-
+            background: #5d422a; /* Old browsers */
+            background: -moz-linear-gradient(left,  #5d422a 0%, #c5ac7a 50%, #5d422a 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(left,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 ); /* IE6-9 */
             padding: 12px 28px;
             font-weight: bold;
             color: white;
@@ -681,6 +685,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', end
     &.autopager{
       background-color: #ded4bd;
       position: relative;
+      & > .wrapper{
+        width: $page-width;
+        margin: 0 auto;
+      }
       &:after{
         content:"";
         width: 105%;
@@ -1342,6 +1350,16 @@ body.page:not(.home){
       background-repeat: no-repeat !important;
       background-position: center top !important;
     }
+  }
+}
+
+body.page-id-37{
+  section#content,
+  main#main{
+    padding: 0 !important;
+  }
+  .post-content > div.fusion-fullwidth {
+    padding: 0 !important;
   }
 }
 

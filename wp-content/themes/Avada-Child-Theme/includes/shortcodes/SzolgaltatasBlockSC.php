@@ -14,44 +14,62 @@ class SzolgaltatasBlockSC
 
     public function do_shortcode( $attr, $content = null )
     {
-        /* Set up the default arguments. */
-        $defaults = apply_filters(
-            self::SCTAG.'_defaults',
-            array(
-              'view' => 'big',
-              'autopageparent' => 0
-            )
-        );
+      global $post;
 
-        /* Parse the arguments. */
-        $attr = shortcode_atts( $defaults, $attr );
+      /* Set up the default arguments. */
+      $defaults = apply_filters(
+          self::SCTAG.'_defaults',
+          array(
+            'view' => 'big',
+            'autopageparent' => 0
+          )
+      );
 
-        if ( $post = get_page_by_path( 'szolgaltatasaink', OBJECT, 'page' ) )
-            $id = $post->ID;
-        else
-            $id = 0;
+      /* Parse the arguments. */
+      $attr = shortcode_atts( $defaults, $attr );
 
-        $posts = get_children(array(
-          'post_parent' => $id,
-          'orderby' => 'menu_order',
-          'order' => 'ASC'
-        ));
+      if ( $parent = get_page_by_path( 'szolgaltatasaink', OBJECT, 'page' ) )
+          $id = $parent->ID;
+      else
+          $id = 0;
 
-        if (count($posts) == 0) {
-          return '';
-        }
+      if ($post->post_parent != 0) {
+        $ancestors = get_post_ancestors($post->ID);
+        $top_parent_id = (int)trim(end($ancestors));
+      }
 
-        $attr['blocks'] = $posts;
+      if ( $top_parent_id !=  $parent->ID && $attr['autopageparent'] == 1) {
+        return '<div class="fake-parent-divider">&nbsp;</div>';
+      }
 
-        $pass_data = $attr;
+      $postarg = array(
+        'post_parent' => $id,
+        'post_type' => 'page',
+        'orderby' => 'menu_order',
+        'order' => 'ASC'
+      );
 
-        $output = '<div class="'.self::SCTAG.'-holder view-of-'.$attr['view'].(($attr['autopageparent'] == 1)?' autopager':'').'">';
+      if ($attr['autopageparent'] == 1) {
+        $postarg['exclude'] = array($post->ID);
+      }
 
-        $output .= (new ShortcodeTemplates('SzolgaltatasBlock/'.$attr['view']))->load_template( $pass_data );
-        $output .= '</div>';
+      //$posts = new WP_Query($postarg);
+      $posts = get_posts($postarg);
 
-        /* Return the output of the tooltip. */
-        return apply_filters( self::SCTAG, $output );
+      if (count($posts) == 0) {
+        return '';
+      }
+
+      $attr['blocks'] = $posts;
+
+      $pass_data = $attr;
+      $output = '<div class="'.self::SCTAG.'-holder view-of-'.$attr['view'].(($attr['autopageparent'] == 1)?' autopager':'').'">';
+
+      $output .= (new ShortcodeTemplates('SzolgaltatasBlock/'.$attr['view']))->load_template( $pass_data );
+      $output .= '</div>';
+
+      /* Return the output of the tooltip. */
+      return apply_filters( self::SCTAG, $output );
     }
 
 }
