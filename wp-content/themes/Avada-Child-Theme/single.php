@@ -30,8 +30,6 @@ if ($tags) {
   }
   $post_nav_info .= $taglines;
 }
-
-
 ?>
 <?php get_header(); ?>
 <div class="fake-arrow-down arrow-down-lightcream">

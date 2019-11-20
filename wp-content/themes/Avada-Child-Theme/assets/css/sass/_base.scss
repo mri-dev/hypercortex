@@ -55,6 +55,7 @@ h4 { font-size: 1.4rem !important; }
         background: white;
       }
       input[type=submit]{
+        cursor: pointer;
         padding: 0 8px;
         border: none;
         background: #7A6740;
@@ -594,7 +595,116 @@ footer .fusion-columns{
     height: 63px;
     background: #c9b07d;
 }
+
 .szolgaltatas-block-holder{
+  &.view-of-kalkulatorblocks{
+    background: #ded4bd;
+    position: relative;
+    &:after{
+      content:"";
+      width: 105%;
+      height: 50px;
+      pointer-events: none;
+      left: 50%;
+      bottom: 0;
+      pointer-events: none;
+      -moz-transform: translateX(-50%);
+      transform: translateX(-50%);
+      background-image: url('#{$imgroot}arrowdownneg-white.svg');
+      background-position: center bottom;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: absolute;
+      z-index: 100;
+    }
+    & > .wrapper{
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      flex-wrap: wrap;
+      width: $page-width;
+      margin: 0 auto;
+      & > .block{
+        padding: 1px;
+        flex-basis: calc(100% / 3);
+        & > .wrapper{
+          background: #444444;
+          height: 10vw;
+          position: relative;
+          a{
+            display: block;
+            height: 100%;
+          }
+          .inside{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            padding: 20px;
+            -webkit-transform:translate(-50%,-50%);
+            -moz-transform:translate(-50%,-50%);
+            transform:translate(-50%,-50%);
+          }
+        }
+        .ico{
+          text-align: center;
+          margin: 0 0 20px 0;
+          img {
+            height: 60px;
+          }
+        }
+        .title {
+          text-align: center;
+          h2 {
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif !important;
+            font-size: 1.40vw !important;
+            color: white !important;
+            font-weight: 700 !important;
+            line-height: 1;
+          }
+        }
+        .abs{
+          font-size: 1vw;
+          color: white;
+          text-align: center;
+          line-height: 1.35;
+        }
+        .fakebtn{
+          padding: 25px 0 0 0;
+          text-align: center;
+
+          button{
+            /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
+            background: #5d422a; /* Old browsers */
+            background: -moz-linear-gradient(left,  #5d422a 0%, #c5ac7a 50%, #5d422a 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(left,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right,  #5d422a 0%,#c5ac7a 50%,#5d422a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d422a', endColorstr='#5d422a',GradientType=1 ); /* IE6-9 */
+            padding: 12px 28px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            text-transform: uppercase;
+            font-size: 0.9vw;
+            cursor: pointer;
+          }
+        }
+      }
+      & > .block:nth-child(3n+1) > .wrapper{
+        background: #c9b07d !important;
+      }
+      & > .block:nth-child(3n+2) > .wrapper{
+        background: #c4a16e !important;
+      }
+      & > .block:nth-child(3n+3) > .wrapper{
+        background: #8f5b2b !important;
+      }
+      & > .block.active > .wrapper{
+        background: #50100f !important;
+      }
+    }
+  }
   &.view-of-big{
     & > .wrapper{
       display: -webkit-box;
@@ -1037,10 +1147,9 @@ footer .fusion-columns{
   padding: 4vw 0 6vw 0px;
   display: none;
   background-image:
-  url('#{$imgroot}calc-arrow-top.svg'),
-  url('#{$imgroot}calc-arrow-bottom.svg');
+  url('#{$imgroot}calc-arrow-top.svg');
   background-size: contain;
-  background-position: center top, center bottom -1px;
+  background-position: center top;
   background-repeat: no-repeat;
 
   &.ng-scope{
@@ -1327,7 +1436,7 @@ body.page:not(.home){
   }
   main#main{
     background: #fffcf7;
-    padding: 0 0 50px 0;
+    padding: 0 0 70px 0;
     & > .fusion-row{
       width: 100%;
       max-width: initial;
@@ -1340,9 +1449,9 @@ body.page:not(.home){
     &:before{
       content: "";
       position: absolute;
-      height: 80px;
+      height: 95px;
       width: 100%;
-      top: -80px;
+      top: -93px;
       left: 0;
       z-index: 10;
       background-image: url('#{$imgroot}calc-arrow-bottom.svg') !important;
@@ -1350,6 +1459,12 @@ body.page:not(.home){
       background-repeat: no-repeat !important;
       background-position: center top !important;
     }
+  }
+}
+
+body.page-id-23{
+  section#content{
+    padding-top: 0 !important;
   }
 }
 
@@ -1457,4 +1572,15 @@ body.page-id-37{
   0% {background-color: #75bf75;}
   50% {background-color: #b6c955;}
   100% {background-color: #75bf75;}
+}
+
+@media all and (min-width: 1500px){
+  body.page:not(.home) .footer-menu:before{
+    height: 118px;
+    top: -115px;
+  }
+  body.page:not(.home) main#main {
+    background: #fffcf7;
+    padding: 0 0 90px 0;
+  }
 }
