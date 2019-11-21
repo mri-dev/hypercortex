@@ -293,9 +293,10 @@ h4 { font-size: 1.4rem !important; }
       display: -ms-flexbox;
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
 
       & > .tag{
-        flex-basis: calc(100% / 7);
+        flex-basis: calc(100% / 5);
         padding: 2px;
         & > .wrap{
           background: $color-gold;
@@ -320,6 +321,11 @@ h4 { font-size: 1.4rem !important; }
       }
     }
   }
+}
+
+.feliratkozas-holder{
+  width: 550px;
+  margin: 0 auto;
 }
 
 body.archive.category,
@@ -601,23 +607,6 @@ footer .fusion-columns{
   &.view-of-kalkulatorblocks{
     background: #ded4bd;
     position: relative;
-    &:after{
-      content:"";
-      width: 105%;
-      height: 50px;
-      pointer-events: none;
-      left: 50%;
-      bottom: 0;
-      pointer-events: none;
-      -moz-transform: translateX(-50%);
-      transform: translateX(-50%);
-      background-image: url('#{$imgroot}arrowdownneg-white.svg');
-      background-position: center bottom;
-      background-size: cover;
-      background-repeat: no-repeat;
-      position: absolute;
-      z-index: 100;
-    }
     & > .wrapper{
       display: -webkit-box;
       display: -ms-flexbox;
@@ -718,6 +707,28 @@ footer .fusion-columns{
         background: #50100f !important;
       }
     }
+  }
+  &.view-of-kalkulatorblocks:not(.group-page){
+    &:after{
+      content:"";
+      width: 105%;
+      height: 50px;
+      pointer-events: none;
+      left: 50%;
+      bottom: 0;
+      pointer-events: none;
+      -moz-transform: translateX(-50%);
+      transform: translateX(-50%);
+      background-image: url('#{$imgroot}arrowdownneg-white.svg');
+      background-position: center bottom;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: absolute;
+      z-index: 100;
+    }
+  }
+  &.view-of-kalkulatorblocks.group-page{
+    margin-bottom: -70px;
   }
   &.view-of-big{
     & > .wrapper{

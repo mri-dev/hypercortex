@@ -9,4 +9,5 @@
 	 require_once "BlogListSC.php";
 	 require_once "AjanlatkeresSzalagSC.php";
 	 require_once "CikkSidebarSC.php";
+	 require_once "FeliratkozasSC.php";
 ?>

@@ -46,6 +46,9 @@ class SzolgaltatasBlockSC
       if ( $attr['view'] == 'kalkulatorblocks' )
       {
         $parent = get_page_by_path( 'kalkulatorok', OBJECT, 'page' );
+        if ($parent->ID == $post->ID) {
+          $kalk_group_page = true;
+        }
         $id = $parent->ID;
       }
 
@@ -70,7 +73,7 @@ class SzolgaltatasBlockSC
       $attr['blocks'] = $posts;
 
       $pass_data = $attr;
-      $output = '<div class="'.self::SCTAG.'-holder view-of-'.$attr['view'].(($attr['autopageparent'] == 1)?' autopager':'').'">';
+      $output = '<div class="'.self::SCTAG.'-holder view-of-'.$attr['view'].(($attr['autopageparent'] == 1)?' autopager':'').(($kalk_group_page)?' group-page':'').'">';
 
       $output .= (new ShortcodeTemplates('SzolgaltatasBlock/'.$attr['view']))->load_template( $pass_data );
       $output .= '</div>';
