@@ -1,8 +1,9 @@
+<?php global $post; ?>
 <div class="wrapper">
   <?php foreach ((array)$blocks as $s):
     $post_id = $s->ID;
     ?>
-    <div class="block">
+    <div class="block <?=($post->ID == $post_id)?'active':''?>">
       <div class="wrapper autocorrett-height-by-width" data-image-ratio="1:1">
         <a href="<?=get_the_permalink($post_id)?>">
           <div class="inside">
@@ -12,12 +13,6 @@
             </div>
             <?php endif; ?>
             <div class="title"><h2><?php echo $s->post_title; ?></h2></div>
-            <div class="abs">
-              <?php echo get_the_excerpt($post_id); ?>
-            </div>
-            <div class="fakebtn">
-              <button type="button"><?=__('Tovább', 'hc')?></button>
-            </div>
           </div>
         </a>
       </div>

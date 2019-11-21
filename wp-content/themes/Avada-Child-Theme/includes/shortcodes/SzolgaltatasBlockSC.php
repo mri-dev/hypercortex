@@ -42,6 +42,13 @@ class SzolgaltatasBlockSC
         return '<div class="fake-parent-divider">&nbsp;</div>';
       }
 
+      // Kalkulátorok
+      if ( $attr['view'] == 'kalkulatorblocks' )
+      {
+        $parent = get_page_by_path( 'kalkulatorok', OBJECT, 'page' );
+        $id = $parent->ID;
+      }
+
       $postarg = array(
         'post_parent' => $id,
         'post_type' => 'page',

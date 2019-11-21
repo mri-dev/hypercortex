@@ -597,6 +597,7 @@ footer .fusion-columns{
 }
 
 .szolgaltatas-block-holder{
+  overflow: hidden;
   &.view-of-kalkulatorblocks{
     background: #ded4bd;
     position: relative;
@@ -623,6 +624,7 @@ footer .fusion-columns{
       display: flex;
       flex-wrap: wrap;
       width: $page-width;
+      justify-content: center;
       margin: 0 auto;
       & > .block{
         padding: 1px;
@@ -631,6 +633,9 @@ footer .fusion-columns{
           background: #444444;
           height: 10vw;
           position: relative;
+          z-index: 1;
+          -webkit-transition: all .4s;
+          transition: all .4s;
           a{
             display: block;
             height: 100%;
@@ -648,9 +653,9 @@ footer .fusion-columns{
         }
         .ico{
           text-align: center;
-          margin: 0 0 20px 0;
+          margin: 0 0 3rem 0;
           img {
-            height: 60px;
+            width: 33%;
           }
         }
         .title {
@@ -688,6 +693,15 @@ footer .fusion-columns{
             text-transform: uppercase;
             font-size: 0.9vw;
             cursor: pointer;
+          }
+        }
+
+        &:hover {
+          & > .wrapper{
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            z-index: 2;
+            box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0.5);
           }
         }
       }
@@ -1459,6 +1473,12 @@ body.page:not(.home){
       background-repeat: no-repeat !important;
       background-position: center top !important;
     }
+  }
+}
+
+body.page-template-page-kalkulator{
+  section#content{
+    padding-top: 10px !important;
   }
 }
 
