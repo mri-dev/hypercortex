@@ -771,20 +771,20 @@ footer .fusion-columns{
           h2 {
             text-transform: uppercase;
             font-family: 'Roboto', sans-serif !important;
-            font-size: 1.40vw !important;
+            font-size: 1.2rem !important;
             color: white !important;
             font-weight: 700 !important;
             line-height: 1;
           }
         }
         .abs{
-          font-size: 1vw;
+          font-size: 0.85rem;
           color: white;
           text-align: center;
           line-height: 1.35;
         }
         .fakebtn{
-          padding: 25px 0 0 0;
+          padding: 10px 0 0 0;
           text-align: center;
 
           button{
@@ -799,7 +799,7 @@ footer .fusion-columns{
             color: white;
             border: none;
             text-transform: uppercase;
-            font-size: 0.9vw;
+            font-size: 0.9rem;
             cursor: pointer;
           }
         }
@@ -1435,7 +1435,7 @@ footer .fusion-columns{
 
 body.page:not(.home){
   section#content{
-    padding-top: 40px;
+    padding-top: 60px;
   }
   .page-custom-title{
     background-color: #c9b07d;

@@ -939,21 +939,21 @@ footer .fusion-columns > div:not(.fusion-column-last) {
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
-  font-size: 1.40vw !important;
+  font-size: 1.2rem !important;
   color: white !important;
   font-weight: 700 !important;
   line-height: 1;
 }
 /* line 780, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .abs {
-  font-size: 1vw;
+  font-size: 0.85rem;
   color: white;
   text-align: center;
   line-height: 1.35;
 }
 /* line 786, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn {
-  padding: 25px 0 0 0;
+  padding: 10px 0 0 0;
   text-align: center;
 }
 /* line 790, sass/_base.scss */
@@ -974,7 +974,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   color: white;
   border: none;
   text-transform: uppercase;
-  font-size: 0.9vw;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 /* line 807, sass/_base.scss */
@@ -1678,7 +1678,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
 
 /* line 1437, sass/_base.scss */
 body.page:not(.home) section#content {
-  padding-top: 40px;
+  padding-top: 60px;
 }
 /* line 1440, sass/_base.scss */
 body.page:not(.home) .page-custom-title {
