@@ -128,6 +128,7 @@ h4 { font-size: 1.4rem !important; }
         background: white;
         height: 100%;
         border: 1px solid #f0e3c8;
+        position: relative;
       }
 
       .image{
@@ -160,7 +161,9 @@ h4 { font-size: 1.4rem !important; }
         }
         .title a{
           font-family: 'Bauer Bodoni', serif !important;
-          font-size: 1.8rem;
+          font-size: 1.3rem;
+          font-weight: bold;
+          line-height: 1.3;
           color: #513621;
           font-style: italic;
 
@@ -169,13 +172,20 @@ h4 { font-size: 1.4rem !important; }
           }
         }
         .desc {
-          line-height: 1.5;
-          font-size: 0.9rem;
-          height: 125px;
-          overflow: hidden;
+          line-height: 1.4;
+          font-size: 0.78rem;
+          margin-bottom: 55px;
           p{
             margin: 0 !important;
           }
+        }
+        .info-block{
+          position: absolute;
+          bottom: 22px;
+          width: 100%;
+          left: 0;
+          right: 0;
+          padding: 0 15px;
         }
         .published{
           color: #7d7567;
@@ -184,7 +194,7 @@ h4 { font-size: 1.4rem !important; }
           font-size: 0.7rem;
         }
         .nextbtn{
-          margin: 35px 0 0 0;
+          margin: 12px 0 0 0;
           a{
             border: 3px solid $color-bordo;
             color: $color-bordo;
@@ -225,7 +235,7 @@ h4 { font-size: 1.4rem !important; }
       flex-basis: calc(100% / 4);
     }
     & > .wrapper .cikk{
-      padding: 0 5px;
+      padding: 5px;
     }
   }
 }
@@ -398,6 +408,8 @@ body.single-post{
       line-height: 1 !important;
       margin: 0 !important;
       font-style: italic !important;
+      font-size: 2.3rem !important;
+      font-weight: bold !important;
     }
   }
   main#main{
@@ -642,9 +654,9 @@ footer .fusion-columns{
         }
         .ico{
           text-align: center;
-          margin: 0 0 3rem 0;
+          margin: 0 0 1rem 0;
           img {
-            width: 33%;
+            width: 20%;
           }
         }
         .title {
@@ -652,7 +664,7 @@ footer .fusion-columns{
           h2 {
             text-transform: uppercase;
             font-family: 'Roboto', sans-serif !important;
-            font-size: 1.40vw !important;
+            font-size: 1rem !important;
             color: white !important;
             font-weight: 700 !important;
             line-height: 1;
@@ -1502,7 +1514,7 @@ body.page-id-23{
 body.page-id-37{
   section#content,
   main#main{
-    padding: 0 !important;
+    padding: 0 0 15px 0 !important;
   }
   .post-content > div.fusion-fullwidth {
     padding: 0 !important;
@@ -1545,6 +1557,7 @@ body.page-id-37{
       .title a{
         font-family: 'Bauer Bodoni', serif !important;
         font-size: 1.3rem;
+        line-height: 1.2;
         color: #513621;
         font-style: italic;
 

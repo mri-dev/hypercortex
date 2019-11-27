@@ -26,14 +26,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				/**
 				 * Render the post title
 				 */
-				$title_size = ( false === avada_is_page_title_bar_enabled( 0 ) ? '1' : '2' );
+				$title_size = 3;
 				echo avada_render_post_title( 0, false, esc_html__( 'Nem találta meg amit keres?', 'hc' ), $title_size ); // WPCS: XSS ok.
 				?>
 				<p><?php esc_html_e( 'Írja be a keresési kifejezéseket', 'hc' ); ?></p>
 				<?php get_search_form(); ?>
 			</div>
 		<?php endif; ?>
-		<h2><?php esc_html_e( 'Találati lista', 'hc' ); ?></h2>
+		<h2><em><?php esc_html_e( sprintf('Találati lista "%s" kifejezésre', $_GET['s']), 'hc' ); ?></em></h2>
 
 		<?php if ( 'top' == Avada()->settings->get( 'search_new_search_position' ) || 'hidden' == Avada()->settings->get( 'search_new_search_position' ) ) : ?>
 			<?php get_template_part( 'templates/listing' ); ?>

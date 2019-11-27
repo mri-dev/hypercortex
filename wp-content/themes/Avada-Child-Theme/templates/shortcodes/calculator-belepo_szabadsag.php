@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="inputs">
-    <div class="header">Belépő szabadság kalkulátor</div>
+    <div class="header">Szabadságkalkulátor</div>
     <div class="inp-body">
       <div class="line" ng-class="{missing:missing.indexOf('iden_kezdett_dolgozni')!==-1, error:error_elements['iden_kezdett_dolgozni']}">
         <div class="head">
@@ -92,7 +92,7 @@
   </div>
   <div class="result-view">
     <div class="line-header">Kalkuláció eredménye</div>
-    <div class="not-resulted" ng-if="!loaded || results===false"><i class="fa fa-bell-o" aria-hidden="true"></i> Az eredmény kiértékeléséhez konfigurálja a beállításokat!</div>
+    <div class="not-resulted" ng-if="!loaded || results===false"><i class="fa fa-bell-o" aria-hidden="true"></i> Az eredmény megjelenítéséhez kérjük töltse ki a táblázatot!</div>
     <div class="loader" ng-if="loading">Eredmény kiértékelése folyamatban...</div>
     <div class="error-msg" ng-if="error" ng-bind-html="error|unsafe"></div>
     <div class="result-body" ng-if="loaded && result!==false">

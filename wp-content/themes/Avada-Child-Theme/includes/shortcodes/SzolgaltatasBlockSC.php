@@ -56,7 +56,8 @@ class SzolgaltatasBlockSC
         'post_parent' => $id,
         'post_type' => 'page',
         'orderby' => 'menu_order',
-        'order' => 'ASC'
+        'order' => 'ASC',
+        'posts_per_page' => -1
       );
 
       if ($attr['autopageparent'] == 1) {

@@ -13,9 +13,11 @@
           <div class="author"><?=__('Szerző')?>: <?php echo get_the_author_meta('display_name'); ?></div>
           <div class="title"><a href="<?php echo the_permalink(); ?>"><?php echo the_title(); ?></a></div>
           <div class="desc"><?php echo the_excerpt(); ?></div>
-          <div class="published"><?php echo get_the_date(); ?></div>
-          <div class="nextbtn">
-            <a href="<?php echo the_permalink(); ?>"><?=__('Tovább')?></a>
+          <div class="info-block">            
+            <div class="published"><?php echo get_the_date(); ?></div>
+            <div class="nextbtn">
+              <a href="<?php echo the_permalink(); ?>"><?=__('Tovább')?></a>
+            </div>
           </div>
         </div>
       </div>
