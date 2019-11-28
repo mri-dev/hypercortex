@@ -65,7 +65,7 @@ h4 {
   background-repeat: no-repeat, repeat-x;
   background-position: 59% center, top center;
   background-size: contain, cover;
-  box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0.7);
+  box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0);
   position: relative;
 }
 /* line 31, sass/_base.scss */
@@ -577,6 +577,7 @@ body.single-post .fusion-page-title-bar {
   height: 50px;
   pointer-events: none;
   left: 50%;
+  bottom: -43px;
   -moz-transform: translateX(-50%);
   transform: translateX(-50%);
   background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
@@ -586,30 +587,30 @@ body.single-post .fusion-page-title-bar {
   position: absolute;
   z-index: 100;
 }
-/* line 475, sass/_base.scss */
+/* line 476, sass/_base.scss */
 .fake-arrow-down.arrow-down-cream:after,
 .fusion-secondary-main-menu.arrow-down-cream:after {
   background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-cream.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
 }
-/* line 479, sass/_base.scss */
+/* line 480, sass/_base.scss */
 .fake-arrow-down.arrow-down-lightcream:after,
 .fusion-secondary-main-menu.arrow-down-lightcream:after {
   background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-lightcream.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
 }
-/* line 482, sass/_base.scss */
+/* line 483, sass/_base.scss */
 .fake-arrow-down.arrow-down-lightbrown:after,
 .fusion-secondary-main-menu.arrow-down-lightbrown:after {
   background-image: url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-lightbrown.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png");
 }
 
-/* line 486, sass/_base.scss */
+/* line 487, sass/_base.scss */
 footer .fusion-columns {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
 }
-/* line 491, sass/_base.scss */
+/* line 492, sass/_base.scss */
 footer .fusion-columns a.button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -632,44 +633,44 @@ footer .fusion-columns a.button {
   float: right;
   cursor: pointer;
 }
-/* line 507, sass/_base.scss */
+/* line 508, sass/_base.scss */
 footer .fusion-columns a.button:hover {
   color: white !important;
 }
-/* line 511, sass/_base.scss */
+/* line 512, sass/_base.scss */
 footer .fusion-columns .divider {
   height: 1px;
   background: #c9b07d;
   margin: 15px 0;
   width: 100%;
 }
-/* line 517, sass/_base.scss */
+/* line 518, sass/_base.scss */
 footer .fusion-columns iframe {
   width: 100%;
 }
-/* line 520, sass/_base.scss */
+/* line 521, sass/_base.scss */
 footer .fusion-columns > .fusion-column {
   width: auto;
   float: none;
   padding: 0 !important;
 }
-/* line 524, sass/_base.scss */
+/* line 525, sass/_base.scss */
 footer .fusion-columns > .fusion-column h2, footer .fusion-columns > .fusion-column h3 {
   font-size: 1.9rem !important;
   line-height: 1.2;
   color: #7a6740;
 }
-/* line 530, sass/_base.scss */
+/* line 531, sass/_base.scss */
 footer .fusion-columns > .fusion-column-last {
   flex-basis: 480px;
 }
-/* line 533, sass/_base.scss */
+/* line 534, sass/_base.scss */
 footer .fusion-columns > div:not(.fusion-column-last) {
   flex-basis: calc(100% - 480px);
   padding-right: 45px !important;
 }
 
-/* line 538, sass/_base.scss */
+/* line 539, sass/_base.scss */
 .ajanlatkeres-szalag-holder {
   background: url("/wp-content/themes/Avada-Child-Theme/images/ajbg-szalag.svg"), url("/wp-content/themes/Avada-Child-Theme/images/arrowdown-shadow.png"), url("/wp-content/themes/Avada-Child-Theme/images/arrowup-shadow.png");
   background-repeat: no-repeat, no-repeat, no-repeat;
@@ -678,7 +679,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   color: white;
   height: 200px;
 }
-/* line 545, sass/_base.scss */
+/* line 546, sass/_base.scss */
 .ajanlatkeres-szalag-holder > .wrapper {
   width: 1050px;
   margin: 0 auto;
@@ -689,15 +690,15 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   align-items: center;
   height: 100%;
 }
-/* line 556, sass/_base.scss */
+/* line 557, sass/_base.scss */
 .ajanlatkeres-szalag-holder > .wrapper .arrow img {
   height: 38px;
 }
-/* line 561, sass/_base.scss */
+/* line 562, sass/_base.scss */
 .ajanlatkeres-szalag-holder > .wrapper .ajbutton {
   padding: 0 0 0 20px;
 }
-/* line 563, sass/_base.scss */
+/* line 564, sass/_base.scss */
 .ajanlatkeres-szalag-holder > .wrapper .ajbutton a {
   border: 1px solid white;
   text-transform: uppercase;
@@ -706,23 +707,23 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px 15px;
   display: block;
 }
-/* line 573, sass/_base.scss */
+/* line 574, sass/_base.scss */
 .ajanlatkeres-szalag-holder > .wrapper h2 {
   font-weight: bold !important;
   font-size: 2.7rem !important;
   letter-spacing: 1px !important;
 }
-/* line 579, sass/_base.scss */
+/* line 580, sass/_base.scss */
 .ajanlatkeres-szalag-holder > .wrapper h2, .ajanlatkeres-szalag-holder > .wrapper a {
   color: white !important;
 }
-/* line 583, sass/_base.scss */
+/* line 584, sass/_base.scss */
 .ajanlatkeres-szalag-holder > .wrapper > div {
   flex-basis: calc(100% / 3);
   text-align: center;
 }
 
-/* line 591, sass/_base.scss */
+/* line 592, sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk a {
   font-family: 'Bauer Bodoni', serif !important;
   display: -webkit-box;
@@ -735,32 +736,32 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-style: italic;
   color: #7a6740 !important;
 }
-/* line 602, sass/_base.scss */
+/* line 603, sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk a:hover {
   color: #c9b07d !important;
 }
-/* line 606, sass/_base.scss */
+/* line 607, sass/_base.scss */
 .custom-templates-sc.view-uzenjen_nekunk .img {
   flex-basis: 90px;
   padding: 0 10px;
 }
 
-/* line 612, sass/_base.scss */
+/* line 613, sass/_base.scss */
 .fake-parent-divider {
   height: 63px;
   background: #c9b07d;
 }
 
-/* line 617, sass/_base.scss */
+/* line 618, sass/_base.scss */
 .szolgaltatas-block-holder {
   overflow: hidden;
 }
-/* line 619, sass/_base.scss */
+/* line 620, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks {
   background: #ded4bd;
   position: relative;
 }
-/* line 622, sass/_base.scss */
+/* line 623, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -770,12 +771,12 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   justify-content: center;
   margin: 0 auto;
 }
-/* line 630, sass/_base.scss */
+/* line 631, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block {
   padding: 1px;
   flex-basis: calc(100% / 3);
 }
-/* line 633, sass/_base.scss */
+/* line 634, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block > .wrapper {
   background: #444444;
   height: 10vw;
@@ -784,12 +785,12 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -webkit-transition: all .4s;
   transition: all .4s;
 }
-/* line 640, sass/_base.scss */
+/* line 641, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block > .wrapper a {
   display: block;
   height: 100%;
 }
-/* line 644, sass/_base.scss */
+/* line 645, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block > .wrapper .inside {
   position: absolute;
   top: 50%;
@@ -800,20 +801,20 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 655, sass/_base.scss */
+/* line 656, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .ico {
   text-align: center;
   margin: 0 0 1rem 0;
 }
-/* line 658, sass/_base.scss */
+/* line 659, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .ico img {
   width: 20%;
 }
-/* line 662, sass/_base.scss */
+/* line 663, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .title {
   text-align: center;
 }
-/* line 664, sass/_base.scss */
+/* line 665, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
@@ -822,19 +823,19 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-weight: 700 !important;
   line-height: 1;
 }
-/* line 673, sass/_base.scss */
+/* line 674, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .abs {
   font-size: 1vw;
   color: white;
   text-align: center;
   line-height: 1.35;
 }
-/* line 679, sass/_base.scss */
+/* line 680, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .fakebtn {
   padding: 25px 0 0 0;
   text-align: center;
 }
-/* line 683, sass/_base.scss */
+/* line 684, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .fakebtn button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -855,30 +856,30 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.9vw;
   cursor: pointer;
 }
-/* line 701, sass/_base.scss */
+/* line 702, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block:hover > .wrapper {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
   z-index: 2;
-  box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0);
 }
-/* line 709, sass/_base.scss */
+/* line 710, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block:nth-child(3n+1) > .wrapper {
   background: #c9b07d !important;
 }
-/* line 712, sass/_base.scss */
+/* line 713, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block:nth-child(3n+2) > .wrapper {
   background: #c4a16e !important;
 }
-/* line 715, sass/_base.scss */
+/* line 716, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block:nth-child(3n+3) > .wrapper {
   background: #8f5b2b !important;
 }
-/* line 718, sass/_base.scss */
+/* line 719, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block.active > .wrapper {
   background: #50100f !important;
 }
-/* line 724, sass/_base.scss */
+/* line 725, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks:not(.group-page):after {
   content: "";
   width: 105%;
@@ -896,11 +897,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   position: absolute;
   z-index: 100;
 }
-/* line 742, sass/_base.scss */
+/* line 743, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks.group-page {
   margin-bottom: -70px;
 }
-/* line 746, sass/_base.scss */
+/* line 747, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -909,22 +910,22 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   align-items: center;
   justify-content: center;
 }
-/* line 753, sass/_base.scss */
+/* line 754, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block {
   padding: 4px;
 }
-/* line 755, sass/_base.scss */
+/* line 756, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper {
   background: #444444;
   height: 10vw;
   position: relative;
 }
-/* line 759, sass/_base.scss */
+/* line 760, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper a {
   display: block;
   height: 100%;
 }
-/* line 763, sass/_base.scss */
+/* line 764, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block > .wrapper .inside {
   position: absolute;
   top: 50%;
@@ -935,20 +936,20 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 774, sass/_base.scss */
+/* line 775, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico {
   text-align: center;
   margin: 0 0 20px 0;
 }
-/* line 777, sass/_base.scss */
+/* line 778, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img {
   height: 60px;
 }
-/* line 781, sass/_base.scss */
+/* line 782, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title {
   text-align: center;
 }
-/* line 783, sass/_base.scss */
+/* line 784, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
@@ -957,19 +958,19 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-weight: 700 !important;
   line-height: 1;
 }
-/* line 792, sass/_base.scss */
+/* line 793, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .abs {
   font-size: 0.85rem;
   color: white;
   text-align: center;
   line-height: 1.35;
 }
-/* line 798, sass/_base.scss */
+/* line 799, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn {
   padding: 10px 0 0 0;
   text-align: center;
 }
-/* line 802, sass/_base.scss */
+/* line 803, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -990,33 +991,33 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.9rem;
   cursor: pointer;
 }
-/* line 819, sass/_base.scss */
+/* line 820, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(1) > .wrapper {
   background: #c9b07d !important;
 }
-/* line 822, sass/_base.scss */
+/* line 823, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(2) > .wrapper {
   background: #c4a16e !important;
 }
-/* line 825, sass/_base.scss */
+/* line 826, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(3) > .wrapper {
   background: #8f5b2b !important;
 }
-/* line 828, sass/_base.scss */
+/* line 829, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big > .wrapper > .block:nth-child(4) > .wrapper {
   background: #50100f !important;
 }
-/* line 832, sass/_base.scss */
+/* line 833, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big.autopager {
   background-color: #ded4bd;
   position: relative;
 }
-/* line 835, sass/_base.scss */
+/* line 836, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big.autopager > .wrapper {
   width: 1050px;
   margin: 0 auto;
 }
-/* line 839, sass/_base.scss */
+/* line 840, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-big.autopager:after {
   content: "";
   width: 105%;
@@ -1034,7 +1035,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   position: absolute;
   z-index: 100;
 }
-/* line 859, sass/_base.scss */
+/* line 860, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1042,18 +1043,18 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
   align-items: flex-start;
 }
-/* line 866, sass/_base.scss */
+/* line 867, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper {
   background: #444444;
   height: 10vw;
   position: relative;
 }
-/* line 870, sass/_base.scss */
+/* line 871, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper a {
   display: block;
   height: 100%;
 }
-/* line 874, sass/_base.scss */
+/* line 875, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block > .wrapper .inside {
   position: absolute;
   top: 50%;
@@ -1063,21 +1064,21 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 885, sass/_base.scss */
+/* line 886, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico {
   text-align: center;
   margin: 0 0 20px 0;
 }
-/* line 888, sass/_base.scss */
+/* line 889, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico img {
   height: 45px;
   margin-top: 25px;
 }
-/* line 893, sass/_base.scss */
+/* line 894, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title {
   text-align: center;
 }
-/* line 895, sass/_base.scss */
+/* line 896, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title h2 {
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif !important;
@@ -1087,38 +1088,38 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-weight: bold;
   line-height: 1;
 }
-/* line 906, sass/_base.scss */
+/* line 907, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(1) > .wrapper {
   background: #c9b07d !important;
 }
-/* line 909, sass/_base.scss */
+/* line 910, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(2) > .wrapper {
   background: #c4a16e !important;
 }
-/* line 912, sass/_base.scss */
+/* line 913, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(3) > .wrapper {
   background: #8f5b2b !important;
 }
-/* line 915, sass/_base.scss */
+/* line 916, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block:nth-child(4) > .wrapper {
   background: #50100f !important;
 }
 
-/* line 922, sass/_base.scss */
+/* line 923, sass/_base.scss */
 .contact-form > .wrapper {
   background: #f0eadd;
   border: 5px solid #cec1ae;
 }
-/* line 925, sass/_base.scss */
+/* line 926, sass/_base.scss */
 .contact-form > .wrapper .divider {
   height: 5px;
 }
-/* line 928, sass/_base.scss */
+/* line 929, sass/_base.scss */
 .contact-form > .wrapper .divider-text {
   text-align: center;
   padding: 10px 0 5px 0;
 }
-/* line 932, sass/_base.scss */
+/* line 933, sass/_base.scss */
 .contact-form > .wrapper .radio-selectors {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1127,41 +1128,41 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   align-items: center;
   justify-content: space-around;
 }
-/* line 939, sass/_base.scss */
+/* line 940, sass/_base.scss */
 .contact-form > .wrapper .radio-selectors > div {
   padding: 0 10px;
   text-align: center;
 }
-/* line 942, sass/_base.scss */
+/* line 943, sass/_base.scss */
 .contact-form > .wrapper .radio-selectors > div label {
   color: black !important;
   cursor: pointer;
   font-weight: 400 !important;
 }
-/* line 947, sass/_base.scss */
+/* line 948, sass/_base.scss */
 .contact-form > .wrapper .radio-selectors > div input[type=radio] {
   text-align: center;
   margin: 0;
   cursor: pointer;
 }
-/* line 952, sass/_base.scss */
+/* line 953, sass/_base.scss */
 .contact-form > .wrapper .radio-selectors > div input[type=radio]:checked + label {
   color: #d6a42e !important;
   font-weight: bold !important;
 }
-/* line 957, sass/_base.scss */
+/* line 958, sass/_base.scss */
 .contact-form > .wrapper .radio-selectors > div input[type=radio][value='igen']:checked + label,
 .contact-form > .wrapper .radio-selectors > div input[type=radio][value='gyakran']:checked + label {
   color: #6dbd6d !important;
   font-weight: bold !important;
 }
-/* line 962, sass/_base.scss */
+/* line 963, sass/_base.scss */
 .contact-form > .wrapper .radio-selectors > div input[type=radio][value='nem']:checked + label,
 .contact-form > .wrapper .radio-selectors > div input[type=radio][value='nincsen']:checked + label {
   color: #ec7776 !important;
   font-weight: bold !important;
 }
-/* line 968, sass/_base.scss */
+/* line 969, sass/_base.scss */
 .contact-form > .wrapper .flextbl {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1170,24 +1171,24 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   align-items: center;
   justify-content: space-between;
 }
-/* line 975, sass/_base.scss */
+/* line 976, sass/_base.scss */
 .contact-form > .wrapper .flextbl > .h {
   flex-basis: 40%;
   padding: 0 10px 0 0;
 }
-/* line 979, sass/_base.scss */
+/* line 980, sass/_base.scss */
 .contact-form > .wrapper .flextbl > .inp {
   flex: 1;
 }
-/* line 984, sass/_base.scss */
+/* line 985, sass/_base.scss */
 .contact-form > .wrapper .flextbl.auto-width > .h {
   flex: 1;
 }
-/* line 987, sass/_base.scss */
+/* line 988, sass/_base.scss */
 .contact-form > .wrapper .flextbl.auto-width > .inp {
   flex: initial;
 }
-/* line 992, sass/_base.scss */
+/* line 993, sass/_base.scss */
 .contact-form > .wrapper > .line {
   background: #fefefe;
   margin: 5px 0;
@@ -1195,24 +1196,24 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border-left: none;
   border-right: none;
 }
-/* line 999, sass/_base.scss */
+/* line 1000, sass/_base.scss */
 .contact-form > .wrapper > .line .accepts {
   font-size: 0.8rem;
   padding: 10px;
 }
-/* line 1002, sass/_base.scss */
+/* line 1003, sass/_base.scss */
 .contact-form > .wrapper > .line .accepts > div {
   line-height: 1;
 }
-/* line 1005, sass/_base.scss */
+/* line 1006, sass/_base.scss */
 .contact-form > .wrapper > .line .accepts > div + div {
   margin: 10px 0 0 0;
 }
-/* line 1009, sass/_base.scss */
+/* line 1010, sass/_base.scss */
 .contact-form > .wrapper > .line .accepts.error {
   color: red;
 }
-/* line 1014, sass/_base.scss */
+/* line 1015, sass/_base.scss */
 .contact-form > .wrapper > .line .error-hint {
   padding: 5px 0 0 0;
   font-style: italic;
@@ -1220,11 +1221,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   color: #db1400;
   flex-basis: 100%;
 }
-/* line 1022, sass/_base.scss */
+/* line 1023, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder {
   padding: 10px;
 }
-/* line 1025, sass/_base.scss */
+/* line 1026, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder label {
   display: block;
   margin: 0 0 8px 0;
@@ -1232,11 +1233,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.8rem;
   color: #6c5c4d;
 }
-/* line 1033, sass/_base.scss */
+/* line 1034, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder .flextbl label {
   margin: 0 !important;
 }
-/* line 1040, sass/_base.scss */
+/* line 1041, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder input[type=text],
 .contact-form > .wrapper > .line .form-input-holder input[type=number],
 .contact-form > .wrapper > .line .form-input-holder input[type=date],
@@ -1250,60 +1251,60 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   color: #b29765;
   font-size: 1rem;
 }
-/* line 1050, sass/_base.scss */
+/* line 1051, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder textarea {
   width: 100%;
   height: 130px;
 }
-/* line 1056, sass/_base.scss */
+/* line 1057, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder.missing label {
   color: #be4646;
 }
-/* line 1062, sass/_base.scss */
+/* line 1063, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder.missing input[type=text],
 .contact-form > .wrapper > .line .form-input-holder.missing input[type=number],
 .contact-form > .wrapper > .line .form-input-holder.missing input[type=date],
 .contact-form > .wrapper > .line .form-input-holder.missing textarea {
   outline: 3px solid #ffee6b;
 }
-/* line 1070, sass/_base.scss */
+/* line 1071, sass/_base.scss */
 .contact-form > .wrapper > .line .form-input-holder.error input[type=text],
 .contact-form > .wrapper > .line .form-input-holder.error input[type=number],
 .contact-form > .wrapper > .line .form-input-holder.error input[type=date],
 .contact-form > .wrapper > .line .form-input-holder.error textarea {
   outline: 3px solid #f67a65;
 }
-/* line 1076, sass/_base.scss */
+/* line 1077, sass/_base.scss */
 .contact-form > .wrapper > .line:first-child {
   margin-top: 0;
 }
-/* line 1080, sass/_base.scss */
+/* line 1081, sass/_base.scss */
 .contact-form > .wrapper .btns {
   padding: 10px;
   text-align: right;
 }
-/* line 1084, sass/_base.scss */
+/* line 1085, sass/_base.scss */
 .contact-form > .wrapper .btns .error-msg,
 .contact-form > .wrapper .btns .success-msg {
   text-align: left;
 }
 
-/* line 1090, sass/_base.scss */
+/* line 1091, sass/_base.scss */
 .footer-menu {
   background: #443a32;
 }
-/* line 1092, sass/_base.scss */
+/* line 1093, sass/_base.scss */
 .footer-menu .menu-lablec-container {
   width: 1050px;
   margin: 0 auto;
 }
-/* line 1095, sass/_base.scss */
+/* line 1096, sass/_base.scss */
 .footer-menu .menu-lablec-container ul, .footer-menu .menu-lablec-container li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 1101, sass/_base.scss */
+/* line 1102, sass/_base.scss */
 .footer-menu .menu-lablec-container ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1311,7 +1312,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   flex-wrap: wrap;
   justify-content: center;
 }
-/* line 1109, sass/_base.scss */
+/* line 1110, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a {
   display: block;
   color: #b59a63;
@@ -1321,17 +1322,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.8rem;
   padding: 15px 25px;
 }
-/* line 1117, sass/_base.scss */
+/* line 1118, sass/_base.scss */
 .footer-menu .menu-lablec-container ul li a:hover {
   color: white;
 }
 
-/* line 1125, sass/_base.scss */
+/* line 1126, sass/_base.scss */
 .fusion-main-menu > ul > li {
   padding: 10px 0;
 }
 
-/* line 1128, sass/_base.scss */
+/* line 1129, sass/_base.scss */
 .fusion-main-menu > ul > li > a {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.8rem !important;
@@ -1340,19 +1341,19 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border: 1px solid transparent;
 }
 
-/* line 1135, sass/_base.scss */
+/* line 1136, sass/_base.scss */
 .fusion-main-menu > ul > li:hover > a {
   border: 0.8px solid #c9b07d;
   color: #443a32 !important;
 }
 
-/* line 1139, sass/_base.scss */
+/* line 1140, sass/_base.scss */
 .fusion-main-menu .sub-menu {
   border: 0.8px solid #c9b07d;
   margin-top: 2px;
 }
 
-/* line 1146, sass/_base.scss */
+/* line 1147, sass/_base.scss */
 .calculator-holder .error-msg,
 .contact-form .error-msg {
   color: white;
@@ -1362,12 +1363,12 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px;
   margin: 5px 0;
 }
-/* line 1153, sass/_base.scss */
+/* line 1154, sass/_base.scss */
 .calculator-holder .error-msg .head,
 .contact-form .error-msg .head {
   margin: 5px 0 3px 0;
 }
-/* line 1157, sass/_base.scss */
+/* line 1158, sass/_base.scss */
 .calculator-holder .success-msg,
 .contact-form .success-msg {
   color: white;
@@ -1377,12 +1378,12 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px;
   margin: 5px 0;
 }
-/* line 1164, sass/_base.scss */
+/* line 1165, sass/_base.scss */
 .calculator-holder .success-msg .head,
 .contact-form .success-msg .head {
   margin: 5px 0 3px 0;
 }
-/* line 1168, sass/_base.scss */
+/* line 1169, sass/_base.scss */
 .calculator-holder .loader,
 .contact-form .loader {
   color: white;
@@ -1400,7 +1401,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   animation-iteration-count: infinite;
 }
 
-/* line 1183, sass/_base.scss */
+/* line 1184, sass/_base.scss */
 .calculator-holder {
   padding: 4vw 0 6vw 0px;
   display: none;
@@ -1409,11 +1410,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   background-position: center top;
   background-repeat: no-repeat;
 }
-/* line 1192, sass/_base.scss */
+/* line 1193, sass/_base.scss */
 .calculator-holder.ng-scope {
   display: block;
 }
-/* line 1197, sass/_base.scss */
+/* line 1198, sass/_base.scss */
 .calculator-holder .line-header,
 .calculator-holder .inputs > .header {
   font-size: 1.2rem;
@@ -1422,7 +1423,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   color: #82735c;
   text-align: center;
 }
-/* line 1205, sass/_base.scss */
+/* line 1206, sass/_base.scss */
 .calculator-holder .not-resulted {
   color: #993534;
   border-radius: 5px;
@@ -1431,13 +1432,13 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   text-align: center;
   font-weight: bold;
 }
-/* line 1212, sass/_base.scss */
+/* line 1213, sass/_base.scss */
 .calculator-holder .not-resulted i {
   display: block;
   margin: 0 0 5px 0;
   font-size: 2rem;
 }
-/* line 1219, sass/_base.scss */
+/* line 1220, sass/_base.scss */
 .calculator-holder > .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1447,23 +1448,23 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   width: 1050px;
   margin: 0 auto;
 }
-/* line 1228, sass/_base.scss */
+/* line 1229, sass/_base.scss */
 .calculator-holder > .wrapper > .inputs .inp-body {
   border: 5px solid #cec1ae;
 }
-/* line 1233, sass/_base.scss */
+/* line 1234, sass/_base.scss */
 .calculator-holder > .wrapper > .inputs, .calculator-holder > .wrapper > .result-view {
   flex-basis: 50%;
 }
-/* line 1236, sass/_base.scss */
+/* line 1237, sass/_base.scss */
 .calculator-holder > .wrapper .result-view {
   padding: 0 0 0 15px;
 }
-/* line 1240, sass/_base.scss */
+/* line 1241, sass/_base.scss */
 .calculator-holder > .wrapper .inputs {
   padding: 0 15px 0 0;
 }
-/* line 1244, sass/_base.scss */
+/* line 1245, sass/_base.scss */
 .calculator-holder .inp-wrapper {
   border: 0.5px solid #cec1ae;
   display: -webkit-box;
@@ -1475,11 +1476,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   overflow: hidden;
   padding: 1px;
 }
-/* line 1255, sass/_base.scss */
+/* line 1256, sass/_base.scss */
 .calculator-holder .inp-wrapper.select-wrapper {
   position: relative;
 }
-/* line 1257, sass/_base.scss */
+/* line 1258, sass/_base.scss */
 .calculator-holder .inp-wrapper.select-wrapper:after {
   pointer-events: none;
   position: absolute;
@@ -1495,7 +1496,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   text-align: center;
   line-height: 35px;
 }
-/* line 1277, sass/_base.scss */
+/* line 1278, sass/_base.scss */
 .calculator-holder .inp-wrapper input[type=text],
 .calculator-holder .inp-wrapper input[type=number],
 .calculator-holder .inp-wrapper input[type=date],
@@ -1510,7 +1511,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 1.1rem;
   width: 100%;
 }
-/* line 1289, sass/_base.scss */
+/* line 1290, sass/_base.scss */
 .calculator-holder .inp-wrapper select {
   cursor: pointer;
   -webkit-appearance: none;
@@ -1520,17 +1521,17 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   position: relative;
   padding-right: 35px;
 }
-/* line 1297, sass/_base.scss */
+/* line 1298, sass/_base.scss */
 .calculator-holder .inp-wrapper select::-ms-expand {
   display: none;
 }
-/* line 1302, sass/_base.scss */
+/* line 1303, sass/_base.scss */
 .calculator-holder .inp-wrapper .ihint {
   color: black;
   position: relative;
   padding: 0 15px;
 }
-/* line 1308, sass/_base.scss */
+/* line 1309, sass/_base.scss */
 .calculator-holder .line {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1540,55 +1541,55 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-/* line 1316, sass/_base.scss */
+/* line 1317, sass/_base.scss */
 .calculator-holder .line .head {
   line-height: 1.2;
   font-size: 0.9rem;
   flex: 1;
   color: #513621;
 }
-/* line 1323, sass/_base.scss */
+/* line 1324, sass/_base.scss */
 .calculator-holder .line .val {
   flex-basis: 30%;
 }
-/* line 1326, sass/_base.scss */
+/* line 1327, sass/_base.scss */
 .calculator-holder .line > div {
   padding: 8px 10px;
 }
-/* line 1332, sass/_base.scss */
+/* line 1333, sass/_base.scss */
 .calculator-holder .line.two-line .head,
 .calculator-holder .line.two-line .val {
   flex-basis: 100%;
 }
-/* line 1339, sass/_base.scss */
+/* line 1340, sass/_base.scss */
 .calculator-holder .line.missing .inp-wrapper,
 .calculator-holder .line.error .inp-wrapper {
   border: 2px solid #ffc5c5;
 }
-/* line 1343, sass/_base.scss */
+/* line 1344, sass/_base.scss */
 .calculator-holder .error-hint {
   color: #ef1212;
   font-size: 0.7rem;
   margin: 0 0 5px 0;
   font-weight: 400;
 }
-/* line 1349, sass/_base.scss */
+/* line 1350, sass/_base.scss */
 .calculator-holder .head-hint {
   color: #808080;
   font-size: 0.7rem;
   line-height: 1.2;
   font-weight: 400;
 }
-/* line 1355, sass/_base.scss */
+/* line 1356, sass/_base.scss */
 .calculator-holder .action-line {
   background: #e8decf !important;
 }
-/* line 1357, sass/_base.scss */
+/* line 1358, sass/_base.scss */
 .calculator-holder .action-line .val {
   flex-basis: 100%;
   text-align: right;
 }
-/* line 1361, sass/_base.scss */
+/* line 1362, sass/_base.scss */
 .calculator-holder .action-line button {
   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#5d422a+0,c5ac7a+50,5d422a+100 */
   background: #5d422a;
@@ -1610,11 +1611,11 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 0.8vw !important;
   cursor: pointer;
 }
-/* line 1376, sass/_base.scss */
+/* line 1377, sass/_base.scss */
 .calculator-holder .action-line button > .fusion-button-text {
   color: white !important;
 }
-/* line 1382, sass/_base.scss */
+/* line 1383, sass/_base.scss */
 .calculator-holder .inputs .line {
   background: #fefefe;
   border: 0.5px solid #cec1ae;
@@ -1622,32 +1623,32 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border-right: none;
   margin-bottom: 10px;
 }
-/* line 1389, sass/_base.scss */
+/* line 1390, sass/_base.scss */
 .calculator-holder .inputs .line:first-child {
   border-top: none;
 }
-/* line 1392, sass/_base.scss */
+/* line 1393, sass/_base.scss */
 .calculator-holder .inputs .line:last-child {
   margin-bottom: 0;
   border-bottom: none;
 }
-/* line 1398, sass/_base.scss */
+/* line 1399, sass/_base.scss */
 .calculator-holder table.result-table {
   background: white;
   border: 5px solid #cec1ae;
   border-collapse: collapse;
   width: 100%;
 }
-/* line 1403, sass/_base.scss */
+/* line 1404, sass/_base.scss */
 .calculator-holder table.result-table td {
   padding: 10px;
   border: 1px solid #c9c9c9;
 }
-/* line 1407, sass/_base.scss */
+/* line 1408, sass/_base.scss */
 .calculator-holder table.result-table td.h {
   color: #343434;
 }
-/* line 1410, sass/_base.scss */
+/* line 1411, sass/_base.scss */
 .calculator-holder table.result-table td.head {
   text-align: center;
   color: #bdbcbc;
@@ -1656,51 +1657,51 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   padding: 10px;
   font-size: 0.7rem;
 }
-/* line 1418, sass/_base.scss */
+/* line 1419, sass/_base.scss */
 .calculator-holder table.result-table td.v {
   color: black;
   text-align: center;
 }
-/* line 1422, sass/_base.scss */
+/* line 1423, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr > td:last-child {
   background: #fefbf4;
 }
-/* line 1426, sass/_base.scss */
+/* line 1427, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td {
   background: #f7f1e8;
 }
-/* line 1429, sass/_base.scss */
+/* line 1430, sass/_base.scss */
 .calculator-holder table.result-table tbody > tr:nth-child(even) > td:last-child {
   background: #ece3d5;
 }
-/* line 1432, sass/_base.scss */
+/* line 1433, sass/_base.scss */
 .calculator-holder table.result-table tr.sm td {
   font-size: 0.9rem !important;
 }
-/* line 1436, sass/_base.scss */
+/* line 1437, sass/_base.scss */
 .calculator-holder table.result-table tr.hl td {
   background: #a99270 !important;
   color: white;
 }
-/* line 1440, sass/_base.scss */
+/* line 1441, sass/_base.scss */
 .calculator-holder table.result-table tr.lt td {
   text-decoration: line-through !important;
   font-style: italic !important;
   color: #707070 !important;
 }
 
-/* line 1449, sass/_base.scss */
+/* line 1450, sass/_base.scss */
 body.page:not(.home) section#content {
   padding-top: 60px;
 }
-/* line 1452, sass/_base.scss */
+/* line 1453, sass/_base.scss */
 body.page:not(.home) .page-custom-title {
   background-color: #c9b07d;
   padding: 0;
   margin-top: -25px;
   padding-top: 25px;
 }
-/* line 1457, sass/_base.scss */
+/* line 1458, sass/_base.scss */
 body.page:not(.home) .page-custom-title h1 {
   font-family: 'Montserrat', serif !important;
   text-transform: uppercase !important;
@@ -1710,7 +1711,7 @@ body.page:not(.home) .page-custom-title h1 {
   font-weight: bold;
   margin: 0 !important;
 }
-/* line 1465, sass/_base.scss */
+/* line 1466, sass/_base.scss */
 body.page:not(.home) .page-custom-title h1 img.ico {
   height: 41px;
   width: auto;
@@ -1718,23 +1719,23 @@ body.page:not(.home) .page-custom-title h1 img.ico {
   vertical-align: middle;
   margin: 0 20px 0 0;
 }
-/* line 1474, sass/_base.scss */
+/* line 1475, sass/_base.scss */
 body.page:not(.home) main#main {
   background: #fffcf7;
   padding: 0 0 70px 0;
 }
-/* line 1477, sass/_base.scss */
+/* line 1478, sass/_base.scss */
 body.page:not(.home) main#main > .fusion-row {
   width: 100%;
   max-width: initial;
   padding: 0;
   margin: 0;
 }
-/* line 1484, sass/_base.scss */
+/* line 1485, sass/_base.scss */
 body.page:not(.home) .footer-menu {
   position: relative;
 }
-/* line 1486, sass/_base.scss */
+/* line 1487, sass/_base.scss */
 body.page:not(.home) .footer-menu:before {
   content: "";
   position: absolute;
@@ -1749,31 +1750,31 @@ body.page:not(.home) .footer-menu:before {
   background-position: center top !important;
 }
 
-/* line 1503, sass/_base.scss */
+/* line 1504, sass/_base.scss */
 body.page-template-page-kalkulator section#content {
   padding-top: 10px !important;
 }
 
-/* line 1509, sass/_base.scss */
+/* line 1510, sass/_base.scss */
 body.page-id-23 section#content {
   padding-top: 0 !important;
 }
 
-/* line 1516, sass/_base.scss */
+/* line 1517, sass/_base.scss */
 body.page-id-37 section#content,
 body.page-id-37 main#main {
   padding: 0 0 15px 0 !important;
 }
-/* line 1519, sass/_base.scss */
+/* line 1520, sass/_base.scss */
 body.page-id-37 .post-content > div.fusion-fullwidth {
   padding: 0 !important;
 }
 
-/* line 1526, sass/_base.scss */
+/* line 1527, sass/_base.scss */
 .cikksidebar-holder > .wrapper > .header {
   margin: 0 0 25px 0;
 }
-/* line 1529, sass/_base.scss */
+/* line 1530, sass/_base.scss */
 .cikksidebar-holder > .wrapper > .header h3 {
   font-style: italic;
   font-size: 2.4rem !important;
@@ -1781,31 +1782,31 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   line-height: 1;
   margin: 0 0 10px 0;
 }
-/* line 1539, sass/_base.scss */
+/* line 1540, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts > .article {
   background: white;
   border: 0.5px solid #f0e3c8;
 }
-/* line 1543, sass/_base.scss */
+/* line 1544, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts > .article + .article {
   margin: 25px 0 0 0;
 }
-/* line 1546, sass/_base.scss */
+/* line 1547, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content {
   padding: 15px;
   padding-bottom: 20px;
   color: #513621;
 }
-/* line 1550, sass/_base.scss */
+/* line 1551, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .author {
   font-size: 0.7rem;
   font-style: italic;
 }
-/* line 1554, sass/_base.scss */
+/* line 1555, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .title {
   margin: 0 0 12px 0;
 }
-/* line 1557, sass/_base.scss */
+/* line 1558, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .title a {
   font-family: 'Bauer Bodoni', serif !important;
   font-size: 1.3rem;
@@ -1813,33 +1814,33 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   color: #513621;
   font-style: italic;
 }
-/* line 1564, sass/_base.scss */
+/* line 1565, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .title a:hover {
   color: #50100f;
 }
-/* line 1568, sass/_base.scss */
+/* line 1569, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .desc {
   line-height: 1.5;
   font-size: 0.7rem;
   height: 85px;
   overflow: hidden;
 }
-/* line 1573, sass/_base.scss */
+/* line 1574, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .desc p {
   margin: 0 !important;
 }
-/* line 1577, sass/_base.scss */
+/* line 1578, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .published {
   color: #7d7567;
   font-weight: bold;
   margin: 10px 0 5px 0;
   font-size: 0.6rem;
 }
-/* line 1583, sass/_base.scss */
+/* line 1584, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .nextbtn {
   margin: 15px 0 0 0;
 }
-/* line 1585, sass/_base.scss */
+/* line 1586, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .nextbtn a {
   border: 3px solid #50100f;
   color: #50100f;
@@ -1848,12 +1849,12 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   font-size: 0.7rem;
   padding: 6px 12px;
 }
-/* line 1596, sass/_base.scss */
+/* line 1597, sass/_base.scss */
 .cikksidebar-holder .footer {
   text-align: right;
   margin: 35px 0 0 0 !important;
 }
-/* line 1600, sass/_base.scss */
+/* line 1601, sass/_base.scss */
 .cikksidebar-holder .footer a {
   font-size: 0.7rem !important;
   text-align: center;
@@ -1862,17 +1863,17 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
-  /* line 1609, sass/_base.scss */
+  /* line 1610, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 1610, sass/_base.scss */
+  /* line 1611, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 1611, sass/_base.scss */
+  /* line 1612, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
@@ -1880,30 +1881,30 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
 
 /* Standard syntax */
 @keyframes loaderbgchange {
-  /* line 1616, sass/_base.scss */
+  /* line 1617, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 1617, sass/_base.scss */
+  /* line 1618, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 1618, sass/_base.scss */
+  /* line 1619, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
 }
 
 @media all and (min-width: 1500px) {
-  /* line 1622, sass/_base.scss */
+  /* line 1623, sass/_base.scss */
   body.page:not(.home) .footer-menu:before {
     height: 118px;
     top: -115px;
   }
 
-  /* line 1626, sass/_base.scss */
+  /* line 1627, sass/_base.scss */
   body.page:not(.home) main#main {
     background: #fffcf7;
     padding: 0 0 90px 0;

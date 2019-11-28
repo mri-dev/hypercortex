@@ -27,6 +27,16 @@ ini_set('allow_url_fopen', 1);
 ?>
 <?php echo do_shortcode('[szolgaltatas-block view="kalkulatorblocks"]'); ?>
 
+<script type="text/javascript">
+	(function($){
+		$(function(){
+			var scrto = $('.szolgaltatas-block-holder').offset().top + $('.szolgaltatas-block-holder').height()+40;
+			$([document.documentElement, document.body]).delay(100).animate({
+	        scrollTop: scrto
+	    }, 100);
+		});
+	})(jQuery);
+</script>
 <section id="content" <?php Avada()->layout->add_style( 'content_style' ); ?>>
 		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<?php echo fusion_render_rich_snippets_for_pages(); // WPCS: XSS ok. ?>
