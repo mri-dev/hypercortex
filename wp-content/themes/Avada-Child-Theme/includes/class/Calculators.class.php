@@ -395,6 +395,31 @@ class Calculators
       case 'cegauto_ado':
         return $this->calcCegautoAdo( $data['emission'], (float)$data['kw'] );
       break;
+
+      case 'ingatlan_ertekesites':
+        $ret = array();
+        $settings = $this->loadSettings( $calc );
+        $ret['settings'] = $settings;
+
+        $bevetel = (float)$data['atruhazasbol_bevetel'];
+        // C8+C9+(C10-C11)+C12
+        $koltseg = $data['megszerzes_osszeg'] + $data['megszerzes_egyeb_kiadas'] + ($data['erteknovelo_beruhazasok'] - $data['erteknovelo_beruhazasok_allammegovas']) + $data['atruhazas_koltsegei'];
+        // (C14-C15)*FKERES(C5;F5:G10;2;IGAZ)
+        $szorzo = $this->ingatlan_ertekesites_jovedelem_szorzo((int)$data['szerzes_eve'], (int)$data['atruhazas_eve']);
+        $jovedelem = ($bevetel - $koltseg) * $szorzo;
+        $fizetendo_szja = 0;
+
+        $fizetendo_szja = $jovedelem * ($settings['ado_szja']/100);
+        $fizetendo_szja = ($fizetendo_szja < 0) ? 0 : $fizetendo_szja;
+        $fizetendo_szja = round($fizetendo_szja);
+
+        $ret['bevetel'] = $bevetel;
+        $ret['koltseg'] = $koltseg;
+        $ret['jovedelem'] = $jovedelem;
+        $ret['fizetendo_szja'] = $fizetendo_szja;
+
+        return $ret;
+      break;
     }
 
     return false;
@@ -415,6 +440,9 @@ class Calculators
       break;
       case 'belepo_szabadsag':
         return $this->load_belepo_szabadsag_resources();
+      break;
+      case 'ingatlan_ertekesites':
+        return $this->load_ingatlan_ertekesites_resources();
       break;
     }
 
@@ -536,6 +564,38 @@ class Calculators
     $res['forms'] = $forms;
 
     return $res;
+  }
+
+  private function load_ingatlan_ertekesites_resources()
+  {
+    $res = array();
+    $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+
+    // Form resources
+    $forms = array();
+    $res['forms'] = $forms;
+
+    return $res;
+  }
+
+  public function ingatlan_ertekesites_jovedelem_szorzo( $szerzesi_eve = false, $atruhazas_eve = false )
+  {
+    $value = 1;
+    $ydiff = $atruhazas_eve - $szerzesi_eve;
+
+    if ( $ydiff >= 0 && $ydiff < 2 ) {
+      $value = 1; // 100%
+    } elseif( $ydiff == 2 ){
+      $value = 0.9; // 90%
+    } elseif( $ydiff == 3 ){
+      $value = 0.6; // 60%
+    } elseif( $ydiff == 4 ){
+      $value = 0.3; // 30%
+    } elseif( $ydiff >= 5 ){
+      $value = 0; // 0%
+    }
+
+    return $value;
   }
 
   public function csaladiAdokedvezmenyOsszege( $eltartott = 0, $kedvezmenyezett = 0, $settings = array() )

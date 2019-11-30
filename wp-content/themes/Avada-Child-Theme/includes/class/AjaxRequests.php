@@ -59,7 +59,6 @@ class AjaxRequests
           $return['missing_elements'][] = 'csalad_eltartott_gyermek_kedvezmenyezett';
         }
 
-
         // Handling missing
         if (!empty($return['missing_elements'])) {
           $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
@@ -179,6 +178,75 @@ class AjaxRequests
         if ( empty($inputs['kw']) ) {
           $return['error'] = 1;
           $return['missing_elements'][] = 'kw';
+        }
+
+        // Error fields
+        /*
+        if ( $inputs['emission'] < 4 ) {
+          $return['error'] = 1;
+          $return['error_elements']['emission'] = 'Emisszió kisebb, mint 4';
+        }*/
+
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calculate( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
+      break;
+
+      case 'ingatlan_ertekesites':
+        // Require field validation
+
+        if ( empty($inputs['atruhazas_eve'])) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'atruhazas_eve';
+        }
+        if ( empty($inputs['atruhazasbol_bevetel']) && $inputs['atruhazasbol_bevetel'] != 0 ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'atruhazasbol_bevetel';
+        }
+        if ( empty($inputs['szerzes_eve']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'szerzes_eve';
+        }
+        if ( empty($inputs['megszerzes_osszeg']) && $inputs['megszerzes_osszeg'] != 0 ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'megszerzes_osszeg';
+        }
+        if ( empty($inputs['megszerzes_egyeb_kiadas']) && $inputs['megszerzes_egyeb_kiadas'] != 0 ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'megszerzes_egyeb_kiadas';
+        }
+        if ( empty($inputs['erteknovelo_beruhazasok']) && $inputs['erteknovelo_beruhazasok'] != 0 ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'erteknovelo_beruhazasok';
+        }
+        if ( empty($inputs['erteknovelo_beruhazasok_allammegovas']) && $inputs['erteknovelo_beruhazasok_allammegovas'] != 0) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'erteknovelo_beruhazasok_allammegovas';
+        }
+        if ( empty($inputs['atruhazas_koltsegei']) && $inputs['atruhazas_koltsegei'] != 0) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'atruhazas_koltsegei';
         }
 
         // Error fields

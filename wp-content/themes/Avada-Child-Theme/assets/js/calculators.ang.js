@@ -143,6 +143,16 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
         $scope.form.athozott_szabadsagok = 0;
         $scope.form.gyerek16ev_fiatalabb = 0;
       break;
+      case 'ingatlan_ertekesites':
+        $scope.form.atruhazas_eve = 2019;
+        $scope.form.szerzes_eve = 2019;
+        //$scope.form.atruhazasbol_bevetel = 0;
+        //$scope.form.megszerzes_osszeg = 0;
+        $scope.form.megszerzes_egyeb_kiadas = 0;
+        $scope.form.erteknovelo_beruhazasok = 0;
+        $scope.form.erteknovelo_beruhazasok_allammegovas = 0;
+        $scope.form.atruhazas_koltsegei = 0;
+      break;
     }
 
     console.log($scope.form);

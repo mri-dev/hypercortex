@@ -65,7 +65,7 @@ h4 {
   background-repeat: no-repeat, repeat-x;
   background-position: 59% center, top center;
   background-size: contain, cover;
-  box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0.7);
+  box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0);
   position: relative;
 }
 /* line 31, sass/_base.scss */
@@ -872,7 +872,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
   z-index: 2;
-  box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0);
 }
 /* line 720, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block:nth-child(3n+1) > .wrapper {
