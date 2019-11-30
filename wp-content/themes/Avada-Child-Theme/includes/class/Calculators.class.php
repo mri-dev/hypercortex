@@ -706,6 +706,58 @@ class Calculators
     return $value;
   }
 
+  // TODO: calc adatok beszúrása és helyben számolása
+  public function calculateBruttoByNetto( $netto, $calc = array() )
+  {
+    $brutto = 0;
+    $allcalc = 0;
+    $kill = false;
+    $step = 0;
+
+    while ($allcalc == 0 || !$kill )
+    {
+      $step++;
+      if ($step >= 1000) {
+        $kill = true;
+      }
+      $eachcalc = 0;
+      foreach ( (array)$calc as $c ) {
+        $eachcalc += $brutto * ($c/100);
+      }
+      $allcalc = $eachcalc;
+
+      if ($brutto == 0) {
+        $brutto = 1;
+      }
+
+      //echo "step: ".$step." - brutto: ".$brutto." - netto: ".($brutto - $allcalc)." - levon: ".$allcalc."<br>";
+
+      if ( (($brutto - $allcalc) * 2) >= $netto ) {
+        $kill = true;
+      }
+
+      if (!$kill) {
+        $brutto = $brutto * 2;
+      }
+    }
+
+    $calced_net = ($brutto - $allcalc);
+
+    while( $calced_net < $netto )
+    {
+      $brutto += 1;
+
+      $eachcalc = 0;
+      foreach ( (array)$calc as $c ) {
+        $eachcalc += $brutto * ($c/100);
+      }
+      $allcalc = $eachcalc;
+      $calced_net = $brutto - $allcalc;
+    }
+
+    return $brutto;
+  }
+
   // Pótszabadság 16 évnél fiatalabb gyermek szerint
   public function potszabadasg16evfiatalabbGyerekSzerint( $gyermek )
   {
