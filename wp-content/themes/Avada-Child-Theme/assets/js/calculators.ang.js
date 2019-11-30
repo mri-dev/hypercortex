@@ -143,6 +143,7 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
         $scope.form.athozott_szabadsagok = 0;
         $scope.form.gyerek16ev_fiatalabb = 0;
       break;
+
       case 'ingatlan_ertekesites':
         $scope.form.atruhazas_eve = 2019;
         $scope.form.szerzes_eve = 2019;
@@ -152,6 +153,34 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
         $scope.form.erteknovelo_beruhazasok = 0;
         $scope.form.erteknovelo_beruhazasok_allammegovas = 0;
         $scope.form.atruhazas_koltsegei = 0;
+      break;
+      case 'osztalekado':
+        $scope.settings.select_yesno = $scope.select_yesno();
+        $scope.form.osztalek_kifizetes = 'Igen';
+        $scope.form.osztalekeloleg_kifizetes = 'Nem';
+
+        $scope.$watch('form.osztalek_kifizetes', function(n, o, s) {
+          if (n == 'Igen' && s.form.osztalekeloleg_kifizetes == 'Igen') {
+            s.form.osztalekeloleg_kifizetes = 'Nem';
+          }
+          if (n == 'Nem' && s.form.osztalekeloleg_kifizetes == 'Nem') {
+            s.form.osztalekeloleg_kifizetes = 'Igen';
+          }
+        });
+
+        $scope.$watch('form.osztalekeloleg_kifizetes', function(n, o, s) {
+          if (n == 'Igen' && s.form.osztalek_kifizetes == 'Igen') {
+            s.form.osztalek_kifizetes = 'Nem';
+          }
+          if (n == 'Nem' && s.form.osztalek_kifizetes == 'Nem') {
+            s.form.osztalek_kifizetes = 'Igen';
+          }
+        });
+      break;
+      case 'cafeteria':
+        $scope.settings.select_yesno = $scope.select_yesno();
+        $scope.settings.cafateria_jutattasok = $scope.cafateria_jutattasok();
+        $scope.form.ceg_kiva = 'Nem';
       break;
     }
 
@@ -163,6 +192,41 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
 
     yn[0] = 'Nem';
     yn[1] = 'Igen';
+
+    return yn;
+  }
+
+  $scope.cafateria_jutattasok = function() {
+    var yn = [];
+
+    yn.push('Számítógéphasználat');
+    yn.push('Iskolarendszeren kívüli oktatás támogatása');
+    yn.push('Bőlcsödei, óvodai szolgáltatás');
+    yn.push('Bőlcsödei, óvodai étkeztetés');
+    yn.push('Sportrendezvényre szóló belépőjegy, bérlet');
+    yn.push('Kulturális szolgáltatásra szóló belépőjegy, bérlet');
+    yn.push('Munkaruházat');
+    yn.push('Védőoltás');
+
+    yn.push('SZÉP kártya vendéglátás');
+    yn.push('SZÉP kártya szálláshely');
+    yn.push('SZÉP kártya szabadidő');
+
+    yn.push('Önkéntes kölcsönös biztosítópénztár célzott szolgáltatásra befizetett összeg');
+    yn.push('Csekély értékű ajándék');
+    yn.push('Munkavállalónak juttatott hivatali, üzleti utazáshoz kapcsolódó étkezés vagy más szolgáltatás');
+
+    yn.push('Erzsébet utalvány');
+    yn.push('Helyi utazási bérlet');
+    yn.push('Mobilitási célú lakhatási támogatás');
+    yn.push('Adóköteles biztosítási díj');
+    yn.push('Kockázati biztosítás');
+    yn.push('Iskolarendszerű oktatás támogatása');
+    yn.push('Diákhitel támogatása');
+    yn.push('Lakáscélú támogatás');
+    yn.push('Munkahelyi étkeztetés');
+    yn.push('Iskolakezdési támogatás');
+    yn.push('Üdülési szolgáltatás');
 
     return yn;
   }

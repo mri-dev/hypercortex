@@ -250,11 +250,86 @@ class AjaxRequests
         }
 
         // Error fields
-        /*
-        if ( $inputs['emission'] < 4 ) {
+
+        if ( $inputs['szerzes_eve'] > $inputs['atruhazas_eve'] ) {
           $return['error'] = 1;
-          $return['error_elements']['emission'] = 'Emisszió kisebb, mint 4';
-        }*/
+          $return['error_elements']['szerzes_eve'] = 'A szerzési év nem lehet későbbi, mint az ingatlan átruházásának éve!';
+        }
+
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calculate( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
+      break;
+      case 'osztalekado':
+        // Require field validation
+
+        if ( empty($inputs['brutto_alap'])) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'brutto_alap';
+        }
+
+        // Error fields
+
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calculate( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
+      break;
+      case 'cafeteria':
+        // Require field validation
+
+        if ( empty($inputs['juttatas_osszege'])) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'juttatas_osszege';
+        }
+
+        if ( empty($inputs['juttatas'])) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'juttatas';
+        }
+
+        // Error fields
 
         // Handling missing
         if (!empty($return['missing_elements'])) {

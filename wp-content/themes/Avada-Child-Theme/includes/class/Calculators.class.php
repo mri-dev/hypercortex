@@ -54,6 +54,7 @@ class Calculators
     $settings[] = $this->getVersion(true).'ado_szocialis_hozzajarulas';
     $settings[] = $this->getVersion(true).'ado_szakkepzesi_hozzajarulas';
     $settings[] = $this->getVersion(true).'ado_kisvallalati';
+    $settings[] = $this->getVersion(true).'ado_caf_adoalap_kieg';
 
     if (isset($_POST['save_calc_settings']))
     {
@@ -420,6 +421,50 @@ class Calculators
 
         return $ret;
       break;
+      case 'osztalekado':
+        $ret = array();
+        $settings = $this->loadSettings( $calc );
+        $ret['settings'] = $settings;
+        $szocho_ado_max = $settings['minimalber'] * 24;
+
+        $osszes_jovedelem = 0;
+        $fizetendo_szja = 0;
+        $fizetendo_szocho = 0;
+
+        $osszes_jovedelem =
+        (float)$data['teljes_targyev_brutto_munkaber'] +
+        (float)$data['teljes_targyev_brutto_tarasvall_kivet'] +
+        (float)$data['targyev_megszerzett_brutto_osztalek'] +
+        (float)$data['targyev_vall_kivont_jovedelem'] +
+        (float)$data['targyev_ertekpapkolcson_jovedelem'] +
+        (float)$data['targyev_arfolyamnyereseg_jovedelem'] +
+        (float)$data['egyeb_szja_jovedelem'];
+
+        $fizetendo_szja = (float)$data['brutto_alap'] * ($settings['ado_szja']/100);
+        $fizetendo_szja = round($fizetendo_szja);
+
+        if ( $data['osztalek_kifizetes'] == 'Igen' )
+        {
+          $alapszamitas = min( ((float)$data['brutto_alap'] * ($settings['ado_szocialis_hozzajarulas']/100)), (($szocho_ado_max - $osszes_jovedelem) * ($settings['ado_szocialis_hozzajarulas']/100)) );
+          $fizetendo_szocho = $alapszamitas;
+          $fizetendo_szocho = round($fizetendo_szocho);
+        }
+
+        $ret['jovedelem'] = $osszes_jovedelem;
+        $ret['fizetendo_szja'] = $fizetendo_szja;
+        $ret['fizetendo_szocho'] = $fizetendo_szocho;
+        $ret['fizetendo'] = $fizetendo_szja +  $fizetendo_szocho;
+        $ret['brutto_alap'] = $data['brutto_alap'];
+
+        return $ret;
+      break;
+      case 'cafeteria':
+        $ret = array();
+        $settings = $this->loadSettings( $calc );
+        $ret['settings'] = $settings;
+
+        return $ret;
+      break;
     }
 
     return false;
@@ -443,6 +488,12 @@ class Calculators
       break;
       case 'ingatlan_ertekesites':
         return $this->load_ingatlan_ertekesites_resources();
+      break;
+      case 'osztalekado':
+        return $this->load_osztalekado_resources();
+      break;
+      case 'cafeteria':
+        return $this->load_cafeteria_resources();
       break;
     }
 
@@ -469,6 +520,7 @@ class Calculators
     $res['ado_szocialis_hozzajarulas'] = (float)get_option($this->getVersion(true).'ado_szocialis_hozzajarulas', 0 );
     $res['ado_szakkepzesi_hozzajarulas'] = (float)get_option($this->getVersion(true).'ado_szakkepzesi_hozzajarulas', 0 );
     $res['ado_kisvallalati'] = (float)get_option($this->getVersion(true).'ado_kisvallalati', 0 );
+    $res['ado_caf_adoalap_kieg'] = (float)get_option($this->getVersion(true).'ado_caf_adoalap_kieg', 0 );
 
     $res['adokedvezmeny_frisshazasok'] = (float)get_option($this->getVersion(true).'adokedvezmeny_frisshazasok', 0 );
     $res['adokedvezmeny_szemelyi'] = (float)get_option($this->getVersion(true).'adokedvezmeny_szemelyi', 0 );
@@ -570,6 +622,44 @@ class Calculators
   {
     $res = array();
     $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+
+    // Form resources
+    $forms = array();
+    $res['forms'] = $forms;
+
+    return $res;
+  }
+
+  private function load_osztalekado_resources()
+  {
+    $res = array();
+
+    $res['minimalber'] = $this->getSettingsValue('minimalber');
+    $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
+    $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_kisvallalati'] = $this->getSettingsValue('ado_kisvallalati');
+    $res['ado_termeszetegeszseg'] = $this->getSettingsValue('ado_termeszetegeszseg');
+    $res['ado_penzbeli_egeszseg'] = $this->getSettingsValue('ado_penzbeli_egeszseg');
+    $res['ado_nyugdij'] = $this->getSettingsValue('ado_nyugdij');
+    $res['ado_munkaerppiac'] = $this->getSettingsValue('ado_munkaerppiac');
+
+    $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
+    $res['ado_szakkepzesi_hozzajarulas'] = $this->getSettingsValue('ado_szakkepzesi_hozzajarulas');
+
+    // Form resources
+    $forms = array();
+    $res['forms'] = $forms;
+
+    return $res;
+  }
+
+  private function load_cafeteria_resources()
+  {
+    $res = array();
+
+    $res['ado_caf_adoalap_kieg'] = $this->getSettingsValue('ado_caf_adoalap_kieg');
+    $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
 
     // Form resources
     $forms = array();
