@@ -52,6 +52,6 @@
     return $brutto;
   }
 
-  echo find_target( 295925, array(15, 4, 3, 10, 1.5) );
+  //echo find_target( 295925, array(15, 4, 3, 10, 1.5) );
   ?>
 </div>
