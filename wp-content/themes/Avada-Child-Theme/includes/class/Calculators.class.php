@@ -463,6 +463,164 @@ class Calculators
         $settings = $this->loadSettings( $calc );
         $ret['settings'] = $settings;
 
+        $jg = $this->getCafeteriaGroupByTitle( $data['juttatas'] );
+        $ret['juttatas_group'] = $jg;
+
+        $adoalap_kiegeszites = 0;
+        $szja = 0;
+        $szocho = 0;
+        $szkh = 0;
+        $kiva = 0;
+        $ado_munkavallalo = 0;
+        $ado_mukaltato = 0;
+
+        $adoalap = (float)$data['juttatas_osszege'];
+
+        if ( $jg && in_array($jg['ID'], array(2, 3)) )
+        {
+          if ( $jg['ID'] == 2) {
+            $adoalap_tetel_limits = $this->getCafeteriaItemAdoalapLimit();
+            $adoalap_tetel_limit = (float)$adoalap_tetel_limits[$data['juttatas']];
+
+            if ((float)$data['juttatas_osszege'] <= $adoalap_tetel_limit) {
+              $adoalap_kiegeszites = 0;
+            } else {
+              $adoalap_kiegeszites = (float)$data['juttatas_osszege'] - $adoalap_tetel_limit;
+              $adoalap_kiegeszites = $adoalap_kiegeszites * ($settings['ado_caf_adoalap_kieg']/100);
+              $adoalap_kiegeszites = ($adoalap_kiegeszites < 0) ? 0 : $adoalap_kiegeszites;
+              $adoalap_kiegeszites = round($adoalap_kiegeszites);
+            }
+          }
+
+          if ( $jg['ID'] == 3) {
+            $adoalap_kiegeszites = (float)$data['juttatas_osszege'] * ($settings['ado_caf_adoalap_kieg']/100);
+            $adoalap_kiegeszites = ($adoalap_kiegeszites < 0) ? 0 : $adoalap_kiegeszites;
+            $adoalap_kiegeszites = round($adoalap_kiegeszites);
+          }
+
+          $adoalap = (float)$adoalap_kiegeszites;
+        }
+
+        // szja
+        // group 3, 4
+        if ($jg && in_array($jg['ID'], array(3, 4)) ) {
+          $szja = $adoalap * ($settings['ado_szja']/100);
+          $szja = ($szja < 0) ? 0 : $szja;
+          $szja = round($szja);
+        }
+
+        // szocho
+        if ($data['ceg_kiva'] == 'Nem') {
+          $szocho = $adoalap * ($settings['ado_szocialis_hozzajarulas']/100);
+          $szocho = ($szocho < 0) ? 0 : $szocho;
+          $szocho = round($szocho);
+        }
+
+        // Szakképzési
+        if ($data['ceg_kiva'] == 'Nem' && $jg && in_array($jg['ID'], array(4))) {
+          $szkh = $adoalap * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+          $szkh = ($szkh < 0) ? 0 : $szkh;
+          $szkh = round($szkh);
+        }
+
+        // KIVA
+        if ($data['ceg_kiva'] == 'Igen' && $jg && in_array($jg['ID'], array(3, 4))) {
+          $kiva = $adoalap * ($settings['ado_kisvallalati']/100);
+          $kiva = ($kiva < 0) ? 0 : $kiva;
+          $kiva = round($kiva);
+        }
+
+        // group 4
+        if ($jg && in_array($jg['ID'], array(4)))
+        {
+          // természetbeni egészség
+          $termeszet_egeszseg_jarulek = $adoalap * ($settings['ado_termeszetegeszseg']/100);
+          $termeszet_egeszseg_jarulek = ($termeszet_egeszseg_jarulek < 0) ? 0 : $termeszet_egeszseg_jarulek;
+          $termeszet_egeszseg_jarulek = round($termeszet_egeszseg_jarulek);
+
+          // pénzbeli egészség
+          $penzbeli_egeszseg_jarulek = $adoalap * ($settings['ado_penzbeli_egeszseg']/100);
+          $penzbeli_egeszseg_jarulek = ($penzbeli_egeszseg_jarulek < 0) ? 0 : $penzbeli_egeszseg_jarulek;
+          $penzbeli_egeszseg_jarulek = round($penzbeli_egeszseg_jarulek);
+
+          // Nyugdíjjárulék
+          $nyugdij_jarulek = $adoalap * ($settings['ado_nyugdij']/100);
+          $nyugdij_jarulek = ($nyugdij_jarulek < 0) ? 0 : $nyugdij_jarulek;
+          $nyugdij_jarulek = round($nyugdij_jarulek);
+
+          // munkaerő hozzájárulás
+          $munkaeropiac_hozzajarulas = $adoalap * ($settings['ado_munkaerppiac']/100);
+          $munkaeropiac_hozzajarulas = ($munkaeropiac_hozzajarulas < 0) ? 0 : $munkaeropiac_hozzajarulas;
+          $munkaeropiac_hozzajarulas = round($munkaeropiac_hozzajarulas);
+
+          // összes munkaválllalói teher
+          $munkavallalo_osszes_jarulek = $termeszet_egeszseg_jarulek + $penzbeli_egeszseg_jarulek + $nyugdij_jarulek + $munkaeropiac_hozzajarulas + $szja;
+          $ado_munkavallalo = $munkavallalo_osszes_jarulek;
+        }
+
+        // group 2
+
+        if ($jg && in_array($jg['ID'], array(2)))
+        {
+          // szja
+          if ( $adoalap_kiegeszites > 0 ) {
+            $szja = ($adoalap_tetel_limit + $adoalap_kiegeszites) * ($settings['ado_szja']/100);
+            $szja = ($szja < 0) ? 0 : $szja;
+            $szja = round($szja);
+          } else {
+            $szja = ($adoalap_tetel_limit) * ($settings['ado_szja']/100);
+            $szja = ($szja < 0) ? 0 : $szja;
+            $szja = round($szja);
+          }
+
+          // szocho
+          if ( $data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0)
+          {
+            $szocho = ($adoalap_tetel_limit + $adoalap_kiegeszites) * ($settings['ado_szocialis_hozzajarulas']/100);
+            $szocho = ($szocho < 0) ? 0 : $szocho;
+            $szocho = round($szocho);
+          }
+
+          if ( $data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites == 0 )
+          {
+            $szocho = ($adoalap_tetel_limit) * ($settings['ado_szocialis_hozzajarulas']/100);
+            $szocho = ($szocho < 0) ? 0 : $szocho;
+            $szocho = round($szocho);
+          }
+
+          // kiva
+          if ( $data['ceg_kiva'] == 'Igen' )
+          {
+            $kiva = (float)$data['juttatas_osszege'] * ($settings['ado_kisvallalati']/100);
+            $kiva = ($kiva < 0) ? 0 : $kiva;
+            $kiva = round($kiva);
+          }
+        }
+
+        // Munkáltató adók
+        if ($jg && in_array($jg['ID'], array(2, 3))) {
+          $ado_munkaltato = $szja + $szocho + $kiva;
+        }
+
+        if ($jg && in_array($jg['ID'], array(4))) {
+          $ado_munkaltato = $szocho + $szkh + $kiva;
+        }
+
+        $ret['adoalap_kiegeszites'] = $adoalap_kiegeszites;
+        $ret['szja'] = $szja;
+        $ret['szocho'] = $szocho;
+        $ret['szkh'] = $szkh;
+        $ret['kiva'] = $kiva;
+
+        $ret['termeszet_egeszseg_jarulek'] = $termeszet_egeszseg_jarulek;
+        $ret['penzbeli_egeszseg_jarulek'] = $penzbeli_egeszseg_jarulek;
+        $ret['nyugdij_jarulek'] = $nyugdij_jarulek;
+        $ret['munkaeropiac_hozzajarulas'] = $munkaeropiac_hozzajarulas;
+        $ret['munkavallalo_osszes_jarulek'] = $munkavallalo_osszes_jarulek;
+
+        $ret['ado_munkavallalo'] = $ado_munkavallalo;
+        $ret['ado_munkaltato'] = $ado_munkaltato;
+
         return $ret;
       break;
     }
@@ -658,8 +816,16 @@ class Calculators
     $res = array();
 
     $res['ado_caf_adoalap_kieg'] = $this->getSettingsValue('ado_caf_adoalap_kieg');
-    $res['ado_szja'] = $this->getSettingsValue('ado_szja');
     $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
+    $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_kisvallalati'] = $this->getSettingsValue('ado_kisvallalati');
+    $res['ado_termeszetegeszseg'] = $this->getSettingsValue('ado_termeszetegeszseg');
+    $res['ado_penzbeli_egeszseg'] = $this->getSettingsValue('ado_penzbeli_egeszseg');
+    $res['ado_nyugdij'] = $this->getSettingsValue('ado_nyugdij');
+    $res['ado_munkaerppiac'] = $this->getSettingsValue('ado_munkaerppiac');
+
+    $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
+    $res['ado_szakkepzesi_hozzajarulas'] = $this->getSettingsValue('ado_szakkepzesi_hozzajarulas');
 
     // Form resources
     $forms = array();
@@ -704,6 +870,98 @@ class Calculators
     $value = $alap * $kedvezmenyezett;
 
     return $value;
+  }
+
+  public function getCafeteriaItemAdoalapLimit()
+  {
+    $limits = array();
+
+    $limits['SZÉP kártya vendéglátás'] = 150000;
+    $limits['SZÉP kártya szálláshely'] = 225000;
+    $limits['SZÉP kártya szabadidő'] = 75000;
+
+    return $limits;
+  }
+
+  public function getCafeteriaGroupByTitle( $item_title = false )
+  {
+    if ( !$item_title ) {
+      return false;
+    }
+
+    $groups = $this->cafeteriaGroups();
+    foreach ((array)$groups as $gid => $group) {
+      foreach ((array)$group['items'] as $title ) {
+        if ($title == $item_title) {
+          return array(
+            'ID' => $gid,
+            'title' => $group['title']
+          );
+        }
+      }
+    }
+
+    return false;
+  }
+
+  public function cafeteriaGroups()
+  {
+    $g = array();
+
+    // Adómentes
+    $g[1] = array(
+      'title' => 'Adómentes',
+      'items' => array(
+        'Számítógéphasználat',
+        'Iskolarendszeren kívüli oktatás támogatása',
+        'Bőlcsödei, óvodai szolgáltatás',
+        'Bőlcsödei, óvodai étkeztetés',
+        'Sportrendezvényre szóló belépőjegy, bérlet',
+        'Kulturális szolgáltatásra szóló belépőjegy, bérlet',
+        'Munkaruházat',
+        'Védőoltás',
+      )
+    );
+
+    // Béren kívüli juttatás
+    $g[2] = array(
+      'title' => 'Béren kívüli juttatás',
+      'items' => array(
+        'SZÉP kártya vendéglátás',
+        'SZÉP kártya szálláshely',
+        'SZÉP kártya szabadidő',
+      )
+    );
+
+    // Egyesmeghatározott juttatás
+    $g[3] = array(
+      'title' => 'Egyesmeghatározott juttatás',
+      'items' => array(
+        'Önkéntes kölcsönös biztosítópénztár célzott szolgáltatásra befizetett összeg',
+        'Csekély értékű ajándék',
+        'Munkavállalónak juttatott hivatali, üzleti utazáshoz kapcsolódó étkezés vagy más szolgáltatás',
+      )
+    );
+
+    // Bérjövedelem
+    $g[4] = array(
+      'title' => 'Bérjövedelem',
+      'items' => array(
+        'Erzsébet utalvány',
+        'Helyi utazási bérlet',
+        'Mobilitási célú lakhatási támogatás',
+        'Adóköteles biztosítási díj',
+        'Kockázati biztosítás',
+        'Iskolarendszerű oktatás támogatása',
+        'Diákhitel támogatása',
+        'Lakáscélú támogatás',
+        'Munkahelyi étkeztetés',
+        'Iskolakezdési támogatás',
+        'Üdülési szolgáltatás',
+      )
+    );
+
+    return $g;
   }
 
   // TODO: calc adatok beszúrása és helyben számolása
