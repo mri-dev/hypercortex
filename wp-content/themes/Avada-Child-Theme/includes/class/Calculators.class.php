@@ -623,6 +623,190 @@ class Calculators
 
         return $ret;
       break;
+      case 'anyak_szabadsaga':
+        $ret = array(
+          'szules_eveben_szabadsag' => 0,
+          'szulesig_idoaranyos_szabadsag' => 0,
+          'szules_eveben_igenybe_vett_szabadsag' => 0,
+          'le_nem_toltott_szabadsag' => 0,
+
+
+          'csed_idejere_jaro_szabadsag' => 0,
+          'csed_szules_eveben_igenybe_vett_szabadsag' => 0,
+          'csed_le_nem_toltott_szabadsag' => 0,
+
+          'gyed_idejere_jaro_szabadsag' => 0,
+          'gyed_szules_eveben_igenybe_vett_szabadsag' => 0,
+          'gyed_le_nem_toltott_szabadsag' => 0,
+
+          'osszes_szabadsag' => 0,
+        );
+
+        $values = array();
+        $settings = $this->loadSettings( $calc );
+
+
+        $targyev = (int)date('Y');
+        $ev_elso_napja = date('Y').'-01-01';
+        $ev_utolso_napja = date('Y-m-d', strtotime('last day of december this year'));
+        $szules_eve = date('Y', strtotime($data['szules_ideje']));
+        $szules_eveben_munkavallalo_eletkora = $szules_eve - (int)$data['szuletesi_ev'];
+        $kor_potszabi = $this->potszabadasgKorSzerint($szules_eveben_munkavallalo_eletkora);
+        $szulelotti_igyenbevett = ($data['szul_elott_igenybevett_potszabadsag_gyermek'] == '3 vagy több') ? 3  : (int)$data['szul_elott_igenybevett_potszabadsag_gyermek'];
+        $gyerek_potszabi = $this->potszabadasg16evfiatalabbGyerekSzerint((int)$data['szul_elott_igenybevett_potszabadsag_gyermek']);
+
+        $alap_szules_eveben_jaro_szabadsag = (int)$settings['alapszabadsag'] + $kor_potszabi + $gyerek_potszabi;
+
+        $day = new DateTime($data['szules_ideje']); $day = $day->modify('+1 day');
+        $szulesig_eltelt_napok_szama = (float)((strtotime($day->format('Y-m-d')) - strtotime($szules_eve.'-01-01')) / (60 * 60 * 24));
+
+        if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
+          $alap_szules_eveben_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
+        }
+
+        $szulesig_idoaranyos_szabadsag = round($alap_szules_eveben_jaro_szabadsag / 365 * $szulesig_eltelt_napok_szama);
+        $szules_eveben_igenybe_vett_szabadsag = (int)$data['szulev_igenybevett_szabadsag'];
+        $le_nem_toltott_szabadsag = $szulesig_idoaranyos_szabadsag - $szules_eveben_igenybe_vett_szabadsag;
+
+        $csed_kezdete = $data['csed_kezdete'];
+        $minucseddays = 168-1;
+        $csed_vege_datum = new DateTime($csed_kezdete); $csed_vege_datum->modify('+ '.$minucseddays.'day');
+        $csed_vege = $csed_vege_datum->format('Y-m-d');
+
+        $gyedgyes_kezdete = $data['gyedgyes_kezdete'];
+        $minugyedgyesmonth = 6;
+        $gyedgyes_vege_datum = new DateTime($gyedgyes_kezdete); $gyedgyes_vege_datum->modify('+ '.$minugyedgyesmonth.' month'); $gyedgyes_vege_datum->modify('-1 day');
+        $gyedgyes_vege = $gyedgyes_vege_datum->format('Y-m-d');
+
+        // Helpers
+        // CSED
+        $help_csed_kezdet = $csed_kezdete;
+        $help_csed_vegzet = $csed_vege;
+        $help_csed_eletkor1 = date('Y', strtotime($csed_kezdete)) - (int)$data['szuletesi_ev'];
+        $help_csed_eletkor2 = date('Y', strtotime($help_csed_vegzet)) - (int)$data['szuletesi_ev'];
+        $help_csed_potszabi1 = (int)$this->potszabadasgKorSzerint( (int)$help_csed_eletkor1 );
+        $help_csed_potszabi2 = (int)$this->potszabadasgKorSzerint( (int)$help_csed_eletkor2 );
+
+        if ( date('Y', strtotime($csed_kezdete)) == date('Y', strtotime($csed_vege)) ) {
+          $vegzetplusz1 = new DateTime($help_csed_vegzet); $vegzetplusz1->modify('+1 day');
+          $help_csed_potszabi = round( $help_csed_potszabi1 / 365 * ((strtotime($vegzetplusz1->format('Y-m-d')) - strtotime($help_csed_kezdet))/(60*60*24)));
+        }
+        else
+        {
+          // KEREKÍTÉS( G33/365 * (DÁTUM(ÉV(C33);12;31) + 1 - C33); 0 ) + KEREKÍTÉS( H33/365 * (D33 + 1 - DÁTUM(ÉV(D33); 1; 1)); 0 )
+          $veg_s1 = date('Y', strtotime($csed_kezdete)).'-12-31';
+          $veg_s1 = new DateTime($veg_s1); $veg_s1->modify('+1 day');
+          $veg_s1 = $veg_s1->format('Y-m-d');
+
+          $veg_s2 = date('Y', strtotime($csed_vege)).'-01-01';
+          $veg_s21 = new DateTime($csed_vege); $veg_s21->modify('+1 day');
+          $veg_s21 = $veg_s21->format('Y-m-d');
+
+          $help_csed_potszabi =
+          round( $help_csed_potszabi1 / 365 * ( (strtotime($veg_s1) - strtotime($csed_kezdete)) /(60*60*24) )) +
+          round( $help_csed_potszabi2 / 365 * ( (strtotime($veg_s21) - (strtotime($veg_s2))) / (60*60*24) ));
+        }
+
+        $values['helper']['help_csed_kezdet'] = $help_csed_kezdet;
+        $values['helper']['help_csed_vegzet'] = $help_csed_vegzet;
+        $values['helper']['help_csed_eletkor1'] = $help_csed_eletkor1;
+        $values['helper']['help_csed_eletkor2'] = $help_csed_eletkor2;
+        $values['helper']['help_csed_potszabi1'] = $help_csed_potszabi1;
+        $values['helper']['help_csed_potszabi2'] = $help_csed_potszabi2;
+        $values['helper']['csed_potszabi'] = $help_csed_potszabi;
+
+        // GYED
+        $help_gyedgyes_kezdet = $gyedgyes_kezdete;
+        $help_gyedgyes_vegzet = $gyedgyes_vege;
+        $help_gyedgyes_eletkor1 = date('Y', strtotime($gyedgyes_kezdete)) - (int)$data['szuletesi_ev'];
+        $help_gyedgyes_eletkor2 = date('Y', strtotime($help_gyedgyes_vegzet)) - (int)$data['szuletesi_ev'];
+        $help_gyedgyes_potszabi1 = (int)$this->potszabadasgKorSzerint( (int)$help_gyedgyes_eletkor1 );
+        $help_gyedgyes_potszabi2 = (int)$this->potszabadasgKorSzerint( (int)$help_gyedgyes_eletkor2 );
+
+        if ( date('Y', strtotime($gyedgyes_kezdete)) == date('Y', strtotime($gyedgyes_vege)) ) {
+          $vegzetplusz1 = new DateTime($help_gyedgyes_vegzet); $vegzetplusz1->modify('+1 day');
+          $help_gyedgyes_potszabi = round( $help_gyedgyes_potszabi1 / 365 * ((strtotime($vegzetplusz1->format('Y-m-d')) - strtotime($help_gyedgyes_kezdet))/(60*60*24)));
+        }
+        else
+        {
+          $veg_s1 = date('Y', strtotime($gyedgyes_kezdete)).'-12-31';
+          $veg_s1 = new DateTime($veg_s1); $veg_s1->modify('+1 day');
+          $veg_s1 = $veg_s1->format('Y-m-d');
+
+          $veg_s2 = date('Y', strtotime($gyedgyes_vege)).'-01-01';
+          $veg_s21 = new DateTime($gyedgyes_vege); $veg_s21->modify('+1 day');
+          $veg_s21 = $veg_s21->format('Y-m-d');
+
+          $help_gyedgyes_potszabi =
+          round( $help_gyedgyes_potszabi1 / 365 * ( (strtotime($veg_s1) - strtotime($gyedgyes_kezdete)) /(60*60*24) )) +
+          round( $help_gyedgyes_potszabi2 / 365 * ( (strtotime($veg_s21) - (strtotime($veg_s2))) / (60*60*24) ));
+        }
+
+        $values['helper']['help_gyedgyes_kezdet'] = $help_gyedgyes_kezdet;
+        $values['helper']['help_gyedgyes_vegzet'] = $help_gyedgyes_vegzet;
+        $values['helper']['help_gyedgyes_eletkor1'] = $help_gyedgyes_eletkor1;
+        $values['helper']['help_gyedgyes_eletkor2'] = $help_gyedgyes_eletkor2;
+        $values['helper']['help_gyedgyes_potszabi1'] = $help_gyedgyes_potszabi1;
+        $values['helper']['help_gyedgyes_potszabi2'] = $help_gyedgyes_potszabi2;
+        $values['helper']['gyedgyes_potszabi'] = $help_gyedgyes_potszabi;
+
+        // csed
+        $csed_idejere_jaro_szabadsag = (int)$settings['alapszabadsag'] + $this->potszabadasg16evfiatalabbGyerekSzerint((int)$data['szul_elott_igenybevett_potszabadsag_gyermek']);
+        if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
+          $csed_idejere_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
+        }
+        $csed_idejere_jaro_szabadsag_vt1 = new DateTime($csed_vege); $csed_idejere_jaro_szabadsag_vt1->modify('+1 day');
+        $csed_idejere_jaro_szabadsag_vt1 = $csed_idejere_jaro_szabadsag_vt1->format('Y-m-d');
+        $csed_idejere_jaro_szabadsag = $csed_idejere_jaro_szabadsag / 365 * ((strtotime($csed_idejere_jaro_szabadsag_vt1) - strtotime($csed_kezdete))/(60*60*24));
+        $csed_idejere_jaro_szabadsag = round($csed_idejere_jaro_szabadsag);
+        $csed_idejere_jaro_szabadsag += (int)$help_csed_potszabi;
+
+        $csed_szules_eveben_igenybe_vett_szabadsag = min($le_nem_toltott_szabadsag, 0);
+
+        $csed_le_nem_toltott_szabadsag = $csed_idejere_jaro_szabadsag + $csed_szules_eveben_igenybe_vett_szabadsag;
+
+        // gyedgyes
+        $gyedgyes_idejere_jaro_szabadsag = (int)$settings['alapszabadsag'] + $this->potszabadasg16evfiatalabbGyerekSzerint((int)$data['szul_elott_igenybevett_potszabadsag_gyermek']);
+        if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
+          $gyedgyes_idejere_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
+        }
+        $gyedgyes_idejere_jaro_szabadsag_vt1 = new DateTime($gyedgyes_vege); $gyedgyes_idejere_jaro_szabadsag_vt1->modify('+1 day');
+        $gyedgyes_idejere_jaro_szabadsag_vt1 = $gyedgyes_idejere_jaro_szabadsag_vt1->format('Y-m-d');
+        $gyedgyes_idejere_jaro_szabadsag = $gyedgyes_idejere_jaro_szabadsag / 365 * ((strtotime($gyedgyes_idejere_jaro_szabadsag_vt1) - strtotime($gyedgyes_kezdete))/(60*60*24));
+        $gyedgyes_idejere_jaro_szabadsag = round($gyedgyes_idejere_jaro_szabadsag);
+        $gyedgyes_idejere_jaro_szabadsag += (int)$help_gyedgyes_potszabi;
+
+        $gyedgyes_szules_eveben_igenybe_vett_szabadsag = min($le_nem_toltott_szabadsag, 0);
+
+        $gyedgyes_le_nem_toltott_szabadsag = $gyedgyes_idejere_jaro_szabadsag + $gyedgyes_szules_eveben_igenybe_vett_szabadsag;
+
+        // összes
+        $osszes_szabadsag = $le_nem_toltott_szabadsag + $csed_idejere_jaro_szabadsag + $gyedgyes_le_nem_toltott_szabadsag;
+
+        $ret['szules_eveben_szabadsag'] = $alap_szules_eveben_jaro_szabadsag;
+        $ret['szulesig_idoaranyos_szabadsag'] = $szulesig_idoaranyos_szabadsag;
+        $ret['szules_eveben_igenybe_vett_szabadsag'] = $szules_eveben_igenybe_vett_szabadsag;
+        $ret['le_nem_toltott_szabadsag'] = $le_nem_toltott_szabadsag;
+        $ret['csed_idejere_jaro_szabadsag'] = $csed_idejere_jaro_szabadsag;
+        $ret['csed_szules_eveben_igenybe_vett_szabadsag'] = $csed_szules_eveben_igenybe_vett_szabadsag;
+        $ret['csed_le_nem_toltott_szabadsag'] = $csed_le_nem_toltott_szabadsag;
+        $ret['gyedgyes_idejere_jaro_szabadsag'] = $gyedgyes_idejere_jaro_szabadsag;
+        $ret['gyedgyes_szules_eveben_igenybe_vett_szabadsag'] = $gyedgyes_szules_eveben_igenybe_vett_szabadsag;
+        $ret['gyedgyes_le_nem_toltott_szabadsag'] = $gyedgyes_le_nem_toltott_szabadsag;
+        $ret['osszes_szabadsag'] = $osszes_szabadsag;
+
+        $values['szules_eve'] = $szules_eve;
+        $values['szules_eveben_munkavallalo_eletkora'] = $szules_eveben_munkavallalo_eletkora;
+        $values['gyerek_potszabi'] = $gyerek_potszabi;
+        $values['gyerek_fogyatek_potszabi'] = $gyerek_fogyatek_potszabi;
+        $values['szulesig_eltelt_napok_szama'] = $szulesig_eltelt_napok_szama;
+        $values['csed_vege'] = $csed_vege;
+        $values['gyedgyes_vege'] = $gyedgyes_vege;
+
+        $ret['values'] = $values;
+
+        return $ret;
+      break;
     }
 
     return false;
@@ -643,6 +827,9 @@ class Calculators
       break;
       case 'belepo_szabadsag':
         return $this->load_belepo_szabadsag_resources();
+      break;
+      case 'anyak_szabadsaga':
+        return $this->load_anyak_szabadsaga_resources();
       break;
       case 'ingatlan_ertekesites':
         return $this->load_ingatlan_ertekesites_resources();
@@ -747,6 +934,22 @@ class Calculators
   }
 
   private function load_belepo_szabadsag_resources()
+  {
+    $res = array();
+
+    $res['alapszabadsag'] = $this->getSettingsValue('alapszabadsag');
+    $res['betegszabadsag'] = $this->getSettingsValue('betegszabadsag');
+    $res['potszabi_ha16evnelfiatalabbgyereketnevel'] = $this->getSettingsValue('potszabi_ha16evnelfiatalabbgyereketnevel');
+    $res['potszabi_megvaltozott_munkakepessegu'] = $this->getSettingsValue('potszabi_megvaltozott_munkakepessegu');
+
+    // Form resources
+    $forms = array();
+    $res['forms'] = $forms;
+
+    return $res;
+  }
+
+  private function load_anyak_szabadsaga_resources()
   {
     $res = array();
 
@@ -1015,6 +1218,7 @@ class Calculators
 
     return $brutto;
   }
+
 
   // Pótszabadság 16 évnél fiatalabb gyermek szerint
   public function potszabadasg16evfiatalabbGyerekSzerint( $gyermek )

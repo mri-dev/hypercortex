@@ -88,6 +88,33 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
       form.belepes_datuma = '';
     }
 
+    if ( view == 'anyak_szabadsaga' )
+    {
+      if ( typeof $scope.form.munkaviszony_kezedete !== 'undefined') {
+        var date = new Date($scope.form.munkaviszony_kezedete);
+        var munkaviszony_kezedete = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+        form.munkaviszony_kezedete = munkaviszony_kezedete;
+      }
+
+      if ( typeof $scope.form.szules_ideje !== 'undefined') {
+        var date = new Date($scope.form.szules_ideje);
+        var szules_ideje = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+        form.szules_ideje = szules_ideje;
+      }
+
+      if ( typeof $scope.form.csed_kezdete !== 'undefined') {
+        var date = new Date($scope.form.csed_kezdete);
+        var csed_kezdete = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+        form.csed_kezdete = csed_kezdete;
+      }
+
+      if ( typeof $scope.form.gyedgyes_kezdete !== 'undefined') {
+        var date = new Date($scope.form.gyedgyes_kezdete);
+        var gyedgyes_kezdete = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+        form.gyedgyes_kezdete = gyedgyes_kezdete;
+      }
+    }
+
 		$http({
 			method: 'POST',
 			url: '/wp-admin/admin-ajax.php?action=calc_api_interface',
@@ -137,13 +164,24 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
       break;
       case 'belepo_szabadsag':
         $scope.settings.select_yesno = $scope.select_yesno();
-        $scope.form.iden_kezdett_dolgozni = 'Nem';
         $scope.form.gyerek16ev_fiatalabb_fogyatekos = 'Nem';
         $scope.form.megvaltozott_munkakepessegu = 'Nem';
         $scope.form.athozott_szabadsagok = 0;
         $scope.form.gyerek16ev_fiatalabb = 0;
       break;
 
+      case 'anyak_szabadsaga':
+        $scope.settings.potszabigyermek = $scope.select_potszabigyermek();
+        $scope.settings.select_yesno = $scope.select_yesno();
+        $scope.form.gyerek16ev_fiatalabb_fogyatekos = 'Nem';
+        $scope.form.athozott_szabadsagok = 0;
+        $scope.form.gyerek16ev_fiatalabb = 0;
+        $scope.form.szulev_igenybevett_szabadsag = 0;
+        $scope.form.szul_elott_igenybevett_potszabadsag_gyermek = '0';
+
+        $scope.form.szuletesi_ev = 1990;
+
+      break;
       case 'ingatlan_ertekesites':
         $scope.form.atruhazas_eve = 2019;
         $scope.form.szerzes_eve = 2019;
@@ -185,6 +223,17 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
     }
 
     console.log($scope.form);
+  }
+
+  $scope.select_potszabigyermek = function() {
+    var yn = [];
+
+    yn[0] = '0';
+    yn[1] = '1';
+    yn[2] = '2';
+    yn[3] = '3 vagy több';
+
+    return yn;
   }
 
   $scope.select_yesno = function() {
