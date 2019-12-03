@@ -179,12 +179,12 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
         $scope.form.szulev_igenybevett_szabadsag = 0;
         $scope.form.szul_elott_igenybevett_potszabadsag_gyermek = '0';
 
-        $scope.form.szuletesi_ev = 1990;
+        //$scope.form.szuletesi_ev = 1990;
 
       break;
       case 'ingatlan_ertekesites':
-        $scope.form.atruhazas_eve = 2019;
-        $scope.form.szerzes_eve = 2019;
+        //$scope.form.atruhazas_eve = 2019;
+        //$scope.form.szerzes_eve = 2019;
         //$scope.form.atruhazasbol_bevetel = 0;
         //$scope.form.megszerzes_osszeg = 0;
         $scope.form.megszerzes_egyeb_kiadas = 0;
@@ -219,6 +219,12 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
         $scope.settings.select_yesno = $scope.select_yesno();
         $scope.settings.cafateria_jutattasok = $scope.cafateria_jutattasok();
         $scope.form.ceg_kiva = 'Nem';
+      break;
+      case 'brutto_ber':
+        $scope.settings.select_yesno = $scope.select_yesno();
+        $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
+        $scope.form.frisshazas_jogosult = 'Nem';
+        $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
       break;
     }
 
