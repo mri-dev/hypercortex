@@ -1,8 +1,4 @@
 <div class="wrapper">
-  <div class="soon">
-    <h3>Hamarosan elkészül ez a kalkulátor is!</h3>
-    Kalkulátor fejlesztés alatt...
-  </div>
   <div class="inputs">
     <div class="header">Bruttó bér</div>
     <div class="inp-body">
@@ -93,9 +89,9 @@
     <div class="result-body" ng-if="loaded && result!==false">
       <table class="result-table">
         <tbody>
-          <tr>
-            <td class="h"><strong>Nettó munkabér</strong></td>
-            <td class="v"><strong>{{result.netto_ber|cash:'Ft':''}}</strong></td>
+          <tr class="hl">
+            <td class="h"><strong>Bruttó bér</strong></td>
+            <td class="v"><strong>{{result.brutto_ber|cash:'Ft':''}}</td>
           </tr>
           <tr class="sm">
             <td class="h">- Személyi jövedelemadó</td>
@@ -122,10 +118,9 @@
             <td class="v"><strong>-{{result.sum_minusbrutto|cash:'Ft':''}}</strong></td>
           </tr>
           <tr>
-            <td class="h"><strong>Bruttó bér</strong></td>
-            <td class="v"><strong>{{result.brutto_ber|cash:'Ft':''}}</td>
-          </tr>
-        </tbody>
+            <td class="h">Nettó munkabér</td>
+            <td class="v">{{result.netto_ber|cash:'Ft':''}}</td>
+          </tr>        </tbody>
       </table>
     </div>
   </div>

@@ -115,61 +115,8 @@ class Calculators
         $netto = $data['netto_ber'];
         $ret['netto_ber'] = $netto;
 
-        /*
-        $csaladi_adokedvezmeny_osszege = 0;
-        if ($data['csaladkedvezmenyre_jogosult'] == 'Igen') {
-          $csaladi_adokedvezmeny_osszege = $this->csaladiAdokedvezmenyOsszege( (int)$data['csalad_eltartott_gyermek'], (int)$data['csalad_eltartott_gyermek_kedvezmenyezett'], $settings );
-        }
-
-        $ervenyesitheto_jarulekkedvezmeny = 0;
-        $friss_hazasok_kedvezmeny = 0;
-        $szemelyi_kedvezmeny = 0;
-        $ervenyesitheto_termeszetbeni_kedvezmeny = 0;
-        $ervenyesitheto_penzbeni_kedvezmeny = 0;
-
-        if ($data['frisshazas_jogosult'] == 'Igen') {
-          $friss_hazasok_kedvezmeny = $settings['adokedvezmeny_frisshazasok'];
-        }
-
-        if ($data['szemelyikedvezmeny_jogosult'] == 'Igen') {
-          $szemelyi_kedvezmeny = $settings['adokedvezmeny_szemelyi'];
-        }
-
-        $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege+$friss_hazasok_kedvezmeny-$brutto_ber;
-        $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
-
-        $ervenyesitheto_jarulekkedvezmeny = $csaladi_adokedvezmeny_maradekalap * 0.15;
-        $ervenyesitheto_jarulekkedvezmeny = ($ervenyesitheto_jarulekkedvezmeny < 0) ? 0 : $ervenyesitheto_jarulekkedvezmeny;
-
-        $ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
-        $ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
-
-        $ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
-        $ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
-
-        $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
-        $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
-        $ret['ado_szja'] = round($ret['ado_szja']);
-
-        $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
-        $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
-        $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
-
-        $ret['ado_penzbeli_egeszseg'] = ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100)) - $ervenyesitheto_termeszetbeni_kedvezmeny;
-        $ret['ado_penzbeli_egeszseg'] = ($ret['ado_penzbeli_egeszseg'] < 0) ? 0 : $ret['ado_penzbeli_egeszseg'];
-        $ret['ado_penzbeli_egeszseg'] = round($ret['ado_penzbeli_egeszseg']);
-
-        $ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
-        $ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
-        $ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
-
-        $ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
-        $ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
-
-        $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
-        */
         $find = $this->findBruttoFromNetto( $netto, $data, $settings, $values );
-        $sum_minusbrutto = $find['brutto'];
+        $sum_minusbrutto = (int)$find['brutto'];
         $values['find'] = $find;
 
         $ret['sum_minusbrutto'] = $find['values']['levonas'];
