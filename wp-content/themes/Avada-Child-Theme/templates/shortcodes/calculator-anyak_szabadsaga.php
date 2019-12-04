@@ -114,11 +114,11 @@
             <td class="v">{{result.szulesig_idoaranyos_szabadsag}}</td>
           </tr>
           <tr>
-            <td class="h">Szülés évében igénybe vett szabadság</td>
+            <td class="h">Szülés évében ténylegesen igénybe vett szabadság</td>
             <td class="v">{{result.szules_eveben_igenybe_vett_szabadsag}}</td>
           </tr>
           <tr>
-            <td class="h"><strong>Le nem töltött szabadság</strong></td>
+            <td class="h"><strong>Le nem töltött szabadság / túlvett (-) szabadság</strong></td>
             <td class="v"><strong>{{result.le_nem_toltott_szabadsag}}</strong></td>
           </tr>
           <tr>
@@ -129,11 +129,11 @@
             <td class="v">{{result.csed_idejere_jaro_szabadsag}}</td>
           </tr>
           <tr>
-            <td class="h">Szülés évében igénybe vett szabadság</td>
+            <td class="h">Ki nem vett / túlvett (-) szabadság</td>
             <td class="v">{{result.csed_szules_eveben_igenybe_vett_szabadsag}}</td>
           </tr>
           <tr>
-            <td class="h"><strong>Le nem töltött szabadság</strong></td>
+            <td class="h"><strong>Le nem töltött szabadság / túlvett (-) szabadság</strong></td>
             <td class="v"><strong>{{result.csed_le_nem_toltott_szabadsag}}</strong></td>
           </tr>
           <tr>
@@ -144,11 +144,11 @@
             <td class="v">{{result.gyedgyes_idejere_jaro_szabadsag}}</td>
           </tr>
           <tr>
-            <td class="h">Szülés évében igénybe vett szabadság</td>
+            <td class="h">Ki nem vett / túlvett (-) szabadság</td>
             <td class="v">{{result.gyedgyes_szules_eveben_igenybe_vett_szabadsag}}</td>
           </tr>
           <tr>
-            <td class="h"><strong>Le nem töltött szabadság</strong></td>
+            <td class="h"><strong>Le nem töltött szabadság / túlvett (-) szabadság</strong></td>
             <td class="v"><strong>{{result.gyedgyes_le_nem_toltott_szabadsag}}</strong></td>
           </tr>
           <tr>

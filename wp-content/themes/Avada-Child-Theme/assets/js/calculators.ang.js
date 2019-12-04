@@ -54,7 +54,7 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
 /**
 * Calculator
 **/
-app.controller('Calculators', ['$scope', '$http', function($scope, $http)
+app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $http, $locale)
 {
   $scope.loaded = false;
   $scope.loading = false;
@@ -64,6 +64,7 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
   $scope.missing = [];
   $scope.error_elements = [];
   $scope.settings = {};
+  $locale.NUMBER_FORMATS.GROUP_SEP = ' ';
 
   $scope.init = function( calc ) {
     $scope.predefineFormSettings(calc);
@@ -287,6 +288,7 @@ app.controller('Calculators', ['$scope', '$http', function($scope, $http)
   }
 
 }]);
+
 app.filter('unsafe', function($sce){ return $sce.trustAsHtml; });
 app.filter('cash', function(){
 	return function(cash, text, aftertext){
@@ -319,3 +321,65 @@ app.filter('range', function() {
     return input;
   };
 });
+app.directive('inputThousandSeparator', [
+  function() {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function(scope, element, attr, ngModel) {
+
+        var viewValue, noCommasVal;
+        var numberMode = attr['inputThousandSeparator'];
+
+        var currencyReg = /^(?!0+\.00)(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})*(\.[0-9]{2})?$/;
+        var percentageReg = /(^100([.]0{1,2})?)$|(^\d{1,2}([.]\d{1,2})?)$/;
+        var wholeNosReg = /^(?=.{1,9}(\.|$))(?!0(?!\.))\d{1,3}(,\d{3})?$/;
+
+        function testValue(value) {
+          switch(numberMode) {
+            case 'currency':
+              ngModel.$setValidity('pattern',currencyReg.test(value));
+              break;
+
+            case 'percentage':
+              ngModel.$setValidity('pattern',percentageReg.test(value));
+              break;
+
+            case 'whole':
+              ngModel.$setValidity('pattern',wholeNosReg.test(value));
+              break;
+          }
+        }
+
+        function setThousandSeperator(value) {
+          if (value) {
+            noCommasVal = value.toString().replace(/ /g, '');
+            viewValue = noCommasVal.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            ngModel.$setViewValue(viewValue);
+            ngModel.$render();
+          }
+        }
+
+        ngModel.$parsers.push(function(value) {
+          if (!value) {
+            ngModel.$setValidity('pattern',true);
+          } else {
+            testValue(value);
+            setThousandSeperator(value);
+            return noCommasVal;
+          }
+        });
+        ngModel.$formatters.push(function(value) {
+          if (!value) {
+            ngModel.$setValidity('pattern',true);
+            return value;
+          } else {
+            testValue(value);
+            setThousandSeperator(value);
+            return viewValue;
+          }
+        });
+      }
+    };
+  }
+]);

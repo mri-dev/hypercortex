@@ -32,7 +32,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.brutto_alap">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.brutto_alap">
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.teljes_targyev_brutto_munkaber">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.teljes_targyev_brutto_munkaber">
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.teljes_targyev_brutto_tarasvall_kivet">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.teljes_targyev_brutto_tarasvall_kivet">
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.targyev_megszerzett_brutto_osztalek">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.targyev_megszerzett_brutto_osztalek">
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.targyev_vall_kivont_jovedelem">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.targyev_vall_kivont_jovedelem">
           </div>
         </div>
       </div>
@@ -91,7 +91,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.targyev_ertekpapkolcson_jovedelem">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.targyev_ertekpapkolcson_jovedelem">
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.targyev_arfolyamnyereseg_jovedelem">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.targyev_arfolyamnyereseg_jovedelem">
           </div>
         </div>
       </div>
@@ -115,7 +115,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.egyeb_szja_jovedelem">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.egyeb_szja_jovedelem">
           </div>
         </div>
       </div>
@@ -144,7 +144,7 @@
             <td class="v"><strong>{{result.brutto_alap|cash:'Ft':''}}</strong></td>
           </tr>
           <tr class="sm">
-            <td class="h">Jövedelem</td>
+            <td class="h">Tárgyévben megszerzett összes jövedelem</td>
             <td class="v">{{result.jovedelem|cash:'Ft':''}}</td>
           </tr>
           <tr>

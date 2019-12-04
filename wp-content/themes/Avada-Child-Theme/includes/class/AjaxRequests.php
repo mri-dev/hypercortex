@@ -488,11 +488,30 @@ class AjaxRequests
           $return['error_elements']['szuletesi_ev'] = 'Pótolja a születési évét a kalkulációhoz!';
         }
 
-        if ( $inputs['iden_kezdett_dolgozni'] == 'Igen' && empty($inputs['belepes_datuma']) ) {
+        if ( empty($inputs['munkaviszony_kezedete']) ) {
           $return['error'] = 1;
-          $return['missing_elements'][] = 'belepes_datuma';
-          $return['error_elements']['belepes_datuma'] = 'A munkába állás első napját kötelező megadnia abban az esetben, ha idén kezdett el dolgozni munkahelyén!';
+          $return['missing_elements'][] = 'munkaviszony_kezedete';
+          $return['error_elements']['munkaviszony_kezedete'] = 'Pótolja a munkaviszony kezdete időpontot a kalkulációhoz!';
         }
+
+        if ( empty($inputs['szules_ideje']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'szules_ideje';
+          $return['error_elements']['szules_ideje'] = 'Pótolja a szülés időpontját a kalkulációhoz!';
+        }
+
+        if ( empty($inputs['csed_kezdete']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'csed_kezdete';
+          $return['error_elements']['csed_kezdete'] = 'Pótolja a szülési szabadság (CSED) kezdetét a kalkulációhoz!';
+        }
+
+        if ( empty($inputs['gyedgyes_kezdete']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'gyedgyes_kezdete';
+          $return['error_elements']['gyedgyes_kezdete'] = 'Pótolja a fizetés nélküli szabadság (GYED/GYES) kezdetét a kalkulációhoz!';
+        }
+
 
         // Handling missing
         if (!empty($return['missing_elements'])) {

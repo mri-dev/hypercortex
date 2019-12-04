@@ -69,7 +69,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" step="5000" ng-model="form.netto_ber">
+            <input type="text" ng-model="form.netto_ber" input-thousand-separator="currency">
           </div>
         </div>
       </div>

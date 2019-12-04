@@ -9,7 +9,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number"min="0" ng-model="form.brutto_ber">
+            <input type="text" ng-model="form.brutto_ber" input-thousand-separator="currency">
           </div>
         </div>
       </div>

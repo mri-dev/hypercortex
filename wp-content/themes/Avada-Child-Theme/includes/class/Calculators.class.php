@@ -476,6 +476,9 @@ class Calculators
           $alapszamitas = min( ((float)$data['brutto_alap'] * ($settings['ado_szocialis_hozzajarulas']/100)), (($szocho_ado_max - $osszes_jovedelem) * ($settings['ado_szocialis_hozzajarulas']/100)) );
           $fizetendo_szocho = $alapszamitas;
           $fizetendo_szocho = round($fizetendo_szocho);
+          if ($fizetendo_szocho < 0 ) {
+            $fizetendo_szocho = 0;
+          }
         }
 
         $ret['jovedelem'] = $osszes_jovedelem;
@@ -553,7 +556,7 @@ class Calculators
 
         // KIVA
         if ($data['ceg_kiva'] == 'Igen' && $jg && in_array($jg['ID'], array(3, 4))) {
-          $kiva = $adoalap * ($settings['ado_kisvallalati']/100);
+          $kiva = $data['juttatas_osszege'] * ($settings['ado_kisvallalati']/100);
           $kiva = ($kiva < 0) ? 0 : $kiva;
           $kiva = round($kiva);
         }
@@ -804,7 +807,7 @@ class Calculators
         $gyedgyes_idejere_jaro_szabadsag = round($gyedgyes_idejere_jaro_szabadsag);
         $gyedgyes_idejere_jaro_szabadsag += (int)$help_gyedgyes_potszabi;
 
-        $gyedgyes_szules_eveben_igenybe_vett_szabadsag = min($le_nem_toltott_szabadsag, 0);
+        $gyedgyes_szules_eveben_igenybe_vett_szabadsag = min($csed_le_nem_toltott_szabadsag, 0);
 
         $gyedgyes_le_nem_toltott_szabadsag = $gyedgyes_idejere_jaro_szabadsag + $gyedgyes_szules_eveben_igenybe_vett_szabadsag;
 

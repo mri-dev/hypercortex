@@ -1,8 +1,4 @@
 <div class="wrapper">
-  <div class="soon">
-    <h3>Hamarosan elkészül ez a kalkulátor is!</h3>
-    Fejlesztés folyamatban...
-  </div>
   <div class="inputs">
     <div class="header">Cafetéria adó</div>
     <div class="inp-body">
@@ -35,7 +31,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.juttatas_osszege">
+            <input type="text" ng-model="form.juttatas_osszege" input-thousand-separator="currency">
           </div>
         </div>
       </div>
@@ -54,10 +50,6 @@
     <div class="result-body" ng-if="loaded && result!==false">
       <table class="result-table">
         <tbody>
-          <tr class="sm" ng-if="[2,3].indexOf(result.juttatas_group.ID)!==-1">
-            <td class="h">Adóalap kiegészítés</td>
-            <td class="v">{{result.adoalap_kiegeszites|cash:'Ft':''}}</td>
-          </tr>
           <tr class="sm" ng-if="[2,3,4].indexOf(result.juttatas_group.ID)!==-1">
             <td class="h">Személyi jövedelemadó</td>
             <td class="v">{{result.szja|cash:'Ft':''}}</td>

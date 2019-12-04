@@ -46,7 +46,7 @@
       <table class="result-table">
         <tbody>
           <tr>
-            <td class="h">Gépjármű után fizetendő cégautóadó</td>
+            <td class="h">Gépjármű után havonta fizetendő cégautóadó</td>
             <td class="v">{{result|cash:'Ft':''}}</td>
           </tr>
         </tbody>

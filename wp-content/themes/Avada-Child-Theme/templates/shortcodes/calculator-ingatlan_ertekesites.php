@@ -20,7 +20,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.atruhazasbol_bevetel">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.atruhazasbol_bevetel">
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.megszerzes_osszeg">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.megszerzes_osszeg">
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.megszerzes_egyeb_kiadas">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.megszerzes_egyeb_kiadas">
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.erteknovelo_beruhazasok">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.erteknovelo_beruhazasok">
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.erteknovelo_beruhazasok_allammegovas">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.erteknovelo_beruhazasok_allammegovas">
           </div>
         </div>
       </div>
@@ -86,7 +86,7 @@
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="number" min="0" ng-model="form.atruhazas_koltsegei">
+            <input type="text" input-thousand-separator="currency" min="0" ng-model="form.atruhazas_koltsegei">
           </div>
         </div>
       </div>
