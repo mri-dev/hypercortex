@@ -1705,24 +1705,29 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   color: white;
 }
 /* line 1460, sass/_base.scss */
+.calculator-holder table.result-table tr.hlh td {
+  background: #953231 !important;
+  color: white;
+}
+/* line 1464, sass/_base.scss */
 .calculator-holder table.result-table tr.lt td {
   text-decoration: line-through !important;
   font-style: italic !important;
   color: #707070 !important;
 }
 
-/* line 1469, sass/_base.scss */
+/* line 1473, sass/_base.scss */
 body.page:not(.home) section#content {
   padding-top: 60px;
 }
-/* line 1472, sass/_base.scss */
+/* line 1476, sass/_base.scss */
 body.page:not(.home) .page-custom-title {
   background-color: #c9b07d;
   padding: 0;
   margin-top: -25px;
   padding-top: 25px;
 }
-/* line 1477, sass/_base.scss */
+/* line 1481, sass/_base.scss */
 body.page:not(.home) .page-custom-title h1 {
   font-family: 'Montserrat', serif !important;
   text-transform: uppercase !important;
@@ -1733,7 +1738,7 @@ body.page:not(.home) .page-custom-title h1 {
   margin: 0 !important;
   height: 50px !important;
 }
-/* line 1486, sass/_base.scss */
+/* line 1490, sass/_base.scss */
 body.page:not(.home) .page-custom-title h1 img.ico {
   height: 41px;
   width: auto;
@@ -1741,23 +1746,23 @@ body.page:not(.home) .page-custom-title h1 img.ico {
   vertical-align: middle;
   margin: 0 20px 0 0;
 }
-/* line 1495, sass/_base.scss */
+/* line 1499, sass/_base.scss */
 body.page:not(.home) main#main {
   background: #fffcf7;
   padding: 0 0 4rem 0;
 }
-/* line 1498, sass/_base.scss */
+/* line 1502, sass/_base.scss */
 body.page:not(.home) main#main > .fusion-row {
   width: 100%;
   max-width: initial;
   padding: 0;
   margin: 0;
 }
-/* line 1505, sass/_base.scss */
+/* line 1509, sass/_base.scss */
 body.page:not(.home) .footer-menu {
   position: relative;
 }
-/* line 1507, sass/_base.scss */
+/* line 1511, sass/_base.scss */
 body.page:not(.home) .footer-menu:before {
   content: "";
   position: absolute;
@@ -1772,31 +1777,31 @@ body.page:not(.home) .footer-menu:before {
   background-position: center top !important;
 }
 
-/* line 1524, sass/_base.scss */
+/* line 1528, sass/_base.scss */
 body.page-template-page-kalkulator section#content {
   padding-top: 10px !important;
 }
 
-/* line 1530, sass/_base.scss */
+/* line 1534, sass/_base.scss */
 body.page-id-23 section#content {
   padding-top: 0 !important;
 }
 
-/* line 1537, sass/_base.scss */
+/* line 1541, sass/_base.scss */
 body.page-id-37 section#content,
 body.page-id-37 main#main {
   padding: 0 0 15px 0 !important;
 }
-/* line 1540, sass/_base.scss */
+/* line 1544, sass/_base.scss */
 body.page-id-37 .post-content > div.fusion-fullwidth {
   padding: 0 !important;
 }
 
-/* line 1547, sass/_base.scss */
+/* line 1551, sass/_base.scss */
 .cikksidebar-holder > .wrapper > .header {
   margin: 0 0 25px 0;
 }
-/* line 1550, sass/_base.scss */
+/* line 1554, sass/_base.scss */
 .cikksidebar-holder > .wrapper > .header h3 {
   font-style: italic;
   font-size: 2.4rem !important;
@@ -1804,31 +1809,31 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   line-height: 1;
   margin: 0 0 10px 0;
 }
-/* line 1560, sass/_base.scss */
+/* line 1564, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts > .article {
   background: white;
   border: 0.5px solid #f0e3c8;
 }
-/* line 1564, sass/_base.scss */
+/* line 1568, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts > .article + .article {
   margin: 25px 0 0 0;
 }
-/* line 1567, sass/_base.scss */
+/* line 1571, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content {
   padding: 15px;
   padding-bottom: 20px;
   color: #513621;
 }
-/* line 1571, sass/_base.scss */
+/* line 1575, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .author {
   font-size: 0.7rem;
   font-style: italic;
 }
-/* line 1575, sass/_base.scss */
+/* line 1579, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .title {
   margin: 0 0 12px 0;
 }
-/* line 1578, sass/_base.scss */
+/* line 1582, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .title a {
   font-family: 'Bauer Bodoni', serif !important;
   font-size: 1.3rem;
@@ -1836,33 +1841,33 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   color: #513621;
   font-style: italic;
 }
-/* line 1585, sass/_base.scss */
+/* line 1589, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .title a:hover {
   color: #50100f;
 }
-/* line 1589, sass/_base.scss */
+/* line 1593, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .desc {
   line-height: 1.5;
   font-size: 0.7rem;
   height: 85px;
   overflow: hidden;
 }
-/* line 1594, sass/_base.scss */
+/* line 1598, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .desc p {
   margin: 0 !important;
 }
-/* line 1598, sass/_base.scss */
+/* line 1602, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .published {
   color: #7d7567;
   font-weight: bold;
   margin: 10px 0 5px 0;
   font-size: 0.6rem;
 }
-/* line 1604, sass/_base.scss */
+/* line 1608, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .nextbtn {
   margin: 15px 0 0 0;
 }
-/* line 1606, sass/_base.scss */
+/* line 1610, sass/_base.scss */
 .cikksidebar-holder .simple-sidebar-posts .content .nextbtn a {
   border: 3px solid #50100f;
   color: #50100f;
@@ -1871,12 +1876,12 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   font-size: 0.7rem;
   padding: 6px 12px;
 }
-/* line 1617, sass/_base.scss */
+/* line 1621, sass/_base.scss */
 .cikksidebar-holder .footer {
   text-align: right;
   margin: 35px 0 0 0 !important;
 }
-/* line 1621, sass/_base.scss */
+/* line 1625, sass/_base.scss */
 .cikksidebar-holder .footer a {
   font-size: 0.7rem !important;
   text-align: center;
@@ -1885,17 +1890,17 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
-  /* line 1630, sass/_base.scss */
+  /* line 1634, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 1631, sass/_base.scss */
+  /* line 1635, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 1632, sass/_base.scss */
+  /* line 1636, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
@@ -1903,30 +1908,30 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
 
 /* Standard syntax */
 @keyframes loaderbgchange {
-  /* line 1637, sass/_base.scss */
+  /* line 1641, sass/_base.scss */
   0% {
     background-color: #75bf75;
   }
 
-  /* line 1638, sass/_base.scss */
+  /* line 1642, sass/_base.scss */
   50% {
     background-color: #b6c955;
   }
 
-  /* line 1639, sass/_base.scss */
+  /* line 1643, sass/_base.scss */
   100% {
     background-color: #75bf75;
   }
 }
 
 @media all and (min-width: 1500px) {
-  /* line 1643, sass/_base.scss */
+  /* line 1647, sass/_base.scss */
   body.page:not(.home) .footer-menu:before {
     height: 118px;
     top: -115px;
   }
 
-  /* line 1647, sass/_base.scss */
+  /* line 1651, sass/_base.scss */
   body.page:not(.home) main#main {
     background: #fffcf7;
     padding: 0 0 4rem 0;

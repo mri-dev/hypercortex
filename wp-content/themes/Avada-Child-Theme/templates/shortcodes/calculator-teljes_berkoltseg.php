@@ -174,6 +174,10 @@
             <td class="h"><strong>Teljes bérköltség KIVA alany cég esetén</strong></td>
             <td class="v">{{result.berkoltseg_KIVA|cash:'Ft':''}}</td>
           </tr>
+          <tr class="hlh">
+            <td class="h"><strong>NAV felé utalandó összes adó és járulék</strong></td>
+            <td class="v">{{result.nav_osszes_ado|cash:'Ft':''}}</td>
+          </tr>
         </tbody>
       </table>
     </div>

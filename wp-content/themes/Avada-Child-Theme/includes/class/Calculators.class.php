@@ -259,6 +259,7 @@ class Calculators
           }
         }
 
+
         $ret['ado_szocialis_hozzajarulas'] = ($brutto_ber - $szocho_es_kiva_kedvezmeny_alap) * ($settings['ado_szocialis_hozzajarulas']/100);
         $ret['ado_szocialis_hozzajarulas'] = round($ret['ado_szocialis_hozzajarulas']);
 
@@ -270,6 +271,16 @@ class Calculators
 
         $ret['berkoltseg_nem_KIVA'] = $brutto_ber + $ret['ado_szocialis_hozzajarulas'] + $ret['ado_szakkepzesi_hozzajarulas'];
         $ret['berkoltseg_KIVA'] = $brutto_ber + $ret['ado_kisvallalati'];
+
+        $nav_osszes_ado = 0;
+
+        if ($data['ceg_kisvallalati_ado_alany'] == 'Igen') {
+          $nav_osszes_ado = $ret['berkoltseg_KIVA'] - $netto_ber;
+        } else {
+          $nav_osszes_ado = $ret['berkoltseg_nem_KIVA'] - $netto_ber;
+        }
+
+        $ret['nav_osszes_ado'] = $nav_osszes_ado;
 
         $values['szocho_es_kiva_kedvezmeny_alap'] = $szocho_es_kiva_kedvezmeny_alap;
         $values['szokho_kedvezmeny_alap'] = $szokho_kedvezmeny_alap;
