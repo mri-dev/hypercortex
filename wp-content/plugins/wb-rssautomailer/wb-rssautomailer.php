@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: Webgalamb RSS Automailer
- * Description: Újonnan létrehozott cikkek kiküldése RSS csatornán keresztül a Webgalamb rendszerével, meghatározott feliratkozó csoportnak.
+ * Plugin Name: Webgalamb Automailer
+ * Description: Újonnan létrehozott cikkek kiküldése a Webgalamb rendszerével, meghatározott feliratkozó csoportnak.
  * Author: WEBPRO Solutions Bt.
  * Author URI: https://www.web-pro.hu/
  * Version: 1.0
@@ -24,16 +24,26 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
     private static $instance;
 
     public $settings;
+		public $wgapi;
+		public $wg;
 
   	static function plugin_activation() {
       self::$instance->prepareDatabase();
-      delete_option( WGRSS_DB_PREFIX.'active', 1, '', 'yes' );
+      add_option( WGRSS_DB_PREFIX.'active', 1, '', 'yes' );
+			add_option( WGRSS_DB_PREFIX.'wg_db_username', '', '', 'yes' );
+			add_option( WGRSS_DB_PREFIX.'wg_db_name', '', '', 'yes' );
+			add_option( WGRSS_DB_PREFIX.'wg_db_pw', '', '', 'yes' );
+			add_option( WGRSS_DB_PREFIX.'wg_db_prefix', '', '', 'yes' );
   		flush_rewrite_rules();
   	}
 
   	static function plugin_deactivation() {
   		flush_rewrite_rules();
   		delete_option( WGRSS_DB_PREFIX.'active' );
+			delete_option( WGRSS_DB_PREFIX.'wg_db_username');
+			delete_option( WGRSS_DB_PREFIX.'wg_db_name');
+			delete_option( WGRSS_DB_PREFIX.'wg_db_pw');
+			delete_option( WGRSS_DB_PREFIX.'wg_db_prefix');
   	}
 
     function __construct()
@@ -44,7 +54,10 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
     public static function instance() {
       if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WGRSSMailer ) ) {
         self::$instance = new WGRSSMailer;
+
         defined( 'WGRSS_INC' ) || define( 'WGRSS_INC', plugin_dir_path( __FILE__ ).'inc/' );
+				defined( 'WGRSS_TEMPLATES' ) || define( 'WGRSS_TEMPLATES', plugin_dir_path( __FILE__ ).'templates/' );
+
         self::$instance->includes();
 
         add_action( 'init', array( self::$instance, 'init' ) );
@@ -57,12 +70,25 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
 
     public function init()
     {
-      $this->settings = new WGRSSMailer_Settings();
+			// Webgalambhoz használt MySQL adatbázis adatai
+			$db_host = "localhost"; // adatbázis kiszolgáló címe
+			$db_user = get_option( WGRSS_DB_PREFIX.'wg_db_username', '' ); // adatbázis felhasználónév
+			$db_name = get_option( WGRSS_DB_PREFIX.'wg_db_name', '' ); // adatbázis neve
+			$db_password = get_option( WGRSS_DB_PREFIX.'wg_db_pw', '' ); // felhasználó jelszava
+			$db_prefix = get_option( WGRSS_DB_PREFIX.'wg_db_prefix', '' ); // Webgalamb 7 prefix, alap telepítés esetén => wg7_
+			$this->wg = new WG($db_prefix, $db_host, $db_name, $db_user, $db_password);
+
+			$this->settings = new WGRSSMailer_Settings(array(
+				'wg' => $this->wg
+			));
   	}
 
     private function includes()
     {
+			require_once WGRSS_INC . 'automation.class.php';
       require_once WGRSS_INC . 'settings.php';
+			require_once WGRSS_INC . 'wg7api.php';
+			require_once WGRSS_INC . 'wg.php';
     }
 
     private static function prepareDatabase()
@@ -78,11 +104,14 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
       {
           $sql = "CREATE TABLE `".$wp_track_table."` (
             `ID` int(6) NOT NULL AUTO_INCREMENT,
-            `category_id` mediumint(9) NOT NULL,
+						`title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+            `category_id` text COLLATE utf8mb4_unicode_ci,
             `wg_group_id` smallint(6) NOT NULL,
             `wg_mail_id` smallint(6) NOT NULL,
+  					`active` tinyint(1) NOT NULL DEFAULT '1',
+						`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`ID`),
-            UNIQUE KEY (`category_id`)
+						INDEX (`active`)
           ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
           $queries[] = $sql;
       }
