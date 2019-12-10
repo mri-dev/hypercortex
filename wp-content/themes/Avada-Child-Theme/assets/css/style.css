@@ -65,7 +65,7 @@ h4 {
   background-repeat: no-repeat, repeat-x;
   background-position: 59% center, top center;
   background-size: contain, cover;
-  box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0.7);
+  box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0);
   position: relative;
 }
 /* line 31, sass/_base.scss */
@@ -872,7 +872,7 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
   z-index: 2;
-  box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0);
 }
 /* line 720, sass/_base.scss */
 .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block:nth-child(3n+1) > .wrapper {
@@ -1935,5 +1935,182 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   body.page:not(.home) main#main {
     background: #fffcf7;
     padding: 0 0 4rem 0;
+  }
+}
+@media all and (max-width: 1450px) {
+  /* line 3, sass/_responsive.scss */
+  .fusion-logo img {
+    margin-left: -85px;
+  }
+}
+@media all and (max-width: 1280px) {
+  /* line 9, sass/_responsive.scss */
+  .fusion-logo img {
+    margin-left: -47px;
+    max-height: 130px !important;
+  }
+
+  /* line 13, sass/_responsive.scss */
+  .fusion-header {
+    background-position: 92% center, top center;
+  }
+
+  /* line 16, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2 {
+    font-size: 0.95rem !important;
+  }
+
+  /* line 19, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button {
+    font-size: 0.78rem !important;
+  }
+
+  /* line 22, sass/_responsive.scss */
+  .fusion-button.button-flat {
+    font-size: 1vw !important;
+  }
+
+  /* line 25, sass/_responsive.scss */
+  .partnerek {
+    width: 1150px;
+  }
+
+  /* line 28, sass/_responsive.scss */
+  .footer-menu .menu-lablec-container {
+    width: 100%;
+  }
+
+  /* line 31, sass/_responsive.scss */
+  .footer-menu .menu-lablec-container ul li a {
+    padding: 15px;
+  }
+}
+@media all and (max-width: 1024px) {
+  /* line 37, sass/_responsive.scss */
+  .fusion-logo img {
+    margin-left: -37px;
+    max-height: 105px !important;
+  }
+
+  /* line 41, sass/_responsive.scss */
+  .fusion-header {
+    background-position: 60% center, top center;
+  }
+
+  /* line 44, sass/_responsive.scss */
+  .fusion-header-v1 .fusion-main-menu > ul > li, .fusion-header-v2 .fusion-main-menu > ul > li, .fusion-header-v3 .fusion-main-menu > ul > li, .fusion-header-v4 .fusion-main-menu > ul > li, .fusion-header-v5 .fusion-main-menu > ul > li, .fusion-header-v7 .fusion-main-menu > ul > li {
+    padding-right: 8px !important;
+  }
+
+  /* line 47, sass/_responsive.scss */
+  .fusion-main-menu > ul > li > a {
+    font-size: 0.75rem !important;
+    padding: 0 6px;
+    height: 35px;
+    line-height: 35px;
+  }
+
+  /* line 53, sass/_responsive.scss */
+  .fusion-header .searcher {
+    position: absolute;
+    bottom: 25px;
+    right: -5px;
+  }
+
+  /* line 58, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2 {
+    font-size: 0.72rem !important;
+  }
+
+  /* line 61, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img {
+    height: 35px;
+  }
+
+  /* line 64, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico {
+    margin: 0 0 10px 0;
+  }
+
+  /* line 67, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn {
+    padding: 0;
+  }
+
+  /* line 70, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button {
+    font-size: 0.6rem !important;
+  }
+
+  /* line 73, sass/_responsive.scss */
+  .partnerek {
+    width: 100%;
+  }
+
+  /* line 76, sass/_responsive.scss */
+  footer .fusion-columns > .fusion-column h2, footer .fusion-columns > .fusion-column h3 {
+    font-size: 1.5rem !important;
+  }
+
+  /* line 79, sass/_responsive.scss */
+  .ajanlatkeres-szalag-holder > .wrapper {
+    width: 95%;
+  }
+
+  /* line 82, sass/_responsive.scss */
+  .custom-templates-sc.view-uzenjen_nekunk a {
+    font-size: 3rem;
+  }
+
+  /* line 85, sass/_responsive.scss */
+  .custom-templates-sc.view-uzenjen_nekunk .img {
+    flex-basis: 70px;
+  }
+
+  /* line 88, sass/_responsive.scss */
+  .bloglist-holder.view-of-archive {
+    width: 100%;
+  }
+
+  /* line 91, sass/_responsive.scss */
+  .bloglist-holder.view-of-archive {
+    padding: 0 25px;
+  }
+
+  /* line 94, sass/_responsive.scss */
+  .tag-filter > .wrapper {
+    width: 100%;
+    padding: 0 25px;
+  }
+
+  /* line 98, sass/_responsive.scss */
+  .tag-filter > .wrapper .tags > .tag {
+    flex-basis: calc(100% / 4);
+  }
+
+  /* line 101, sass/_responsive.scss */
+  body.single-post .single-post-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* line 105, sass/_responsive.scss */
+  .cikksidebar-holder > .wrapper > .header {
+    padding: 0 0 0 15px;
+  }
+
+  /* line 108, sass/_responsive.scss */
+  .cikksidebar-holder > .wrapper > .header h3 {
+    font-size: 2rem !important;
+  }
+
+  /* line 111, sass/_responsive.scss */
+  body.search .bloglist-holder.view-of-archive {
+    padding: 0;
+  }
+
+  /* line 114, sass/_responsive.scss */
+  body.search .bloglist-holder.view-of-archive > .wrapper > div {
+    flex-basis: calc(100% / 2);
   }
 }
