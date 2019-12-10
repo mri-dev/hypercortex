@@ -22,10 +22,17 @@
         <td><a href="<?=admin_url('admin.php?page=wgrss-settings-adder&edit='.$l['ID'])?>"><strong><?=$l['title']?></strong></a></td>
         <td>
           <?php
-          if (is_null($l['category_id'])) {
-            echo '<em>Minden kategória cikkei.</em>';
+          if (!$l['cats']) {
+            echo '<em>Minden kategória cikkei esetén.</em>';
+          } else {
+            $incats = '';
+            foreach ((array)$l['cats_obj'] as $c) {
+              $incats .= $c->name.', ';
+            }
+            $incats = rtrim($incats, ', ');
+            echo $incats;
           }
-           ?>
+          ?>
         </td>
         <td class="center"><?=$l['wg_group_id']?></td>
         <td class="center"><?=$l['wg_mail_id']?></td>

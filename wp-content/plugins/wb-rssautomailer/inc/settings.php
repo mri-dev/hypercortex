@@ -50,6 +50,8 @@ class WGRSSMailer_Settings
 
     $is_editing = (isset($_POST['edit_id'])) ? $_POST['edit_id'] : false;
 
+    //print_r($_POST); exit;
+
     if ( !current_user_can( 'manage_options' ) ) {
       $errors->add('nopriv', 'Nincs megfelelő jogosultsága a művelet végrehajtására: adminisztrátori jogok.');
     }
@@ -66,7 +68,8 @@ class WGRSSMailer_Settings
       if ($is_editing)
       {
         // saving
-        $catids = (empty($_POST['cats'])) ? NULL: implode($_POST['cats'],',');
+        $catids = (!isset($_POST['cats'])) ? NULL: implode($_POST['cats'],',');
+        $mezok = maybe_serialize($_POST['mezoxref']);
         $wpdb->update(
           $table_prefix.WGRSS_DB_PREFIX.'automations',
           array(
@@ -74,6 +77,7 @@ class WGRSSMailer_Settings
             'category_id' => $catids,
             'wg_group_id' => (int)($_POST['wg_group_id']),
             'wg_mail_id' => (int)($_POST['wg_mail_id']),
+            'mezok' => $mezok,
             'active' => (int)($_POST['active'])
           ),
           array(
@@ -82,7 +86,8 @@ class WGRSSMailer_Settings
         );
       } else {
         // create
-        $catids = (empty($_POST['cats'])) ? NULL: implode($_POST['cats'],',');
+        $catids = (!isset($_POST['cats'])) ? NULL: implode($_POST['cats'],',');
+        $mezok = maybe_serialize($_POST['mezoxref']);
         $wpdb->insert(
           $table_prefix.WGRSS_DB_PREFIX.'automations',
           array(
@@ -90,6 +95,7 @@ class WGRSSMailer_Settings
             'category_id' => $catids,
             'wg_group_id' => (int)($_POST['wg_group_id']),
             'wg_mail_id' => (int)($_POST['wg_mail_id']),
+            'mezok' => $mezok,
             'active' => (int)($_POST['active'])
           )
         );
@@ -111,10 +117,9 @@ class WGRSSMailer_Settings
 
   public function wgrss_settings_page()
   {
-    global $wpdb, $table_prefix;
 
-    $tbl = $table_prefix.WGRSS_DB_PREFIX.'automations';
-    $list = $wpdb->get_results("SELECT * FROM {$tbl} ORDER BY created_at DESC", ARRAY_A);
+    $mailer = new AutomationWG();
+    $list = $mailer->getList();
 
 
     require_once WGRSS_TEMPLATES . "admin-settings.php";
@@ -125,6 +130,8 @@ class WGRSSMailer_Settings
     if (isset($_GET['edit'])) {
       $editor = (int)$_GET['edit'];
     }
+
+    $categories = get_categories();
 
     if ($editor) {
       $mailer = new AutomationWG();

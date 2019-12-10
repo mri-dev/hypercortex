@@ -26,6 +26,7 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
     public $settings;
 		public $wgapi;
 		public $wg;
+		public $automation;
 
   	static function plugin_activation() {
       self::$instance->prepareDatabase();
@@ -81,6 +82,9 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
 			$this->settings = new WGRSSMailer_Settings(array(
 				'wg' => $this->wg
 			));
+
+			$this->automation = new AutomationWG();
+			$this->automation->startWatch();
   	}
 
     private function includes()
@@ -108,6 +112,7 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
             `category_id` text COLLATE utf8mb4_unicode_ci,
             `wg_group_id` smallint(6) NOT NULL,
             `wg_mail_id` smallint(6) NOT NULL,
+						`mezok` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   					`active` tinyint(1) NOT NULL DEFAULT '1',
 						`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`ID`),
