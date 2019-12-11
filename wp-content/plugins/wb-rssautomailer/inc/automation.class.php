@@ -43,8 +43,6 @@ class AutomationWG
         }
       }
     }
-
-    exit;
   }
 
   public function sendingWGAutomation( $auto_config, $post_id )
