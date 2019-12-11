@@ -56,6 +56,7 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
       if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WGRSSMailer ) ) {
         self::$instance = new WGRSSMailer;
 
+				defined( 'WGRSS_DIR_URL' ) || define( 'WGRSS_DIR_URL', plugin_dir_url( __FILE__ ) );
         defined( 'WGRSS_INC' ) || define( 'WGRSS_INC', plugin_dir_path( __FILE__ ).'inc/' );
 				defined( 'WGRSS_TEMPLATES' ) || define( 'WGRSS_TEMPLATES', plugin_dir_path( __FILE__ ).'templates/' );
 
@@ -83,7 +84,9 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
 				'wg' => $this->wg
 			));
 
-			$this->automation = new AutomationWG();
+			$this->automation = new AutomationWG(array(
+				'wg' => $this->wg
+			));
 			$this->automation->startWatch();
   	}
 
@@ -129,9 +132,11 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
             `ID` int(8) NOT NULL AUTO_INCREMENT,
             `config_id` int(6) NOT NULL,
             `item_id` int(8) NOT NULL,
+            `recepients` MEDIUMINT NOT NULL DEFAULT '0',
             `sended_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`ID`),
-            INDEX (`config_id`)
+            INDEX (`config_id`),
+            INDEX (`item_id`)
           ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
           $queries[] = $sql;
       }

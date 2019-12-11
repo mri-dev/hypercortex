@@ -18,6 +18,36 @@ class WGRSSMailer_Settings
 
     add_action('admin_post_wgrss_add_automation',array($this, 'saving_posted_add_automation'));
     add_action('admin_post_nopriv_wgrss_add_automation',array($this, 'saving_posted_add_automation'));
+
+    add_action( 'manage_posts_columns', array($this, 'post_listing_column_modifier'), 10, 2 );
+    add_action( 'manage_posts_custom_column', array($this, 'post_listing_column_modifier_value'), 10, 2 );
+  }
+
+  public function post_listing_column_modifier( $posts_columns )
+  {
+    $posts_columns['wg_sending'] = '<img height="12" src="'.WGRSS_DIR_URL.'wg-ico-black.png" alt="Webgalamb" /> Webgalamb Automail';
+    return $posts_columns;
+  }
+
+
+  public function post_listing_column_modifier_value( $column, $post_id )
+  {
+    global $wpdb, $table_prefix;
+    if ( $column == 'wg_sending') {
+      $tbl = $table_prefix.WGRSS_DB_PREFIX.'sended';
+      $qry = "SELECT count(ID) FROM {$tbl} WHERE item_id = {$post_id}";
+
+      $c = $wpdb->get_var($qry);
+
+      if ( $c == 0 ) {
+        echo '<div style="color: #c37f7f;">Nem lett automatikusan még kiküldve.</div>';
+      } else {
+        echo '<div style="color: #ff7635;"><strong>'.$c.' db</strong> automatikus kiküldés elküldve.</div>';
+        $qry = "SELECT SUM(recepients) FROM {$tbl} WHERE item_id = {$post_id}";
+        $cs = $wpdb->get_var($qry);
+        echo '<div style="font-size: 0.65rem;">Összesen <strong>'.number_format($cs, 0, '', ' ').' db</strong> kimenő levél.</div>';
+      }
+    }
   }
 
   public function settings_admin_menu()
@@ -28,7 +58,7 @@ class WGRSSMailer_Settings
         'manage_options',
         'wgrss-settings',
         array($this, 'wgrss_settings_page'),
-        '',
+        WGRSS_DIR_URL . 'wg-ico.png',
         81
     );
     add_submenu_page(
@@ -117,10 +147,8 @@ class WGRSSMailer_Settings
 
   public function wgrss_settings_page()
   {
-
     $mailer = new AutomationWG();
     $list = $mailer->getList();
-
 
     require_once WGRSS_TEMPLATES . "admin-settings.php";
   }
@@ -142,9 +170,8 @@ class WGRSSMailer_Settings
 
   public function sanitize( $input )
   {
-      $input = sanitize_text_field($input);
-
-      return $input;
+    $input = sanitize_text_field($input);
+    return $input;
   }
 
   public function __destruct()

@@ -1,14 +1,22 @@
 <?php
+
 class AutomationWG
 {
+  public $wg;
+  function __construct( $arr = array() )
+  {
+    $this->wg = $arr['wg'];
+  }
+
   public function startWatch()
   {
-    add_action('save_post', array($this, 'watch_save_post'),10, 3);
+    add_action('save_post', array($this, 'watch_save_post'), 10, 3);
   }
 
   public function watch_save_post( $post_id, $post, $update )
   {
     if ( wp_is_post_revision( $post_id ) ) {  return;  }
+    if ( !$this->wg ) { return; }
 
     $post_categories = (array)$_POST['post_category'];
 
@@ -44,7 +52,10 @@ class AutomationWG
     global $wpdb, $table_prefix;
     $wgsuccess = false;
 
-    // TODO: Ide kell majd a WG api kiküldője
+    $wg_group_id = $auto_config['wg_group_id'];
+    $wg_mail_id = $auto_config['wg_mail_id'];
+
+    $wgsuccess = $this->wg->sending( $wg_group_id, $wg_mail_id, $auto_config );
 
     if ( $wgsuccess ) {
       $tbl = $table_prefix.WGRSS_DB_PREFIX.'sended';
@@ -52,7 +63,8 @@ class AutomationWG
         $tbl,
         array(
           'config_id' => $auto_config['ID'],
-          'item_id' => $post_id
+          'item_id' => $post_id,
+          'recepients' => $wgsuccess
         )
       );
     }
@@ -118,5 +130,10 @@ class AutomationWG
     }
 
     return $data;
+  }
+
+  public function __destruct()
+  {
+    $this->wg = null;
   }
 }

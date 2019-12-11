@@ -46,7 +46,7 @@
   <h2>Webgalamb kapcsolat beállítások</h2>
   A webgalamb szoftvernek azon a szerveren kell telepítve lennie, melyen a jelenlegi weboldal is található!
   <?php if ($this->wg->wgdberror): ?>
-  <div class="notice error">Wegbalamb adatbázis csatlakozási hiba: <strong><?=$this->wg->wgdberror?></strong></div>
+  <div class="notice error"><p>Wegbalamb adatbázis csatlakozási hiba: <strong><?=$this->wg->wgdberror?></strong></p></div>
   <?php endif; ?>
   <form class="" action="options.php" method="post">
     <table class="form-table">
@@ -80,4 +80,8 @@
     <?php settings_fields( 'wgrss-settings' ); ?>
     <?php submit_button('Webgalamb beállítások mentése'); ?>
   </form>
+  <br><br>
+  <div class="" style="font-size: 0.7rem; text-align: right;">
+    Fejlesztette: <a style="text-decoration:none;" href="mailto:info@web-pro.hu">WEBPRO Solutions Bt.</a>
+  </div>
 </div>
