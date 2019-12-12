@@ -115,3 +115,156 @@
     flex-basis: calc(100% / 2);
   }
 }
+
+@media all and (max-width: 1024px)
+{
+  .fusion-mobile-menu-icons a, .fusion-mobile-menu-icons a:after, .fusion-mobile-menu-icons a:before{
+    color: black;
+    cursor: pointer;
+  }
+  .fusion-mobile-menu-design-modern .fusion-mobile-menu-text-align-left .fusion-mobile-nav-item a{
+    height: auto;
+  }
+  .fusion-open-submenu{
+    height: auto;
+    line-height: 35px;
+  }
+  .fusion-header {
+    background-position: 115% center, top center;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button{
+    padding: 8px 13px;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2{
+    margin: 0 0 6px 0 !important;
+    line-height: 1 !important;
+  }
+  .bloglist-holder > .wrapper .cikk{
+    padding: 0 5px;
+  }
+  ajanlatkeres-szalag-holder > .wrapper h2 {
+    font-size: 4vw !important;
+  }
+  .ajanlatkeres-szalag-holder > .wrapper .arrow img {
+    height: 24px;
+  }
+  .szolgaltatas-block-holder.view-of-footer-block > .wrapper > div {
+    //flex-basis: calc(100% / 2) !important;
+  }
+  .fusion-footer footer .fusion-row .fusion-columns .fusion-column{
+    flex-basis: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .ajanlatkeres-szalag-holder > .wrapper h2{
+    font-size: 3vw !important;
+  }
+  footer .fusion-columns a.button{
+    font-size: 1.8vw;
+  }
+  body.single-post main#main {
+    background: #fffcf7;
+    padding: 20px 0 0 0 !important;
+  }
+  .cikksidebar-holder > .wrapper > .header h3{
+    text-align: center;
+    font-size: 4vw !important;
+  }
+  .cikksidebar-holder > .wrapper > .header {
+    padding: 25px 0;
+    margin: 0 !important;
+  }
+  .cikksidebar-holder .simple-sidebar-posts .content .desc{
+    height: auto;
+    overflow: inherit;
+  }
+  .cikksidebar-holder .simple-sidebar-posts > .article + .article {
+    margin: 5px 0 0 0;
+  }
+  .tag-filter > .wrapper .tags > .tag {
+    flex-basis: calc(100% / 3);
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks{
+    width: 100%;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper{
+    width: 100%;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks.group-page {
+    margin-bottom: -2.4rem;
+    margin-top: 1.1rem;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .title h2{
+    font-size: 1.4vw !important;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .ico img{
+    width: 28%;
+  }
+  .calculator-holder > .wrapper{
+    width: 100%;
+  }
+  .calculator-holder .action-line button{
+    font-size: 1.8vw !important;
+  }
+  .calculator-holder > .wrapper > div {
+    flex-basis: 100% !important;
+    padding: 10px 25px !important;
+  }
+
+  body.page:not(.home) .page-custom-title,
+  .szolgaltatas-block-holder.view-of-big.autopager,
+  .szolgaltatas-block-holder.view-of-big.autopager > .wrapper{
+    width: 100%;
+  }
+  #content.full-width{
+    order: 0;
+  }
+  .bloglist-holder.view-of-archive > .wrapper > div {
+    flex-basis: calc(100% / 2);
+  }
+}
+@media all and (max-width: 760px)
+{
+  .bloglist-holder > .wrapper > div,
+  .bloglist-holder.view-of-archive > .wrapper > div {
+    flex-basis: calc(100% / 1);
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block{
+    flex-basis: calc(100% / 2) !important;
+    padding: 1px;
+  }
+  .bloglist-holder .more {
+    position: relative;
+    margin: 0 0 5px 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    a{
+      float: none;
+      text-align: center;
+    }
+  }
+  .post-content h1 {
+    line-height: 1;
+    margin: 0 0 4px 0;
+  }
+  .fusion-button.button-flat {
+    font-size: 4vw !important;
+  }
+  .ajanlatkeres-szalag-holder > .wrapper > div{
+    display: none;
+  }
+  .ajanlatkeres-szalag-holder > .wrapper > .ajbutton{
+    display: block;
+    flex-basis: 100%;
+  }
+  .footer-menu .menu-lablec-container li{
+    flex-basis: 100%;
+    a{
+      text-align: center;
+    }
+  }
+  .szolgaltatas-block-holder.view-of-footer-block > .wrapper > div {
+    flex-basis: 50% !important;
+  }
+}

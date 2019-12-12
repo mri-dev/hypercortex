@@ -2114,3 +2114,225 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
     flex-basis: calc(100% / 2);
   }
 }
+@media all and (max-width: 1024px) {
+  /* line 121, sass/_responsive.scss */
+  .fusion-mobile-menu-icons a, .fusion-mobile-menu-icons a:after, .fusion-mobile-menu-icons a:before {
+    color: black;
+    cursor: pointer;
+  }
+
+  /* line 125, sass/_responsive.scss */
+  .fusion-mobile-menu-design-modern .fusion-mobile-menu-text-align-left .fusion-mobile-nav-item a {
+    height: auto;
+  }
+
+  /* line 128, sass/_responsive.scss */
+  .fusion-open-submenu {
+    height: auto;
+    line-height: 35px;
+  }
+
+  /* line 132, sass/_responsive.scss */
+  .fusion-header {
+    background-position: 115% center, top center;
+  }
+
+  /* line 135, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button {
+    padding: 8px 13px;
+  }
+
+  /* line 138, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2 {
+    margin: 0 0 6px 0 !important;
+    line-height: 1 !important;
+  }
+
+  /* line 142, sass/_responsive.scss */
+  .bloglist-holder > .wrapper .cikk {
+    padding: 0 5px;
+  }
+
+  /* line 145, sass/_responsive.scss */
+  ajanlatkeres-szalag-holder > .wrapper h2 {
+    font-size: 4vw !important;
+  }
+
+  /* line 148, sass/_responsive.scss */
+  .ajanlatkeres-szalag-holder > .wrapper .arrow img {
+    height: 24px;
+  }
+
+  /* line 154, sass/_responsive.scss */
+  .fusion-footer footer .fusion-row .fusion-columns .fusion-column {
+    flex-basis: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* line 159, sass/_responsive.scss */
+  .ajanlatkeres-szalag-holder > .wrapper h2 {
+    font-size: 3vw !important;
+  }
+
+  /* line 162, sass/_responsive.scss */
+  footer .fusion-columns a.button {
+    font-size: 1.8vw;
+  }
+
+  /* line 165, sass/_responsive.scss */
+  body.single-post main#main {
+    background: #fffcf7;
+    padding: 20px 0 0 0 !important;
+  }
+
+  /* line 169, sass/_responsive.scss */
+  .cikksidebar-holder > .wrapper > .header h3 {
+    text-align: center;
+    font-size: 4vw !important;
+  }
+
+  /* line 173, sass/_responsive.scss */
+  .cikksidebar-holder > .wrapper > .header {
+    padding: 25px 0;
+    margin: 0 !important;
+  }
+
+  /* line 177, sass/_responsive.scss */
+  .cikksidebar-holder .simple-sidebar-posts .content .desc {
+    height: auto;
+    overflow: inherit;
+  }
+
+  /* line 181, sass/_responsive.scss */
+  .cikksidebar-holder .simple-sidebar-posts > .article + .article {
+    margin: 5px 0 0 0;
+  }
+
+  /* line 184, sass/_responsive.scss */
+  .tag-filter > .wrapper .tags > .tag {
+    flex-basis: calc(100% / 3);
+  }
+
+  /* line 187, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks {
+    width: 100%;
+  }
+
+  /* line 190, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper {
+    width: 100%;
+  }
+
+  /* line 193, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks.group-page {
+    margin-bottom: -2.4rem;
+    margin-top: 1.1rem;
+  }
+
+  /* line 197, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .title h2 {
+    font-size: 1.4vw !important;
+  }
+
+  /* line 200, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .ico img {
+    width: 28%;
+  }
+
+  /* line 203, sass/_responsive.scss */
+  .calculator-holder > .wrapper {
+    width: 100%;
+  }
+
+  /* line 206, sass/_responsive.scss */
+  .calculator-holder .action-line button {
+    font-size: 1.8vw !important;
+  }
+
+  /* line 209, sass/_responsive.scss */
+  .calculator-holder > .wrapper > div {
+    flex-basis: 100% !important;
+    padding: 10px 25px !important;
+  }
+
+  /* line 216, sass/_responsive.scss */
+  body.page:not(.home) .page-custom-title,
+  .szolgaltatas-block-holder.view-of-big.autopager,
+  .szolgaltatas-block-holder.view-of-big.autopager > .wrapper {
+    width: 100%;
+  }
+
+  /* line 219, sass/_responsive.scss */
+  #content.full-width {
+    order: 0;
+  }
+
+  /* line 222, sass/_responsive.scss */
+  .bloglist-holder.view-of-archive > .wrapper > div {
+    flex-basis: calc(100% / 2);
+  }
+}
+@media all and (max-width: 760px) {
+  /* line 229, sass/_responsive.scss */
+  .bloglist-holder > .wrapper > div,
+  .bloglist-holder.view-of-archive > .wrapper > div {
+    flex-basis: calc(100% / 1);
+  }
+
+  /* line 232, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block {
+    flex-basis: calc(100% / 2) !important;
+    padding: 1px;
+  }
+
+  /* line 236, sass/_responsive.scss */
+  .bloglist-holder .more {
+    position: relative;
+    margin: 0 0 5px 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+  }
+  /* line 242, sass/_responsive.scss */
+  .bloglist-holder .more a {
+    float: none;
+    text-align: center;
+  }
+
+  /* line 247, sass/_responsive.scss */
+  .post-content h1 {
+    line-height: 1;
+    margin: 0 0 4px 0;
+  }
+
+  /* line 251, sass/_responsive.scss */
+  .fusion-button.button-flat {
+    font-size: 4vw !important;
+  }
+
+  /* line 254, sass/_responsive.scss */
+  .ajanlatkeres-szalag-holder > .wrapper > div {
+    display: none;
+  }
+
+  /* line 257, sass/_responsive.scss */
+  .ajanlatkeres-szalag-holder > .wrapper > .ajbutton {
+    display: block;
+    flex-basis: 100%;
+  }
+
+  /* line 261, sass/_responsive.scss */
+  .footer-menu .menu-lablec-container li {
+    flex-basis: 100%;
+  }
+  /* line 263, sass/_responsive.scss */
+  .footer-menu .menu-lablec-container li a {
+    text-align: center;
+  }
+
+  /* line 267, sass/_responsive.scss */
+  .szolgaltatas-block-holder.view-of-footer-block > .wrapper > div {
+    flex-basis: 50% !important;
+  }
+}
