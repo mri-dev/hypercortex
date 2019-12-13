@@ -41,18 +41,15 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
   	static function plugin_deactivation() {
   		flush_rewrite_rules();
   		delete_option( WGRSS_DB_PREFIX.'active' );
-			delete_option( WGRSS_DB_PREFIX.'wg_db_username');
-			delete_option( WGRSS_DB_PREFIX.'wg_db_name');
-			delete_option( WGRSS_DB_PREFIX.'wg_db_pw');
-			delete_option( WGRSS_DB_PREFIX.'wg_db_prefix');
   	}
 
     function __construct()
     {
-      // code...
+
     }
 
-    public static function instance() {
+    public static function instance()
+		{
       if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WGRSSMailer ) ) {
         self::$instance = new WGRSSMailer;
 
@@ -112,6 +109,7 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
           $sql = "CREATE TABLE `".$wp_track_table."` (
             `ID` int(6) NOT NULL AUTO_INCREMENT,
 						`title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+						`post_types` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
             `category_id` text COLLATE utf8mb4_unicode_ci,
             `wg_group_id` smallint(6) NOT NULL,
             `wg_mail_id` smallint(6) NOT NULL,
@@ -149,7 +147,7 @@ if ( ! class_exists( 'WGRSSMailer' ) ) :
   	}
 
     public function load_textdomain() {
-      load_plugin_textdomain( 'wb-rssautomailer', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+      load_plugin_textdomain( 'wg-automailer', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
     }
   }
 endif;
