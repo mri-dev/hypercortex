@@ -73,6 +73,9 @@
   .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img{
     height: 50px;
   }
+  .szolgaltatas-block-holder.autopager > .wrapper > .block .title{
+    height: 35px !important;
+  }
   .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico{
     margin: 0 0 10px 0;
   }
@@ -234,9 +237,32 @@
   .bloglist-holder.view-of-archive > .wrapper > div {
     flex-basis: calc(100% / 2);
   }
+  .fusion-mobile-nav-item a {
+    color: #ffffff;
+    line-height: 40px;
+    background-color: #b19864;
+    border-color: #886e48;
+    height: 40px;
+    padding: 0 15px !important;
+  }
+  .fusion-mobile-menu-design-modern .fusion-mobile-menu-text-align-left .fusion-open-submenu {
+    padding-right: 10px;
+  }
 }
 @media all and (max-width: 760px)
 {
+  .feliratkozas-holder{
+    width: 100%;
+  }
+  body.page:not(.home) .page-custom-title h1 img.ico{
+    display: block;
+    margin: 0 auto 5px auto;
+  }
+  body.page:not(.home) .page-custom-title h1{
+    height: auto !important;
+    overflow: initial;
+    font-size: 5vw !important;
+  }
   .bloglist-holder > .wrapper > div,
   .bloglist-holder.view-of-archive > .wrapper > div {
     flex-basis: calc(100% / 1);
@@ -244,6 +270,9 @@
   .szolgaltatas-block-holder.view-of-big > .wrapper > .block{
     flex-basis: calc(100% / 2) !important;
     padding: 1px;
+  }
+  .szolgaltatas-block-holder.view-of-big.autopager > .wrapper > .block{
+    flex-basis: calc(100% / 1) !important;
   }
   .bloglist-holder .more {
     position: relative;
@@ -269,6 +298,7 @@
   .ajanlatkeres-szalag-holder > .wrapper > .ajbutton{
     display: block;
     flex-basis: 100%;
+    padding: 0;
   }
   .footer-menu .menu-lablec-container li{
     flex-basis: 100%;
@@ -343,7 +373,7 @@
     width: 55px;
     height: 42px !important;
     max-height: 42px !important;
-    background: black;
+    background: #c9b07d;
   }
   .fusion-mobile-menu-icons a{
     height: 42px !important;
@@ -400,5 +430,102 @@
   .tag-filter > .wrapper .tags > .tag > .wrap{
     height: 100%;
     position: relative;
+  }
+  .szolgaltatas-block-holder.autopager > .wrapper > .block > .wrapper .inside{
+    position: relative;
+    top: inherit;
+    left: inherit;
+    width: 100%;
+    height: 100%;
+    transform: initial;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+
+    .ico{
+      flex-basis: 50px;
+      margin: 0 !important;
+    }
+    .title{
+      text-align: left;
+      height: auto !important;
+      flex: 1;
+      h2{
+        line-height: 1;
+        margin: 0 !important;
+      }
+    }
+  }
+  .szolgaltatas-block-holder.view-of-big{
+    margin-bottom: 25px;
+  }
+  .szolgaltatas-block-holder.view-of-big.autopager:after{
+    bottom: 0;
+  }
+  .szolgaltatas-block-holder.autopager > .wrapper > .block > .wrapper{
+    height: auto !important;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks{
+    margin-top: 25px;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block > .wrapper{
+    height: auto !important
+  }
+  .calculator-holder .inputs .line > div{
+    flex-basis: 100% !important;
+  }
+  .calculator-holder .action-line button{
+    font-size: 4vw !important;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block > .wrapper .inside{
+    position: relative;
+    top: inherit;
+    left: inherit;
+    width: 100%;
+    height: 100%;
+    transform: initial;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+
+    .ico{
+      flex-basis: 50px;
+      margin: 0 !important;
+      text-align: center;
+    }
+    .title{
+      height: auto !important;
+      margin: 0 !important;
+      flex: 1;
+      text-align: left;
+      h2{
+        margin: 0 !important;
+        font-size: 4vw !important;
+      }
+    }
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block{
+    flex-basis: calc(100% / 1);
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .ico img{
+    width: 80%;
+    margin: 0 auto;
+  }
+  .calculator-holder table.result-table{
+    tr, td{
+      display: block;
+      width: 100%;
+    }
+    td{
+      background: white !important;
+    }
+    td.h{
+      font-size: 4vw !important;
+      text-align: center;
+      background: #fbfbfb !important;
+    }
   }
 }

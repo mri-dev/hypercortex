@@ -16,6 +16,8 @@ class AutomationWG
   public function watch_save_post( $post_id, $post, $update )
   {
     if ( wp_is_post_revision( $post_id ) ) {  return;  }
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if( 'auto-draft' === $post->post_status ) return;
     if ( !$this->wg ) { return; }
 
     $post_type = $post->post_type;
