@@ -20,7 +20,27 @@
           infinite: true,
           slidesToShow: 6,
           slidesToScroll: 1,
-          arrows: true
+          arrows: true,
+          responsive: [
+           {
+             breakpoint: 1100,
+             settings: {
+               slidesToShow: 4
+             }
+           },
+           {
+             breakpoint: 768,
+             settings: {
+               slidesToShow: 3,
+             }
+           },
+           {
+             breakpoint: 490,
+             settings: {
+               slidesToShow: 2,
+             }
+           }
+         ]
         });
       });
     })(jQuery);

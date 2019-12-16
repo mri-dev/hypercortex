@@ -1,3 +1,270 @@
-@media all and (max-width: 1000px) {
+@media all and (max-width: 1450px)
+{
+  .fusion-logo img{
+    margin-left: -85px;
+  }
+}
+@media all and (max-width: 1280px)
+{
+  .fusion-logo img{
+    margin-left: -47px;
+    max-height: 130px !important;
+  }
+  .fusion-header{
+    background-position: 92% center, top center;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2{
+    font-size: 0.95rem !important;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button{
+    font-size: 0.78rem !important;
+  }
+  .fusion-button.button-flat{
+    font-size: 1vw !important;
+  }
+  .partnerek{
+    width: 1150px;
+  }
+  .footer-menu .menu-lablec-container{
+    width: 100%;
+  }
+  .footer-menu .menu-lablec-container ul li a{
+    padding: 15px;
+  }
+}
+@media all and (max-width: 1024px)
+{
+  .fusion-logo img{
+    margin-left: -37px;
+    max-height: 105px !important;
+  }
+  .fusion-header {
+    background-position: 60% center, top center;
+  }
+  .fusion-header-v1 .fusion-main-menu > ul > li, .fusion-header-v2 .fusion-main-menu > ul > li, .fusion-header-v3 .fusion-main-menu > ul > li, .fusion-header-v4 .fusion-main-menu > ul > li, .fusion-header-v5 .fusion-main-menu > ul > li, .fusion-header-v7 .fusion-main-menu > ul > li{
+    padding-right: 8px !important;
+  }
+  .fusion-main-menu > ul > li > a {
+    font-size: 0.75rem !important;
+    padding: 0 6px;
+    height: 35px;
+    line-height: 35px;
+  }
+  .fusion-header .searcher {
+    position: absolute;
+    bottom: 25px;
+    right: -5px;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2{
+    font-size: 0.72rem !important;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img{
+    height: 35px;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico{
+    margin: 0 0 10px 0;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn{
+    padding: 0;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button{
+    font-size: 0.6rem !important;
+  }
+  .partnerek{
+    width: 100%;
+  }
+  footer .fusion-columns > .fusion-column h2, footer .fusion-columns > .fusion-column h3{
+    font-size: 1.5rem !important;
+  }
+  .ajanlatkeres-szalag-holder > .wrapper{
+    width:95%;
+  }
+  .custom-templates-sc.view-uzenjen_nekunk a{
+    font-size: 3rem;
+  }
+  .custom-templates-sc.view-uzenjen_nekunk .img{
+    flex-basis: 70px;
+  }
+  .bloglist-holder.view-of-archive{
+    width: 100%;
+  }
+  .bloglist-holder.view-of-archive{
+    padding: 0 25px;
+  }
+  .tag-filter > .wrapper{
+    width: 100%;
+    padding: 0 25px;
+  }
+  .tag-filter > .wrapper .tags > .tag{
+    flex-basis: calc(100% / 4);
+  }
+  body.single-post .single-post-wrapper{
+    width: 100%;
+    max-width: 100%;
+  }
+  .cikksidebar-holder > .wrapper > .header{
+    padding: 0 0 0 15px;
+  }
+  .cikksidebar-holder > .wrapper > .header h3{
+    font-size: 2rem !important;
+  }
+  body.search .bloglist-holder.view-of-archive{
+    padding: 0;
+  }
+  body.search .bloglist-holder.view-of-archive > .wrapper > div{
+    flex-basis: calc(100% / 2);
+  }
+}
 
+@media all and (max-width: 1024px)
+{
+  .fusion-mobile-menu-icons a, .fusion-mobile-menu-icons a:after, .fusion-mobile-menu-icons a:before{
+    color: black;
+    cursor: pointer;
+  }
+  .fusion-mobile-menu-design-modern .fusion-mobile-menu-text-align-left .fusion-mobile-nav-item a{
+    height: auto;
+  }
+  .fusion-open-submenu{
+    height: auto;
+    line-height: 35px;
+  }
+  .fusion-header {
+    background-position: 115% center, top center;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button{
+    padding: 8px 13px;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2{
+    margin: 0 0 6px 0 !important;
+    line-height: 1 !important;
+  }
+  .bloglist-holder > .wrapper .cikk{
+    padding: 0 5px;
+  }
+  ajanlatkeres-szalag-holder > .wrapper h2 {
+    font-size: 4vw !important;
+  }
+  .ajanlatkeres-szalag-holder > .wrapper .arrow img {
+    height: 24px;
+  }
+  .szolgaltatas-block-holder.view-of-footer-block > .wrapper > div {
+    //flex-basis: calc(100% / 2) !important;
+  }
+  .fusion-footer footer .fusion-row .fusion-columns .fusion-column{
+    flex-basis: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .ajanlatkeres-szalag-holder > .wrapper h2{
+    font-size: 3vw !important;
+  }
+  footer .fusion-columns a.button{
+    font-size: 1.8vw;
+  }
+  body.single-post main#main {
+    background: #fffcf7;
+    padding: 20px 0 0 0 !important;
+  }
+  .cikksidebar-holder > .wrapper > .header h3{
+    text-align: center;
+    font-size: 4vw !important;
+  }
+  .cikksidebar-holder > .wrapper > .header {
+    padding: 25px 0;
+    margin: 0 !important;
+  }
+  .cikksidebar-holder .simple-sidebar-posts .content .desc{
+    height: auto;
+    overflow: inherit;
+  }
+  .cikksidebar-holder .simple-sidebar-posts > .article + .article {
+    margin: 5px 0 0 0;
+  }
+  .tag-filter > .wrapper .tags > .tag {
+    flex-basis: calc(100% / 3);
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks{
+    width: 100%;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper{
+    width: 100%;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks.group-page {
+    margin-bottom: -2.4rem;
+    margin-top: 1.1rem;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .title h2{
+    font-size: 1.4vw !important;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .ico img{
+    width: 28%;
+  }
+  .calculator-holder > .wrapper{
+    width: 100%;
+  }
+  .calculator-holder .action-line button{
+    font-size: 1.8vw !important;
+  }
+  .calculator-holder > .wrapper > div {
+    flex-basis: 100% !important;
+    padding: 10px 25px !important;
+  }
+
+  body.page:not(.home) .page-custom-title,
+  .szolgaltatas-block-holder.view-of-big.autopager,
+  .szolgaltatas-block-holder.view-of-big.autopager > .wrapper{
+    width: 100%;
+  }
+  #content.full-width{
+    order: 0;
+  }
+  .bloglist-holder.view-of-archive > .wrapper > div {
+    flex-basis: calc(100% / 2);
+  }
+}
+@media all and (max-width: 760px)
+{
+  .bloglist-holder > .wrapper > div,
+  .bloglist-holder.view-of-archive > .wrapper > div {
+    flex-basis: calc(100% / 1);
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block{
+    flex-basis: calc(100% / 2) !important;
+    padding: 1px;
+  }
+  .bloglist-holder .more {
+    position: relative;
+    margin: 0 0 5px 0;
+    right: 0;
+    top: 0;
+    text-align: center;
+    a{
+      float: none;
+      text-align: center;
+    }
+  }
+  .post-content h1 {
+    line-height: 1;
+    margin: 0 0 4px 0;
+  }
+  .fusion-button.button-flat {
+    font-size: 4vw !important;
+  }
+  .ajanlatkeres-szalag-holder > .wrapper > div{
+    display: none;
+  }
+  .ajanlatkeres-szalag-holder > .wrapper > .ajbutton{
+    display: block;
+    flex-basis: 100%;
+  }
+  .footer-menu .menu-lablec-container li{
+    flex-basis: 100%;
+    a{
+      text-align: center;
+    }
+  }
+  .szolgaltatas-block-holder.view-of-footer-block > .wrapper > div {
+    flex-basis: 50% !important;
+  }
 }
