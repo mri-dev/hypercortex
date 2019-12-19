@@ -17,7 +17,7 @@ class AutomationWG
   {
     if ( wp_is_post_revision( $post_id ) ) {  return;  }
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-    if( 'auto-draft' === $post->post_status ) return;
+    if ( $post->post_status != 'publish' ) return;
     if ( !$this->wg ) { return; }
 
     $post_type = $post->post_type;
@@ -37,7 +37,6 @@ class AutomationWG
 
     $list = $this->getList(array('active' => 1));
     $catok = array();
-
 
     foreach ((array)$list as $li)
     {
