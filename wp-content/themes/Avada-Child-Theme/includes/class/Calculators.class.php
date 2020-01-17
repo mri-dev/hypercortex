@@ -3,7 +3,7 @@ class Calculators
 {
   const DEFAULT_VERSION = 2019;
   public $year_version = 2019;
-  protected $avaiable_versions = array(2019);
+  protected $avaiable_versions = array(2020, 2019);
 
   function __construct()
   {
@@ -93,7 +93,6 @@ class Calculators
       }
     }
 
-
     $pass_data = array();
     $pass_data['metaprefix'] = $this->getVersion(true);
     $pass_data['versions'] = $this->avaiable_versions;
@@ -129,7 +128,6 @@ class Calculators
         $ret['ado_munkaerppiac'] = $find['values']['params']['ado_munkaerppiac'];
 
         // Nettó bér alap vége
-
         $ret['values'] = $values;
 
         return $ret;
@@ -389,8 +387,8 @@ class Calculators
 
         // pre calc
         $munkavallalo_kora = $targyev - $data['szuletesi_ev'];
-        $ev_vegeig_hatralevo_napok = round((strtotime($ev_utolso_napja) - strtotime($szamitas_kezdete)) / (60 * 60 * 24)) + 1;
-        $ev_naptari_napok = round((strtotime($ev_utolso_napja) - strtotime($ev_elso_napja)) / (60 * 60 * 24)) + 1;
+        $ev_vegeig_hatralevo_napok = round((strtotime($ev_utolso_napja) - strtotime($szamitas_kezdete)) / (60 * 60 * 24))+1;
+        $ev_naptari_napok = round((strtotime($ev_utolso_napja) - strtotime($ev_elso_napja)) / (60 * 60 * 24))+1;
         $kor_potszabi = $this->potszabadasgKorSzerint($munkavallalo_kora);
         $gyerek16fiatalabb_potszabi = $this->potszabadasg16evfiatalabbGyerekSzerint((int)$data['gyerek16ev_fiatalabb']);
 
@@ -411,13 +409,13 @@ class Calculators
 
         $ret['szabadsag_eves'] = $szabadsag_eves;
         $szabadsag_idoaranyos = $szabadsag_eves/$ev_naptari_napok*$ev_vegeig_hatralevo_napok;
-        $ret['szabadsag_idoaranyos'] = (int)$szabadsag_idoaranyos;
+        $ret['szabadsag_idoaranyos'] = round($szabadsag_idoaranyos);
 
         $betegszabadsag_eves = $settings['betegszabadsag'];
         $betegszabadsag_idoaranyos = $betegszabadsag_eves/$ev_naptari_napok*$ev_vegeig_hatralevo_napok;
 
         $ret['betegszabadsag_eves'] = $betegszabadsag_eves;
-        $ret['betegszabadsag_idoaranyos'] = (int)$betegszabadsag_idoaranyos;
+        $ret['betegszabadsag_idoaranyos'] = round($betegszabadsag_idoaranyos);
 
 
         $values['targyev'] = $targyev;

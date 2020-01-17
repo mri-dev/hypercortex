@@ -823,7 +823,7 @@ class Calculators
         $gyedgyes_le_nem_toltott_szabadsag = $gyedgyes_idejere_jaro_szabadsag + $gyedgyes_szules_eveben_igenybe_vett_szabadsag;
 
         // összes
-        $osszes_szabadsag = $le_nem_toltott_szabadsag + $csed_idejere_jaro_szabadsag + $gyedgyes_le_nem_toltott_szabadsag;
+        $osszes_szabadsag = $le_nem_toltott_szabadsag + $csed_idejere_jaro_szabadsag + $gyedgyes_idejere_jaro_szabadsag;
 
         $ret['szules_eveben_szabadsag'] = $alap_szules_eveben_jaro_szabadsag;
         $ret['szulesig_idoaranyos_szabadsag'] = $szulesig_idoaranyos_szabadsag;
