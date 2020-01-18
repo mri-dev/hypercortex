@@ -2,17 +2,19 @@
   <div class="inputs">
     <div class="header">Osztalékadó kalkulátor</div>
 
-      <div class="version-changer">
-        <div class="wrapper">
-          <div class="" ng-repeat="ver in settings.versions">
-            <div class="wrap">
-              <input type="radio" id="ver_v{{ver}}" ng-value="ver" ng-model="form.version"> <label title="Számolás {{ver}}. évi jogszabályok alapján." for="ver_v{{ver}}">{{ver}}</label>
+    <div class="inp-body">
+
+
+        <div class="version-changer">
+          <div class="wrapper">
+            <div class="" ng-repeat="ver in settings.versions">
+              <div class="wrap">
+                <input type="radio" id="ver_v{{ver}}" ng-value="ver" ng-model="form.version"> <label title="Számolás {{ver}}. évi jogszabályok alapján." for="ver_v{{ver}}">{{ver}}</label>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      
-    <div class="inp-body">
+        
       <div class="line" ng-class="{missing:missing.indexOf('osztalek_kifizetes')!==-1, error:error_elements['osztalek_kifizetes']}">
         <div class="head">
           Osztalék kifizetését tervezi *
