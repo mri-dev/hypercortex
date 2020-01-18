@@ -16,7 +16,6 @@ define('CAPTCHA_SECRET_KEY', '6LeGfsEUAAAAAOKxmdJ8b_JSYlI5Wv0JmA8dEB--');
 
 // Includes
 require_once "includes/include.php";
-
 $app_settings = new Setup_General_Settings();
 
 function get_site_title( $site = '' )
@@ -372,6 +371,7 @@ function ajax_requests()
   $ajax = new AjaxRequests();
   $ajax->contact_form();
   $ajax->calc_api_interface();
+  $ajax->calc_settings();
 }
 add_action( 'init', 'ajax_requests' );
 

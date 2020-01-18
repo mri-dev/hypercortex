@@ -2,6 +2,29 @@
   <div class="inputs">
     <div class="header">Bruttó bér</div>
     <div class="inp-body">
+
+      <div class="version-changer">
+        <div class="wrapper">
+          <div class="" ng-repeat="ver in settings.versions">
+            <div class="wrap">
+              <input type="radio" id="ver_v{{ver}}" ng-value="ver" ng-model="form.version"> <label title="Számolás {{ver}}. évi jogszabályok alapján." for="ver_v{{ver}}">{{ver}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="line" ng-class="{missing:missing.indexOf('anyak_4vagytobbgyermek')!==-1, error:error_elements['anyak_4vagytobbgyermek']}">
+        <div class="head">
+          A munkavállaló négy vagy több gyermeket nevelő anyák kedvezményére jogosult
+          <div class="error-hint" ng-if="error_elements.indexOf('anyak_4vagytobbgyermek')!==-1">{{error_elements['anyak_4vagytobbgyermek']}}</div>
+        </div>
+        <div class="val">
+          <div class="inp-wrapper select-wrapper">
+            <select class="" ng-model="form.anyak_4vagytobbgyermek" ng-options="item for item in settings.select_yesno"></select>
+          </div>
+        </div>
+      </div>
+
       <div class="line" ng-class="{missing:missing.indexOf('csaladkedvezmenyre_jogosult')!==-1, error:error_elements['csaladkedvezmenyre_jogosult']}">
         <div class="head">
           Családi kedvezményre jogosult *
@@ -87,6 +110,9 @@
     <div class="loader" ng-if="loading">Eredmény kiértékelése folyamatban...</div>
     <div class="error-msg" ng-if="error" ng-bind-html="error|unsafe"></div>
     <div class="result-body" ng-if="loaded && result!==false">
+      <div class="result-jog-text">
+        Az eredmény kiszámítása a(z) {{form.version}}. évi jogszabályok alkalmazásával történt.
+      </div>
       <table class="result-table">
         <tbody>
           <tr class="hl">

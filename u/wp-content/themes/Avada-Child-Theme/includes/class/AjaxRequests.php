@@ -24,34 +24,6 @@ class AjaxRequests
     add_action( 'wp_ajax_nopriv_'.__FUNCTION__, array( $this, 'CalcAPIInterface'));
   }
 
-  public function calc_settings()
-  {
-    add_action( 'wp_ajax_'.__FUNCTION__, array( $this, 'CalcSettings'));
-    add_action( 'wp_ajax_nopriv_'.__FUNCTION__, array( $this, 'CalcSettings'));
-  }
-
-  public function CalcSettings()
-  {
-    extract($_POST);
-    $return = array(
-      'error' => 0,
-      'msg'   => '',
-      'missing_elements' => [],
-      'error_elements' => [],
-      'missing' => 0,
-      'passed_params' => false
-    );
-    $return['passed_params'] = $_POST;
-    $inputs = $_POST['input'];
-
-    $calculators = new Calculators();
-
-    $result = $calculators->getSettings();
-
-    $return['data'] = $result;
-    $this->returnJSON($return);
-  }
-
   public function CalcAPIInterface()
   {
     extract($_POST);
@@ -66,7 +38,7 @@ class AjaxRequests
     $return['passed_params'] = $_POST;
     $inputs = $_POST['input'];
 
-    $calculators = new Calculators( $inputs['version'] );
+    $calculators = new Calculators();
 
     switch ( $calculator )
     {
@@ -107,7 +79,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }
@@ -153,7 +125,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }
@@ -202,7 +174,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }
@@ -252,7 +224,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }
@@ -295,7 +267,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }
@@ -343,7 +315,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }
@@ -416,7 +388,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }
@@ -455,7 +427,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }
@@ -499,7 +471,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }
@@ -561,7 +533,7 @@ class AjaxRequests
         }
 
         if ($return['error'] == 0) {
-          $result = $calculators->calc( $calculator, $inputs );
+          $result = $calculators->calculate( $calculator, $inputs );
           $return['data'] = $result;
           $this->returnJSON($return);
         }

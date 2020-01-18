@@ -11,12 +11,11 @@ define('FB_APP_ID', '1900170110285208');
 define('METAKEY_PREFIX', 'hc_'); // Textdomain
 define('DEFAULT_LANGUAGE', 'hu_HU');
 define('TD', 'buso');
-define('CAPTCHA_SITE_KEY', '6LceE7UUAAAAAMIjeQCZzP8biZQ1kRETBLdmaQ9O');
-define('CAPTCHA_SECRET_KEY', '6LceE7UUAAAAACVjjUMb-tGwrzouUsZuEJt1Ey01');
+define('CAPTCHA_SITE_KEY', '6LeGfsEUAAAAAHUc28uWCC24RdXyfw8LSU55pEEG');
+define('CAPTCHA_SECRET_KEY', '6LeGfsEUAAAAAOKxmdJ8b_JSYlI5Wv0JmA8dEB--');
 
 // Includes
 require_once "includes/include.php";
-
 $app_settings = new Setup_General_Settings();
 
 function get_site_title( $site = '' )
@@ -29,6 +28,24 @@ function get_site_title( $site = '' )
 
   return $title;
 }
+
+function mailer_config(PHPMailer $phpmailer)
+{
+  if ( ! is_object( $phpmailer ) ) {
+		$phpmailer = (object) $phpmailer;
+	}
+
+	$phpmailer->Mailer     = 'smtp';
+	$phpmailer->Host       = SMTP_HOST;
+	$phpmailer->SMTPAuth   = SMTP_AUTH;
+	$phpmailer->Port       = SMTP_PORT;
+	$phpmailer->Username   = SMTP_USER;
+	$phpmailer->Password   = SMTP_PASS;
+	$phpmailer->SMTPSecure = SMTP_SECURE;
+	$phpmailer->From       = SMTP_FROM;
+	$phpmailer->FromName   = SMTP_NAME;
+}
+add_action( 'phpmailer_init', 'mailer_config', 10, 1);
 
 function get_languages()
 {
@@ -245,9 +262,14 @@ function rd_init()
 {
   date_default_timezone_set('Europe/Budapest');
   setlocale(LC_TIME, "hu_HU");
+
   add_rewrite_rule('^jelentkezes/([0-9]+)/?', 'index.php?custom_page=jelentkezes&ac_id=$matches[1]', 'top');
   create_custom_posttypes();
   add_post_type_support( 'page', 'excerpt' );
+
+  // Kalkulátor admin settings
+  $calculator = new Calculators();
+  $calculator->adminSettings();
 }
 add_action('init', 'rd_init');
 
@@ -256,6 +278,14 @@ function app_query_vars($aVars) {
   return $aVars;
 }
 add_filter('query_vars', 'app_query_vars');
+
+function prepost_limit_change( $query ){
+    if( !is_admin() && $query->is_main_query() && $query->is_category() ){
+      $query->set( 'posts_per_page', 8 );
+    }
+    return $query;
+}
+add_action( 'pre_get_posts', 'prepost_limit_change', 999 );
 
 function create_custom_posttypes()
 {

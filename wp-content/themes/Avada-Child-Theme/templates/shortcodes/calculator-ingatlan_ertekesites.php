@@ -2,6 +2,17 @@
   <div class="inputs">
     <div class="header">Ingatlan értékesítés</div>
     <div class="inp-body">
+
+      <div class="version-changer">
+        <div class="wrapper">
+          <div class="" ng-repeat="ver in settings.versions">
+            <div class="wrap">
+              <input type="radio" id="ver_v{{ver}}" ng-value="ver" ng-model="form.version"> <label title="Számolás {{ver}}. évi jogszabályok alapján." for="ver_v{{ver}}">{{ver}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div class="line" ng-class="{missing:missing.indexOf('atruhazas_eve')!==-1, error:error_elements['atruhazas_eve']}">
         <div class="head">
           Ingatlan ártuházásának éve *
@@ -103,6 +114,9 @@
     <div class="loader" ng-if="loading">Eredmény kiértékelése folyamatban...</div>
     <div class="error-msg" ng-if="error" ng-bind-html="error|unsafe"></div>
     <div class="result-body" ng-if="loaded && result!==false">
+      <div class="result-jog-text">
+        Az eredmény kiszámítása a(z) {{form.version}}. évi jogszabályok alkalmazásával történt.
+      </div>
       <table class="result-table">
         <tbody>
           <tr class="sm">

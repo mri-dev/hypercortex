@@ -2,6 +2,17 @@
   <div class="inputs">
     <div class="header">Teljes bérköltség</div>
     <div class="inp-body">
+
+      <div class="version-changer">
+        <div class="wrapper">
+          <div class="" ng-repeat="ver in settings.versions">
+            <div class="wrap">
+              <input type="radio" id="ver_v{{ver}}" ng-value="ver" ng-model="form.version"> <label title="Számolás {{ver}}. évi jogszabályok alapján." for="ver_v{{ver}}">{{ver}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="line" ng-class="{missing:missing.indexOf('brutto_ber')!==-1, error:error_elements['brutto_ber']}">
         <div class="head">
           Bruttó havi bér (Ft) *
@@ -10,6 +21,46 @@
         <div class="val">
           <div class="inp-wrapper">
             <input type="text" ng-model="form.brutto_ber" input-thousand-separator="currency">
+          </div>
+        </div>
+      </div>
+
+      <div class="line" ng-class="{missing:missing.indexOf('ceg_kisvallalati_ado_alany')!==-1, error:error_elements['ceg_kisvallalati_ado_alany']}">
+        <div class="head">
+          A cég Kisvállalati adó (KIVA) alanya? *
+          <div class="error-hint" ng-if="error_elements.indexOf('ceg_kisvallalati_ado_alany')!==-1">{{error_elements['ceg_kisvallalati_ado_alany']}}</div>
+        </div>
+        <div class="val">
+          <div class="inp-wrapper select-wrapper">
+            <select class="" ng-model="form.ceg_kisvallalati_ado_alany" ng-options="item for item in settings.select_yesno"></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="line two-line" ng-class="{missing:missing.indexOf('munkavallalo_kedvezmeny')!==-1, error:error_elements['munkavallalo_kedvezmeny']}">
+        <div class="head">
+          A munkavállaló után a vállalkozás jogosult kedvezményre? *
+          <div class="error-hint" ng-if="error_elements.indexOf('munkavallalo_kedvezmeny')!==-1">{{error_elements['munkavallalo_kedvezmeny']}}</div>
+        </div>
+        <div class="val">
+          <div class="inp-wrapper select-wrapper">
+            <select class="" ng-model="form.munkavallalo_kedvezmeny">
+              <?php foreach ((array)$settings['forms']['munkavallalo_kedvezmenyek'] as $i => $kedv): ?>
+              <option value="<?=$i?>" ng-selected="<?=$i?>==0"><?=$kedv['title']?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="line" ng-class="{missing:missing.indexOf('anyak_4vagytobbgyermek')!==-1, error:error_elements['anyak_4vagytobbgyermek']}">
+        <div class="head">
+          A munkavállaló négy vagy több gyermeket nevelő anyák kedvezményére jogosult
+          <div class="error-hint" ng-if="error_elements.indexOf('anyak_4vagytobbgyermek')!==-1">{{error_elements['anyak_4vagytobbgyermek']}}</div>
+        </div>
+        <div class="val">
+          <div class="inp-wrapper select-wrapper">
+            <select class="" ng-model="form.anyak_4vagytobbgyermek" ng-options="item for item in settings.select_yesno"></select>
           </div>
         </div>
       </div>
@@ -74,34 +125,6 @@
         </div>
       </div>
 
-      <div class="line" ng-class="{missing:missing.indexOf('ceg_kisvallalati_ado_alany')!==-1, error:error_elements['ceg_kisvallalati_ado_alany']}">
-        <div class="head">
-          A cég Kisvállalati adó alanya? *
-          <div class="error-hint" ng-if="error_elements.indexOf('ceg_kisvallalati_ado_alany')!==-1">{{error_elements['ceg_kisvallalati_ado_alany']}}</div>
-        </div>
-        <div class="val">
-          <div class="inp-wrapper select-wrapper">
-            <select class="" ng-model="form.ceg_kisvallalati_ado_alany" ng-options="item for item in settings.select_yesno"></select>
-          </div>
-        </div>
-      </div>
-
-      <div class="line two-line" ng-class="{missing:missing.indexOf('munkavallalo_kedvezmeny')!==-1, error:error_elements['munkavallalo_kedvezmeny']}">
-        <div class="head">
-          A munkavállaló után a vállalkozás jogosult kedvezményre? *
-          <div class="error-hint" ng-if="error_elements.indexOf('munkavallalo_kedvezmeny')!==-1">{{error_elements['munkavallalo_kedvezmeny']}}</div>
-        </div>
-        <div class="val">
-          <div class="inp-wrapper select-wrapper">
-            <select class="" ng-model="form.munkavallalo_kedvezmeny">
-              <?php foreach ((array)$settings['forms']['munkavallalo_kedvezmenyek'] as $i => $kedv): ?>
-              <option value="<?=$i?>" ng-selected="<?=$i?>==0"><?=$kedv['title']?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-        </div>
-      </div>
-
       <div class="line action-line" ng-if="!loading">
         <div class="val">
           <button type="button" ng-click="calculate('<?=$view?>')" name="button"><?=__('Kalkuláció indítása', 'hc')?></button>
@@ -115,6 +138,9 @@
     <div class="loader" ng-if="loading">Eredmény kiértékelése folyamatban...</div>
     <div class="error-msg" ng-if="error" ng-bind-html="error|unsafe"></div>
     <div class="result-body" ng-if="loaded && result!==false">
+      <div class="result-jog-text">
+        Az eredmény kiszámítása a(z) {{form.version}}. évi jogszabályok alkalmazásával történt.
+      </div>
       <table class="result-table">
         <tbody>
           <tr>
@@ -154,23 +180,23 @@
               Cég által fizetendő költségek
             </td>
           </tr>
-          <tr ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
+          <tr ng-if="result.values.kiva_adoalany=='Nem'" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szociális hozzájárulási adó</td>
             <td class="v">+{{result.ado_szocialis_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
+          <tr ng-if="result.values.kiva_adoalany=='Nem'" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szakképzési hozzájárulás</td>
             <td class="v">+{{result.ado_szakkepzesi_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-class="{lt: result.values.kiva_adoalany=='Nem'}">
+          <tr ng-if="result.values.kiva_adoalany=='Igen'" ng-class="{lt: result.values.kiva_adoalany=='Nem'}">
             <td class="h">Fizetendő kisvállalati adó</td>
             <td class="v">+{{result.ado_kisvallalati|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-class="{hl: result.values.kiva_adoalany=='Nem'}">
+          <tr ng-if="result.values.kiva_adoalany=='Nem'" ng-class="{hl: result.values.kiva_adoalany=='Nem'}">
             <td class="h"><strong>Teljes bérköltség nem KIVA alany cég esetén</strong></td>
             <td class="v">{{result.berkoltseg_nem_KIVA|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-class="{hl: result.values.kiva_adoalany=='Igen'}">
+          <tr ng-if="result.values.kiva_adoalany=='Igen'" ng-class="{hl: result.values.kiva_adoalany=='Igen'}">
             <td class="h"><strong>Teljes bérköltség KIVA alany cég esetén</strong></td>
             <td class="v">{{result.berkoltseg_KIVA|cash:'Ft':''}}</td>
           </tr>

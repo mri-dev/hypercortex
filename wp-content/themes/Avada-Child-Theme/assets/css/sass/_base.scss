@@ -1201,6 +1201,45 @@ footer .fusion-columns{
   background-position: center top;
   background-repeat: no-repeat;
 
+  .version-changer{
+    position: absolute;
+    top: -44px;
+    left: 0;
+    & > .wrapper{
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+
+      & > div {
+        padding: 4px;
+        .wrap {
+
+          input[type=radio]{
+            display: none;
+          }
+
+          label {
+            font-size: 1rem;
+            padding: 5px 10px;
+            display: block;
+            position: relative;
+            background: #cec1ae;
+            color: #f0eadd;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+          }
+          input[type=radio]:checked + label{
+            background: #50120f !important;
+            color: #fffbfb !important;
+            font-size: 1.05rem;
+          }
+        }
+      }
+    }
+  }
+
   &.ng-scope{
     display: block;
   }
@@ -1247,7 +1286,10 @@ footer .fusion-columns{
     }
 
     & > .inputs .inp-body{
+      border-radius: 5px;
+      margin-top: 50px;
       border: 5px solid #cec1ae;
+      position: relative;
     }
 
     & > .inputs,
@@ -1416,7 +1458,15 @@ footer .fusion-columns{
     }
   }
 
+  .result-jog-text{
+    text-align: center;
+    font-size: 0.7rem;
+    font-style: italic;
+    color: #776850;
+    margin: 0 0 14px 0;
+  }
   table.result-table{
+    border-radius: 5px;
     background: white;
     border: 5px solid #cec1ae;
     border-collapse: collapse;
