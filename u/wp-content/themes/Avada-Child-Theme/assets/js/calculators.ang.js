@@ -57,6 +57,7 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
 app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $http, $locale)
 {
   $scope.loaded = false;
+  $scope.loaded_calc = '';
   $scope.loading = false;
   $scope.error = false;
   $scope.form = {};
@@ -67,13 +68,14 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
   $locale.NUMBER_FORMATS.GROUP_SEP = ' ';
 
   $scope.init = function( calc ) {
-    $scope.predefineFormSettings(calc);
+    $scope.predefineFormSettings( calc );
   }
 
   $scope.calculate = function( view )
   {
     $scope.loaded = false;
     $scope.loading = true;
+    $scope.loaded_calc = view;
     $scope.missing = [];
     $scope.error_elements = [];
     $scope.error = false;
@@ -147,89 +149,124 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
     });
 	}
 
-  $scope.predefineFormSettings = function( calc ) {
-    switch (calc)
+  $scope.predefineFormSettings = function( calc )
+  {
+    $http({
+			method: 'POST',
+			url: '/wp-admin/admin-ajax.php?action=calc_settings',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			data: jQuery.param({
+			})
+		}).then(function successCallback(r)
     {
-      case 'netto_ber':
-        $scope.settings.select_yesno = $scope.select_yesno();
-        $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
-        $scope.form.frisshazas_jogosult = 'Nem';
-        $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
-      break;
-      case 'teljes_berkoltseg':
-        $scope.settings.select_yesno = $scope.select_yesno();
-        $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
-        $scope.form.frisshazas_jogosult = 'Nem';
-        $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
-        $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
-      break;
-      case 'belepo_szabadsag':
-        $scope.settings.select_yesno = $scope.select_yesno();
-        $scope.form.gyerek16ev_fiatalabb_fogyatekos = 'Nem';
-        $scope.form.megvaltozott_munkakepessegu = 'Nem';
-        $scope.form.athozott_szabadsagok = 0;
-        $scope.form.gyerek16ev_fiatalabb = 0;
-      break;
+      var settings_data = r.data;
 
-      case 'anyak_szabadsaga':
-        $scope.settings.potszabigyermek = $scope.select_potszabigyermek();
-        $scope.settings.select_yesno = $scope.select_yesno();
-        $scope.form.gyerek16ev_fiatalabb_fogyatekos = 'Nem';
-        $scope.form.athozott_szabadsagok = 0;
-        $scope.form.gyerek16ev_fiatalabb = 0;
-        $scope.form.szulev_igenybevett_szabadsag = 0;
-        $scope.form.szul_elott_igenybevett_potszabadsag_gyermek = '0';
+      if ( settings_data.data ) {
+        $scope.settings = settings_data.data;
+        $scope.form.version = parseInt($scope.settings.current_version);
+      }
 
-        //$scope.form.szuletesi_ev = 1990;
+      $scope.$watch('form.version', function(n, o, s) {
+        if (Object.keys(s.result).length !== 0) {
+          s.calculate( s.loaded_calc );
+        }
+      });
 
-      break;
-      case 'ingatlan_ertekesites':
-        //$scope.form.atruhazas_eve = 2019;
-        //$scope.form.szerzes_eve = 2019;
-        //$scope.form.atruhazasbol_bevetel = 0;
-        //$scope.form.megszerzes_osszeg = 0;
-        $scope.form.megszerzes_egyeb_kiadas = 0;
-        $scope.form.erteknovelo_beruhazasok = 0;
-        $scope.form.erteknovelo_beruhazasok_allammegovas = 0;
-        $scope.form.atruhazas_koltsegei = 0;
-      break;
-      case 'osztalekado':
-        $scope.settings.select_yesno = $scope.select_yesno();
-        $scope.form.osztalek_kifizetes = 'Igen';
-        $scope.form.osztalekeloleg_kifizetes = 'Nem';
+      switch (calc)
+      {
+        case 'netto_ber':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
+          $scope.form.frisshazas_jogosult = 'Nem';
+          $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
+          $scope.form.anyak_4vagytobbgyermek = 'Nem';
+        break;
+        case 'teljes_berkoltseg':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
+          $scope.form.frisshazas_jogosult = 'Nem';
+          $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
+          $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
+          $scope.form.anyak_4vagytobbgyermek = 'Nem';
+        break;
+        case 'belepo_szabadsag':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          $scope.form.gyerek16ev_fiatalabb_fogyatekos = 'Nem';
+          $scope.form.megvaltozott_munkakepessegu = 'Nem';
+          $scope.form.athozott_szabadsagok = 0;
+          $scope.form.gyerek16ev_fiatalabb = 0;
+        break;
 
-        $scope.$watch('form.osztalek_kifizetes', function(n, o, s) {
-          if (n == 'Igen' && s.form.osztalekeloleg_kifizetes == 'Igen') {
-            s.form.osztalekeloleg_kifizetes = 'Nem';
-          }
-          if (n == 'Nem' && s.form.osztalekeloleg_kifizetes == 'Nem') {
-            s.form.osztalekeloleg_kifizetes = 'Igen';
-          }
-        });
+        case 'anyak_szabadsaga':
+          $scope.settings.potszabigyermek = $scope.select_potszabigyermek();
+          $scope.settings.select_yesno = $scope.select_yesno();
+          $scope.form.gyerek16ev_fiatalabb_fogyatekos = 'Nem';
+          $scope.form.athozott_szabadsagok = 0;
+          $scope.form.gyerek16ev_fiatalabb = 0;
+          $scope.form.szulev_igenybevett_szabadsag = 0;
+          $scope.form.szul_elott_igenybevett_potszabadsag_gyermek = '0';
 
-        $scope.$watch('form.osztalekeloleg_kifizetes', function(n, o, s) {
-          if (n == 'Igen' && s.form.osztalek_kifizetes == 'Igen') {
-            s.form.osztalek_kifizetes = 'Nem';
-          }
-          if (n == 'Nem' && s.form.osztalek_kifizetes == 'Nem') {
-            s.form.osztalek_kifizetes = 'Igen';
-          }
-        });
-      break;
-      case 'cafeteria':
-        $scope.settings.select_yesno = $scope.select_yesno();
-        $scope.settings.cafateria_jutattasok = $scope.cafateria_jutattasok();
-        $scope.form.ceg_kiva = 'Nem';
-      break;
-      case 'brutto_ber':
-        $scope.settings.select_yesno = $scope.select_yesno();
-        $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
-        $scope.form.frisshazas_jogosult = 'Nem';
-        $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
-      break;
-    }
+          //$scope.form.szuletesi_ev = 1990;
 
-    console.log($scope.form);
+        break;
+        case 'ingatlan_ertekesites':
+          //$scope.form.atruhazas_eve = 2019;
+          //$scope.form.szerzes_eve = 2019;
+          //$scope.form.atruhazasbol_bevetel = 0;
+          //$scope.form.megszerzes_osszeg = 0;
+          $scope.form.megszerzes_egyeb_kiadas = 0;
+          $scope.form.erteknovelo_beruhazasok = 0;
+          $scope.form.erteknovelo_beruhazasok_allammegovas = 0;
+          $scope.form.atruhazas_koltsegei = 0;
+        break;
+        case 'osztalekado':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          $scope.form.osztalek_kifizetes = 'Igen';
+          $scope.form.osztalekeloleg_kifizetes = 'Nem';
+
+          $scope.$watch('form.osztalek_kifizetes', function(n, o, s) {
+            if (n == 'Igen' && s.form.osztalekeloleg_kifizetes == 'Igen') {
+              s.form.osztalekeloleg_kifizetes = 'Nem';
+            }
+            if (n == 'Nem' && s.form.osztalekeloleg_kifizetes == 'Nem') {
+              s.form.osztalekeloleg_kifizetes = 'Igen';
+            }
+          });
+
+          $scope.$watch('form.osztalekeloleg_kifizetes', function(n, o, s) {
+            if (n == 'Igen' && s.form.osztalek_kifizetes == 'Igen') {
+              s.form.osztalek_kifizetes = 'Nem';
+            }
+            if (n == 'Nem' && s.form.osztalek_kifizetes == 'Nem') {
+              s.form.osztalek_kifizetes = 'Igen';
+            }
+          });
+        break;
+        case 'cafeteria':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          $scope.settings.cafateria_jutattasok = $scope.cafateria_jutattasok();
+          $scope.form.ceg_kiva = 'Nem';
+        break;
+        case 'brutto_ber':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
+          $scope.form.frisshazas_jogosult = 'Nem';
+          $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
+          $scope.form.anyak_4vagytobbgyermek = 'Nem';
+        break;
+        case 'cegauto_ado':
+          var xs = 1.34; // 1 kw = 1.34 lóerő
+          $scope.$watch('form.kw', function(n, o, s) {
+            s.form.hp = n * xs;
+          });
+          $scope.$watch('form.hp', function(n, o, s) {
+            s.form.kw = n / xs;
+          });
+        break;
+      }
+
+      console.log($scope.form);
+    }, function errorCallback(response) {});
   }
 
   $scope.select_potszabigyermek = function() {
