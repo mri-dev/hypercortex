@@ -22,6 +22,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="fusion-header-has-flyout-menu-content">
 			<?php endif; ?>
 			<?php avada_logo(); ?>
+			<div class="searcher">
+				<form class="" action="/" method="get">
+					<div class="wrapper">
+						<input type="text" name="s" placeholder="<?=__('Keresés','hc')?>" value="<?=$_GET['s']?>">
+						<input type="submit" name="" value="Mehet">
+					</div>
+				</form>
+			</div>
 			<?php if ( 'flyout' === Avada()->settings->get( 'mobile_menu_design' ) ) : ?>
 				<?php get_template_part( 'templates/menu-mobile-flyout' ); ?>
 			<?php else : ?>

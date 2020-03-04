@@ -28,6 +28,80 @@ h4 { font-size: 1.4rem !important; }
   background-size: contain, cover;
   box-shadow: inset 0 -20px 28px -21px rgba(25, 18, 12, 0.7);
   position: relative;
+
+  .site-buttons {
+    width: 280px;
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    .site{
+      height: 75px;
+      background: white;
+      border: 0.5px solid #b18f2c;
+
+      .inside, a {
+        display: block;
+        height: 100%;
+        position: relative;
+        text-align: center;
+      }
+
+    }
+
+    .site.irisz a {
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ebd491+0,d7ba78+43,d7ba78+61,ebd491+100 */
+background: #ebd491; /* Old browsers */
+background: -moz-linear-gradient(left, #ebd491 0%, #d7ba78 43%, #d7ba78 61%, #ebd491 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #ebd491 0%,#d7ba78 43%,#d7ba78 61%,#ebd491 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #ebd491 0%,#d7ba78 43%,#d7ba78 61%,#ebd491 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebd491', endColorstr='#ebd491',GradientType=1 ); /* IE6-9 */
+
+
+      img {
+        height: 90%;
+        max-height: 90%;
+        width: auto;
+        max-width: initial;
+        margin-top: 4px;
+      }
+    }
+
+    .site.eco a {
+      /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#b49a65+0,eacc8f+43,eacc8f+61,b49a65+100 */
+background: #b49a65; /* Old browsers */
+background: -moz-linear-gradient(left, #b49a65 0%, #eacc8f 43%, #eacc8f 61%, #b49a65 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #b49a65 0%,#eacc8f 43%,#eacc8f 61%,#b49a65 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #b49a65 0%,#eacc8f 43%,#eacc8f 61%,#b49a65 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b49a65', endColorstr='#b49a65',GradientType=1 ); /* IE6-9 */
+
+
+      img {
+        height: 45px;
+        max-height: 45px;
+        width: auto;
+        max-width: initial;
+        margin-top: 15px;
+      }
+    }
+
+    .site:nth-child(1){
+      transform:skewX(-20deg);
+      border-bottom: none !important;
+      .inside {
+        transform:skewX(20deg);
+      }
+    }
+    .site:nth-child(2){
+      transform:skewX(20deg);
+      .inside {
+        transform:skewX(-20deg);
+      }
+    }
+  }
+
   .searcher{
     position: absolute;
     bottom: 25px;

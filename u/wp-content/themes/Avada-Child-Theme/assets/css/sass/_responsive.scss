@@ -34,8 +34,17 @@
 }
 @media all and (max-width: 1024px)
 {
+  .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico img{
+    height: 6vw;
+  }
+  footer .fusion-columns .divider{
+    margin: 25px 0;
+  }
+  .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title h2{
+    font-size: 2vw !important;
+  }
   .fusion-logo img{
-    margin-left: -37px;
+    margin-left: -5px;
     max-height: 105px !important;
   }
   .fusion-header {
@@ -56,10 +65,16 @@
     right: -5px;
   }
   .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2{
-    font-size: 0.72rem !important;
+    font-size: 1.04rem !important;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title{
+    height: 50px;
   }
   .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img{
-    height: 35px;
+    height: 50px;
+  }
+  .szolgaltatas-block-holder.autopager > .wrapper > .block .title{
+    height: 35px !important;
   }
   .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico{
     margin: 0 0 10px 0;
@@ -74,7 +89,7 @@
     width: 100%;
   }
   footer .fusion-columns > .fusion-column h2, footer .fusion-columns > .fusion-column h3{
-    font-size: 1.5rem !important;
+    font-size: 2rem !important;
   }
   .ajanlatkeres-szalag-holder > .wrapper{
     width:95%;
@@ -222,9 +237,32 @@
   .bloglist-holder.view-of-archive > .wrapper > div {
     flex-basis: calc(100% / 2);
   }
+  .fusion-mobile-nav-item a {
+    color: #ffffff;
+    line-height: 40px;
+    background-color: #b19864;
+    border-color: #886e48;
+    height: 40px;
+    padding: 0 15px !important;
+  }
+  .fusion-mobile-menu-design-modern .fusion-mobile-menu-text-align-left .fusion-open-submenu {
+    padding-right: 10px;
+  }
 }
 @media all and (max-width: 760px)
 {
+  .feliratkozas-holder{
+    width: 100%;
+  }
+  body.page:not(.home) .page-custom-title h1 img.ico{
+    display: block;
+    margin: 0 auto 5px auto;
+  }
+  body.page:not(.home) .page-custom-title h1{
+    height: auto !important;
+    overflow: initial;
+    font-size: 5vw !important;
+  }
   .bloglist-holder > .wrapper > div,
   .bloglist-holder.view-of-archive > .wrapper > div {
     flex-basis: calc(100% / 1);
@@ -232,6 +270,9 @@
   .szolgaltatas-block-holder.view-of-big > .wrapper > .block{
     flex-basis: calc(100% / 2) !important;
     padding: 1px;
+  }
+  .szolgaltatas-block-holder.view-of-big.autopager > .wrapper > .block{
+    flex-basis: calc(100% / 1) !important;
   }
   .bloglist-holder .more {
     position: relative;
@@ -257,6 +298,7 @@
   .ajanlatkeres-szalag-holder > .wrapper > .ajbutton{
     display: block;
     flex-basis: 100%;
+    padding: 0;
   }
   .footer-menu .menu-lablec-container li{
     flex-basis: 100%;
@@ -266,5 +308,224 @@
   }
   .szolgaltatas-block-holder.view-of-footer-block > .wrapper > div {
     flex-basis: 50% !important;
+  }
+}
+
+@media all and (max-width: 480px)
+{
+  .szolgaltatas-block-holder.view-of-big{
+    margin-top: 25px;
+  }
+  .fusion-header .searcher{
+    position: relative;
+    left: inherit;
+    right: inherit;
+    top: inherit;
+    bottom: inherit;
+    margin-left: 55px;
+  }
+  .fusion-header .searcher .wrapper input[type=submit],
+  .fusion-header .searcher .wrapper input[type=text]{
+    line-height: 42px;
+    height: 42px !important;
+    max-height: 42px !important;
+  }
+  .fake-arrow-down:after, .fusion-secondary-main-menu:after{
+    bottom: -50px;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title{
+    height: auto;
+    margin: 0 0 4px 0 !important;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2{
+    font-size: 3vw !important;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img{
+    height: 35px;
+  }
+  .bloglist-holder > .wrapper .cikk{
+    padding: 5px;
+  }
+  footer .fusion-columns a.button{
+    font-size: 2.8vw;
+  }
+  .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .ico img {
+    height: auto;
+    width: 33%;
+  }
+  .post-content h1 {
+    line-height: 1;
+    margin: 1rem 0;
+    font-size: 12vw !important;
+  }
+  .grad-button, .grad-button:hover{
+    font-size: 3.2vw !important;
+  }
+  .szolgaltatas-block-holder.view-of-footer-block > .wrapper > .block .title h2{
+    font-size: 4vw !important;
+  }
+  .fusion-mobile-menu-icons{
+    position: absolute;
+    left: 0;
+    top: initial;
+    bottom: 0;
+    display: initial !important;
+    width: 55px;
+    height: 42px !important;
+    max-height: 42px !important;
+    background: #c9b07d;
+  }
+  .fusion-mobile-menu-icons a{
+    height: 42px !important;
+    max-height: 42px !important;
+    width: 100%;
+    float: none;
+    display: block;
+    line-height: 1;
+    text-align: center;
+    margin: 0;
+  }
+  .fusion-mobile-menu-icons a:before{
+    height: 42px;
+    width: 100%;
+    float: none;
+    line-height: 42px;
+    text-align: center;
+    margin: 0 auto;
+    color: white !important;
+  }
+  .fusion-header{
+    background-color: #f9ebbb !important;
+    background-image: none !important;
+    padding: 0px !important;
+  }
+  .fusion-header .searcher .wrapper{
+    border: none;
+    border-top: 1px solid #e0be8c;
+  }
+  .fusion-logo{
+    padding: 3vw 0;
+    float: none  !important;
+    position: relative !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    text-align: center;
+  }
+  .contact-form > .wrapper .flextbl > div{
+    flex-basis: 100% !important;
+  }
+  .contact-form > .wrapper .flextbl > .h{
+    padding: 0 0 8px 0;
+  }
+  .bloglist-holder.view-of-archive {
+    padding: 0 15px;
+    margin: 0;
+  }
+  .tag-filter > .wrapper {
+    padding: 0px 15px;
+  }
+  .tag-filter > .wrapper .tags > .tag{
+    flex-basis: calc(100% / 2);
+  }
+  .tag-filter > .wrapper .tags > .tag > .wrap{
+    height: 100%;
+    position: relative;
+  }
+  .szolgaltatas-block-holder.autopager > .wrapper > .block > .wrapper .inside{
+    position: relative;
+    top: inherit;
+    left: inherit;
+    width: 100%;
+    height: 100%;
+    transform: initial;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+
+    .ico{
+      flex-basis: 50px;
+      margin: 0 !important;
+    }
+    .title{
+      text-align: left;
+      height: auto !important;
+      flex: 1;
+      h2{
+        line-height: 1;
+        margin: 0 !important;
+      }
+    }
+  }
+  .szolgaltatas-block-holder.view-of-big{
+    margin-bottom: 25px;
+  }
+  .szolgaltatas-block-holder.view-of-big.autopager:after{
+    bottom: 0;
+  }
+  .szolgaltatas-block-holder.autopager > .wrapper > .block > .wrapper{
+    height: auto !important;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks{
+    margin-top: 25px;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block > .wrapper{
+    height: auto !important
+  }
+  .calculator-holder .inputs .line > div{
+    flex-basis: 100% !important;
+  }
+  .calculator-holder .action-line button{
+    font-size: 4vw !important;
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block > .wrapper .inside{
+    position: relative;
+    top: inherit;
+    left: inherit;
+    width: 100%;
+    height: 100%;
+    transform: initial;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+
+    .ico{
+      flex-basis: 50px;
+      margin: 0 !important;
+      text-align: center;
+    }
+    .title{
+      height: auto !important;
+      margin: 0 !important;
+      flex: 1;
+      text-align: left;
+      h2{
+        margin: 0 !important;
+        font-size: 4vw !important;
+      }
+    }
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block{
+    flex-basis: calc(100% / 1);
+  }
+  .szolgaltatas-block-holder.view-of-kalkulatorblocks > .wrapper > .block .ico img{
+    width: 80%;
+    margin: 0 auto;
+  }
+  .calculator-holder table.result-table{
+    tr, td{
+      display: block;
+      width: 100%;
+    }
+    td{
+      background: white !important;
+    }
+    td.h{
+      font-size: 4vw !important;
+      text-align: center;
+      background: #fbfbfb !important;
+    }
   }
 }

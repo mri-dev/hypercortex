@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="fusion-header-sticky-height"></div>
 <div class="fusion-sticky-header-wrapper"> <!-- start fusion sticky header wrapper -->
 	<div class="fusion-header">
+		<div class="site-buttons">
+      <div class="site irisz">
+        <a title="Írisz Office Zrt. - Adótervező és számviteli szolgáltató" href="//www.iriszoffice.hu" target="_blank"><div class="inside"><img retina_logo_url="<?=IMG?>/iriszoff-header-badge-x2.png" srcset="<?=IMG?>/iriszoff-header-badge.png 1x, <?=IMG?>/iriszoff-header-badge-x2.png 2x" alt="Írisz Office Zrt."></div></a>
+      </div>
+      <div class="site eco">
+        <a title="EcoCreative - Vezetői döntéstámogató" href="//www.ecocreative.hu" target="_blank"><div class="inside"><img retina_logo_url="<?=IMG?>/ecologo_v2_x2.png" srcset="<?=IMG?>/ecologo_v2.png 1x, <?=IMG?>/ecologo_v2_x2.png 2x"  alt="EcoCreative - Vezetői döntéstámogató"></div></a>
+      </div>
+    </div>
 		<div class="fusion-row">
 			<?php if ( 'flyout' === Avada()->settings->get( 'mobile_menu_design' ) ) : ?>
 				<div class="fusion-header-has-flyout-menu-content">
