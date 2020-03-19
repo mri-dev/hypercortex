@@ -8,7 +8,10 @@
 @media all and (max-width: 1450px)
 {
   .fusion-logo img{
-    margin-left: -85px;
+    margin-left: -114px;
+  }
+  .fusion-header .searcher{
+    right: 100px;
   }
 }
 
@@ -53,11 +56,8 @@
     font-size: 2vw !important;
   }
   .fusion-logo img{
-    margin-left: -5px;
-    max-height: 105px !important;
-  }
-  .fusion-header {
-    background-position: 60% center, top center;
+    margin-left: 0px;
+    max-height: 72px !important;
   }
   .fusion-header-v1 .fusion-main-menu > ul > li, .fusion-header-v2 .fusion-main-menu > ul > li, .fusion-header-v3 .fusion-main-menu > ul > li, .fusion-header-v4 .fusion-main-menu > ul > li, .fusion-header-v5 .fusion-main-menu > ul > li, .fusion-header-v7 .fusion-main-menu > ul > li{
     padding-right: 8px !important;
@@ -153,8 +153,15 @@
     height: auto;
     line-height: 35px;
   }
+  .testimonials-holder > .wrapper{
+    width: 800px;
+    margin: 0 auto;
+  }
+  .fusion-header .searcher {
+    right: 270px;
+  }
   .fusion-header {
-    background-position: 115% center, top center;
+    background-position: 50% center, top center;
   }
   .szolgaltatas-block-holder.view-of-big > .wrapper > .block .fakebtn button{
     padding: 8px 13px;
@@ -258,6 +265,43 @@
     padding-right: 10px;
   }
 }
+@media all and (max-width: 960px)
+{
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title h2{
+    font-size: 0.85rem !important;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .title{
+    height: 30px;
+  }
+  .szolgaltatas-block-holder.view-of-big > .wrapper > .block .ico img{
+    height: 35px;
+  }
+  .fusion-header .site-buttons{
+    width: 200px;
+  }
+  .fusion-header .searcher {
+    right: 180px;
+    bottom: 0px;
+  }
+  .fusion-logo img {
+    margin-left: -10px;
+    max-height: 67px !important;
+  }
+  .testimonials-holder > .wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .fusion-header .site-buttons .site{
+    height: 45px;
+  }
+  .fusion-header .site-buttons .site.eco a img {
+    height: 30px;
+    max-height: 30px;
+    width: auto;
+    max-width: initial;
+    margin-top: 11px;
+  }
+}
 @media all and (max-width: 760px)
 {
   .feliratkozas-holder{
@@ -322,8 +366,29 @@
 
 @media all and (max-width: 480px)
 {
+  .fusion-logo{
+    width: 55%;
+    max-width: 55%;
+  }
   .szolgaltatas-block-holder.view-of-big{
     margin-top: 25px;
+  }
+  .fusion-header .site-buttons{
+    width: 170px;
+    top: 0;
+    -webkit-transform: none;
+    transform: none;
+  }
+  .fusion-header .site-buttons .site.eco a img {
+    height: 27px;
+    max-height: 27px;
+    width: auto;
+    max-width: initial;
+    margin-top: 9px;
+  }
+  .fusion-header .site-buttons .site.irisz a img {
+    height: 84%;
+    max-height: 84%;
   }
   .fusion-header .searcher{
     position: relative;
