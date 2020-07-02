@@ -18,6 +18,7 @@ define('CAPTCHA_SECRET_KEY', '6LeGfsEUAAAAAOKxmdJ8b_JSYlI5Wv0JmA8dEB--');
 require_once "includes/include.php";
 $app_settings = new Setup_General_Settings();
 
+
 function get_site_title( $site = '' )
 {
   global $wpdb;
