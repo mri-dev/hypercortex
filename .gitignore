@@ -5,3 +5,5 @@ images/
 settings/
 test.php
 front/error_log
+.sftp.json
+.vscode/*
