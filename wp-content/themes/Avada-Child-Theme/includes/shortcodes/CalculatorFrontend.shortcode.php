@@ -42,5 +42,3 @@ class CalculatorFrontendSC
 }
 
 new CalculatorFrontendSC();
-
-?>

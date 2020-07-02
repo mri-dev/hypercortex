@@ -163,7 +163,7 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
 
       if ( settings_data.data ) {
         $scope.settings = settings_data.data;
-        $scope.form.version = parseInt($scope.settings.current_version);
+        $scope.form.version = $scope.settings.current_version;
       }
 
       $scope.$watch('form.version', function(n, o, s) {

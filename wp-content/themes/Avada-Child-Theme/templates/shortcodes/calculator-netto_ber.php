@@ -110,9 +110,7 @@
     <div class="loader" ng-if="loading">Eredmény kiértékelése folyamatban...</div>
     <div class="error-msg" ng-if="error" ng-bind-html="error|unsafe"></div>
     <div class="result-body" ng-if="loaded && result!==false">
-      <div class="result-jog-text">
-        Az eredmény kiszámítása a(z) {{form.version}}. évi jogszabályok alkalmazásával történt.
-      </div>
+      <div class="result-jog-text">{{result.result_comment}}</div>
       <table class="result-table">
         <tbody>
           <tr>
