@@ -225,6 +225,7 @@ class CalculatorBase
     $res['minimalber'] = $this->getSettingsValue('minimalber');
 
     $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_tb'] = $this->getSettingsValue('ado_tb');
     $res['ado_termeszetegeszseg'] = $this->getSettingsValue('ado_termeszetegeszseg');
     $res['ado_penzbeli_egeszseg'] = $this->getSettingsValue('ado_penzbeli_egeszseg');
     $res['ado_nyugdij'] = $this->getSettingsValue('ado_nyugdij');
@@ -257,6 +258,7 @@ class CalculatorBase
     $res['minimalber'] = $this->getSettingsValue('minimalber');
 
     $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_tb'] = $this->getSettingsValue('ado_tb');
     $res['ado_termeszetegeszseg'] = $this->getSettingsValue('ado_termeszetegeszseg');
     $res['ado_penzbeli_egeszseg'] = $this->getSettingsValue('ado_penzbeli_egeszseg');
     $res['ado_nyugdij'] = $this->getSettingsValue('ado_nyugdij');
@@ -287,6 +289,7 @@ class CalculatorBase
     $res['calc_comment'] = $this->getSettingsValue('calc_comment');
 
     $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_tb'] = $this->getSettingsValue('ado_tb');
     $res['ado_termeszetegeszseg'] = $this->getSettingsValue('ado_termeszetegeszseg');
     $res['ado_penzbeli_egeszseg'] = $this->getSettingsValue('ado_penzbeli_egeszseg');
     $res['ado_nyugdij'] = $this->getSettingsValue('ado_nyugdij');
@@ -406,6 +409,7 @@ class CalculatorBase
     $res['ado_caf_adoalap_kieg'] = $this->getSettingsValue('ado_caf_adoalap_kieg');
     $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
     $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_tb'] = $this->getSettingsValue('ado_tb');
     $res['ado_kisvallalati'] = $this->getSettingsValue('ado_kisvallalati');
     $res['ado_termeszetegeszseg'] = $this->getSettingsValue('ado_termeszetegeszseg');
     $res['ado_penzbeli_egeszseg'] = $this->getSettingsValue('ado_penzbeli_egeszseg');
@@ -1094,6 +1098,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -1252,6 +1257,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -1332,6 +1338,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -1399,6 +1406,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -1429,6 +1437,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
         $ret['jovedelem'] = $jovedelem;
         $ret['fizetendo_szja'] = $fizetendo_szja;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -1471,6 +1480,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
         $ret['fizetendo'] = $fizetendo_szja +  $fizetendo_szocho;
         $ret['brutto_alap'] = $data['brutto_alap'];
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -1638,6 +1648,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
         $ret['ado_munkavallalo'] = $ado_munkavallalo;
         $ret['ado_munkaltato'] = $ado_munkaltato;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -1823,6 +1834,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -2014,6 +2026,7 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -2187,6 +2200,7 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -2284,6 +2298,7 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -2351,6 +2366,7 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -2382,6 +2398,7 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
         $ret['jovedelem'] = $jovedelem;
         $ret['fizetendo_szja'] = $fizetendo_szja;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -2424,6 +2441,7 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
         $ret['fizetendo'] = $fizetendo_szja +  $fizetendo_szocho;
         $ret['brutto_alap'] = $data['brutto_alap'];
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -2591,6 +2609,7 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
         $ret['ado_munkavallalo'] = $ado_munkavallalo;
         $ret['ado_munkaltato'] = $ado_munkaltato;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -2775,6 +2794,7 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -2787,7 +2807,7 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
 
 
 /***********************************************
-* 2020/2-es jogszabályoknak megfelelő kalkulátor *
+* 2020/2-es jogszabályoknak megfelelő kalkulátor @since 2020-07-01 *
 ************************************************/
 class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 {
@@ -2837,11 +2857,11 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
     $ervenyesitheto_jarulekkedvezmeny = $csaladi_adokedvezmeny_maradekalap * 0.15;
     $ervenyesitheto_jarulekkedvezmeny = ($ervenyesitheto_jarulekkedvezmeny < 0) ? 0 : $ervenyesitheto_jarulekkedvezmeny;
 
-    $ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
-    $ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
+    //$ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
+    //$ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
 
-    $ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
-    $ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
+    //$ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
+    //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
 
     if ( !$anyak_gyerek4vagytobb ) {
       $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
@@ -2853,10 +2873,18 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
       $ret['ado_szja'] = round($ret['ado_szja']);
     }
 
+    // TB járulék számítás
+    $ret['ado_tb'] = ($brutto_ber * ($settings['ado_tb']/100)) - $ervenyesitheto_jarulekkedvezmeny;;
+    $ret['ado_tb'] = ($ret['ado_tb'] < 0) ? 0 : $ret['ado_tb'];
+    $ret['ado_tb'] = round($ret['ado_tb']);
+
+    /*
     $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
     $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
     $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
+    */
 
+    /*
     $ret['ado_penzbeli_egeszseg'] = ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100)) - $ervenyesitheto_termeszetbeni_kedvezmeny;
     $ret['ado_penzbeli_egeszseg'] = ($ret['ado_penzbeli_egeszseg'] < 0) ? 0 : $ret['ado_penzbeli_egeszseg'];
     $ret['ado_penzbeli_egeszseg'] = round($ret['ado_penzbeli_egeszseg']);
@@ -2867,8 +2895,9 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
     $ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
     $ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
+    */
 
-    $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
+    $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_tb'];
 
     $sum_minusbrutto = round($sum_minusbrutto);
 
@@ -2958,15 +2987,19 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $ret['brutto_ber'] = $netto_ber + $sum_minusbrutto;
 
         $ret['ado_szja'] = $find['values']['params']['ado_szja'];
+        $ret['ado_tb'] = $find['values']['params']['ado_tb'];
+        /*
         $ret['ado_termeszetegeszseg'] = $find['values']['params']['ado_termeszetegeszseg'];
         $ret['ado_penzbeli_egeszseg'] = $find['values']['params']['ado_penzbeli_egeszseg'];
         $ret['ado_nyugdij'] = $find['values']['params']['ado_nyugdij'];
         $ret['ado_munkaerppiac'] = $find['values']['params']['ado_munkaerppiac'];
+        */
 
         // Nettó bér alap vége
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -3020,8 +3053,8 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
         $ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
 
-        $ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
-        $ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
+        //$ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
+        //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
 
         if ( !$anyak_gyerek4vagytobb ) {
           $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
@@ -3033,6 +3066,11 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
           $ret['ado_szja'] = round($ret['ado_szja']);
         }
 
+        // TB járulék számítás
+        $ret['ado_tb'] = ($brutto_ber * ($settings['ado_tb']/100)) - $ervenyesitheto_jarulekkedvezmeny;;
+        $ret['ado_tb'] = ($ret['ado_tb'] < 0) ? 0 : $ret['ado_tb'];
+        $ret['ado_tb'] = round($ret['ado_tb']);
+
         $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
         $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
         $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
@@ -3041,14 +3079,15 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $ret['ado_penzbeli_egeszseg'] = ($ret['ado_penzbeli_egeszseg'] < 0) ? 0 : $ret['ado_penzbeli_egeszseg'];
         $ret['ado_penzbeli_egeszseg'] = round($ret['ado_penzbeli_egeszseg']);
 
-        $ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
-        $ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
-        $ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
+        //$ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
+        //$ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
+        //$ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
 
-        $ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
-        $ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
+        //$ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
+        //$ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
 
-        $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
+        //$sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
+        $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_tb'];
 
         $ret['sum_minusbrutto'] = $sum_minusbrutto;
         $netto_ber = $brutto_ber-$sum_minusbrutto;
@@ -3059,8 +3098,8 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $values['szemelyikedvezmeny_jogosult'] = $szemelyi_kedvezmeny;
         $values['csaladi_adokedvezmeny_maradekalap'] = $csaladi_adokedvezmeny_maradekalap;
         $values['ervenyesitheto_jarulekkedvezmeny'] = $ervenyesitheto_jarulekkedvezmeny;
-        $values['ervenyesitheto_termeszetbeni_kedvezmeny'] = $ervenyesitheto_termeszetbeni_kedvezmeny;
-        $values['ervenyesitheto_penzbeni_kedvezmeny'] = $ervenyesitheto_penzbeni_kedvezmeny;
+        //$values['ervenyesitheto_termeszetbeni_kedvezmeny'] = $ervenyesitheto_termeszetbeni_kedvezmeny;
+        //$values['ervenyesitheto_penzbeni_kedvezmeny'] = $ervenyesitheto_penzbeni_kedvezmeny;
 
         // Nettó bér alap vége
 
@@ -3070,7 +3109,6 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $minimalber_ketszeres = $minimalber * 2;
         $szocho_es_kiva_kedvezmeny_alap = 0;
         $szokho_kedvezmeny_alap = 0;
-
 
         $sel_mk = (int)$data['munkavallalo_kedvezmeny'];
         $mk_obj = $mk[$sel_mk];
@@ -3141,6 +3179,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -3194,8 +3233,8 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
         $ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
 
-        $ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
-        $ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
+        //$ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
+        //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
 
         if ( !$anyak_gyerek4vagytobb ) {
           $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
@@ -3207,6 +3246,11 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
           $ret['ado_szja'] = round($ret['ado_szja']);
         }
 
+        // TB járulék számítás
+        $ret['ado_tb'] = ($brutto_ber * ($settings['ado_tb']/100)) - $ervenyesitheto_jarulekkedvezmeny;;
+        $ret['ado_tb'] = ($ret['ado_tb'] < 0) ? 0 : $ret['ado_tb'];
+        $ret['ado_tb'] = round($ret['ado_tb']);
+
         $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
         $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
         $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
@@ -3215,14 +3259,15 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $ret['ado_penzbeli_egeszseg'] = ($ret['ado_penzbeli_egeszseg'] < 0) ? 0 : $ret['ado_penzbeli_egeszseg'];
         $ret['ado_penzbeli_egeszseg'] = round($ret['ado_penzbeli_egeszseg']);
 
-        $ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
-        $ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
-        $ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
+        //$ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
+        //$ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
+        //$ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
 
-        $ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
-        $ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
+        //$ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
+        //$ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
 
-        $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
+        //$sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
+        $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_tb'];
 
         $ret['sum_minusbrutto'] = $sum_minusbrutto;
         $netto_ber = $brutto_ber-$sum_minusbrutto;
@@ -3233,11 +3278,12 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $values['szemelyikedvezmeny_jogosult'] = $szemelyi_kedvezmeny;
         $values['csaladi_adokedvezmeny_maradekalap'] = $csaladi_adokedvezmeny_maradekalap;
         $values['ervenyesitheto_jarulekkedvezmeny'] = $ervenyesitheto_jarulekkedvezmeny;
-        $values['ervenyesitheto_termeszetbeni_kedvezmeny'] = $ervenyesitheto_termeszetbeni_kedvezmeny;
-        $values['ervenyesitheto_penzbeni_kedvezmeny'] = $ervenyesitheto_penzbeni_kedvezmeny;
+        //$values['ervenyesitheto_termeszetbeni_kedvezmeny'] = $ervenyesitheto_termeszetbeni_kedvezmeny;
+        //$values['ervenyesitheto_penzbeni_kedvezmeny'] = $ervenyesitheto_penzbeni_kedvezmeny;
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -3305,6 +3351,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -3336,6 +3383,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $ret['jovedelem'] = $jovedelem;
         $ret['fizetendo_szja'] = $fizetendo_szja;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -3378,6 +3426,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $ret['fizetendo'] = $fizetendo_szja +  $fizetendo_szocho;
         $ret['brutto_alap'] = $data['brutto_alap'];
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -3545,6 +3594,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $ret['ado_munkavallalo'] = $ado_munkavallalo;
         $ret['ado_munkaltato'] = $ado_munkaltato;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
@@ -3729,6 +3779,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
         $ret['values'] = $values;
         $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
