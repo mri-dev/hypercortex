@@ -1688,7 +1688,23 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
 
         $day = new DateTime($data['csed_kezdete']);
         $day_munkaviszony_kezdet = new DateTime($data['munkaviszony_kezdete']);
-        $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - strtotime($day_munkaviszony_kezdet->format('Y-m-d'))) / (60*60*24) );
+        $mv_day_str = strtotime($day_munkaviszony_kezdet->format('Y-m-d'));
+        $csed_day_str = strtotime($day->format('Y').'-01-01');
+
+        // alap munkaviszony kezdete
+        $calc_ts = $mv_day_str;
+
+        // ha a csed évi első napja nagyobb a mv kezdetétől
+        if ( $csed_day_str > $calc_ts ) {
+          $calc_ts = $csed_day_str;
+        }
+
+        if( $mv_day_str > $csed_day_str )
+        {
+          $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - $calc_ts) / (60*60*24) );          
+        } else {
+          $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - $calc_ts) / (60*60*24) );
+        }
 
         if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
           $alap_szules_eveben_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
@@ -2649,7 +2665,23 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
 
         $day = new DateTime($data['csed_kezdete']);
         $day_munkaviszony_kezdet = new DateTime($data['munkaviszony_kezdete']);
-        $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - strtotime($day_munkaviszony_kezdet->format('Y-m-d'))) / (60*60*24) );
+        $mv_day_str = strtotime($day_munkaviszony_kezdet->format('Y-m-d'));
+        $csed_day_str = strtotime($day->format('Y').'-01-01');
+
+        // alap munkaviszony kezdete
+        $calc_ts = $mv_day_str;
+
+        // ha a csed évi első napja nagyobb a mv kezdetétől
+        if ( $csed_day_str > $calc_ts ) {
+          $calc_ts = $csed_day_str;
+        }
+
+        if( $mv_day_str > $csed_day_str )
+        {
+          $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - $calc_ts) / (60*60*24) );          
+        } else {
+          $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - $calc_ts) / (60*60*24) );
+        }
 
         if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
           $alap_szules_eveben_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
@@ -3623,7 +3655,23 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
         $day = new DateTime($data['csed_kezdete']);
         $day_munkaviszony_kezdet = new DateTime($data['munkaviszony_kezdete']);
-        $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - strtotime($day_munkaviszony_kezdet->format('Y-m-d'))) / (60*60*24) );
+        $mv_day_str = strtotime($day_munkaviszony_kezdet->format('Y-m-d'));
+        $csed_day_str = strtotime($day->format('Y').'-01-01');
+
+        // alap munkaviszony kezdete
+        $calc_ts = $mv_day_str;
+
+        // ha a csed évi első napja nagyobb a mv kezdetétől
+        if ( $csed_day_str > $calc_ts ) {
+          $calc_ts = $csed_day_str;
+        }
+
+        if( $mv_day_str > $csed_day_str )
+        {
+          $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - $calc_ts) / (60*60*24) );          
+        } else {
+          $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - $calc_ts) / (60*60*24) );
+        }
 
         if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
           $alap_szules_eveben_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
