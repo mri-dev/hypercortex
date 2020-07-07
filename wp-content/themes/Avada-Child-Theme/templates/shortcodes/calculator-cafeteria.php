@@ -66,19 +66,23 @@
             <td class="h">Személyi jövedelemadó</td>
             <td class="v">{{result.szja|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1 && result.vi >= 3">
+            <td class="h">TB járulék</td>
+            <td class="v">{{result.tb|cash:'Ft':''}}</td>
+          </tr>
+          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1 && result.vi < 3">
             <td class="h">Természetbeni egészségbiztosítási járulék</td>
             <td class="v">{{result.termeszet_egeszseg_jarulek|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1 && result.vi < 3">
             <td class="h">Pénzbeli egészségbiztosítási járulék</td>
             <td class="v">{{result.penzbeli_egeszseg_jarulek|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1 && result.vi < 3">
             <td class="h">Nyugdíjjárulék</td>
             <td class="v">{{result.nyugdij_jarulek|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1 && result.vi < 3">
             <td class="h">Munkaerő piaci hozzájárulás</td>
             <td class="v">{{result.munkaeropiac_hozzajarulas|cash:'Ft':''}}</td>
           </tr>

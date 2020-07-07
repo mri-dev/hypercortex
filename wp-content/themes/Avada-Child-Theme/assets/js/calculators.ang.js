@@ -93,10 +93,10 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
 
     if ( view == 'anyak_szabadsaga' )
     {
-      if ( typeof $scope.form.munkaviszony_kezedete !== 'undefined') {
-        var date = new Date($scope.form.munkaviszony_kezedete);
-        var munkaviszony_kezedete = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
-        form.munkaviszony_kezedete = munkaviszony_kezedete;
+      if ( typeof $scope.form.munkaviszony_kezdete !== 'undefined') {
+        var date = new Date($scope.form.munkaviszony_kezdete);
+        var munkaviszony_kezdete = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+        form.munkaviszony_kezdete = munkaviszony_kezdete;
       }
 
       if ( typeof $scope.form.szules_ideje !== 'undefined') {
@@ -320,6 +320,10 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
     yn.push('Munkahelyi étkeztetés');
     yn.push('Iskolakezdési támogatás');
     yn.push('Üdülési szolgáltatás');
+
+    yn.sort(function(a, b){
+      return a.localeCompare(b);
+    });
 
     return yn;
   }

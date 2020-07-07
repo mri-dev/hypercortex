@@ -1686,8 +1686,9 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
 
         $alap_szules_eveben_jaro_szabadsag = (int)$settings['alapszabadsag'] + $kor_potszabi + $gyerek_potszabi;
 
-        $day = new DateTime($data['szules_ideje']); $day = $day->modify('+1 day');
-        $szulesig_eltelt_napok_szama = (float)((strtotime($day->format('Y-m-d')) - strtotime($szules_eve.'-01-01')) / (60 * 60 * 24));
+        $day = new DateTime($data['csed_kezdete']);
+        $day_munkaviszony_kezdet = new DateTime($data['munkaviszony_kezdete']);
+        $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - strtotime($day_munkaviszony_kezdet->format('Y-m-d'))) / (60*60*24) );
 
         if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
           $alap_szules_eveben_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
@@ -2646,8 +2647,9 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
 
         $alap_szules_eveben_jaro_szabadsag = (int)$settings['alapszabadsag'] + $kor_potszabi + $gyerek_potszabi;
 
-        $day = new DateTime($data['szules_ideje']); $day = $day->modify('+1 day');
-        $szulesig_eltelt_napok_szama = (float)((strtotime($day->format('Y-m-d')) - strtotime($szules_eve.'-01-01')) / (60 * 60 * 24));
+        $day = new DateTime($data['csed_kezdete']);
+        $day_munkaviszony_kezdet = new DateTime($data['munkaviszony_kezdete']);
+        $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - strtotime($day_munkaviszony_kezdet->format('Y-m-d'))) / (60*60*24) );
 
         if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
           $alap_szules_eveben_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
@@ -3480,6 +3482,10 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
           $szja = $adoalap * ($settings['ado_szja']/100);
           $szja = ($szja < 0) ? 0 : $szja;
           $szja = round($szja);
+
+          $tb = $adoalap * ($settings['ado_tb']/100);
+          $tb = ($tb < 0) ? 0 : $tb;
+          $tb = round($tb);
         }
 
         // szocho
@@ -3506,28 +3512,11 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         // group 4
         if ($jg && in_array($jg['ID'], array(4)))
         {
-          // természetbeni egészség
-          $termeszet_egeszseg_jarulek = $adoalap * ($settings['ado_termeszetegeszseg']/100);
-          $termeszet_egeszseg_jarulek = ($termeszet_egeszseg_jarulek < 0) ? 0 : $termeszet_egeszseg_jarulek;
-          $termeszet_egeszseg_jarulek = round($termeszet_egeszseg_jarulek);
-
-          // pénzbeli egészség
-          $penzbeli_egeszseg_jarulek = $adoalap * ($settings['ado_penzbeli_egeszseg']/100);
-          $penzbeli_egeszseg_jarulek = ($penzbeli_egeszseg_jarulek < 0) ? 0 : $penzbeli_egeszseg_jarulek;
-          $penzbeli_egeszseg_jarulek = round($penzbeli_egeszseg_jarulek);
-
-          // Nyugdíjjárulék
-          $nyugdij_jarulek = $adoalap * ($settings['ado_nyugdij']/100);
-          $nyugdij_jarulek = ($nyugdij_jarulek < 0) ? 0 : $nyugdij_jarulek;
-          $nyugdij_jarulek = round($nyugdij_jarulek);
-
-          // munkaerő hozzájárulás
-          $munkaeropiac_hozzajarulas = $adoalap * ($settings['ado_munkaerppiac']/100);
-          $munkaeropiac_hozzajarulas = ($munkaeropiac_hozzajarulas < 0) ? 0 : $munkaeropiac_hozzajarulas;
-          $munkaeropiac_hozzajarulas = round($munkaeropiac_hozzajarulas);
-
           // összes munkaválllalói teher
-          $munkavallalo_osszes_jarulek = $termeszet_egeszseg_jarulek + $penzbeli_egeszseg_jarulek + $nyugdij_jarulek + $munkaeropiac_hozzajarulas + $szja;
+          $mv_ado = ($settings['ado_szja'] + $settings['ado_tb']) / 100;
+          $munkavallalo_osszes_jarulek = $adoalap * $mv_ado;
+          $munkavallalo_osszes_jarulek = ($munkavallalo_osszes_jarulek < 0) ? 0 : $munkavallalo_osszes_jarulek;
+          $munkavallalo_osszes_jarulek = round($munkavallalo_osszes_jarulek);
           $ado_munkavallalo = $munkavallalo_osszes_jarulek;
         }
 
@@ -3581,6 +3570,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
         $ret['adoalap_kiegeszites'] = $adoalap_kiegeszites;
         $ret['szja'] = $szja;
+        $ret['tb'] = $tb;
         $ret['szocho'] = $szocho;
         $ret['szkh'] = $szkh;
         $ret['kiva'] = $kiva;
@@ -3631,8 +3621,9 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
         $alap_szules_eveben_jaro_szabadsag = (int)$settings['alapszabadsag'] + $kor_potszabi + $gyerek_potszabi;
 
-        $day = new DateTime($data['szules_ideje']); $day = $day->modify('+1 day');
-        $szulesig_eltelt_napok_szama = (float)((strtotime($day->format('Y-m-d')) - strtotime($szules_eve.'-01-01')) / (60 * 60 * 24));
+        $day = new DateTime($data['csed_kezdete']);
+        $day_munkaviszony_kezdet = new DateTime($data['munkaviszony_kezdete']);
+        $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - strtotime($day_munkaviszony_kezdet->format('Y-m-d'))) / (60*60*24) );
 
         if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
           $alap_szules_eveben_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
@@ -3769,6 +3760,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $ret['gyedgyes_le_nem_toltott_szabadsag'] = $gyedgyes_le_nem_toltott_szabadsag;
         $ret['osszes_szabadsag'] = $osszes_szabadsag;
 
+        $values['munkaviszony_kezdete'] = $data['munkaviszony_kezdete'];
         $values['szules_eve'] = $szules_eve;
         $values['szules_eveben_munkavallalo_eletkora'] = $szules_eveben_munkavallalo_eletkora;
         $values['gyerek_potszabi'] = $gyerek_potszabi;

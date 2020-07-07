@@ -516,10 +516,10 @@ class AjaxRequests
           $return['error_elements']['szuletesi_ev'] = 'Pótolja a születési évét a kalkulációhoz!';
         }
 
-        if ( empty($inputs['munkaviszony_kezedete']) ) {
+        if ( empty($inputs['munkaviszony_kezdete']) ) {
           $return['error'] = 1;
-          $return['missing_elements'][] = 'munkaviszony_kezedete';
-          $return['error_elements']['munkaviszony_kezedete'] = 'Pótolja a munkaviszony kezdete időpontot a kalkulációhoz!';
+          $return['missing_elements'][] = 'munkaviszony_kezdete';
+          $return['error_elements']['munkaviszony_kezdete'] = 'Pótolja a munkaviszony kezdete időpontot a kalkulációhoz!';
         }
 
         if ( empty($inputs['szules_ideje']) ) {

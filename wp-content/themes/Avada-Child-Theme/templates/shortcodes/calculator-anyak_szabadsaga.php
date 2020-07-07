@@ -24,14 +24,14 @@
           </div>
         </div>
       </div>
-      <div class="line" ng-class="{missing:missing.indexOf('munkaviszony_kezedete')!==-1, error:error_elements['munkaviszony_kezedete']}">
+      <div class="line" ng-class="{missing:missing.indexOf('munkaviszony_kezdete')!==-1, error:error_elements['munkaviszony_kezdete']}">
         <div class="head">
           Munkaviszony kezdete *
-          <div class="error-hint" ng-if="error_elements.indexOf('munkaviszony_kezedete')!==-1">{{error_elements['munkaviszony_kezedete']}}</div>
+          <div class="error-hint" ng-if="error_elements.indexOf('munkaviszony_kezdete')!==-1">{{error_elements['munkaviszony_kezdete']}}</div>
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="date" ng-model="form.munkaviszony_kezedete" value="">
+            <input type="date" ng-model="form.munkaviszony_kezdete" value="">
           </div>
         </div>
       </div>
