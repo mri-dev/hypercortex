@@ -468,6 +468,11 @@ class CalculatorBase
   {
     $limits = array();
 
+    
+    $limits['Sportrendezvényre szóló belépőjegy, bérlet'] = 161000;
+    $limits['Kulturális szolgáltatásra szóló belépőjegy, bérlet'] = 161000;    
+    $limits['Csekély értékű ajándék'] = 16100;
+
     $limits['SZÉP kártya vendéglátás'] = 150000;
     $limits['SZÉP kártya szálláshely'] = 225000;
     $limits['SZÉP kártya szabadidő'] = 75000;
