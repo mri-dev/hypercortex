@@ -63,10 +63,10 @@
       <table class="result-table">
         <tbody>
           <tr class="sm" ng-if="[2,3,4].indexOf(result.juttatas_group.ID)!==-1">
-            <td class="h">Személyi jövedelemadó</td>
+            <td class="h"><strong>Személyi jövedelemadó</strong></td>
             <td class="v">{{result.szja|cash:'Ft':''}}</td>
-          </tr>
-          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1 && result.vi >= 3">
+          </tr>    
+          <tr class="sm" ng-if="[3,4].indexOf(result.juttatas_group.ID)!==-1 && result.vi >= 3">
             <td class="h">TB járulék</td>
             <td class="v">{{result.tb|cash:'Ft':''}}</td>
           </tr>
@@ -89,12 +89,12 @@
           <tr class="hl" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1">
             <td class="h">Összes munkavállaló járulék</td>
             <td class="v">{{result.munkavallalo_osszes_jarulek|cash:'Ft':''}}</td>
-          </tr>
+          </tr>    
           <tr class="sm" ng-if="[2,3,4].indexOf(result.juttatas_group.ID)!==-1">
             <td class="h">Szociális hozzájárulási adó</td>
             <td class="v">{{result.szocho|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="sm" ng-if="[3,4].indexOf(result.juttatas_group.ID)!==-1">
             <td class="h">Szakképzési hozzájárulás</td>
             <td class="v">{{result.szkh|cash:'Ft':''}}</td>
           </tr>
