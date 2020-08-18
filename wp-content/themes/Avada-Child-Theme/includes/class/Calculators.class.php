@@ -3440,7 +3440,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         (float)$data['teljes_targyev_brutto_munkaber'] +
         (float)$data['teljes_targyev_brutto_tarasvall_kivet'] +
         (float)$data['targyev_megszerzett_brutto_osztalek'] +
-        (float)$data['targyev_vall_kivont_jovedelem'] +
+        (float)$data['targyev_vall_kivont_jovedelem'] + 
         (float)$data['targyev_ertekpapkolcson_jovedelem'] +
         (float)$data['targyev_arfolyamnyereseg_jovedelem'] +
         (float)$data['egyeb_szja_jovedelem'];
@@ -3487,6 +3487,62 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         $hataron_felul = false;
 
         $adoalap = (float)$data['juttatas_osszege'];
+
+        // Adómentes juttatás
+        // group 1 
+        if ( $jg && in_array($jg['ID'], array(1)) )
+        {          
+          $adoalap_tetel_limits = $this->getCafeteriaItemAdoalapLimit();
+          $adoalap_tetel_limit = (float)$adoalap_tetel_limits[$data['juttatas']];
+
+          if ((float)$data['juttatas_osszege'] < $adoalap_tetel_limit) {
+            $adoalap_kiegeszites = 0;
+          } else {
+            $hataron_felul = true;
+            $adoalap_kiegeszites = (float)$data['juttatas_osszege'] - $adoalap_tetel_limit;
+            $adoalap_kiegeszites = ($adoalap_kiegeszites < 0) ? 0 : $adoalap_kiegeszites;
+            $adoalap_kiegeszites = round($adoalap_kiegeszites);
+
+            $szja = $adoalap_kiegeszites * ($settings['ado_szja']/100);
+            $szja = ($szja < 0) ? 0 : $szja;
+            $szja = round($szja);
+  
+            $tb = $adoalap_kiegeszites * ($settings['ado_tb']/100);
+            $tb = ($tb < 0) ? 0 : $tb;
+            $tb = round($tb);
+
+            // összes munkaválllalói teher
+            $munkavallalo_osszes_jarulek = $szja + $tb;
+            $munkavallalo_osszes_jarulek = ($munkavallalo_osszes_jarulek < 0) ? 0 : $munkavallalo_osszes_jarulek;
+            $munkavallalo_osszes_jarulek = round($munkavallalo_osszes_jarulek);
+            $ado_munkavallalo = $munkavallalo_osszes_jarulek;
+
+            // szocho
+            if ( $data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0)
+            {
+              $szocho = $adoalap_kiegeszites * ($settings['ado_szocialis_hozzajarulas']/100);
+              $szocho = ($szocho < 0) ? 0 : $szocho;
+              $szocho = round($szocho);
+            }
+
+            // Szakképzési
+            if ($data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0) {
+              $szkh = $adoalap_kiegeszites * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+              $szkh = ($szkh < 0) ? 0 : $szkh;
+              $szkh = round($szkh);
+            }
+
+            // kiva
+            if ( $data['ceg_kiva'] == 'Igen' )
+            {
+              $kiva = $adoalap_kiegeszites * ($settings['ado_kisvallalati']/100);
+              $kiva = ($kiva < 0) ? 0 : $kiva;
+              $kiva = round($kiva);
+            }
+
+            $ado_munkaltato = $szocho + $szkh + $kiva;
+          }
+        } 
 
         if ( $jg && in_array($jg['ID'], array(2, 3)) )
         {
@@ -3558,12 +3614,12 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
           $munkavallalo_osszes_jarulek = ($munkavallalo_osszes_jarulek < 0) ? 0 : $munkavallalo_osszes_jarulek;
           $munkavallalo_osszes_jarulek = round($munkavallalo_osszes_jarulek);
           $ado_munkavallalo = $munkavallalo_osszes_jarulek;
-        } else {
+        } elseif( $jg && in_array($jg['ID'], array(3)) ) {
           $tb = 0;
         }
 
         // szocho
-        if ($data['ceg_kiva'] == 'Nem') {
+        if ($data['ceg_kiva'] == 'Nem' && !isset($szocho)) {
           $szocho = $adoalap * ($settings['ado_szocialis_hozzajarulas']/100);
           $szocho = ($szocho < 0) ? 0 : $szocho;
           $szocho = round($szocho);

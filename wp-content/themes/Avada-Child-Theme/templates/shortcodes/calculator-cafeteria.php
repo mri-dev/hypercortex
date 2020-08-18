@@ -62,11 +62,11 @@
     <div class="result-jog-text">{{result.result_comment}}</div>
       <table class="result-table">
         <tbody>
-          <tr class="sm" ng-if="[2,3,4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="sm" ng-if="[1,2,3,4].indexOf(result.juttatas_group.ID)!==-1">
             <td class="h"><strong>Személyi jövedelemadó</strong></td>
             <td class="v">{{result.szja|cash:'Ft':''}}</td>
           </tr>    
-          <tr class="sm" ng-if="[3,4].indexOf(result.juttatas_group.ID)!==-1 && result.vi >= 3">
+          <tr class="sm" ng-if="[1,3,4].indexOf(result.juttatas_group.ID)!==-1 && result.vi >= 3">
             <td class="h">TB járulék</td>
             <td class="v">{{result.tb|cash:'Ft':''}}</td>
           </tr>
@@ -86,23 +86,27 @@
             <td class="h">Munkaerő piaci hozzájárulás</td>
             <td class="v">{{result.munkaeropiac_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
-          <tr class="hl" ng-if="[4].indexOf(result.juttatas_group.ID)!==-1">
-            <td class="h">Összes munkavállaló járulék</td>
-            <td class="v">{{result.munkavallalo_osszes_jarulek|cash:'Ft':''}}</td>
+          <tr class="hl" ng-if="[1,4].indexOf(result.juttatas_group.ID)!==-1">
+            <td class="h"><strong>Összes munkavállaló járulék</strong></td>
+            <td class="v"><strong>{{result.munkavallalo_osszes_jarulek|cash:'Ft':''}}</strong></td> 
           </tr>    
-          <tr class="sm" ng-if="[2,3,4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="sm" ng-if="[1,2,3,4].indexOf(result.juttatas_group.ID)!==-1">
             <td class="h">Szociális hozzájárulási adó</td>
             <td class="v">{{result.szocho|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm" ng-if="[3,4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="sm" ng-if="[1,3,4].indexOf(result.juttatas_group.ID)!==-1">
             <td class="h">Szakképzési hozzájárulás</td>
             <td class="v">{{result.szkh|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-if="[2,3,4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr ng-if="[1,2,3,4].indexOf(result.juttatas_group.ID)!==-1">
             <td class="h">KIVA</td>
             <td class="v">{{result.kiva|cash:'Ft':''}}</td>
-          </tr>
-          <tr>
+          </tr>          
+          <tr class="hl" ng-if="[1].indexOf(result.juttatas_group.ID)!==-1 && result.values.hataron_felul">
+            <td class="h"><strong>Munkáltató adófizetési kötelezettség</strong></td>
+            <td class="v"><strong>{{result.ado_munkaltato|cash:'Ft':''}}</strong></td> 
+          </tr> 
+          <tr ng-if="[1].indexOf(result.juttatas_group.ID)!==-1 && !result.values.hataron_felul">
             <td colspan="2" class="head">
               Fizetendő adók megoszlása alanyonként
             </td>
@@ -115,7 +119,7 @@
             <td class="h"><strong>Munkáltatót terhelő adó</strong></td>
             <td class="v"><strong>{{result.ado_munkaltato|cash:'Ft':''}}</strong></td>
           </tr>
-          <tr class="hl" ng-if="[1].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="hl" ng-if="[1].indexOf(result.juttatas_group.ID)!==-1 && !result.values.hataron_felul">
             <td class="h"><strong>Adófizetési kötelezettség</strong></td>
             <td class="v"><strong>Nincs</strong></td>
           </tr>
