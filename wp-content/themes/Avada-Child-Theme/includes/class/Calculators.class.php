@@ -3574,6 +3574,29 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
               $adoalap_kiegeszites = ($adoalap_kiegeszites < 0) ? 0 : $adoalap_kiegeszites;
               $adoalap_kiegeszites = round($adoalap_kiegeszites);
             }
+
+            // szocho
+            if ( $data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0)
+            {
+              $szocho = $adoalap_kiegeszites * ($settings['ado_szocialis_hozzajarulas']/100);
+              $szocho = ($szocho < 0) ? 0 : $szocho;
+              $szocho = round($szocho);
+            }
+
+            // Szakképzési
+            if ($data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0) {
+              $szkh = $adoalap_kiegeszites * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+              $szkh = ($szkh < 0) ? 0 : $szkh;
+              $szkh = round($szkh);
+            }
+
+            // kiva
+            if ( $data['ceg_kiva'] == 'Igen' )
+            {
+              $kiva = $adoalap_kiegeszites * ($settings['ado_kisvallalati']/100);
+              $kiva = ($kiva < 0) ? 0 : $kiva;
+              $kiva = round($kiva);
+            }
           }
 
           $adoalap = (float)$adoalap_kiegeszites;
@@ -3626,7 +3649,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         }
 
         // Szakképzési
-        if ($data['ceg_kiva'] == 'Nem' && $jg && in_array($jg['ID'], array(4))) {
+        if ( !isset($szkh) && $data['ceg_kiva'] == 'Nem' && $jg && in_array($jg['ID'], array(4))) {
           $szkh = $adoalap * ($settings['ado_szakkepzesi_hozzajarulas']/100);
           $szkh = ($szkh < 0) ? 0 : $szkh;
           $szkh = round($szkh);
@@ -3691,7 +3714,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
         // Munkáltató adók
         if ($jg && in_array($jg['ID'], array(2, 3))) {
-          $ado_munkaltato = $szja + $szocho + $kiva;
+          $ado_munkaltato = $szja + $szocho + $kiva + $szkh;
         }
 
         if ($jg && in_array($jg['ID'], array(4))) {
@@ -3701,13 +3724,16 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         // group 3 módosítás, ha elérte a határértéket
         if  ($jg && in_array($jg['ID'], array(3)) && $hataron_felul ) 
         {
-          $szocho = (float)$data['juttatas_osszege'] * ($settings['ado_szocialis_hozzajarulas']/100);
-          $szocho = ($szocho < 0) ? 0 : $szocho;
-          $szocho = round($szocho);
-
-          $szkh = (float)$data['juttatas_osszege'] * ($settings['ado_szakkepzesi_hozzajarulas']/100);
-          $szkh = ($szkh < 0) ? 0 : $szkh;
-          $szkh = round($szkh);
+          if( $data['ceg_kiva'] == 'Nem' )
+          {
+            $szocho = (float)$data['juttatas_osszege'] * ($settings['ado_szocialis_hozzajarulas']/100);
+            $szocho = ($szocho < 0) ? 0 : $szocho;
+            $szocho = round($szocho);
+  
+            $szkh = (float)$data['juttatas_osszege'] * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+            $szkh = ($szkh < 0) ? 0 : $szkh;
+            $szkh = round($szkh);
+          }
 
           $ado_munkaltato = $szocho + $szkh + $kiva;
         }
