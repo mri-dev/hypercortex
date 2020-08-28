@@ -468,14 +468,13 @@ class CalculatorBase
   {
     $limits = array();
 
-    
     $limits['Sportrendezvényre szóló belépőjegy, bérlet'] = 161000;
     $limits['Kulturális szolgáltatásra szóló belépőjegy, bérlet'] = 161000;    
     $limits['Csekély értékű ajándék'] = 16100;
 
-    $limits['SZÉP kártya vendéglátás'] = 150000;
-    $limits['SZÉP kártya szálláshely'] = 225000;
-    $limits['SZÉP kártya szabadidő'] = 75000;
+    $limits['SZÉP kártya vendéglátás'] = 265000;
+    $limits['SZÉP kártya szálláshely'] = 400000;
+    $limits['SZÉP kártya szabadidő'] = 135000;
 
     return $limits;
   }
@@ -3584,7 +3583,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
             }
 
             // Szakképzési
-            if ($data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0) {
+            if ($data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0 && $hataron_felul) {
               $szkh = $adoalap_kiegeszites * ($settings['ado_szakkepzesi_hozzajarulas']/100);
               $szkh = ($szkh < 0) ? 0 : $szkh;
               $szkh = round($szkh);
@@ -3671,6 +3670,20 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
           $munkavallalo_osszes_jarulek = ($munkavallalo_osszes_jarulek < 0) ? 0 : $munkavallalo_osszes_jarulek;
           $munkavallalo_osszes_jarulek = round($munkavallalo_osszes_jarulek);
           $ado_munkavallalo = $munkavallalo_osszes_jarulek;
+
+          // szocho
+          if ($data['ceg_kiva'] == 'Nem') {
+            $szocho = $adoalap * ($settings['ado_szocialis_hozzajarulas']/100);
+            $szocho = ($szocho < 0) ? 0 : $szocho;
+            $szocho = round($szocho);
+          }
+
+          // Szakképzési
+          if ($data['ceg_kiva'] == 'Nem' ) {
+            $szkh = $adoalap * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+            $szkh = ($szkh < 0) ? 0 : $szkh;
+            $szkh = round($szkh);
+          }
         }
 
         // group 2
