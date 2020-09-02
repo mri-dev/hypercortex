@@ -3494,7 +3494,8 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
           $adoalap_tetel_limits = $this->getCafeteriaItemAdoalapLimit();
           $adoalap_tetel_limit = (float)$adoalap_tetel_limits[$data['juttatas']];
 
-          if ((float)$data['juttatas_osszege'] < $adoalap_tetel_limit) {
+          if ($adoalap_tetel_limit == 0 || ((float)$data['juttatas_osszege'] < $adoalap_tetel_limit) ) 
+          {
             $adoalap_kiegeszites = 0;
           } else {
             $hataron_felul = true;
@@ -3565,7 +3566,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
             $adoalap_tetel_limits = $this->getCafeteriaItemAdoalapLimit();
             $adoalap_tetel_limit = (float)$adoalap_tetel_limits[$data['juttatas']];
           
-            if ((float)$data['juttatas_osszege'] > $adoalap_tetel_limit) {
+            if ($adoalap_tetel_limit != 0 && ((float)$data['juttatas_osszege'] > $adoalap_tetel_limit)) {
               $adoalap_kiegeszites = 0;
               $hataron_felul = true;
             } else {
@@ -3623,6 +3624,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
         // group 3 módosítás, ha elérte a határértéket
         if  ($jg && in_array($jg['ID'], array(3)) && $hataron_felul ) 
         {
+          /* **/
           $szja = (float)$data['juttatas_osszege'] * ($settings['ado_szja']/100);
           $szja = ($szja < 0) ? 0 : $szja;
           $szja = round($szja);
@@ -3630,6 +3632,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
           $tb = (float)$data['juttatas_osszege'] * ($settings['ado_tb']/100);
           $tb = ($tb < 0) ? 0 : $tb;
           $tb = round($tb);
+          /* */
 
           // összes munkaválllalói teher
           $munkavallalo_osszes_jarulek = $szja + $tb;
@@ -3690,7 +3693,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
         if ($jg && in_array($jg['ID'], array(2)))
         {
-          // szja
+          // szja 
           if ( $adoalap_kiegeszites > 0 ) {
             $szja = ($adoalap_tetel_limit + $adoalap_kiegeszites) * ($settings['ado_szja']/100);
             $szja = ($szja < 0) ? 0 : $szja;
