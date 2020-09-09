@@ -3714,7 +3714,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
           if ( $data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites == 0 )
           {
-            $szocho = ($adoalap_tetel_limit) * ($settings['ado_szocialis_hozzajarulas']/100);
+            $szocho = ((float)$data['juttatas_osszege']) * ($settings['ado_szocialis_hozzajarulas']/100);
             $szocho = ($szocho < 0) ? 0 : $szocho;
             $szocho = round($szocho);
           }
