@@ -16,17 +16,56 @@ class CalculatorBase
     '2020/1' => 2, 
     '2019' => 1
   );
+  public $db = null;
 
   function __construct( $version = false )
   {
     if ( $version ) {
       $this->year_version = $version;
     } else {
-      $this->year_version = get_option(\METAKEY_PREFIX.'calc_version', self::DEFAULT_VERSION);
+      $this->year_version = $this->get_option(\METAKEY_PREFIX.'calc_version', self::DEFAULT_VERSION);
     }
+
+    $this->getDB();
 
     return $this;
   }
+
+  public function getDB()
+  {
+    global $wpdb, $calc_wpdb;
+
+    if( defined('DB_CALC_NAME') && defined('DB_CALC_USER') && defined('DB_CALC_PASSWORD') )
+    {
+      $this->db = $calc_wpdb;
+    } else {
+      $this->db = $wpdb;
+    }
+  }
+
+  public function get_option( $option, $default = false )
+  {
+    $db = $this->db;
+    $value = $default;
+
+    if( $db ) 
+    {
+      if($db->prefix == 'hc_'){
+        $option = str_replace(\METAKEY_PREFIX, 'hc_', $option);
+      }
+      //echo $db->prepare( "SELECT option_value FROM $db->options WHERE option_name = %s LIMIT 1", $option ) . "<br>";
+      $row = $db->get_row( $db->prepare( "SELECT option_value FROM $db->options WHERE option_name = %s LIMIT 1", $option ) );
+ 
+      if ( is_object( $row ) ) {
+          $value = $row->option_value;
+      } else { 
+         $value = $default;
+      }
+    }
+    
+    return $value;
+  }
+  /* =============================================================== */
 
   public function getResultTitle( $settings, $version )
   {
@@ -185,31 +224,31 @@ class CalculatorBase
     $value = false;
 
     // temp
-    $res['calc_comment'] = get_option($this->getVersion(true).'calc_comment', false );
+    $res['calc_comment'] = $this->get_option($this->getVersion(true).'calc_comment', false );
 
-    $res['alapszabadsag'] = (float)get_option($this->getVersion(true).'alapszabadsag', 0 );
-    $res['betegszabadsag'] = (float)get_option($this->getVersion(true).'betegszabadsag', 0 );
-    $res['potszabi_ha16evnelfiatalabbgyereketnevel'] = (float)get_option($this->getVersion(true).'potszabi_ha16evnelfiatalabbgyereketnevel', 0 );
-    $res['potszabi_megvaltozott_munkakepessegu'] = (float)get_option($this->getVersion(true).'potszabi_megvaltozott_munkakepessegu', 0 );
+    $res['alapszabadsag'] = (float)$this->get_option($this->getVersion(true).'alapszabadsag', 0 );
+    $res['betegszabadsag'] = (float)$this->get_option($this->getVersion(true).'betegszabadsag', 0 );
+    $res['potszabi_ha16evnelfiatalabbgyereketnevel'] = (float)$this->get_option($this->getVersion(true).'potszabi_ha16evnelfiatalabbgyereketnevel', 0 );
+    $res['potszabi_megvaltozott_munkakepessegu'] = (float)$this->get_option($this->getVersion(true).'potszabi_megvaltozott_munkakepessegu', 0 );
 
-    $res['ado_tb'] = (float)get_option($this->getVersion(true).'ado_tb', 0 );
-    $res['ado_szja'] = (float)get_option($this->getVersion(true).'ado_szja', 0 );
-    $res['ado_termeszetegeszseg'] = (float)get_option($this->getVersion(true).'ado_termeszetegeszseg', 0 );
-    $res['ado_penzbeli_egeszseg'] = (float)get_option($this->getVersion(true).'ado_penzbeli_egeszseg', 0 );
-    $res['ado_nyugdij'] = (float)get_option($this->getVersion(true).'ado_nyugdij', 0 );
-    $res['ado_munkaerppiac'] = (float)get_option($this->getVersion(true).'ado_munkaerppiac', 0 );
-    $res['ado_szocialis_hozzajarulas'] = (float)get_option($this->getVersion(true).'ado_szocialis_hozzajarulas', 0 );
-    $res['ado_szakkepzesi_hozzajarulas'] = (float)get_option($this->getVersion(true).'ado_szakkepzesi_hozzajarulas', 0 );
-    $res['ado_kisvallalati'] = (float)get_option($this->getVersion(true).'ado_kisvallalati', 0 );
-    $res['ado_caf_adoalap_kieg'] = (float)get_option($this->getVersion(true).'ado_caf_adoalap_kieg', 0 );
+    $res['ado_tb'] = (float)$this->get_option($this->getVersion(true).'ado_tb', 0 );
+    $res['ado_szja'] = (float)$this->get_option($this->getVersion(true).'ado_szja', 0 );
+    $res['ado_termeszetegeszseg'] = (float)$this->get_option($this->getVersion(true).'ado_termeszetegeszseg', 0 );
+    $res['ado_penzbeli_egeszseg'] = (float)$this->get_option($this->getVersion(true).'ado_penzbeli_egeszseg', 0 );
+    $res['ado_nyugdij'] = (float)$this->get_option($this->getVersion(true).'ado_nyugdij', 0 );
+    $res['ado_munkaerppiac'] = (float)$this->get_option($this->getVersion(true).'ado_munkaerppiac', 0 );
+    $res['ado_szocialis_hozzajarulas'] = (float)$this->get_option($this->getVersion(true).'ado_szocialis_hozzajarulas', 0 );
+    $res['ado_szakkepzesi_hozzajarulas'] = (float)$this->get_option($this->getVersion(true).'ado_szakkepzesi_hozzajarulas', 0 );
+    $res['ado_kisvallalati'] = (float)$this->get_option($this->getVersion(true).'ado_kisvallalati', 0 );
+    $res['ado_caf_adoalap_kieg'] = (float)$this->get_option($this->getVersion(true).'ado_caf_adoalap_kieg', 0 );
 
-    $res['adokedvezmeny_frisshazasok'] = (float)get_option($this->getVersion(true).'adokedvezmeny_frisshazasok', 0 );
-    $res['adokedvezmeny_szemelyi'] = (float)get_option($this->getVersion(true).'adokedvezmeny_szemelyi', 0 );
-    $res['adokedvezmeny_csalad_gyermek1'] = (float)get_option($this->getVersion(true).'adokedvezmeny_csalad_gyermek1', 0 );
-    $res['adokedvezmeny_csalad_gyermek2'] = (float)get_option($this->getVersion(true).'adokedvezmeny_csalad_gyermek2', 0 );
-    $res['adokedvezmeny_csalad_gyermek3'] = (float)get_option($this->getVersion(true).'adokedvezmeny_csalad_gyermek3', 0 );
+    $res['adokedvezmeny_frisshazasok'] = (float)$this->get_option($this->getVersion(true).'adokedvezmeny_frisshazasok', 0 );
+    $res['adokedvezmeny_szemelyi'] = (float)$this->get_option($this->getVersion(true).'adokedvezmeny_szemelyi', 0 );
+    $res['adokedvezmeny_csalad_gyermek1'] = (float)$this->get_option($this->getVersion(true).'adokedvezmeny_csalad_gyermek1', 0 );
+    $res['adokedvezmeny_csalad_gyermek2'] = (float)$this->get_option($this->getVersion(true).'adokedvezmeny_csalad_gyermek2', 0 );
+    $res['adokedvezmeny_csalad_gyermek3'] = (float)$this->get_option($this->getVersion(true).'adokedvezmeny_csalad_gyermek3', 0 );
 
-    $res['minimalber'] = (float)get_option($this->getVersion(true).'minimalber', 0 );
+    $res['minimalber'] = (float)$this->get_option($this->getVersion(true).'minimalber', 0 );
 
     $value = $res[$key];
 
@@ -3981,7 +4020,7 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
     }
 
     return false;
-  }
+  } 
 }
 
 ?>
