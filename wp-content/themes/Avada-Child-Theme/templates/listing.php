@@ -1,4 +1,4 @@
-<div class="bloglist-holder view-of-archive">
+<div class="bloglist-holder view-of-archive<?=(is_search())?' search-results':''?>">
   <div class="wrapper">
     <?php $i = 0; while(have_posts()): ?>
       <?php

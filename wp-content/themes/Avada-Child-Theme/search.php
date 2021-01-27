@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <?php get_header(); ?>
-<pre><?php echo $GLOBALS['wp_query']->request; ?></pre>
 <section id="content" <?php Avada()->layout->add_class( 'content_class' ); ?> <?php Avada()->layout->add_style( 'content_style' ); ?>>
 	<?php if ( have_posts() && 0 != strlen( trim( get_search_query() ) ) ) : ?>
 

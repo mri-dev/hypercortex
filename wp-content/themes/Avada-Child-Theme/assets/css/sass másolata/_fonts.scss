@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=latin-ext');
+
+@font-face {
+    font-family: 'Bauer Bodoni';
+    src: url('../fonts/bauerbodoni/BauerBodD-Regu.eot');
+    src: url('../fonts/bauerbodoni/BauerBodD-Regu.eot#iefix') format('embedded-opentype'),
+         url('../fonts/bauerbodoni/BauerBodD-Regu.woff') format('woff'),
+         url('../fonts/bauerbodoni/BauerBodD-Regu.ttf') format('truetype'),
+         url('../fonts/bauerbodoni/BauerBodD-Regu.svg#Name') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bauer Bodoni';
+    src: url('../fonts/bauerbodoni/Bauer Bodoni D Italic.eot');
+    src: url('../fonts/bauerbodoni/Bauer Bodoni D Italic.eot#iefix') format('embedded-opentype'),
+         url('../fonts/bauerbodoni/BauerBodD-ReguItal.woff') format('woff'),
+         url('../fonts/bauerbodoni/BauerBodD-ReguItal.ttf') format('truetype'),
+         url('../fonts/bauerbodoni/BauerBodD-ReguItal.svg#Name') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
