@@ -181,13 +181,14 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
           $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
           $scope.form.anyak_4vagytobbgyermek = 'Nem';
         break;
-        case 'teljes_berkoltseg':
+        case 'berkalkulator': case 'teljes_berkoltseg':
           $scope.settings.select_yesno = $scope.select_yesno();
           $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
           $scope.form.frisshazas_jogosult = 'Nem';
           $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
           $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
           $scope.form.anyak_4vagytobbgyermek = 'Nem';
+          $scope.form.oregsegi_nyugdijas = 'Nem';
         break;
         case 'belepo_szabadsag':
           $scope.settings.select_yesno = $scope.select_yesno();

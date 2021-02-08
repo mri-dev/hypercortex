@@ -1478,6 +1478,48 @@ footer .fusion-columns{
       border: 2px solid #ffc5c5;
     }
   }
+  
+  .line-switcher{
+    background: transparent !important;
+    border: none !important;
+    .head{
+      flex-basis: 100%;
+      text-align: center;
+      font-weight: bold;
+    }
+    .val {
+      flex-basis: 100%;
+      .inp-wrapper{
+        border: none;
+        background: transparent !important;
+
+        .radio-switch{
+          display: flex;
+          align-items: center;
+          width: 100%;
+
+          input[type=radio]{
+            display: none;
+          }
+
+          input[type=radio] + label {
+            background: white;
+            cursor: pointer;
+            padding: 10px;
+            flex-basis: calc(100% / 3);
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+          }
+
+          input[type=radio]:checked + label {
+            background: #712322;
+            color: white;
+          }
+        }
+      }
+    }
+  }
   .error-hint{
     color: #ef1212;
     font-size: 0.7rem;

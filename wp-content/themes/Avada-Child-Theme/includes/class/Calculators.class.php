@@ -8,10 +8,11 @@ interface CalculatorVersion
 
 class CalculatorBase
 {
-  const DEFAULT_VERSION = '2020/2';
-  public $year_version = '2020/2';
-  public $avaiable_versions = array('2020/2', '2020/1', '2019');  
+  const DEFAULT_VERSION = '2021';
+  public $year_version = '2021';
+  public $avaiable_versions = array('2021','2020/2', '2020/1', '2019');  
   public $version_index = array(
+    '2021' => 4,
     '2020/2' => 3, 
     '2020/1' => 2, 
     '2019' => 1
@@ -185,6 +186,9 @@ class CalculatorBase
   {
     switch ( $calc )
     {
+      case 'berkalkulator':
+        return $this->load_berkalkulator_resources();
+      break;
       case 'teljes_berkoltseg':
         return $this->load_teljes_berkoltseg_resources();
       break;
@@ -256,6 +260,39 @@ class CalculatorBase
   }
 
   private function load_brutto_ber_resources()
+  {
+    $res = array();
+
+    $res['calc_comment'] = $this->getSettingsValue('calc_comment');
+
+    $res['minimalber'] = $this->getSettingsValue('minimalber');
+
+    $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_tb'] = $this->getSettingsValue('ado_tb');
+    $res['ado_termeszetegeszseg'] = $this->getSettingsValue('ado_termeszetegeszseg');
+    $res['ado_penzbeli_egeszseg'] = $this->getSettingsValue('ado_penzbeli_egeszseg');
+    $res['ado_nyugdij'] = $this->getSettingsValue('ado_nyugdij');
+    $res['ado_munkaerppiac'] = $this->getSettingsValue('ado_munkaerppiac');
+
+    $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
+    $res['ado_szakkepzesi_hozzajarulas'] = $this->getSettingsValue('ado_szakkepzesi_hozzajarulas');
+    $res['ado_kisvallalati'] = $this->getSettingsValue('ado_kisvallalati');
+
+    $res['adokedvezmeny_frisshazasok'] = $this->getSettingsValue('adokedvezmeny_frisshazasok');
+    $res['adokedvezmeny_szemelyi'] = $this->getSettingsValue('adokedvezmeny_szemelyi');
+    $res['adokedvezmeny_csalad_gyermek1'] = $this->getSettingsValue('adokedvezmeny_csalad_gyermek1');
+    $res['adokedvezmeny_csalad_gyermek2'] = $this->getSettingsValue('adokedvezmeny_csalad_gyermek2');
+    $res['adokedvezmeny_csalad_gyermek3'] = $this->getSettingsValue('adokedvezmeny_csalad_gyermek3');
+
+    // Form resources
+    $forms = array();
+    $forms['munkavallalo_kedvezmenyek'] = $this->loadMunkavallaloKedvezmenyek();
+    $res['forms'] = $forms;
+
+    return $res;
+  }
+
+  private function load_berkalkulator_resources()
   {
     $res = array();
 
@@ -884,6 +921,7 @@ class CalculatorBase
 
     return $row;
   }
+
   protected function loadGepjarmuTeljesitmenyOsztalyok()
   {
     $row = array();
@@ -3235,6 +3273,1389 @@ class CalculatorV2020_2 extends CalculatorBase implements CalculatorVersion
 
         $ret['ado_kisvallalati'] = ($brutto_ber - $szocho_es_kiva_kedvezmeny_alap) * ($settings['ado_kisvallalati']/100);
         $ret['ado_kisvallalati'] = round($ret['ado_kisvallalati']);
+
+        $ret['berkoltseg_nem_KIVA'] = $brutto_ber + $ret['ado_szocialis_hozzajarulas'] + $ret['ado_szakkepzesi_hozzajarulas'];
+        $ret['berkoltseg_KIVA'] = $brutto_ber + $ret['ado_kisvallalati'];
+
+        $nav_osszes_ado = 0;
+
+        if ($data['ceg_kisvallalati_ado_alany'] == 'Igen') {
+          $nav_osszes_ado = $ret['berkoltseg_KIVA'] - $netto_ber;
+        } else {
+          $nav_osszes_ado = $ret['berkoltseg_nem_KIVA'] - $netto_ber;
+        }
+
+        $ret['nav_osszes_ado'] = $nav_osszes_ado;
+
+        $values['szocho_es_kiva_kedvezmeny_alap'] = $szocho_es_kiva_kedvezmeny_alap;
+        $values['szokho_kedvezmeny_alap'] = $szokho_kedvezmeny_alap;
+        $values['kiva_adoalany'] = $data['ceg_kisvallalati_ado_alany'];
+
+        $ret['values'] = $values;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+      case 'netto_ber':
+        $ret = array(
+          'brutto_ber' => 0
+        );
+        $settings = $this->loadSettings( $calc );
+
+        $brutto_ber = $data['brutto_ber'];
+
+        $ret['brutto_ber'] = $brutto_ber;
+
+        $csaladi_adokedvezmeny_osszege = 0;
+        if ($data['csaladkedvezmenyre_jogosult'] == 'Igen') {
+          $csaladi_adokedvezmeny_osszege = $this->csaladiAdokedvezmenyOsszege( (int)$data['csalad_eltartott_gyermek'], (int)$data['csalad_eltartott_gyermek_kedvezmenyezett'], $settings );
+        }
+
+        $anyak_gyerek4vagytobb = false;
+        if ($data['anyak_4vagytobbgyermek'] == 'Igen') {
+          $anyak_gyerek4vagytobb = true;
+        }
+
+        $ervenyesitheto_jarulekkedvezmeny = 0;
+        $friss_hazasok_kedvezmeny = 0;
+        $szemelyi_kedvezmeny = 0;
+        $ervenyesitheto_termeszetbeni_kedvezmeny = 0;
+        $ervenyesitheto_penzbeni_kedvezmeny = 0;
+
+        if ($data['frisshazas_jogosult'] == 'Igen') {
+          $friss_hazasok_kedvezmeny = $settings['adokedvezmeny_frisshazasok'];
+        }
+
+        if ($data['szemelyikedvezmeny_jogosult'] == 'Igen') {
+          $szemelyi_kedvezmeny = $settings['adokedvezmeny_szemelyi'];
+        }
+
+        if ( !$anyak_gyerek4vagytobb )
+        {
+          $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege+$friss_hazasok_kedvezmeny-$brutto_ber;
+          $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
+        } else {
+          $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege;
+          $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
+        }
+
+        $ervenyesitheto_jarulekkedvezmeny = $csaladi_adokedvezmeny_maradekalap * 0.15;
+        $ervenyesitheto_jarulekkedvezmeny = ($ervenyesitheto_jarulekkedvezmeny < 0) ? 0 : $ervenyesitheto_jarulekkedvezmeny;
+
+        $ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
+        $ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
+
+        //$ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
+        //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
+
+        if ( !$anyak_gyerek4vagytobb ) {
+          $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
+          $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
+          $ret['ado_szja'] = round($ret['ado_szja']);
+        } else {
+          $ret['ado_szja'] = 0;
+          $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
+          $ret['ado_szja'] = round($ret['ado_szja']);
+        }
+
+        // TB járulék számítás
+        $ret['ado_tb'] = ($brutto_ber * ($settings['ado_tb']/100)) - $ervenyesitheto_jarulekkedvezmeny;;
+        $ret['ado_tb'] = ($ret['ado_tb'] < 0) ? 0 : $ret['ado_tb'];
+        $ret['ado_tb'] = round($ret['ado_tb']);
+
+        $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
+        $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
+        $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
+
+        $ret['ado_penzbeli_egeszseg'] = ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100)) - $ervenyesitheto_termeszetbeni_kedvezmeny;
+        $ret['ado_penzbeli_egeszseg'] = ($ret['ado_penzbeli_egeszseg'] < 0) ? 0 : $ret['ado_penzbeli_egeszseg'];
+        $ret['ado_penzbeli_egeszseg'] = round($ret['ado_penzbeli_egeszseg']);
+
+        //$ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
+        //$ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
+        //$ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
+
+        //$ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
+        //$ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
+
+        //$sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
+        $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_tb'];
+
+        $ret['sum_minusbrutto'] = $sum_minusbrutto;
+        $netto_ber = $brutto_ber-$sum_minusbrutto;
+        $ret['netto_ber'] = $netto_ber;
+
+        $values['csaladi_adokedvezmeny_osszege'] = $csaladi_adokedvezmeny_osszege;
+        $values['frisshazas_jogosult'] = $friss_hazasok_kedvezmeny;
+        $values['szemelyikedvezmeny_jogosult'] = $szemelyi_kedvezmeny;
+        $values['csaladi_adokedvezmeny_maradekalap'] = $csaladi_adokedvezmeny_maradekalap;
+        $values['ervenyesitheto_jarulekkedvezmeny'] = $ervenyesitheto_jarulekkedvezmeny;
+        //$values['ervenyesitheto_termeszetbeni_kedvezmeny'] = $ervenyesitheto_termeszetbeni_kedvezmeny;
+        //$values['ervenyesitheto_penzbeni_kedvezmeny'] = $ervenyesitheto_penzbeni_kedvezmeny;
+
+        $ret['values'] = $values;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+      case 'belepo_szabadsag':
+        $ret = array(
+          'szabadsag_eves' => 0,
+          'szabadsag_idoaranyos' => 0,
+          'betegszabadsag_eves' => 0,
+          'betegszabadsag_idoaranyos' => 0
+        );
+        $values = array();
+        $settings = $this->loadSettings( $calc );
+        $ret['betegszabadsag_eves'] = $settings['betegszabadsag'];
+        $targyev = (int)date('Y');
+        $ev_elso_napja = date('Y').'-01-01';
+        $ev_utolso_napja = date('Y-m-d', strtotime('last day of december this year'));
+        $szamitas_kezdete = $ev_elso_napja;
+
+        if ($data['iden_kezdett_dolgozni'] == 'Igen') {
+          $szamitas_kezdete = date('Y-m-d', strtotime($data['belepes_datuma']));
+        }
+
+        // pre calc
+        $munkavallalo_kora = $targyev - $data['szuletesi_ev'];
+        $ev_vegeig_hatralevo_napok = round((strtotime($ev_utolso_napja) - strtotime($szamitas_kezdete)) / (60 * 60 * 24))+1;
+        $ev_naptari_napok = round((strtotime($ev_utolso_napja) - strtotime($ev_elso_napja)) / (60 * 60 * 24))+1;
+        $kor_potszabi = $this->potszabadasgKorSzerint($munkavallalo_kora);
+        $gyerek16fiatalabb_potszabi = $this->potszabadasg16evfiatalabbGyerekSzerint((int)$data['gyerek16ev_fiatalabb']);
+
+        // potszabi_ha16evnelfiatalabbgyereketnevel
+        // megvaltozott_munkakepessegu
+
+        $szabadsag_eves = (int)$data['athozott_szabadsagok'] + $settings['alapszabadsag'] + $kor_potszabi + $gyerek16fiatalabb_potszabi;
+
+        if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
+          $szabadsag_eves += $settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
+          $values['ha16evnelfiatalabbgyereketnevel_potszabi'] = $settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
+        }
+
+        if ($data['megvaltozott_munkakepessegu'] == 'Igen') {
+          $szabadsag_eves += $settings['potszabi_megvaltozott_munkakepessegu'];
+          $values['megvaltozott_munkakepessegu_potszabi'] = $settings['potszabi_megvaltozott_munkakepessegu'];
+        }
+
+        $ret['szabadsag_eves'] = $szabadsag_eves;
+        $szabadsag_idoaranyos = $szabadsag_eves/$ev_naptari_napok*$ev_vegeig_hatralevo_napok;
+        $ret['szabadsag_idoaranyos'] = round($szabadsag_idoaranyos);
+
+        $betegszabadsag_eves = $settings['betegszabadsag'];
+        $betegszabadsag_idoaranyos = $betegszabadsag_eves/$ev_naptari_napok*$ev_vegeig_hatralevo_napok;
+
+        $ret['betegszabadsag_eves'] = $betegszabadsag_eves;
+        $ret['betegszabadsag_idoaranyos'] = round($betegszabadsag_idoaranyos);
+
+
+        $values['targyev'] = $targyev;
+        $values['szamitas_kezdete'] = $szamitas_kezdete;
+        $values['ev_utolso_napja'] = $ev_utolso_napja;
+        $values['munkavallalo_kora'] = $munkavallalo_kora;
+        $values['ev_vegeig_hatralevo_napok'] = $ev_vegeig_hatralevo_napok;
+        $values['ev_naptari_napok'] = $ev_naptari_napok;
+        $values['kor_potszabi'] = $kor_potszabi;
+        $values['gyerek16fiatalabb_potszabi'] = $gyerek16fiatalabb_potszabi;
+
+        $ret['values'] = $values;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+
+      case 'cegauto_ado':
+        return $this->calcCegautoAdo( $data['emission'], (float)$data['kw'] );
+      break;
+
+      case 'ingatlan_ertekesites':
+        $ret = array();
+        $settings = $this->loadSettings( $calc );
+        $ret['settings'] = $settings;
+
+        $bevetel = (float)$data['atruhazasbol_bevetel'];
+        // C8+C9+(C10-C11)+C12
+        $koltseg = $data['megszerzes_osszeg'] + $data['megszerzes_egyeb_kiadas'] + ($data['erteknovelo_beruhazasok'] - $data['erteknovelo_beruhazasok_allammegovas']) + $data['atruhazas_koltsegei'];
+        // (C14-C15)*FKERES(C5;F5:G10;2;IGAZ)
+        $szorzo = $this->ingatlan_ertekesites_jovedelem_szorzo((int)$data['szerzes_eve'], (int)$data['atruhazas_eve']);
+        $jovedelem = ($bevetel - $koltseg) * $szorzo;
+        $fizetendo_szja = 0;
+
+        $fizetendo_szja = $jovedelem * ($settings['ado_szja']/100);
+        $fizetendo_szja = ($fizetendo_szja < 0) ? 0 : $fizetendo_szja;
+        $fizetendo_szja = round($fizetendo_szja);
+
+        $ret['bevetel'] = $bevetel;
+        $ret['koltseg'] = $koltseg;
+        $ret['jovedelem'] = $jovedelem;
+        $ret['fizetendo_szja'] = $fizetendo_szja;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+      case 'osztalekado':
+        $ret = array();
+        $settings = $this->loadSettings( $calc );
+        $ret['settings'] = $settings;
+        $szocho_ado_max = $settings['minimalber'] * 24;
+
+        $osszes_jovedelem = 0;
+        $fizetendo_szja = 0;
+        $fizetendo_szocho = 0;
+
+        $osszes_jovedelem =
+        (float)$data['teljes_targyev_brutto_munkaber'] +
+        (float)$data['teljes_targyev_brutto_tarasvall_kivet'] +
+        (float)$data['targyev_megszerzett_brutto_osztalek'] +
+        (float)$data['targyev_vall_kivont_jovedelem'] + 
+        (float)$data['targyev_ertekpapkolcson_jovedelem'] +
+        (float)$data['targyev_arfolyamnyereseg_jovedelem'] +
+        (float)$data['egyeb_szja_jovedelem'];
+
+        $fizetendo_szja = (float)$data['brutto_alap'] * ($settings['ado_szja']/100);
+        $fizetendo_szja = round($fizetendo_szja);
+
+        if ( $data['osztalek_kifizetes'] == 'Igen' )
+        {
+          $alapszamitas = min( ((float)$data['brutto_alap'] * ($settings['ado_szocialis_hozzajarulas']/100)), (($szocho_ado_max - $osszes_jovedelem) * ($settings['ado_szocialis_hozzajarulas']/100)) );
+          $fizetendo_szocho = $alapszamitas;
+          $fizetendo_szocho = round($fizetendo_szocho);
+          if ($fizetendo_szocho < 0 ) {
+            $fizetendo_szocho = 0;
+          }
+        }
+
+        $ret['jovedelem'] = $osszes_jovedelem;
+        $ret['fizetendo_szja'] = $fizetendo_szja;
+        $ret['fizetendo_szocho'] = $fizetendo_szocho;
+        $ret['fizetendo'] = $fizetendo_szja +  $fizetendo_szocho;
+        $ret['brutto_alap'] = $data['brutto_alap'];
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+      case 'cafeteria':
+        $ret = array();
+        $settings = $this->loadSettings( $calc );
+        $ret['settings'] = $settings;
+
+        $jg = $this->getCafeteriaGroupByTitle( $data['juttatas'] );
+        $ret['juttatas_group'] = $jg;
+
+        $adoalap_kiegeszites = 0;
+        $szja = 0;
+        $szocho = 0;
+        $szkh = 0;
+        $kiva = 0;
+        $ado_munkavallalo = 0;
+        $ado_mukaltato = 0;
+        $hataron_felul = false;
+
+        $adoalap = (float)$data['juttatas_osszege'];
+
+        // Adómentes juttatás
+        // group 1 
+        if ( $jg && in_array($jg['ID'], array(1)) )
+        {          
+          $adoalap_tetel_limits = $this->getCafeteriaItemAdoalapLimit();
+          $adoalap_tetel_limit = (float)$adoalap_tetel_limits[$data['juttatas']];
+
+          if ($adoalap_tetel_limit == 0 || ((float)$data['juttatas_osszege'] < $adoalap_tetel_limit) ) 
+          {
+            $adoalap_kiegeszites = 0;
+          } else {
+            $hataron_felul = true;
+            $adoalap_kiegeszites = (float)$data['juttatas_osszege'] - $adoalap_tetel_limit;
+            $adoalap_kiegeszites = ($adoalap_kiegeszites < 0) ? 0 : $adoalap_kiegeszites;
+            $adoalap_kiegeszites = round($adoalap_kiegeszites);
+
+            $szja = $adoalap_kiegeszites * ($settings['ado_szja']/100);
+            $szja = ($szja < 0) ? 0 : $szja;
+            $szja = round($szja);
+  
+            $tb = $adoalap_kiegeszites * ($settings['ado_tb']/100);
+            $tb = ($tb < 0) ? 0 : $tb;
+            $tb = round($tb);
+
+            // összes munkaválllalói teher
+            $munkavallalo_osszes_jarulek = $szja + $tb;
+            $munkavallalo_osszes_jarulek = ($munkavallalo_osszes_jarulek < 0) ? 0 : $munkavallalo_osszes_jarulek;
+            $munkavallalo_osszes_jarulek = round($munkavallalo_osszes_jarulek);
+            $ado_munkavallalo = $munkavallalo_osszes_jarulek;
+
+            // szocho
+            if ( $data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0)
+            {
+              $szocho = $adoalap_kiegeszites * ($settings['ado_szocialis_hozzajarulas']/100);
+              $szocho = ($szocho < 0) ? 0 : $szocho;
+              $szocho = round($szocho);
+            }
+
+            // Szakképzési
+            if ($data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0) {
+              $szkh = $adoalap_kiegeszites * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+              $szkh = ($szkh < 0) ? 0 : $szkh;
+              $szkh = round($szkh);
+            }
+
+            // kiva
+            if ( $data['ceg_kiva'] == 'Igen' )
+            {
+              $kiva = $adoalap_kiegeszites * ($settings['ado_kisvallalati']/100);
+              $kiva = ($kiva < 0) ? 0 : $kiva;
+              $kiva = round($kiva);
+            }
+
+            $ado_munkaltato = $szocho + $szkh + $kiva;
+          }
+        } 
+
+        if ( $jg && in_array($jg['ID'], array(2, 3)) )
+        {
+          if ( $jg['ID'] == 2) {
+            $adoalap_tetel_limits = $this->getCafeteriaItemAdoalapLimit();
+            $adoalap_tetel_limit = (float)$adoalap_tetel_limits[$data['juttatas']];
+
+            if ((float)$data['juttatas_osszege'] <= $adoalap_tetel_limit) {
+              $adoalap_kiegeszites = 0;
+            } else {
+              $hataron_felul = true;
+              $adoalap_kiegeszites = (float)$data['juttatas_osszege'] - $adoalap_tetel_limit;
+              $adoalap_kiegeszites = $adoalap_kiegeszites * ($settings['ado_caf_adoalap_kieg']/100);
+              $adoalap_kiegeszites = ($adoalap_kiegeszites < 0) ? 0 : $adoalap_kiegeszites;
+              $adoalap_kiegeszites = round($adoalap_kiegeszites);
+            }
+          }
+
+          if ( $jg['ID'] == 3) 
+          {
+            $adoalap_tetel_limits = $this->getCafeteriaItemAdoalapLimit();
+            $adoalap_tetel_limit = (float)$adoalap_tetel_limits[$data['juttatas']];
+          
+            if ($adoalap_tetel_limit != 0 && ((float)$data['juttatas_osszege'] > $adoalap_tetel_limit)) {
+              $adoalap_kiegeszites = 0;
+              $hataron_felul = true;
+            } else {
+              $adoalap_kiegeszites = (float)$data['juttatas_osszege'] * ($settings['ado_caf_adoalap_kieg']/100);
+              $adoalap_kiegeszites = ($adoalap_kiegeszites < 0) ? 0 : $adoalap_kiegeszites;
+              $adoalap_kiegeszites = round($adoalap_kiegeszites);
+            }
+
+            // szocho
+            if ( $data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0)
+            {
+              $szocho = $adoalap_kiegeszites * ($settings['ado_szocialis_hozzajarulas']/100);
+              $szocho = ($szocho < 0) ? 0 : $szocho;
+              $szocho = round($szocho);
+            }
+
+            // Szakképzési
+            if ($data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0 && $hataron_felul) {
+              $szkh = $adoalap_kiegeszites * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+              $szkh = ($szkh < 0) ? 0 : $szkh;
+              $szkh = round($szkh);
+            }
+
+            // kiva
+            if ( $data['ceg_kiva'] == 'Igen' )
+            {
+              $kiva = $adoalap_kiegeszites * ($settings['ado_kisvallalati']/100);
+              $kiva = ($kiva < 0) ? 0 : $kiva;
+              $kiva = round($kiva);
+            }
+          }
+
+          $adoalap = (float)$adoalap_kiegeszites;
+        }
+
+        $ret['values']['adoalap'] = $adoalap;
+
+        // szja
+        // group 3, 4
+        if ($jg && in_array($jg['ID'], array(3, 4)) ) {
+          $szja = $adoalap * ($settings['ado_szja']/100);
+          $szja = ($szja < 0) ? 0 : $szja;
+          $szja = round($szja);
+
+          $tb = $adoalap * ($settings['ado_tb']/100);
+          $tb = ($tb < 0) ? 0 : $tb;
+          $tb = round($tb);
+        }
+
+        
+        $ret['values']['adoalap_tetel_limit'] = $adoalap_tetel_limit;
+        $ret['values']['juttatas'] = $data['juttatas'];
+        $ret['values']['hataron_felul'] = $hataron_felul;
+
+        // group 3 módosítás, ha elérte a határértéket
+        if  ($jg && in_array($jg['ID'], array(3)) && $hataron_felul ) 
+        {
+          /* **/
+          $szja = (float)$data['juttatas_osszege'] * ($settings['ado_szja']/100);
+          $szja = ($szja < 0) ? 0 : $szja;
+          $szja = round($szja);
+
+          $tb = (float)$data['juttatas_osszege'] * ($settings['ado_tb']/100);
+          $tb = ($tb < 0) ? 0 : $tb;
+          $tb = round($tb);
+          /* */
+
+          // összes munkaválllalói teher
+          $munkavallalo_osszes_jarulek = $szja + $tb;
+          $munkavallalo_osszes_jarulek = ($munkavallalo_osszes_jarulek < 0) ? 0 : $munkavallalo_osszes_jarulek;
+          $munkavallalo_osszes_jarulek = round($munkavallalo_osszes_jarulek);
+          $ado_munkavallalo = $munkavallalo_osszes_jarulek;
+        } elseif( $jg && in_array($jg['ID'], array(3)) ) {
+          $tb = 0;
+        }
+
+        // szocho
+        if ($data['ceg_kiva'] == 'Nem' && !isset($szocho)) {
+          $szocho = $adoalap * ($settings['ado_szocialis_hozzajarulas']/100);
+          $szocho = ($szocho < 0) ? 0 : $szocho;
+          $szocho = round($szocho);
+        }
+
+        // Szakképzési
+        if ( !isset($szkh) && $data['ceg_kiva'] == 'Nem' && $jg && in_array($jg['ID'], array(4))) {
+          $szkh = $adoalap * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+          $szkh = ($szkh < 0) ? 0 : $szkh;
+          $szkh = round($szkh);
+        }
+
+        // KIVA
+        if ($data['ceg_kiva'] == 'Igen' && $jg && in_array($jg['ID'], array(3, 4))) {
+          $kiva = $data['juttatas_osszege'] * ($settings['ado_kisvallalati']/100);
+          $kiva = ($kiva < 0) ? 0 : $kiva;
+          $kiva = round($kiva);
+        }
+
+        // group 4
+        if ($jg && in_array($jg['ID'], array(4)))
+        {
+          // összes munkaválllalói teher
+          $mv_ado = ($settings['ado_szja'] + $settings['ado_tb']) / 100;
+          $munkavallalo_osszes_jarulek = $adoalap * $mv_ado;
+          $munkavallalo_osszes_jarulek = ($munkavallalo_osszes_jarulek < 0) ? 0 : $munkavallalo_osszes_jarulek;
+          $munkavallalo_osszes_jarulek = round($munkavallalo_osszes_jarulek);
+          $ado_munkavallalo = $munkavallalo_osszes_jarulek;
+
+          // szocho
+          if ($data['ceg_kiva'] == 'Nem') {
+            $szocho = $adoalap * ($settings['ado_szocialis_hozzajarulas']/100);
+            $szocho = ($szocho < 0) ? 0 : $szocho;
+            $szocho = round($szocho);
+          }
+
+          // Szakképzési
+          if ($data['ceg_kiva'] == 'Nem' ) {
+            $szkh = $adoalap * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+            $szkh = ($szkh < 0) ? 0 : $szkh;
+            $szkh = round($szkh);
+          }
+        }
+
+        // group 2
+
+        if ($jg && in_array($jg['ID'], array(2)))
+        {
+          // szja 
+          if ( $adoalap_kiegeszites > 0 ) {
+            $szja = ($adoalap_tetel_limit + $adoalap_kiegeszites) * ($settings['ado_szja']/100);
+            $szja = ($szja < 0) ? 0 : $szja;
+            $szja = round($szja);
+          } else {
+            $szja = ((float)$data['juttatas_osszege']) * ($settings['ado_szja']/100);
+            $szja = ($szja < 0) ? 0 : $szja;
+            $szja = round($szja);
+          }
+
+          // szocho
+          if ( $data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0)
+          {
+            $szocho = ($adoalap_tetel_limit + $adoalap_kiegeszites) * ($settings['ado_szocialis_hozzajarulas']/100);
+            $szocho = ($szocho < 0) ? 0 : $szocho;
+            $szocho = round($szocho);
+          }
+
+          if ( $data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites == 0 )
+          {
+            $szocho = ((float)$data['juttatas_osszege']) * ($settings['ado_szocialis_hozzajarulas']/100);
+            $szocho = ($szocho < 0) ? 0 : $szocho;
+            $szocho = round($szocho);
+          }
+
+          // kiva
+          if ( $data['ceg_kiva'] == 'Igen' )
+          {
+            $kiva = (float)$data['juttatas_osszege'] * ($settings['ado_kisvallalati']/100);
+            $kiva = ($kiva < 0) ? 0 : $kiva;
+            $kiva = round($kiva);
+          }
+        }
+
+        // Munkáltató adók
+        if ($jg && in_array($jg['ID'], array(2, 3))) {
+          $ado_munkaltato = $szja + $szocho + $kiva + $szkh;
+        }
+
+        if ($jg && in_array($jg['ID'], array(4))) {
+          $ado_munkaltato = $szocho + $szkh + $kiva;
+        }
+
+        // group 3 módosítás, ha elérte a határértéket
+        if  ($jg && in_array($jg['ID'], array(3)) && $hataron_felul ) 
+        {
+          if( $data['ceg_kiva'] == 'Nem' )
+          {
+            $szocho = (float)$data['juttatas_osszege'] * ($settings['ado_szocialis_hozzajarulas']/100);
+            $szocho = ($szocho < 0) ? 0 : $szocho;
+            $szocho = round($szocho);
+  
+            $szkh = (float)$data['juttatas_osszege'] * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+            $szkh = ($szkh < 0) ? 0 : $szkh;
+            $szkh = round($szkh);
+          }
+
+          $ado_munkaltato = $szocho + $szkh + $kiva;
+        }
+
+        $ret['adoalap_kiegeszites'] = $adoalap_kiegeszites;
+        $ret['szja'] = $szja;
+        $ret['tb'] = $tb;
+        $ret['szocho'] = $szocho;
+        $ret['szkh'] = $szkh;
+        $ret['kiva'] = $kiva;
+
+        $ret['termeszet_egeszseg_jarulek'] = $termeszet_egeszseg_jarulek;
+        $ret['penzbeli_egeszseg_jarulek'] = $penzbeli_egeszseg_jarulek;
+        $ret['nyugdij_jarulek'] = $nyugdij_jarulek;
+        $ret['munkaeropiac_hozzajarulas'] = $munkaeropiac_hozzajarulas;
+        $ret['munkavallalo_osszes_jarulek'] = $munkavallalo_osszes_jarulek;
+
+        $ret['ado_munkavallalo'] = $ado_munkavallalo;
+        $ret['ado_munkaltato'] = $ado_munkaltato;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+      case 'anyak_szabadsaga':
+        $ret = array(
+          'szules_eveben_szabadsag' => 0,
+          'szulesig_idoaranyos_szabadsag' => 0,
+          'szules_eveben_igenybe_vett_szabadsag' => 0,
+          'le_nem_toltott_szabadsag' => 0,
+
+          'csed_idejere_jaro_szabadsag' => 0,
+          'csed_szules_eveben_igenybe_vett_szabadsag' => 0,
+          'csed_le_nem_toltott_szabadsag' => 0,
+
+          'gyed_idejere_jaro_szabadsag' => 0,
+          'gyed_szules_eveben_igenybe_vett_szabadsag' => 0,
+          'gyed_le_nem_toltott_szabadsag' => 0,
+
+          'osszes_szabadsag' => 0,
+        );
+
+        $values = array();
+        $settings = $this->loadSettings( $calc );
+
+        $targyev = (int)date('Y');
+        $ev_elso_napja = date('Y').'-01-01';
+        $ev_utolso_napja = date('Y-m-d', strtotime('last day of december this year'));
+        $szules_eve = date('Y', strtotime($data['szules_ideje']));
+        $szules_eveben_munkavallalo_eletkora = $szules_eve - (int)$data['szuletesi_ev'];
+        $kor_potszabi = $this->potszabadasgKorSzerint($szules_eveben_munkavallalo_eletkora);
+        $szulelotti_igyenbevett = ($data['szul_elott_igenybevett_potszabadsag_gyermek'] == '3 vagy több') ? 3  : (int)$data['szul_elott_igenybevett_potszabadsag_gyermek'];
+        $gyerek_potszabi = $this->potszabadasg16evfiatalabbGyerekSzerint((int)$data['szul_elott_igenybevett_potszabadsag_gyermek']);
+
+        $alap_szules_eveben_jaro_szabadsag = (int)$settings['alapszabadsag'] + $kor_potszabi + $gyerek_potszabi;
+
+        $day = new DateTime($data['csed_kezdete']);
+        $day_munkaviszony_kezdet = new DateTime($data['munkaviszony_kezdete']);
+        $mv_day_str = strtotime($day_munkaviszony_kezdet->format('Y-m-d'));
+        $csed_day_str = strtotime($day->format('Y').'-01-01');
+
+        // alap munkaviszony kezdete
+        $calc_ts = $mv_day_str;
+
+        // ha a csed évi első napja nagyobb a mv kezdetétől
+        if ( $csed_day_str > $calc_ts ) {
+          $calc_ts = $csed_day_str;
+        }
+
+        if( $mv_day_str > $csed_day_str )
+        {
+          $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - $calc_ts) / (60*60*24) );          
+        } else {
+          $szulesig_eltelt_napok_szama = (float)( (strtotime($day->format('Y-m-d')) - $calc_ts) / (60*60*24) );
+        }
+
+        if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
+          $alap_szules_eveben_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
+        }
+
+        $szulesig_idoaranyos_szabadsag = round($alap_szules_eveben_jaro_szabadsag / 365 * $szulesig_eltelt_napok_szama);
+        $szules_eveben_igenybe_vett_szabadsag = (int)$data['szulev_igenybevett_szabadsag'];
+        $le_nem_toltott_szabadsag = $szulesig_idoaranyos_szabadsag - $szules_eveben_igenybe_vett_szabadsag;
+
+        $csed_kezdete = $data['csed_kezdete'];
+        $minucseddays = 168-1;
+        $csed_vege_datum = new DateTime($csed_kezdete); $csed_vege_datum->modify('+ '.$minucseddays.'day');
+        $csed_vege = $csed_vege_datum->format('Y-m-d');
+
+        $gyedgyes_kezdete = $data['gyedgyes_kezdete'];
+        $minugyedgyesmonth = 6;
+        $gyedgyes_vege_datum = new DateTime($gyedgyes_kezdete); $gyedgyes_vege_datum->modify('+ '.$minugyedgyesmonth.' month'); $gyedgyes_vege_datum->modify('-1 day');
+        $gyedgyes_vege = $gyedgyes_vege_datum->format('Y-m-d');
+
+        // Helpers
+        // CSED
+        $help_csed_kezdet = $csed_kezdete;
+        $help_csed_vegzet = $csed_vege;
+        $help_csed_eletkor1 = date('Y', strtotime($csed_kezdete)) - (int)$data['szuletesi_ev'];
+        $help_csed_eletkor2 = date('Y', strtotime($help_csed_vegzet)) - (int)$data['szuletesi_ev'];
+        $help_csed_potszabi1 = (int)$this->potszabadasgKorSzerint( (int)$help_csed_eletkor1 );
+        $help_csed_potszabi2 = (int)$this->potszabadasgKorSzerint( (int)$help_csed_eletkor2 );
+
+        if ( date('Y', strtotime($csed_kezdete)) == date('Y', strtotime($csed_vege)) ) {
+          $vegzetplusz1 = new DateTime($help_csed_vegzet); $vegzetplusz1->modify('+1 day');
+          $help_csed_potszabi = round( $help_csed_potszabi1 / 365 * ((strtotime($vegzetplusz1->format('Y-m-d')) - strtotime($help_csed_kezdet))/(60*60*24)));
+        }
+        else
+        {
+          // KEREKÍTÉS( G33/365 * (DÁTUM(ÉV(C33);12;31) + 1 - C33); 0 ) + KEREKÍTÉS( H33/365 * (D33 + 1 - DÁTUM(ÉV(D33); 1; 1)); 0 )
+          $veg_s1 = date('Y', strtotime($csed_kezdete)).'-12-31';
+          $veg_s1 = new DateTime($veg_s1); $veg_s1->modify('+1 day');
+          $veg_s1 = $veg_s1->format('Y-m-d');
+
+          $veg_s2 = date('Y', strtotime($csed_vege)).'-01-01';
+          $veg_s21 = new DateTime($csed_vege); $veg_s21->modify('+1 day');
+          $veg_s21 = $veg_s21->format('Y-m-d');
+
+          $help_csed_potszabi =
+          round( $help_csed_potszabi1 / 365 * ( (strtotime($veg_s1) - strtotime($csed_kezdete)) /(60*60*24) )) +
+          round( $help_csed_potszabi2 / 365 * ( (strtotime($veg_s21) - (strtotime($veg_s2))) / (60*60*24) ));
+        }
+
+        $values['helper']['help_csed_kezdet'] = $help_csed_kezdet;
+        $values['helper']['help_csed_vegzet'] = $help_csed_vegzet;
+        $values['helper']['help_csed_eletkor1'] = $help_csed_eletkor1;
+        $values['helper']['help_csed_eletkor2'] = $help_csed_eletkor2;
+        $values['helper']['help_csed_potszabi1'] = $help_csed_potszabi1;
+        $values['helper']['help_csed_potszabi2'] = $help_csed_potszabi2;
+        $values['helper']['csed_potszabi'] = $help_csed_potszabi;
+
+        // GYED
+        $help_gyedgyes_kezdet = $gyedgyes_kezdete;
+        $help_gyedgyes_vegzet = $gyedgyes_vege;
+        $help_gyedgyes_eletkor1 = date('Y', strtotime($gyedgyes_kezdete)) - (int)$data['szuletesi_ev'];
+        $help_gyedgyes_eletkor2 = date('Y', strtotime($help_gyedgyes_vegzet)) - (int)$data['szuletesi_ev'];
+        $help_gyedgyes_potszabi1 = (int)$this->potszabadasgKorSzerint( (int)$help_gyedgyes_eletkor1 );
+        $help_gyedgyes_potszabi2 = (int)$this->potszabadasgKorSzerint( (int)$help_gyedgyes_eletkor2 );
+
+        if ( date('Y', strtotime($gyedgyes_kezdete)) == date('Y', strtotime($gyedgyes_vege)) ) {
+          $vegzetplusz1 = new DateTime($help_gyedgyes_vegzet); $vegzetplusz1->modify('+1 day');
+          $help_gyedgyes_potszabi = round( $help_gyedgyes_potszabi1 / 365 * ((strtotime($vegzetplusz1->format('Y-m-d')) - strtotime($help_gyedgyes_kezdet))/(60*60*24)));
+        }
+        else
+        {
+          $veg_s1 = date('Y', strtotime($gyedgyes_kezdete)).'-12-31';
+          $veg_s1 = new DateTime($veg_s1); $veg_s1->modify('+1 day');
+          $veg_s1 = $veg_s1->format('Y-m-d');
+
+          $veg_s2 = date('Y', strtotime($gyedgyes_vege)).'-01-01';
+          $veg_s21 = new DateTime($gyedgyes_vege); $veg_s21->modify('+1 day');
+          $veg_s21 = $veg_s21->format('Y-m-d');
+
+          $help_gyedgyes_potszabi =
+          round( $help_gyedgyes_potszabi1 / 365 * ( (strtotime($veg_s1) - strtotime($gyedgyes_kezdete)) /(60*60*24) )) +
+          round( $help_gyedgyes_potszabi2 / 365 * ( (strtotime($veg_s21) - (strtotime($veg_s2))) / (60*60*24) ));
+        }
+
+        $values['helper']['help_gyedgyes_kezdet'] = $help_gyedgyes_kezdet;
+        $values['helper']['help_gyedgyes_vegzet'] = $help_gyedgyes_vegzet;
+        $values['helper']['help_gyedgyes_eletkor1'] = $help_gyedgyes_eletkor1;
+        $values['helper']['help_gyedgyes_eletkor2'] = $help_gyedgyes_eletkor2;
+        $values['helper']['help_gyedgyes_potszabi1'] = $help_gyedgyes_potszabi1;
+        $values['helper']['help_gyedgyes_potszabi2'] = $help_gyedgyes_potszabi2;
+        $values['helper']['gyedgyes_potszabi'] = $help_gyedgyes_potszabi;
+
+        // csed
+        $csed_idejere_jaro_szabadsag = (int)$settings['alapszabadsag'] + $this->potszabadasg16evfiatalabbGyerekSzerint((int)$data['szul_elott_igenybevett_potszabadsag_gyermek']);
+        if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
+          $csed_idejere_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
+        }
+        $csed_idejere_jaro_szabadsag_vt1 = new DateTime($csed_vege); $csed_idejere_jaro_szabadsag_vt1->modify('+1 day');
+        $csed_idejere_jaro_szabadsag_vt1 = $csed_idejere_jaro_szabadsag_vt1->format('Y-m-d');
+        $csed_idejere_jaro_szabadsag = $csed_idejere_jaro_szabadsag / 365 * ((strtotime($csed_idejere_jaro_szabadsag_vt1) - strtotime($csed_kezdete))/(60*60*24));
+        $csed_idejere_jaro_szabadsag = round($csed_idejere_jaro_szabadsag);
+        $csed_idejere_jaro_szabadsag += (int)$help_csed_potszabi;
+
+        $csed_szules_eveben_igenybe_vett_szabadsag = min($le_nem_toltott_szabadsag, 0);
+
+        $csed_le_nem_toltott_szabadsag = $csed_idejere_jaro_szabadsag + $csed_szules_eveben_igenybe_vett_szabadsag;
+
+        // gyedgyes
+        $gyedgyes_idejere_jaro_szabadsag = (int)$settings['alapszabadsag'] + $this->potszabadasg16evfiatalabbGyerekSzerint((int)$data['szul_elott_igenybevett_potszabadsag_gyermek']);
+        if ($data['gyerek16ev_fiatalabb_fogyatekos'] == 'Igen') {
+          $gyedgyes_idejere_jaro_szabadsag += (float)$settings['potszabi_ha16evnelfiatalabbgyereketnevel'];
+        }
+        $gyedgyes_idejere_jaro_szabadsag_vt1 = new DateTime($gyedgyes_vege); $gyedgyes_idejere_jaro_szabadsag_vt1->modify('+1 day');
+        $gyedgyes_idejere_jaro_szabadsag_vt1 = $gyedgyes_idejere_jaro_szabadsag_vt1->format('Y-m-d');
+        $gyedgyes_idejere_jaro_szabadsag = $gyedgyes_idejere_jaro_szabadsag / 365 * ((strtotime($gyedgyes_idejere_jaro_szabadsag_vt1) - strtotime($gyedgyes_kezdete))/(60*60*24));
+        $gyedgyes_idejere_jaro_szabadsag = round($gyedgyes_idejere_jaro_szabadsag);
+        $gyedgyes_idejere_jaro_szabadsag += (int)$help_gyedgyes_potszabi;
+
+        $gyedgyes_szules_eveben_igenybe_vett_szabadsag = min($csed_le_nem_toltott_szabadsag, 0);
+
+        $gyedgyes_le_nem_toltott_szabadsag = $gyedgyes_idejere_jaro_szabadsag + $gyedgyes_szules_eveben_igenybe_vett_szabadsag;
+
+        // összes
+        $osszes_szabadsag = $le_nem_toltott_szabadsag + $csed_idejere_jaro_szabadsag + $gyedgyes_idejere_jaro_szabadsag;
+
+        $ret['szules_eveben_szabadsag'] = $alap_szules_eveben_jaro_szabadsag;
+        $ret['szulesig_idoaranyos_szabadsag'] = $szulesig_idoaranyos_szabadsag;
+        $ret['szules_eveben_igenybe_vett_szabadsag'] = $szules_eveben_igenybe_vett_szabadsag;
+        $ret['le_nem_toltott_szabadsag'] = $le_nem_toltott_szabadsag;
+        $ret['csed_idejere_jaro_szabadsag'] = $csed_idejere_jaro_szabadsag;
+        $ret['csed_szules_eveben_igenybe_vett_szabadsag'] = $csed_szules_eveben_igenybe_vett_szabadsag;
+        $ret['csed_le_nem_toltott_szabadsag'] = $csed_le_nem_toltott_szabadsag;
+        $ret['gyedgyes_idejere_jaro_szabadsag'] = $gyedgyes_idejere_jaro_szabadsag;
+        $ret['gyedgyes_szules_eveben_igenybe_vett_szabadsag'] = $gyedgyes_szules_eveben_igenybe_vett_szabadsag;
+        $ret['gyedgyes_le_nem_toltott_szabadsag'] = $gyedgyes_le_nem_toltott_szabadsag;
+        $ret['osszes_szabadsag'] = $osszes_szabadsag;
+
+        $values['munkaviszony_kezdete'] = $data['munkaviszony_kezdete'];
+        $values['szules_eve'] = $szules_eve;
+        $values['szules_eveben_munkavallalo_eletkora'] = $szules_eveben_munkavallalo_eletkora;
+        $values['gyerek_potszabi'] = $gyerek_potszabi;
+        $values['gyerek_fogyatek_potszabi'] = $gyerek_fogyatek_potszabi;
+        $values['szulesig_eltelt_napok_szama'] = $szulesig_eltelt_napok_szama;
+        $values['csed_vege'] = $csed_vege;
+        $values['gyedgyes_vege'] = $gyedgyes_vege;
+
+        $ret['values'] = $values;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+    }
+
+    return false;
+  } 
+}
+
+/***********************************************
+* 2021-es jogszabályoknak megfelelő kalkulátor @since 2021-02-08 *
+************************************************/
+class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
+{
+  public function __construct( $version = false )
+  {
+    parent::__construct( $version );
+    return $this;
+  }
+
+  public function calcBerAdoLevonasok( $brutto_ber, $data, $settings )
+  {
+    $ret = array();
+
+    $csaladi_adokedvezmeny_osszege = 0;
+    if ($data['csaladkedvezmenyre_jogosult'] == 'Igen') {
+      $csaladi_adokedvezmeny_osszege = $this->csaladiAdokedvezmenyOsszege( (int)$data['csalad_eltartott_gyermek'], (int)$data['csalad_eltartott_gyermek_kedvezmenyezett'], $settings );
+    }
+
+    $anyak_gyerek4vagytobb = false;
+    if ($data['anyak_4vagytobbgyermek'] == 'Igen') {
+      $anyak_gyerek4vagytobb = true;
+    }
+
+    $ervenyesitheto_jarulekkedvezmeny = 0;
+    $friss_hazasok_kedvezmeny = 0;
+    $szemelyi_kedvezmeny = 0;
+    $ervenyesitheto_termeszetbeni_kedvezmeny = 0;
+    $ervenyesitheto_penzbeni_kedvezmeny = 0;
+
+    if ($data['frisshazas_jogosult'] == 'Igen') {
+      $friss_hazasok_kedvezmeny = $settings['adokedvezmeny_frisshazasok'];
+    }
+
+    if ($data['szemelyikedvezmeny_jogosult'] == 'Igen') {
+      $szemelyi_kedvezmeny = $settings['adokedvezmeny_szemelyi'];
+    }
+
+    if ( !$anyak_gyerek4vagytobb )
+    {
+      $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege+$friss_hazasok_kedvezmeny-$brutto_ber;
+      $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
+    } else {
+      $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege;
+      $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
+    }
+
+    $ervenyesitheto_jarulekkedvezmeny = $csaladi_adokedvezmeny_maradekalap * 0.15;
+    $ervenyesitheto_jarulekkedvezmeny = ($ervenyesitheto_jarulekkedvezmeny < 0) ? 0 : $ervenyesitheto_jarulekkedvezmeny;
+
+    //$ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
+    //$ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
+
+    //$ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
+    //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
+
+    if ( !$anyak_gyerek4vagytobb ) {
+      $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
+      $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
+      $ret['ado_szja'] = round($ret['ado_szja']);
+    } else {
+      $ret['ado_szja'] = 0;
+      $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
+      $ret['ado_szja'] = round($ret['ado_szja']);
+    }
+
+    // TB járulék számítás
+    $ret['ado_tb'] = ($brutto_ber * ($settings['ado_tb']/100)) - $ervenyesitheto_jarulekkedvezmeny;;
+    $ret['ado_tb'] = ($ret['ado_tb'] < 0) ? 0 : $ret['ado_tb'];
+    $ret['ado_tb'] = round($ret['ado_tb']);
+
+    /*
+    $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
+    $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
+    $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
+    */
+
+    /*
+    $ret['ado_penzbeli_egeszseg'] = ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100)) - $ervenyesitheto_termeszetbeni_kedvezmeny;
+    $ret['ado_penzbeli_egeszseg'] = ($ret['ado_penzbeli_egeszseg'] < 0) ? 0 : $ret['ado_penzbeli_egeszseg'];
+    $ret['ado_penzbeli_egeszseg'] = round($ret['ado_penzbeli_egeszseg']);
+
+    $ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
+    $ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
+    $ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
+
+    $ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
+    $ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
+    */
+
+    $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_tb'];
+
+    $sum_minusbrutto = round($sum_minusbrutto);
+
+    return array(
+      'levonas' => $sum_minusbrutto,
+      'params' => $ret
+    );
+  }
+
+  public function findBruttoFromNetto( $netto, $data, $settings )
+  {
+    $brutto = $netto * 1.5;
+    $allcalc = 0;
+    $running = true;
+    $step = 0;
+    $szamolt_netto = 0;
+    $xn = 1000;
+    $calced = array();
+
+    $steps = array();
+    while( $running )
+    {
+      $step++;
+
+      $calced = $this->calcBerAdoLevonasok($brutto, $data, $settings);
+      $levon = (float)$calced['levonas'];
+      $szamolt_netto = $brutto - $levon;
+      $tol = ($szamolt_netto / $netto) * 100;
+
+      $steps[] = array(
+        'br' => round($brutto),
+        'le' => $levon,
+        'net' => round($szamolt_netto),
+        'tol' => $tol
+      );
+
+      if ($step >= 1000) {
+        $running = false;
+      }
+
+      $fdiff = ($netto - $szamolt_netto);
+      if ( abs($fdiff) < 1000 ) {
+        $xn = 10;
+      }
+      if ( abs($fdiff) < 10 ) {
+        $xn = 1;
+      }
+
+      if( $szamolt_netto > $netto ){
+        $brutto -= $xn;
+      }
+
+      if ( $szamolt_netto < $netto ) {
+        $brutto += $xn;
+      }
+      if ( round($szamolt_netto) == $netto ) {
+        $running = false;
+      }
+    }
+
+    unset($netto);unset($data);unset($settings);
+
+    return array(
+      'brutto' => $brutto,
+      'values' => $calced
+    );
+  }
+
+  public function calculate( $calc, $data )
+  {
+    switch ( $calc )
+    {
+      case 'berkalkulator':
+        $ret = array(
+          'jovedelem' => 0
+        );
+        $settings = $this->loadSettings( $calc );
+        $mode = $data['mode'];
+
+        $jovedelem = $data['jovedelem'];
+
+        switch( $mode )
+        {
+          // Nettó bérkalkulátor
+          case 'netto':
+            $brutto_ber = $jovedelem;
+          break;
+          // Bruttó bérkalkulátor
+          case 'brutto':
+          break;
+          // Teljes bérkalkulátor
+          case 'teljes':
+            $brutto_ber = $jovedelem;
+          break;
+        }
+
+        $ret['jovedelem'] = $jovedelem;
+        $ret['mode'] = $mode;
+
+        $csaladi_adokedvezmeny_osszege = 0;
+        if ($data['csaladkedvezmenyre_jogosult'] == 'Igen') {
+          $csaladi_adokedvezmeny_osszege = $this->csaladiAdokedvezmenyOsszege( (int)$data['csalad_eltartott_gyermek'], (int)$data['csalad_eltartott_gyermek_kedvezmenyezett'], $settings );
+        }
+
+        $anyak_gyerek4vagytobb = false;
+        if ($data['anyak_4vagytobbgyermek'] == 'Igen') {
+          $anyak_gyerek4vagytobb = true;
+        }
+
+        $ervenyesitheto_jarulekkedvezmeny = 0;
+        $friss_hazasok_kedvezmeny = 0;
+        $szemelyi_kedvezmeny = 0;
+        $ervenyesitheto_termeszetbeni_kedvezmeny = 0;
+        $ervenyesitheto_penzbeni_kedvezmeny = 0;
+
+        if ($data['frisshazas_jogosult'] == 'Igen') {
+          $friss_hazasok_kedvezmeny = $settings['adokedvezmeny_frisshazasok'];
+        }
+
+        if ($data['szemelyikedvezmeny_jogosult'] == 'Igen') {
+          $szemelyi_kedvezmeny = $settings['minimalber'] / 3;
+        }
+
+        // Maradék családi kedvezmény alap
+        if ( !$anyak_gyerek4vagytobb )
+        {
+          $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege+$friss_hazasok_kedvezmeny+$szemelyi_kedvezmeny-$brutto_ber;
+          $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
+        } else {
+          $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege;
+          $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
+        }
+
+        $ervenyesitheto_jarulekkedvezmeny = $csaladi_adokedvezmeny_maradekalap * 0.15;
+        $ervenyesitheto_jarulekkedvezmeny = ($ervenyesitheto_jarulekkedvezmeny < 0) ? 0 : $ervenyesitheto_jarulekkedvezmeny;
+
+        $ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
+        $ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
+
+        //$ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
+        //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
+
+        if ( !$anyak_gyerek4vagytobb ) {
+          $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
+          $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
+          $ret['ado_szja'] = round($ret['ado_szja']);
+        } else {
+          $ret['ado_szja'] = 0;
+          $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
+          $ret['ado_szja'] = round($ret['ado_szja']);
+        }
+
+        // TB járulék számítás
+        $ret['ado_tb'] = ($brutto_ber * ($settings['ado_tb']/100)) - $ervenyesitheto_jarulekkedvezmeny;;
+        $ret['ado_tb'] = ($ret['ado_tb'] < 0) ? 0 : $ret['ado_tb'];
+        $ret['ado_tb'] = round($ret['ado_tb']);
+
+        // Öregségi nyugdíjas @ 2021-02-08
+        if ($data['oregsegi_nyugdijas'] == 'Igen') {
+          $ret['ado_tb'] = 0;
+        }
+
+        $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
+        $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
+        $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
+
+        $ret['ado_penzbeli_egeszseg'] = ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100)) - $ervenyesitheto_termeszetbeni_kedvezmeny;
+        $ret['ado_penzbeli_egeszseg'] = ($ret['ado_penzbeli_egeszseg'] < 0) ? 0 : $ret['ado_penzbeli_egeszseg'];
+        $ret['ado_penzbeli_egeszseg'] = round($ret['ado_penzbeli_egeszseg']);
+
+        //$ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
+        //$ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
+        //$ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
+
+        //$ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
+        //$ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
+
+        //$sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
+        $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_tb'];
+
+        $ret['sum_minusbrutto'] = $sum_minusbrutto;
+        $netto_ber = $brutto_ber-$sum_minusbrutto;
+        $ret['netto_ber'] = $netto_ber;
+
+        $values['csaladi_adokedvezmeny_osszege'] = $csaladi_adokedvezmeny_osszege;
+        $values['frisshazas_jogosult'] = $friss_hazasok_kedvezmeny;
+        $values['szemelyikedvezmeny_jogosult'] = $szemelyi_kedvezmeny;
+        $values['csaladi_adokedvezmeny_maradekalap'] = $csaladi_adokedvezmeny_maradekalap;
+        $values['ervenyesitheto_jarulekkedvezmeny'] = $ervenyesitheto_jarulekkedvezmeny;
+        //$values['ervenyesitheto_termeszetbeni_kedvezmeny'] = $ervenyesitheto_termeszetbeni_kedvezmeny;
+        //$values['ervenyesitheto_penzbeni_kedvezmeny'] = $ervenyesitheto_penzbeni_kedvezmeny;
+
+        // Nettó bér alap vége
+
+        /****************************
+         * Teljes bérköltség számítás
+         ***************************/ 
+        
+        $mk = $settings['forms']['munkavallalo_kedvezmenyek'];
+        $minimalber = $settings['minimalber'];
+        $minimalber_ketszeres = $minimalber * 2;
+        $szocho_es_kiva_kedvezmeny_alap = 0;
+        $szokho_kedvezmeny_alap = 0;
+
+        $sel_mk = (int)$data['munkavallalo_kedvezmeny'];
+        $mk_obj = $mk[$sel_mk];
+
+        // szocho kiva alapszámítás
+        $kedvezmeny_mertek = $mk_obj['calc']['szochokiva']['kedvezmeny_mertek'];
+        $kedvezmeny_max = $mk_obj['calc']['szochokiva']['kedvezmeny_max'];
+        $kedvezmeny_max = (float)str_replace(array('{minimalber}', '{minimalber_ketszeres}'), array($minimalber, $minimalber_ketszeres), $kedvezmeny_max);
+
+        $values['szochokiva_kedvezmeny_mertek'] = $kedvezmeny_mertek;
+        $values['szochokiva_kedvezmeny_max'] = $kedvezmeny_max;
+
+        if ( $kedvezmeny_mertek > 0 ) {
+          if ($kedvezmeny_max > 0) {
+            $szocho_es_kiva_kedvezmeny_alap_row = array();
+            $szocho_es_kiva_kedvezmeny_alap_row[] = $brutto_ber * ($kedvezmeny_mertek/100);
+            $szocho_es_kiva_kedvezmeny_alap_row[] = $kedvezmeny_max * ($kedvezmeny_mertek/100);
+            $szocho_es_kiva_kedvezmeny_alap = min($szocho_es_kiva_kedvezmeny_alap_row);
+          } else {
+            $szocho_es_kiva_kedvezmeny_alap = $brutto_ber * ($kedvezmeny_mertek/100);
+          }
+        }
+
+        // szokho alapszámítás
+        $kedvezmeny_mertek = $mk_obj['calc']['szokho']['kedvezmeny_mertek'];
+        $kedvezmeny_max = $mk_obj['calc']['szokho']['kedvezmeny_max'];
+        $kedvezmeny_max = (float)str_replace(array('{minimalber}', '{minimalber_ketszeres}'), array($minimalber, $minimalber_ketszeres), $kedvezmeny_max);
+
+        $values['szokho_kedvezmeny_mertek'] = $kedvezmeny_mertek;
+        $values['szokho_kedvezmeny_max'] = $kedvezmeny_max;
+
+        if ( $kedvezmeny_mertek > 0 ) {
+          if ($kedvezmeny_max > 0) {
+            $szokho_kedvezmeny_alap_row = array();
+            $szokho_kedvezmeny_alap_row[] = $brutto_ber * ($kedvezmeny_mertek/100);
+            $szokho_kedvezmeny_alap_row[] = $kedvezmeny_max * ($kedvezmeny_mertek/100);
+            $szokho_kedvezmeny_alap = min($szokho_kedvezmeny_alap_row);
+          } else {
+            $szokho_kedvezmeny_alap = $brutto_ber * ($kedvezmeny_mertek/100);
+          }
+        }
+
+        $ret['ado_szocialis_hozzajarulas'] = ($brutto_ber - $szocho_es_kiva_kedvezmeny_alap) * ($settings['ado_szocialis_hozzajarulas']/100);
+        $ret['ado_szocialis_hozzajarulas'] = round($ret['ado_szocialis_hozzajarulas']);
+
+        // Öregségi nyugdíjas @ 2021-02-08
+        if ($data['oregsegi_nyugdijas'] == 'Igen') {
+          $ret['ado_szocialis_hozzajarulas'] = 0;
+        }
+
+        $ret['ado_szakkepzesi_hozzajarulas'] = ($brutto_ber - $szokho_kedvezmeny_alap) * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+        $ret['ado_szakkepzesi_hozzajarulas'] = round($ret['ado_szakkepzesi_hozzajarulas']);
+
+        // Öregségi nyugdíjas @ 2021-02-08
+        if ($data['oregsegi_nyugdijas'] == 'Igen') {
+          $ret['ado_szakkepzesi_hozzajarulas'] = 0;
+        }
+
+        $ret['ado_kisvallalati'] = ($brutto_ber - $szocho_es_kiva_kedvezmeny_alap) * ($settings['ado_kisvallalati']/100);
+        $ret['ado_kisvallalati'] = round($ret['ado_kisvallalati']);
+
+        // Öregségi nyugdíjas @ 2021-02-08
+        if ($data['oregsegi_nyugdijas'] == 'Igen') {
+          $ret['ado_kisvallalati'] = 0;
+        }
+
+        $ret['berkoltseg_nem_KIVA'] = $brutto_ber + $ret['ado_szocialis_hozzajarulas'] + $ret['ado_szakkepzesi_hozzajarulas'];
+        $ret['berkoltseg_KIVA'] = $brutto_ber + $ret['ado_kisvallalati'];
+
+        $nav_osszes_ado = 0;
+
+        if ($data['ceg_kisvallalati_ado_alany'] == 'Igen') {
+          $nav_osszes_ado = $ret['berkoltseg_KIVA'] - $netto_ber;
+        } else {
+          $nav_osszes_ado = $ret['berkoltseg_nem_KIVA'] - $netto_ber;
+        }
+
+        $ret['nav_osszes_ado'] = $nav_osszes_ado;
+
+        $values['szocho_es_kiva_kedvezmeny_alap'] = $szocho_es_kiva_kedvezmeny_alap;
+        $values['szokho_kedvezmeny_alap'] = $szokho_kedvezmeny_alap;
+        $values['kiva_adoalany'] = $data['ceg_kisvallalati_ado_alany'];
+
+        $ret['values'] = $values;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+      case 'brutto_ber':
+        $ret = array(
+          'netto_ber' => 0
+        );
+        $settings = $this->loadSettings( $calc );
+
+        $netto = $data['netto_ber'];
+        $ret['netto_ber'] = $netto;
+
+        $find = $this->findBruttoFromNetto( $netto, $data, $settings, $values );
+        $sum_minusbrutto = (int)$find['brutto'];
+        $values['find'] = $find;
+
+        $ret['sum_minusbrutto'] = $find['values']['levonas'];
+        $ret['brutto_ber'] = $netto_ber + $sum_minusbrutto;
+
+        $ret['ado_szja'] = $find['values']['params']['ado_szja'];
+        $ret['ado_tb'] = $find['values']['params']['ado_tb'];
+        /*
+        $ret['ado_termeszetegeszseg'] = $find['values']['params']['ado_termeszetegeszseg'];
+        $ret['ado_penzbeli_egeszseg'] = $find['values']['params']['ado_penzbeli_egeszseg'];
+        $ret['ado_nyugdij'] = $find['values']['params']['ado_nyugdij'];
+        $ret['ado_munkaerppiac'] = $find['values']['params']['ado_munkaerppiac'];
+        */
+
+        // Nettó bér alap vége
+
+        $ret['values'] = $values;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+      case 'teljes_berkoltseg':
+        $ret = array(
+          'brutto_ber' => 0
+        );
+        $settings = $this->loadSettings( $calc );
+
+        $brutto_ber = $data['brutto_ber'];
+
+        $ret['brutto_ber'] = $brutto_ber;
+
+        $csaladi_adokedvezmeny_osszege = 0;
+        if ($data['csaladkedvezmenyre_jogosult'] == 'Igen') {
+          $csaladi_adokedvezmeny_osszege = $this->csaladiAdokedvezmenyOsszege( (int)$data['csalad_eltartott_gyermek'], (int)$data['csalad_eltartott_gyermek_kedvezmenyezett'], $settings );
+        }
+
+        $anyak_gyerek4vagytobb = false;
+        if ($data['anyak_4vagytobbgyermek'] == 'Igen') {
+          $anyak_gyerek4vagytobb = true;
+        }
+
+        $ervenyesitheto_jarulekkedvezmeny = 0;
+        $friss_hazasok_kedvezmeny = 0;
+        $szemelyi_kedvezmeny = 0;
+        $ervenyesitheto_termeszetbeni_kedvezmeny = 0;
+        $ervenyesitheto_penzbeni_kedvezmeny = 0;
+
+        if ($data['frisshazas_jogosult'] == 'Igen') {
+          $friss_hazasok_kedvezmeny = $settings['adokedvezmeny_frisshazasok'];
+        }
+
+        if ($data['szemelyikedvezmeny_jogosult'] == 'Igen') {
+          $szemelyi_kedvezmeny = $settings['minimalber'] / 3;
+        }
+
+        // Maradék családi kedvezmény alap
+        if ( !$anyak_gyerek4vagytobb )
+        {
+          $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege+$friss_hazasok_kedvezmeny+$szemelyi_kedvezmeny-$brutto_ber;
+          $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
+        } else {
+          $csaladi_adokedvezmeny_maradekalap = $csaladi_adokedvezmeny_osszege;
+          $csaladi_adokedvezmeny_maradekalap = ($csaladi_adokedvezmeny_maradekalap < 0) ? 0 : $csaladi_adokedvezmeny_maradekalap;
+        }
+
+        $ervenyesitheto_jarulekkedvezmeny = $csaladi_adokedvezmeny_maradekalap * 0.15;
+        $ervenyesitheto_jarulekkedvezmeny = ($ervenyesitheto_jarulekkedvezmeny < 0) ? 0 : $ervenyesitheto_jarulekkedvezmeny;
+
+        $ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
+        $ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
+
+        //$ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
+        //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
+
+        if ( !$anyak_gyerek4vagytobb ) {
+          $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
+          $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
+          $ret['ado_szja'] = round($ret['ado_szja']);
+        } else {
+          $ret['ado_szja'] = 0;
+          $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
+          $ret['ado_szja'] = round($ret['ado_szja']);
+        }
+
+        // TB járulék számítás
+        $ret['ado_tb'] = ($brutto_ber * ($settings['ado_tb']/100)) - $ervenyesitheto_jarulekkedvezmeny;;
+        $ret['ado_tb'] = ($ret['ado_tb'] < 0) ? 0 : $ret['ado_tb'];
+        $ret['ado_tb'] = round($ret['ado_tb']);
+
+        // Öregségi nyugdíjas @ 2021-02-08
+        if ($data['oregsegi_nyugdijas'] == 'Igen') {
+          $ret['ado_tb'] = 0;
+        }
+
+        $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
+        $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
+        $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
+
+        $ret['ado_penzbeli_egeszseg'] = ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100)) - $ervenyesitheto_termeszetbeni_kedvezmeny;
+        $ret['ado_penzbeli_egeszseg'] = ($ret['ado_penzbeli_egeszseg'] < 0) ? 0 : $ret['ado_penzbeli_egeszseg'];
+        $ret['ado_penzbeli_egeszseg'] = round($ret['ado_penzbeli_egeszseg']);
+
+        //$ret['ado_nyugdij'] = ($brutto_ber * ($settings['ado_nyugdij']/100)) - $ervenyesitheto_penzbeni_kedvezmeny;
+        //$ret['ado_nyugdij'] = ($ret['ado_nyugdij'] < 0) ? 0 : $ret['ado_nyugdij'];
+        //$ret['ado_nyugdij'] = round($ret['ado_nyugdij']);
+
+        //$ret['ado_munkaerppiac'] = $brutto_ber * ($settings['ado_munkaerppiac']/100);
+        //$ret['ado_munkaerppiac'] = round($ret['ado_munkaerppiac']);
+
+        //$sum_minusbrutto = $ret['ado_szja'] + $ret['ado_termeszetegeszseg'] + $ret['ado_penzbeli_egeszseg'] + $ret['ado_nyugdij'] + $ret['ado_munkaerppiac'];
+        $sum_minusbrutto = $ret['ado_szja'] + $ret['ado_tb'];
+
+        $ret['sum_minusbrutto'] = $sum_minusbrutto;
+        $netto_ber = $brutto_ber-$sum_minusbrutto;
+        $ret['netto_ber'] = $netto_ber;
+
+        $values['csaladi_adokedvezmeny_osszege'] = $csaladi_adokedvezmeny_osszege;
+        $values['frisshazas_jogosult'] = $friss_hazasok_kedvezmeny;
+        $values['szemelyikedvezmeny_jogosult'] = $szemelyi_kedvezmeny;
+        $values['csaladi_adokedvezmeny_maradekalap'] = $csaladi_adokedvezmeny_maradekalap;
+        $values['ervenyesitheto_jarulekkedvezmeny'] = $ervenyesitheto_jarulekkedvezmeny;
+        //$values['ervenyesitheto_termeszetbeni_kedvezmeny'] = $ervenyesitheto_termeszetbeni_kedvezmeny;
+        //$values['ervenyesitheto_penzbeni_kedvezmeny'] = $ervenyesitheto_penzbeni_kedvezmeny;
+
+        // Nettó bér alap vége
+
+        // Teljes bérköltség számítások
+        $mk = $settings['forms']['munkavallalo_kedvezmenyek'];
+        $minimalber = $settings['minimalber'];
+        $minimalber_ketszeres = $minimalber * 2;
+        $szocho_es_kiva_kedvezmeny_alap = 0;
+        $szokho_kedvezmeny_alap = 0;
+
+        $sel_mk = (int)$data['munkavallalo_kedvezmeny'];
+        $mk_obj = $mk[$sel_mk];
+
+        // szocho kiva alapszámítás
+        $kedvezmeny_mertek = $mk_obj['calc']['szochokiva']['kedvezmeny_mertek'];
+        $kedvezmeny_max = $mk_obj['calc']['szochokiva']['kedvezmeny_max'];
+        $kedvezmeny_max = (float)str_replace(array('{minimalber}', '{minimalber_ketszeres}'), array($minimalber, $minimalber_ketszeres), $kedvezmeny_max);
+
+        $values['szochokiva_kedvezmeny_mertek'] = $kedvezmeny_mertek;
+        $values['szochokiva_kedvezmeny_max'] = $kedvezmeny_max;
+
+        if ( $kedvezmeny_mertek > 0 ) {
+          if ($kedvezmeny_max > 0) {
+            $szocho_es_kiva_kedvezmeny_alap_row = array();
+            $szocho_es_kiva_kedvezmeny_alap_row[] = $brutto_ber * ($kedvezmeny_mertek/100);
+            $szocho_es_kiva_kedvezmeny_alap_row[] = $kedvezmeny_max * ($kedvezmeny_mertek/100);
+            $szocho_es_kiva_kedvezmeny_alap = min($szocho_es_kiva_kedvezmeny_alap_row);
+          } else {
+            $szocho_es_kiva_kedvezmeny_alap = $brutto_ber * ($kedvezmeny_mertek/100);
+          }
+        }
+
+        // szokho alapszámítás
+        $kedvezmeny_mertek = $mk_obj['calc']['szokho']['kedvezmeny_mertek'];
+        $kedvezmeny_max = $mk_obj['calc']['szokho']['kedvezmeny_max'];
+        $kedvezmeny_max = (float)str_replace(array('{minimalber}', '{minimalber_ketszeres}'), array($minimalber, $minimalber_ketszeres), $kedvezmeny_max);
+
+        $values['szokho_kedvezmeny_mertek'] = $kedvezmeny_mertek;
+        $values['szokho_kedvezmeny_max'] = $kedvezmeny_max;
+
+        if ( $kedvezmeny_mertek > 0 ) {
+          if ($kedvezmeny_max > 0) {
+            $szokho_kedvezmeny_alap_row = array();
+            $szokho_kedvezmeny_alap_row[] = $brutto_ber * ($kedvezmeny_mertek/100);
+            $szokho_kedvezmeny_alap_row[] = $kedvezmeny_max * ($kedvezmeny_mertek/100);
+            $szokho_kedvezmeny_alap = min($szokho_kedvezmeny_alap_row);
+          } else {
+            $szokho_kedvezmeny_alap = $brutto_ber * ($kedvezmeny_mertek/100);
+          }
+        }
+
+        $ret['ado_szocialis_hozzajarulas'] = ($brutto_ber - $szocho_es_kiva_kedvezmeny_alap) * ($settings['ado_szocialis_hozzajarulas']/100);
+        $ret['ado_szocialis_hozzajarulas'] = round($ret['ado_szocialis_hozzajarulas']);
+
+        // Öregségi nyugdíjas @ 2021-02-08
+        if ($data['oregsegi_nyugdijas'] == 'Igen') {
+          $ret['ado_szocialis_hozzajarulas'] = 0;
+        }
+
+        $ret['ado_szakkepzesi_hozzajarulas'] = ($brutto_ber - $szokho_kedvezmeny_alap) * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+        $ret['ado_szakkepzesi_hozzajarulas'] = round($ret['ado_szakkepzesi_hozzajarulas']);
+
+        // Öregségi nyugdíjas @ 2021-02-08
+        if ($data['oregsegi_nyugdijas'] == 'Igen') {
+          $ret['ado_szakkepzesi_hozzajarulas'] = 0;
+        }
+
+        $ret['ado_kisvallalati'] = ($brutto_ber - $szocho_es_kiva_kedvezmeny_alap) * ($settings['ado_kisvallalati']/100);
+        $ret['ado_kisvallalati'] = round($ret['ado_kisvallalati']);
+
+        // Öregségi nyugdíjas @ 2021-02-08
+        if ($data['oregsegi_nyugdijas'] == 'Igen') {
+          $ret['ado_kisvallalati'] = 0;
+        }
 
         $ret['berkoltseg_nem_KIVA'] = $brutto_ber + $ret['ado_szocialis_hozzajarulas'] + $ret['ado_szakkepzesi_hozzajarulas'];
         $ret['berkoltseg_KIVA'] = $brutto_ber + $ret['ado_kisvallalati'];

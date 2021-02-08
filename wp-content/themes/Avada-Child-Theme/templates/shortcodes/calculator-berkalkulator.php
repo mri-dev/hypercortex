@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="inputs">
-    <div class="header">Teljes bérköltség</div>
+    <div class="header">Bérkalkulátor</div>
     <div class="inp-body">
 
       <div class="version-changer">
@@ -13,14 +13,30 @@
         </div>
       </div>
 
-      <div class="line" ng-class="{missing:missing.indexOf('brutto_ber')!==-1, error:error_elements['brutto_ber']}">
+      <div class="line line-switcher" ng-class="{missing:missing.indexOf('jovedelem')!==-1, error:error_elements['jovedelem']}">
         <div class="head">
-          Bruttó havi bér (Ft) *
-          <div class="error-hint" ng-if="error_elements.indexOf('brutto_ber')!==-1">{{error_elements['brutto_ber']}}</div>
+          Ráfordítás jellege
+          <div class="error-hint" ng-if="error_elements.indexOf('jovedelem')!==-1">{{error_elements['jovedelem']}}</div>
         </div>
         <div class="val">
           <div class="inp-wrapper">
-            <input type="text" ng-model="form.brutto_ber" input-thousand-separator="currency">
+            <div class="radio-switch">
+              <input type="radio" ng-model="form.mode" value="netto" id="netto"> <label for="netto">Nettó</label>
+              <input type="radio" ng-model="form.mode" value="brutto" id="brutto"> <label for="brutto">Bruttó</label>
+              <input type="radio" ng-model="form.mode" value="teljes" id="teljes"> <label for="teljes">Teljes bérköltség</label>
+            </div>            
+          </div>
+        </div>
+      </div>
+
+      <div class="line" ng-class="{missing:missing.indexOf('jovedelem')!==-1, error:error_elements['jovedelem']}">
+        <div class="head">
+         Rendszeres havi jövedelem (Ft) *
+          <div class="error-hint" ng-if="error_elements.indexOf('jovedelem')!==-1">{{error_elements['jovedelem']}}</div>
+        </div>
+        <div class="val">
+          <div class="inp-wrapper">
+            <input type="text" ng-model="form.jovedelem" input-thousand-separator="currency">
           </div>
         </div>
       </div>

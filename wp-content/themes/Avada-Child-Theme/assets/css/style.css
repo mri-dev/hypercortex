@@ -1762,6 +1762,58 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   border: 2px solid #ffc5c5;
 }
 
+.calculator-holder .line-switcher {
+  background: transparent !important;
+  border: none !important;
+}
+
+.calculator-holder .line-switcher .head {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.calculator-holder .line-switcher .val {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+}
+
+.calculator-holder .line-switcher .val .inp-wrapper {
+  border: none;
+  background: transparent !important;
+}
+
+.calculator-holder .line-switcher .val .inp-wrapper .radio-switch {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.calculator-holder .line-switcher .val .inp-wrapper .radio-switch input[type=radio] {
+  display: none;
+}
+
+.calculator-holder .line-switcher .val .inp-wrapper .radio-switch input[type=radio] + label {
+  background: white;
+  cursor: pointer;
+  padding: 10px;
+  -ms-flex-preferred-size: calc(100% / 3);
+      flex-basis: calc(100% / 3);
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.calculator-holder .line-switcher .val .inp-wrapper .radio-switch input[type=radio]:checked + label {
+  background: #712322;
+  color: white;
+}
+
 .calculator-holder .error-hint {
   color: #ef1212;
   font-size: 0.7rem;

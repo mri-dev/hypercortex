@@ -213,11 +213,11 @@ class AjaxRequests
       break;
 
       // teljes bérköltség alapja
-      case 'teljes_berkoltseg':
-        if ( empty($inputs['brutto_ber']) ) {
+      case 'berkalkulator':
+        if ( empty($inputs['jovedelem']) ) {
           $return['error'] = 1;
-          $return['missing_elements'][] = 'brutto_ber';
-          $return['error_elements']['brutto_ber'] = 'Írja be a bruttó bérét a kalkulációhoz!';
+          $return['missing_elements'][] = 'jovedelem';
+          $return['error_elements']['brutto_ber'] = 'Írja be a rendszeres havi jövedelmet a kalkulációhoz!';
         }
 
         if ( $inputs['csaladkedvezmenyre_jogosult'] == 'Igen' && empty($inputs['csalad_eltartott_gyermek']) ) {
