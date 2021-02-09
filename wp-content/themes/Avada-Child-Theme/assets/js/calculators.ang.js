@@ -172,6 +172,15 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
         }
       });
 
+      $scope.$watch('form.mode', function(n, o, s) {
+        if( typeof n !== 'undefined' )
+        {
+          if (Object.keys(s.result).length !== 0) {
+            s.calculate( s.loaded_calc );
+          }
+        }
+      });
+
       switch (calc)
       {
         case 'netto_ber':

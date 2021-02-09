@@ -1575,6 +1575,10 @@ footer .fusion-columns > div:not(.fusion-column-last) {
   font-size: 1.05rem;
 }
 
+.calculator-holder .version-changer > .wrapper > div .wrap input[type=radio]:disabled + label {
+  background: #d2ccbe;
+}
+
 .calculator-holder.ng-scope {
   display: block;
 }
@@ -1772,6 +1776,8 @@ footer .fusion-columns > div:not(.fusion-column-last) {
       flex-basis: 100%;
   text-align: center;
   font-weight: bold;
+  padding: 25px 15px;
+  font-size: 1.15rem;
 }
 
 .calculator-holder .line-switcher .val {
@@ -1806,7 +1812,12 @@ footer .fusion-columns > div:not(.fusion-column-last) {
       flex-basis: calc(100% / 3);
   text-align: center;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
+  border-left: 1px solid #eae4d6;
+}
+
+.calculator-holder .line-switcher .val .inp-wrapper .radio-switch input[type=radio]:first-child + label {
+  border-left: none;
 }
 
 .calculator-holder .line-switcher .val .inp-wrapper .radio-switch input[type=radio]:checked + label {

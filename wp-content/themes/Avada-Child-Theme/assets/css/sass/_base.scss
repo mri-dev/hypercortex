@@ -1310,6 +1310,10 @@ footer .fusion-columns{
             color: #fffbfb !important;
             font-size: 1.05rem;
           }
+
+          input[type=radio]:disabled + label {
+            background: #d2ccbe;
+          }
         }
       }
     }
@@ -1486,6 +1490,8 @@ footer .fusion-columns{
       flex-basis: 100%;
       text-align: center;
       font-weight: bold;
+      padding: 25px 15px;
+      font-size: 1.15rem;
     }
     .val {
       flex-basis: 100%;
@@ -1509,7 +1515,11 @@ footer .fusion-columns{
             flex-basis: calc(100% / 3);
             text-align: center;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.84rem;
+            border-left: 1px solid #eae4d6;
+          }
+          input[type=radio]:first-child + label {
+            border-left: none;
           }
 
           input[type=radio]:checked + label {

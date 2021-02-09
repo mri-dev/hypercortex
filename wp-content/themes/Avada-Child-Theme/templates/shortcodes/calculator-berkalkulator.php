@@ -6,7 +6,7 @@
       <div class="version-changer">
         <div class="wrapper">
           <div class="" ng-repeat="ver in settings.versions">
-            <div class="wrap">
+            <div class="wrap" ng-if="['2019','2020/1','2020/2'].indexOf(ver) === -1">
               <input type="radio" id="ver_v{{ver}}" ng-value="ver" ng-model="form.version"> <label title="Számolás {{ver}}. évi jogszabályok alapján." for="ver_v{{ver}}">{{ver}}</label>
             </div>
           </div>
@@ -15,23 +15,23 @@
 
       <div class="line line-switcher" ng-class="{missing:missing.indexOf('jovedelem')!==-1, error:error_elements['jovedelem']}">
         <div class="head">
-          Ráfordítás jellege
+          Mit szeretne kiszámolni?
           <div class="error-hint" ng-if="error_elements.indexOf('jovedelem')!==-1">{{error_elements['jovedelem']}}</div>
         </div>
         <div class="val">
           <div class="inp-wrapper">
             <div class="radio-switch">
-              <input type="radio" ng-model="form.mode" value="netto" id="netto"> <label for="netto">Nettó</label>
-              <input type="radio" ng-model="form.mode" value="brutto" id="brutto"> <label for="brutto">Bruttó</label>
-              <input type="radio" ng-model="form.mode" value="teljes" id="teljes"> <label for="teljes">Teljes bérköltség</label>
+              <input type="radio" ng-model="form.mode" value="netto" id="netto"> <label for="netto">Nettó bért</label>
+              <input type="radio" ng-model="form.mode" value="brutto" id="brutto"> <label for="brutto">Bruttó bért</label>
+              <input type="radio" ng-model="form.mode" value="teljes" id="teljes"> <label for="teljes">Teljes bérköltséget</label>
             </div>            
           </div>
         </div>
       </div>
 
-      <div class="line" ng-class="{missing:missing.indexOf('jovedelem')!==-1, error:error_elements['jovedelem']}">
+      <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('jovedelem')!==-1, error:error_elements['jovedelem']}">
         <div class="head">
-         Rendszeres havi jövedelem (Ft) *
+         Rendszeres havi <span ng-if="(form.mode=='brutto')">nettó</span><span ng-if="(form.mode=='netto')">bruttó</span> jövedelem (Ft) *
           <div class="error-hint" ng-if="error_elements.indexOf('jovedelem')!==-1">{{error_elements['jovedelem']}}</div>
         </div>
         <div class="val">
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="line" ng-class="{missing:missing.indexOf('ceg_kisvallalati_ado_alany')!==-1, error:error_elements['ceg_kisvallalati_ado_alany']}">
+      <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('ceg_kisvallalati_ado_alany')!==-1, error:error_elements['ceg_kisvallalati_ado_alany']}">
         <div class="head">
           A cég Kisvállalati adó (KIVA) alanya? *
           <div class="error-hint" ng-if="error_elements.indexOf('ceg_kisvallalati_ado_alany')!==-1">{{error_elements['ceg_kisvallalati_ado_alany']}}</div>
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <div class="line two-line" ng-class="{missing:missing.indexOf('munkavallalo_kedvezmeny')!==-1, error:error_elements['munkavallalo_kedvezmeny']}">
+      <div ng-if="form.mode" class="line two-line" ng-class="{missing:missing.indexOf('munkavallalo_kedvezmeny')!==-1, error:error_elements['munkavallalo_kedvezmeny']}">
         <div class="head">
           A munkavállaló után a vállalkozás jogosult kedvezményre? *
           <div class="error-hint" ng-if="error_elements.indexOf('munkavallalo_kedvezmeny')!==-1">{{error_elements['munkavallalo_kedvezmeny']}}</div>
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-      <div class="line" ng-class="{missing:missing.indexOf('anyak_4vagytobbgyermek')!==-1, error:error_elements['anyak_4vagytobbgyermek']}">
+      <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('anyak_4vagytobbgyermek')!==-1, error:error_elements['anyak_4vagytobbgyermek']}">
         <div class="head">
           A munkavállaló négy vagy több gyermeket nevelő anyák kedvezményére jogosult
           <div class="error-hint" ng-if="error_elements.indexOf('anyak_4vagytobbgyermek')!==-1">{{error_elements['anyak_4vagytobbgyermek']}}</div>
@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <div class="line" ng-class="{missing:missing.indexOf('oregsegi_nyugdijas')!==-1, error:error_elements['oregsegi_nyugdijas']}">
+      <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('oregsegi_nyugdijas')!==-1, error:error_elements['oregsegi_nyugdijas']}">
         <div class="head">
           Öregségi nyugdíjas
           <div class="error-hint" ng-if="error_elements.indexOf('oregsegi_nyugdijas')!==-1">{{error_elements['oregsegi_nyugdijas']}}</div>
@@ -93,7 +93,7 @@
         </div>
       </div>
 
-      <div class="line" ng-class="{missing:missing.indexOf('csaladkedvezmenyre_jogosult')!==-1, error:error_elements['csaladkedvezmenyre_jogosult']}">
+      <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('csaladkedvezmenyre_jogosult')!==-1, error:error_elements['csaladkedvezmenyre_jogosult']}">
         <div class="head">
           Családi kedvezményre jogosult
           <div class="error-hint" ng-if="error_elements.indexOf('csaladkedvezmenyre_jogosult')!==-1">{{error_elements['csaladkedvezmenyre_jogosult']}}</div>
@@ -129,7 +129,7 @@
         </div>
       </div>
 
-      <div class="line" ng-class="{missing:missing.indexOf('frisshazas_jogosult')!==-1, error:error_elements['frisshazas_jogosult']}">
+      <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('frisshazas_jogosult')!==-1, error:error_elements['frisshazas_jogosult']}">
         <div class="head">
           Friss házasok kedvezményre jogosult
           <div class="error-hint" ng-if="error_elements.indexOf('frisshazas_jogosult')!==-1">{{error_elements['frisshazas_jogosult']}}</div>
@@ -141,7 +141,7 @@
         </div>
       </div>
 
-      <div class="line" ng-class="{missing:missing.indexOf('szemelyikedvezmeny_jogosult')!==-1, error:error_elements['szemelyikedvezmeny_jogosult']}">
+      <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('szemelyikedvezmeny_jogosult')!==-1, error:error_elements['szemelyikedvezmeny_jogosult']}">
         <div class="head">
           Személyi kedvezményre jogosult
           <div class="error-hint" ng-if="error_elements.indexOf('szemelyikedvezmeny_jogosult')!==-1">{{error_elements['szemelyikedvezmeny_jogosult']}}</div>
@@ -153,7 +153,7 @@
         </div>
       </div>
 
-      <div class="line action-line" ng-if="!loading">
+      <div class="line action-line" ng-if="!loading && form.mode">
         <div class="val">
           <button type="button" ng-click="calculate('<?=$view?>')" name="button"><?=__('Kalkuláció indítása', 'hc')?></button>
         </div>
@@ -169,7 +169,7 @@
     <div class="result-jog-text">{{result.result_comment}}</div>
       <table class="result-table">
         <tbody>
-          <tr>
+          <tr ng-class="{hl: (result.mode=='brutto')}">
             <td class="h"><strong>Bruttó havi munkabér</strong></td>
             <td class="v"><strong>{{result.brutto_ber|cash:'Ft':''}}</strong></td>
           </tr>
@@ -201,36 +201,36 @@
             <td class="h"><strong>Összes levonás bruttó bérből</strong></td>
             <td class="v"><strong>{{result.sum_minusbrutto|cash:'Ft':''}}</strong></td>
           </tr>
-          <tr>
+          <tr ng-class="{hl: (result.mode=='netto')}">
             <td class="h"><strong>Nettó bér</strong></td>
             <td class="v"><strong>{{result.netto_ber|cash:'Ft':''}}</td>
           </tr>
-          <tr>
+          <tr ng-if="(result.mode=='teljes')">
             <td colspan="2" class="head">
               Cég által fizetendő költségek
             </td>
           </tr>
-          <tr ng-if="result.values.kiva_adoalany=='Nem'" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
+          <tr ng-if="(result.values.kiva_adoalany=='Nem' && result.mode=='teljes')" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szociális hozzájárulási adó</td>
             <td class="v">+{{result.ado_szocialis_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-if="result.values.kiva_adoalany=='Nem'" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
+          <tr ng-if="(result.values.kiva_adoalany=='Nem' && result.mode=='teljes')" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szakképzési hozzájárulás</td>
             <td class="v">+{{result.ado_szakkepzesi_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-if="result.values.kiva_adoalany=='Igen'" ng-class="{lt: result.values.kiva_adoalany=='Nem'}">
+          <tr ng-if="(result.values.kiva_adoalany=='Igen' && result.mode=='teljes')" ng-class="{lt: result.values.kiva_adoalany=='Nem'}">
             <td class="h">Fizetendő kisvállalati adó</td>
             <td class="v">+{{result.ado_kisvallalati|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-if="result.values.kiva_adoalany=='Nem'" ng-class="{hl: result.values.kiva_adoalany=='Nem'}">
+          <tr ng-if="(result.values.kiva_adoalany=='Nem' && result.mode=='teljes')" ng-class="{hl: result.values.kiva_adoalany=='Nem'}">
             <td class="h"><strong>Teljes bérköltség nem KIVA alany cég esetén</strong></td>
             <td class="v">{{result.berkoltseg_nem_KIVA|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-if="result.values.kiva_adoalany=='Igen'" ng-class="{hl: result.values.kiva_adoalany=='Igen'}">
+          <tr ng-if="(result.values.kiva_adoalany=='Igen' && result.mode=='teljes')" ng-class="{hl: result.values.kiva_adoalany=='Igen'}">
             <td class="h"><strong>Teljes bérköltség KIVA alany cég esetén</strong></td>
             <td class="v">{{result.berkoltseg_KIVA|cash:'Ft':''}}</td>
           </tr>
-          <tr class="hlh">
+          <tr class="hlh" ng-if="(result.mode=='teljes')">
             <td class="h"><strong>NAV felé utalandó összes adó és járulék</strong></td>
             <td class="v">{{result.nav_osszes_ado|cash:'Ft':''}}</td>
           </tr>
