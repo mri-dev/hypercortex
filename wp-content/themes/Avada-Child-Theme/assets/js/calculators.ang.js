@@ -273,6 +273,16 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
             s.form.kw = n / xs;
           });
         break;
+        case 'reprezentacio_ado':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          
+          $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
+        break;
+        case 'cegtelefon_ado':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          
+          $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
+        break;
       }
 
       console.log($scope.form);

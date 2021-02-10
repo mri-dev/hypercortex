@@ -216,6 +216,13 @@ class CalculatorBase
       case 'cafeteria':
         return $this->load_cafeteria_resources();
       break;
+      /** Hozzáadva @ 2021-02-08 */
+      case 'reprezentacio_ado':
+        return $this->load_reprezentacio_ado_resources();
+      break;
+      case 'cegtelefon_ado':
+        return $this->load_cegtelefon_ado_resources();
+      break;
     }
 
     return false;
@@ -483,7 +490,6 @@ class CalculatorBase
     $res['calc_comment'] = $this->getSettingsValue('calc_comment');
 
     $res['ado_caf_adoalap_kieg'] = $this->getSettingsValue('ado_caf_adoalap_kieg');
-    $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
     $res['ado_szja'] = $this->getSettingsValue('ado_szja');
     $res['ado_tb'] = $this->getSettingsValue('ado_tb');
     $res['ado_kisvallalati'] = $this->getSettingsValue('ado_kisvallalati');
@@ -491,6 +497,56 @@ class CalculatorBase
     $res['ado_penzbeli_egeszseg'] = $this->getSettingsValue('ado_penzbeli_egeszseg');
     $res['ado_nyugdij'] = $this->getSettingsValue('ado_nyugdij');
     $res['ado_munkaerppiac'] = $this->getSettingsValue('ado_munkaerppiac');
+
+    $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
+    $res['ado_szakkepzesi_hozzajarulas'] = $this->getSettingsValue('ado_szakkepzesi_hozzajarulas');
+
+    // Form resources
+    $forms = array();
+    $res['forms'] = $forms;
+
+    return $res;
+  }
+  
+  /**
+   * Hozzáadva 2021-es kalkulátor verziónál
+   * @since 2021-02-08
+   */
+  private function load_cegtelefon_ado_resources()
+  {
+    $res = array();
+
+    $res['calc_comment'] = $this->getSettingsValue('calc_comment');
+
+    // Adóalap kiegészítés - cafetériából
+    $res['ado_caf_adoalap_kieg'] = $this->getSettingsValue('ado_caf_adoalap_kieg');
+    $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_kisvallalati'] = $this->getSettingsValue('ado_kisvallalati');
+
+    $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
+    $res['ado_szakkepzesi_hozzajarulas'] = $this->getSettingsValue('ado_szakkepzesi_hozzajarulas');
+
+    // Form resources
+    $forms = array();
+    $res['forms'] = $forms;
+
+    return $res;
+  }
+
+  /**
+   * Hozzáadva 2021-es kalkulátor verziónál
+   * @since 2021-02-08
+   */
+  private function load_reprezentacio_ado_resources()
+  {
+    $res = array();
+
+    $res['calc_comment'] = $this->getSettingsValue('calc_comment');
+
+    // Adóalap kiegészítés - cafetériából
+    $res['ado_caf_adoalap_kieg'] = $this->getSettingsValue('ado_caf_adoalap_kieg');
+    $res['ado_szja'] = $this->getSettingsValue('ado_szja');
+    $res['ado_kisvallalati'] = $this->getSettingsValue('ado_kisvallalati');
 
     $res['ado_szocialis_hozzajarulas'] = $this->getSettingsValue('ado_szocialis_hozzajarulas');
     $res['ado_szakkepzesi_hozzajarulas'] = $this->getSettingsValue('ado_szakkepzesi_hozzajarulas');
@@ -4072,6 +4128,22 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
     return $this;
   }
 
+  public function getCafeteriaItemAdoalapLimit()
+  {
+    $limits = array();
+
+    $limits['Sportrendezvényre szóló belépőjegy, bérlet'] = 167400;
+    $limits['Kulturális szolgáltatásra szóló belépőjegy, bérlet'] = 167400;    
+    $limits['Távmunkavégzés költségtérítése'] = 16740;
+    $limits['Csekély értékű ajándék'] = 16740;
+
+    $limits['SZÉP kártya vendéglátás'] = 265000;
+    $limits['SZÉP kártya szálláshely'] = 400000;
+    $limits['SZÉP kártya szabadidő'] = 135000;
+
+    return $limits;
+  }
+
   public function calcBerAdoLevonasok( $brutto_ber, $data, $settings )
   {
     $ret = array();
@@ -4470,6 +4542,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
 
         return $ret;
       break;
+      /** Deprecate @ 2021-02-08 */
       case 'brutto_ber':
         $ret = array(
           'netto_ber' => 0
@@ -4504,6 +4577,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
 
         return $ret;
       break;
+      /** Deprecate @ 2021-02-08 */
       case 'teljes_berkoltseg':
         $ret = array(
           'brutto_ber' => 0
@@ -4705,6 +4779,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
 
         return $ret;
       break;
+      /** Deprecate @ 2021-02-08 */
       case 'netto_ber':
         $ret = array(
           'brutto_ber' => 0
@@ -4956,6 +5031,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
         $ret = array();
         $settings = $this->loadSettings( $calc );
         $ret['settings'] = $settings;
+        $szochokiva_nemfizet_date = strtotime('2021-06-30');
 
         $jg = $this->getCafeteriaGroupByTitle( $data['juttatas'] );
         $ret['juttatas_group'] = $jg;
@@ -5065,6 +5141,12 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
               $szocho = $adoalap_kiegeszites * ($settings['ado_szocialis_hozzajarulas']/100);
               $szocho = ($szocho < 0) ? 0 : $szocho;
               $szocho = round($szocho);
+
+              /** Hozzáadva @ 2021-02-08 */
+              if( time() <= $szochokiva_nemfizet_date )
+              {
+                $szocho = 0;
+              }
             }
 
             // Szakképzési
@@ -5080,6 +5162,12 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
               $kiva = $adoalap_kiegeszites * ($settings['ado_kisvallalati']/100);
               $kiva = ($kiva < 0) ? 0 : $kiva;
               $kiva = round($kiva);
+
+              /** Hozzáadva @ 2021-02-08 */
+              if( time() <= $szochokiva_nemfizet_date )
+              {
+                $kiva = 0;
+              }
             }
           }
 
@@ -5210,6 +5298,18 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
             $kiva = ($kiva < 0) ? 0 : $kiva;
             $kiva = round($kiva);
           }
+        }
+
+        /** Hozzáadva @ 2021-02-08 */
+        if( time() <= $szochokiva_nemfizet_date && $szocho != 0 && $jg['ID'] == 2 )
+        {
+          $szocho = 0;
+        }
+
+        /** Hozzáadva @ 2021-02-08 */
+        if( time() <= $szochokiva_nemfizet_date && $kiva != 0 && $jg['ID'] == 2 )
+        {
+          $kiva = 0;
         }
 
         // Munkáltató adók
@@ -5461,6 +5561,153 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
         $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
 
         return $ret;
+      break;
+
+      /** Új kalkulátorok */
+      case 'reprezentacio_ado':
+        $ret = [];
+        $values = [];
+        $settings = $this->loadSettings( $calc );
+        $ret['settings'] = $settings;
+        $szakkh_nemfizet_date = strtotime('2021-06-30');
+
+        $szamla_brutto = (float)$data['szamla_brutto'];
+        $ret['szamla_brutto'] = $szamla_brutto;
+        
+        $ado_munkaltato = 0;
+        $ado_szocialis_hozzajarulas = 0;
+        $adoalap_kiegeszites = 0;
+        $ado_kisvallalati = 0;
+        $adoalap_kiegeszites = (float)$szamla_brutto * ($settings['ado_caf_adoalap_kieg'] / 100);
+        $adoalap_kiegeszites = ($adoalap_kiegeszites < 0) ? 0 : $adoalap_kiegeszites;
+        $adoalap_kiegeszites = round($adoalap_kiegeszites);
+
+        $szja = $adoalap_kiegeszites * ($settings['ado_szja']/100);
+        $szja = ($szja < 0) ? 0 : $szja;
+        $szja = round($szja);
+        $ret['ado_szja'] = $szja;
+        $ado_munkaltato += $szja;
+
+        if( $data['ceg_kisvallalati_ado_alany'] == 'Nem' )
+        {
+          // Szocho
+          $ado_szocialis_hozzajarulas = (float)$adoalap_kiegeszites * ($settings['ado_szocialis_hozzajarulas'] / 100);
+          $ado_szocialis_hozzajarulas = ($ado_szocialis_hozzajarulas < 0) ? 0 : $ado_szocialis_hozzajarulas;
+          $ado_szocialis_hozzajarulas = round($ado_szocialis_hozzajarulas);
+          $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
+          $ado_munkaltato += $ado_szocialis_hozzajarulas;
+
+          // Szakképzési
+          $ado_szakkepzesi_hozzajarulas = (float)$adoalap_kiegeszites * ($settings['ado_szakkepzesi_hozzajarulas'] / 100);
+          $ado_szakkepzesi_hozzajarulas = ($ado_szakkepzesi_hozzajarulas < 0) ? 0 : $ado_szakkepzesi_hozzajarulas;
+          $ado_szakkepzesi_hozzajarulas = round($ado_szakkepzesi_hozzajarulas);
+
+          /** Hozzáadva @ 2021-02-08 */
+          if( time() <= $szakkh_nemfizet_date )
+          {
+            $ado_szakkepzesi_hozzajarulas = 0;
+          }
+
+          $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
+          $ado_munkaltato += $ado_szakkepzesi_hozzajarulas;
+        } 
+        else 
+        {
+          // KIVA 
+          $ado_kisvallalati = (float)$szamla_brutto * ($settings['ado_kisvallalati'] / 100);
+          $ado_kisvallalati = ($ado_kisvallalati < 0) ? 0 : $ado_kisvallalati;
+          $ado_kisvallalati = round($ado_kisvallalati);
+          $ret['ado_kisvallalati'] = $ado_kisvallalati;
+          
+          $ado_munkaltato += $ado_kisvallalati;
+        }
+
+        // Values
+
+        $values['kiva_adoalany'] = $data['ceg_kisvallalati_ado_alany'];
+        $values['adoalap_kiegeszites'] = $adoalap_kiegeszites;
+
+        $ret['ado_munkaltato'] = $ado_munkaltato;
+
+        $ret['values'] = $values;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+      case 'cegtelefon_ado':
+        $ret = [];
+        $values = [];
+        $settings = $this->loadSettings( $calc );
+        $ret['settings'] = $settings;
+        $szakkh_nemfizet_date = strtotime('2021-06-30');
+
+        $szamla_brutto = (float)$data['szamla_brutto'];
+        $ret['szamla_brutto'] = $szamla_brutto;
+        
+        $ado_munkaltato = 0;
+        $ado_szocialis_hozzajarulas = 0;
+        $adoalap_kiegeszites = 0;
+        $ado_kisvallalati = 0;
+        $adoalap_kiegeszites = (float)$szamla_brutto * ($settings['ado_caf_adoalap_kieg'] / 100);
+        $adoalap_kiegeszites = ($adoalap_kiegeszites < 0) ? 0 : $adoalap_kiegeszites;
+        $adoalap_kiegeszites = round($adoalap_kiegeszites);
+
+        $szja = ($adoalap_kiegeszites * 0.2) * ($settings['ado_szja']/100);
+        $szja = ($szja < 0) ? 0 : $szja;
+        $szja = round($szja);
+        $ret['ado_szja'] = $szja;
+        $ado_munkaltato += $szja;
+
+        if( $data['ceg_kisvallalati_ado_alany'] == 'Nem' )
+        {
+          // Szocho
+          $ado_szocialis_hozzajarulas = ((float)$adoalap_kiegeszites * 0.2) * ($settings['ado_szocialis_hozzajarulas'] / 100);
+          $ado_szocialis_hozzajarulas = ($ado_szocialis_hozzajarulas < 0) ? 0 : $ado_szocialis_hozzajarulas;
+          $ado_szocialis_hozzajarulas = round($ado_szocialis_hozzajarulas);
+          $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
+          $ado_munkaltato += $ado_szocialis_hozzajarulas;
+
+          // Szakképzési
+          $ado_szakkepzesi_hozzajarulas = ((float)$adoalap_kiegeszites * 0.2) * ($settings['ado_szakkepzesi_hozzajarulas'] / 100);
+          $ado_szakkepzesi_hozzajarulas = ($ado_szakkepzesi_hozzajarulas < 0) ? 0 : $ado_szakkepzesi_hozzajarulas;
+          $ado_szakkepzesi_hozzajarulas = round($ado_szakkepzesi_hozzajarulas);
+
+          /** Hozzáadva @ 2021-02-08 */
+          if( time() <= $szakkh_nemfizet_date )
+          {
+            $ado_szakkepzesi_hozzajarulas = 0;
+          }
+
+          $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
+          $ado_munkaltato += $ado_szakkepzesi_hozzajarulas;
+        } 
+        else 
+        {
+          // KIVA 
+          $ado_kisvallalati = ((float)$szamla_brutto * 0.2) * ($settings['ado_kisvallalati'] / 100);
+          $ado_kisvallalati = ($ado_kisvallalati < 0) ? 0 : $ado_kisvallalati;
+          $ado_kisvallalati = round($ado_kisvallalati);
+          $ret['ado_kisvallalati'] = $ado_kisvallalati;
+          
+          $ado_munkaltato += $ado_kisvallalati;
+        }
+
+        // Values
+        $values['kiva_adoalany'] = $data['ceg_kisvallalati_ado_alany'];
+        $values['adoalap_kiegeszites'] = $adoalap_kiegeszites;
+
+        $ret['ado_munkaltato'] = $ado_munkaltato;
+
+        $ret['values'] = $values;
+        $ret['version'] = $this->getVersion();
+        $ret['vi'] = $this->version_index[$ret['version']];
+        $ret['result_comment'] = $this->getResultTitle( $settings, $ret['version'] );
+
+        return $ret;
+      break;
+      case 'megbizasi_dij':
       break;
     }
 

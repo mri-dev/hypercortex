@@ -352,7 +352,6 @@ class AjaxRequests
         unset($result);
         unset($calculators);
       break;
-
       case 'ingatlan_ertekesites':
         // Require field validation
 
@@ -565,6 +564,82 @@ class AjaxRequests
           $return['data'] = $result;
           $this->returnJSON($return);
         }
+
+        unset($return);
+        unset($result);
+        unset($calculators);
+      break;
+      case 'reprezentacio_ado':
+
+        if ( empty($inputs['szamla_brutto'])) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'szamla_brutto';
+        }
+
+        // Error fields
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calc( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
+
+
+        unset($return);
+        unset($result);
+        unset($calculators);
+      break;
+      case 'cegtelefon_ado':
+
+        if ( empty($inputs['szamla_brutto'])) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'szamla_brutto';
+        }
+
+        // Error fields
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calc( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
+
 
         unset($return);
         unset($result);
