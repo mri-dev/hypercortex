@@ -283,6 +283,13 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
           
           $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
         break;
+        case 'megbizasi_dij':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          
+          $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
+          $scope.form.oregsegi_nyugdijas = 'Nem';
+          $scope.form.koltseghanyad = 10;
+        break;
       }
 
       console.log($scope.form);
