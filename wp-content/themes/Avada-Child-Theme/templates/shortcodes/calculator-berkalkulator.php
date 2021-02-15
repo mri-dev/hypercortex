@@ -6,7 +6,7 @@
       <div class="version-changer">
         <div class="wrapper">
           <div class="" ng-repeat="ver in settings.versions">
-            <div class="wrap" ng-if="['2019','2020/1','2020/2'].indexOf(ver) === -1">
+            <div class="wrap" ng-if="['2020/2', '2020/1', '2019'].indexOf(ver) === -1">
               <input type="radio" id="ver_v{{ver}}" ng-value="ver" ng-model="form.version"> <label title="Számolás {{ver}}. évi jogszabályok alapján." for="ver_v{{ver}}">{{ver}}</label>
             </div>
           </div>

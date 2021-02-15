@@ -4,7 +4,7 @@
     <div class="inp-body">
       <div class="version-changer">
         <div class="wrapper">
-          <div class="" ng-repeat="ver in settings.versions">
+          <div class="" ng-repeat="ver in settings.versions" ng-if="['2020/2', '2020/1', '2019'].indexOf(ver) === -1">
             <div class="wrap">
               <input type="radio" id="ver_v{{ver}}" ng-value="ver" ng-model="form.version"> <label title="Számolás {{ver}}. évi jogszabályok alapján." for="ver_v{{ver}}">{{ver}}</label>
             </div>
@@ -105,8 +105,12 @@
     <div class="result-body" ng-if="loaded && result!==false">
     <div class="result-jog-text">{{result.result_comment}}</div>
       <table class="result-table">
-        <tbody>
-          <tr>
+        <tbody>        
+          <tr ng-if="form.mode=='teljes'">
+            <td class="h"><strong>A cég teljes költsége</strong></td>
+            <td class="v"><strong>{{result.teljes|cash:'Ft':''}}</strong></td>
+          </tr>
+          <tr ng-class="{hl: (form.mode == 'netto' || form.mode == 'teljes')}">
             <td class="h"><strong>Bruttó megbízási díj</strong></td>
             <td class="v"><strong>{{result.brutto|cash:'Ft':''}}</strong></td>
           </tr>
@@ -122,7 +126,7 @@
             <td class="h"><strong>Összes levonás a bruttó megbízási díjból</strong></td>
             <td class="v"><strong>{{result.levonas_bruttobol|cash:'Ft':''}}</strong></td>
           </tr>
-          <tr class="hl">
+          <tr ng-class="{hl: (form.mode == 'brutto' || form.mode == 'teljes')}">
             <td class="h"><strong>Nettó megbízási díj</strong></td>
             <td class="v"><strong>{{result.netto|cash:'Ft':''}}</strong></td>
           </tr>

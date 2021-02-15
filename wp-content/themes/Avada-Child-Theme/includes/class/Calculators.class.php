@@ -1111,6 +1111,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
     parent::__construct( $version );
     return $this;
   }
+
   public function calcBerAdoLevonasok( $brutto_ber, $data, $settings )
   {
     $ret = array();
@@ -1172,7 +1173,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
       'params' => $ret
     );
   }
-
+  
   public function findBruttoFromNetto( $netto, $data, $settings )
   {
     $brutto = $netto * 1.5;
@@ -1231,7 +1232,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
       'values' => $calced
     );
   }
-
+  
   public function calculate( $calc, $data )
   {
     switch ( $calc )
@@ -4324,6 +4325,283 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
     );
   }
 
+  
+  /**
+   * Megbízási díjhoz levonás számítások
+   * @since 2021-02-08
+   *
+   * @param  mixed $brutto
+   * @param  mixed $data
+   * @param  mixed $settings
+   * @return void
+   */
+  public function calcMegbizasiDijLevonasok( $brutto, $data, $settings )
+  {
+    $ret['brutto'] = $brutto;
+    $teljes_koltseg = ($data['mode'] == 'teljes') ? true : false;
+    $ret['teljes_koltseg'] = $teljes_koltseg;
+
+    // Jövedelem
+    $jovedelem = $brutto * ( (100 - $data['koltseghanyad']) / 100 );
+    $jovedelem = ($jovedelem < 0) ? 0 : $jovedelem;
+    $jovedelem = round($jovedelem);
+    $ret['jovedelem'] = $jovedelem;
+
+    // Napi jövedelem
+
+    $napi_jovedelem = (float)$brutto / (int)$data['nap'];
+    $napi_jovedelem = ($napi_jovedelem < 0) ? 0 : $napi_jovedelem;
+    $napi_jovedelem = round($napi_jovedelem);
+    $values['napi_jovedelem'] = $napi_jovedelem;
+
+    // Biztosítottság határa
+
+    $biztonsitottsag_hatara = $settings['minimalber'] / 30 * 0.3;
+    $values['biztonsitottsag_hatara'] = $biztonsitottsag_hatara;
+
+    // Biztosítottá válik
+
+    if( $napi_jovedelem >= $biztonsitottsag_hatara )
+    {
+      $biztositotta_valik = 'Igen';
+    }
+    $ret['biztositotta_valik'] = $biztositotta_valik;
+
+    // Szja
+
+    $szja = $jovedelem * ($settings['ado_szja']/100);
+    $szja = ($szja < 0) ? 0 : $szja;
+    $szja = round($szja);
+    $ret['ado_szja'] = $szja;
+
+    // TB
+    if( $biztositotta_valik == 'Igen' )
+    {
+      $tb = $jovedelem * ($settings['ado_tb']/100);
+      $tb = ($tb < 0) ? 0 : $tb;
+      $tb = round($tb);
+      $ret['ado_tb'] = $tb;
+
+      // Öregségi nyugdíjas @ 2021-02-08
+      if ($data['oregsegi_nyugdijas'] == 'Igen') 
+      {
+        $tb = 0;
+        $ret['ado_tb'] = $tb;
+      }
+
+    } else {          
+      $tb = 0;
+      $ret['ado_tb'] = $tb;
+    }
+
+    $ado_nav += $tb;
+    $ado_nav += $szja;
+
+    // Összes levonás bruttóból 
+    $levonas_bruttobol = $tb + $szja;
+    $ret['levonas_bruttobol'] = $levonas_bruttobol;
+
+    // Nettó
+    if( $data['mode'] == 'brutto' )
+    {
+      $netto = (float)$brutto - $levonas_bruttobol;
+      $netto = ($netto < 0) ? 0 : $netto;
+      $netto = round($netto);
+    }
+
+    // KIVA
+    if( $data['ceg_kisvallalati_ado_alany'] == 'Igen' )
+    {
+      $kiva = $jovedelem * ($settings['ado_kisvallalati']/100);
+      $kiva = ($kiva < 0) ? 0 : $kiva;
+      $kiva = round($kiva);
+      $ret['ado_kiva'] = $kiva;
+
+      // Öregségi nyugdíjas @ 2021-02-08
+      if ($data['oregsegi_nyugdijas'] == 'Igen') 
+      {
+      $kiva = 0;
+      $ret['ado_kiva'] = $kiva;
+      }
+
+      $ado_raforditas = (float)$brutto + $kiva;
+      $ado_nav += $kiva;
+    } 
+    else 
+    {
+      $ado_szocialis_hozzajarulas = $jovedelem * ($settings['ado_szocialis_hozzajarulas']/100);
+      $ado_szocialis_hozzajarulas = ($ado_szocialis_hozzajarulas < 0) ? 0 : $ado_szocialis_hozzajarulas;
+      $ado_szocialis_hozzajarulas = round($ado_szocialis_hozzajarulas);
+      $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
+
+      $ado_szakkepzesi_hozzajarulas = $jovedelem * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+      $ado_szakkepzesi_hozzajarulas = ($ado_szakkepzesi_hozzajarulas < 0) ? 0 : $ado_szakkepzesi_hozzajarulas;
+      $ado_szakkepzesi_hozzajarulas = round($ado_szakkepzesi_hozzajarulas);
+      $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
+
+      // Öregségi nyugdíjas @ 2021-02-08
+      if ($data['oregsegi_nyugdijas'] == 'Igen') 
+      {
+        $ado_szocialis_hozzajarulas = 0;
+        $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
+
+        $ado_szakkepzesi_hozzajarulas = 0;
+        $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
+      }
+
+      $ado_raforditas = (float)$brutto + $ado_szocialis_hozzajarulas + $ado_szakkepzesi_hozzajarulas;
+      $ado_nav += $ado_szocialis_hozzajarulas + $ado_szakkepzesi_hozzajarulas;
+    }
+
+    $fullreturn = [];
+    
+    if( $teljes_koltseg )
+    {
+      $osszes_nav = 0;
+      $sum_minusbrutto = $tb + $szja;
+
+      if( $data['ceg_kisvallalati_ado_alany'] == 'Igen' )
+      {
+        $osszes_nav = $tb + $szja + $kiva;
+      } 
+      else 
+      {
+        $osszes_nav = $tb + $szja + $ado_szocialis_hozzajarulas + $ado_szakkepzesi_hozzajarulas;
+      }
+      $fullreturn['osszes_nav'] = $osszes_nav;
+      $fullreturn['teljes_koltseg'] = $osszes_nav + ($brutto - $sum_minusbrutto);
+    }
+    else 
+    {
+      $sum_minusbrutto = $tb + $szja;
+    }
+
+    $fullreturn['levonas'] = $sum_minusbrutto;
+    $fullreturn['params'] = $ret;
+    
+    return $fullreturn;
+  }
+
+  public function findMegbizasiDijTeljes( $teljes, $data, $settings )
+  {
+    $original = $teljes;
+    $running = true;
+    $xn = 100000;
+    $step = 0;
+    $calced = array();
+    $steps = [];
+
+    while( $running )
+    {
+      $step++;
+
+      $calced = $this->calcMegbizasiDijLevonasok($teljes, $data, $settings);
+      $teljes_koltseg = $calced['teljes_koltseg'];
+
+      if ($step >= 1000) {
+        $running = false;
+      }
+
+      $fdiff = ( $original - $teljes_koltseg );
+      $calced['fdiff'] = abs($fdiff);
+      $calced['step'] = $step;
+
+      if( abs($fdiff) < 100000 ) $xn = 10000;
+      if( abs($fdiff) < 10000 ) $xn = 1000;
+      if( abs($fdiff) < 1000 ) $xn = 100;
+      if( abs($fdiff) < 100 ) $xn = 10;
+      if( abs($fdiff) < 10 ) $xn = 1;
+
+      if( $teljes_koltseg < $original ){
+        $teljes += $xn;
+      }
+
+      if( $teljes_koltseg > $original )
+      {
+        $teljes -= $xn;
+      }
+
+      if ( round($teljes_koltseg) == $original ) {
+        $running = false;
+      }
+      
+      $steps[] = $calced;
+    }
+    
+    return [
+      'brutto' => $calced['params']['brutto'],
+      'values' => $calced
+    ];
+  }
+
+    /**
+   * A megbízási díjhoz a célértékeresés alternatíva metódus
+   * @since 2021-02-08
+   *
+   * @param  float $netto
+   * @param  array $data
+   * @param  array $settings
+   * @return array
+   */
+  public function findMegbizasiDijBruttoFromNetto( $netto, $data, $settings )
+  {
+    $brutto = $netto * 1.5;
+    $allcalc = 0;
+    $running = true;
+    $step = 0;
+    $szamolt_netto = 0;
+    $xn = 1000;
+    $calced = array();
+
+    $steps = array();
+    while( $running )
+    {
+      $step++;
+
+      $calced = $this->calcMegbizasiDijLevonasok($brutto, $data, $settings);
+      $levon = (float)$calced['levonas'];
+      $szamolt_netto = $brutto - $levon;
+      $tol = ($szamolt_netto / $netto) * 100;
+
+      $steps[] = array(
+        'br' => round($brutto),
+        'le' => $levon,
+        'net' => round($szamolt_netto),
+        'tol' => $tol
+      );
+
+      if ($step >= 1000) {
+        $running = false;
+      }
+
+      $fdiff = ($netto - $szamolt_netto);
+      if ( abs($fdiff) < 1000 ) {
+        $xn = 10;
+      }
+      if ( abs($fdiff) < 10 ) {
+        $xn = 1;
+      }
+
+      if( $szamolt_netto > $netto ){
+        $brutto -= $xn;
+      }
+
+      if ( $szamolt_netto < $netto ) {
+        $brutto += $xn;
+      }
+      if ( round($szamolt_netto) == $netto ) {
+        $running = false;
+      }
+    }
+
+    unset($netto);unset($data);unset($settings);
+
+    return array(
+      'brutto' => $brutto,
+      'values' => $calced
+    );
+  }
+
   public function calculate( $calc, $data )
   {
     switch ( $calc )
@@ -5590,7 +5868,6 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
 
         return $ret;
       break;
-
       /** Új kalkulátorok */
       case 'reprezentacio_ado':
         $ret = [];
@@ -5745,6 +6022,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
         $values['kiva_adoalany'] = $data['ceg_kisvallalati_ado_alany'];
         
         $brutto = 0;
+        $teljes = 0;
         $netto = 0;
         $jovedelem = 0;
         $napi_jovedelem = 0;
@@ -5754,126 +6032,303 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
         $ado_raforditas = 0;
         $ado_nav = 0;
 
-        if( $data['mode'] == 'brutto' )
-        {
-          $brutto = (float)$data['megbizasi_dij'];
-        }
-
         if( $data['koltseghanyad'] < 0 ) $data['koltseghanyad'] = 0;
 
-        // Jövedelem
-
-        $jovedelem = $data['megbizasi_dij'] * ( (100 - $data['koltseghanyad']) / 100 );
-        $jovedelem = ($jovedelem < 0) ? 0 : $jovedelem;
-        $jovedelem = round($jovedelem);
-        $ret['jovedelem'] = $jovedelem;
-
-        // Napi jövedelem
-
-        $napi_jovedelem = (float)$data['megbizasi_dij'] / (int)$data['nap'];
-        $napi_jovedelem = ($napi_jovedelem < 0) ? 0 : $napi_jovedelem;
-        $napi_jovedelem = round($napi_jovedelem);
-        $values['napi_jovedelem'] = $napi_jovedelem;
-
-        // Biztosítottság határa
-
-        $biztonsitottsag_hatara = $settings['minimalber'] / 30 * 0.3;
-        $values['biztonsitottsag_hatara'] = $biztonsitottsag_hatara;
-
-        // Biztosítottá válik
-
-        if( $napi_jovedelem >= $biztonsitottsag_hatara )
+        // BRUTTÓból számlás -> Nettó
+        if( $data['mode'] == 'brutto')
         {
-          $biztositotta_valik = 'Igen';
+            $brutto = (float)$data['megbizasi_dij'];
+           // Jövedelem
+            $jovedelem = $data['megbizasi_dij'] * ( (100 - $data['koltseghanyad']) / 100 );
+            $jovedelem = ($jovedelem < 0) ? 0 : $jovedelem;
+            $jovedelem = round($jovedelem);
+            $ret['jovedelem'] = $jovedelem;
+
+            // Napi jövedelem
+
+            $napi_jovedelem = (float)$data['megbizasi_dij'] / (int)$data['nap'];
+            $napi_jovedelem = ($napi_jovedelem < 0) ? 0 : $napi_jovedelem;
+            $napi_jovedelem = round($napi_jovedelem);
+            $values['napi_jovedelem'] = $napi_jovedelem;
+
+            // Biztosítottság határa
+
+            $biztonsitottsag_hatara = $settings['minimalber'] / 30 * 0.3;
+            $values['biztonsitottsag_hatara'] = $biztonsitottsag_hatara;
+
+            // Biztosítottá válik
+
+            if( $napi_jovedelem >= $biztonsitottsag_hatara )
+            {
+              $biztositotta_valik = 'Igen';
+            }
+            $ret['biztositotta_valik'] = $biztositotta_valik;
+
+            // Szja
+
+            $szja = $jovedelem * ($settings['ado_szja']/100);
+            $szja = ($szja < 0) ? 0 : $szja;
+            $szja = round($szja);
+            $ret['ado_szja'] = $szja;
+
+            // TB
+            if( $biztositotta_valik == 'Igen' )
+            {
+              $tb = $jovedelem * ($settings['ado_tb']/100);
+              $tb = ($tb < 0) ? 0 : $tb;
+              $tb = round($tb);
+              $ret['ado_tb'] = $tb;
+
+              // Öregségi nyugdíjas @ 2021-02-08
+              if ($data['oregsegi_nyugdijas'] == 'Igen') 
+              {
+                $tb = 0;
+                $ret['ado_tb'] = $tb;
+              }
+
+            } else {          
+              $tb = 0;
+              $ret['ado_tb'] = $tb;
+            }
+
+            $ado_nav += $tb;
+            $ado_nav += $szja;
+
+            // Összes levonás bruttóból 
+            $levonas_bruttobol = $tb + $szja;
+            $ret['levonas_bruttobol'] = $levonas_bruttobol;
+
+            // Nettó
+            if( $data['mode'] == 'brutto' )
+            {
+              $netto = (float)$data['megbizasi_dij'] - $levonas_bruttobol;
+              $netto = ($netto < 0) ? 0 : $netto;
+              $netto = round($netto);
+            }
+
+            // KIVA
+            if( $data['ceg_kisvallalati_ado_alany'] == 'Igen' )
+            {
+              $kiva = $jovedelem * ($settings['ado_kisvallalati']/100);
+              $kiva = ($kiva < 0) ? 0 : $kiva;
+              $kiva = round($kiva);
+              $ret['ado_kiva'] = $kiva;
+
+              // Öregségi nyugdíjas @ 2021-02-08
+              if ($data['oregsegi_nyugdijas'] == 'Igen') 
+              {
+                $kiva = 0;
+                $ret['ado_kiva'] = $kiva;
+              }
+
+              $ado_raforditas = (float)$data['megbizasi_dij'] + $kiva;
+              $ado_nav += $kiva;
+            } 
+            else 
+            {
+              $ado_szocialis_hozzajarulas = $jovedelem * ($settings['ado_szocialis_hozzajarulas']/100);
+              $ado_szocialis_hozzajarulas = ($ado_szocialis_hozzajarulas < 0) ? 0 : $ado_szocialis_hozzajarulas;
+              $ado_szocialis_hozzajarulas = round($ado_szocialis_hozzajarulas);
+              $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
+
+              $ado_szakkepzesi_hozzajarulas = $jovedelem * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+              $ado_szakkepzesi_hozzajarulas = ($ado_szakkepzesi_hozzajarulas < 0) ? 0 : $ado_szakkepzesi_hozzajarulas;
+              $ado_szakkepzesi_hozzajarulas = round($ado_szakkepzesi_hozzajarulas);
+              $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
+
+              // Öregségi nyugdíjas @ 2021-02-08
+              if ($data['oregsegi_nyugdijas'] == 'Igen') 
+              {
+                $ado_szocialis_hozzajarulas = 0;
+                $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
+
+                $ado_szakkepzesi_hozzajarulas = 0;
+                $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
+              }
+
+              $ado_raforditas = (float)$data['megbizasi_dij'] + $ado_szocialis_hozzajarulas + $ado_szakkepzesi_hozzajarulas;
+              $ado_nav += $ado_szocialis_hozzajarulas + $ado_szakkepzesi_hozzajarulas;
+            }
         }
-        $ret['biztositotta_valik'] = $biztositotta_valik;
 
-        // Szja
-
-        $szja = $jovedelem * ($settings['ado_szja']/100);
-        $szja = ($szja < 0) ? 0 : $szja;
-        $szja = round($szja);
-        $ret['ado_szja'] = $szja;
-
-        // TB
-        if( $biztositotta_valik == 'Igen' )
+        // NETTÓból számolás -> Bruttó
+        if( $data['mode'] == 'netto' )
         {
-          $tb = $jovedelem * ($settings['ado_tb']/100);
-          $tb = ($tb < 0) ? 0 : $tb;
-          $tb = round($tb);
-          $ret['ado_tb'] = $tb;
+          $netto = (float)$data['megbizasi_dij'];
+          
+          $find = $this->findMegbizasiDijBruttoFromNetto( $netto, $data, $settings, $values );
+          $sum_minusbrutto = (int)$find['brutto'];
+          $values['find'] = $find;
+          
+          $ret['sum_minusbrutto'] = $find['values']['levonas'];
+          $brutto = $netto_ber + $sum_minusbrutto;
 
-          // Öregségi nyugdíjas @ 2021-02-08
-          if ($data['oregsegi_nyugdijas'] == 'Igen') 
+          $ret['ado_szja'] = $find['values']['params']['ado_szja'];
+          $ret['ado_tb'] = $find['values']['params']['ado_tb'];
+
+          $ado_nav += $ret['ado_tb'];
+          $ado_nav += $ret['ado_szja'];
+
+          
+          $levonas_bruttobol = $ret['ado_tb'] +  $ret['ado_szja'];
+          $ret['levonas_bruttobol'] = $levonas_bruttobol;
+
+          if( $data['ceg_kisvallalati_ado_alany'] == 'Igen' )
           {
-            $tb = 0;
-            $ret['ado_tb'] = $tb;
-          }
+            $kiva = $find['values']['params']['ado_kiva'];
+            $kiva = ($kiva < 0) ? 0 : $kiva;
+            $kiva = round($kiva);
+            $ret['ado_kiva'] = $kiva;
 
-        } else {          
-          $tb = 0;
-          $ret['ado_tb'] = $tb;
-        }
+            // Öregségi nyugdíjas @ 2021-02-08
+            if ($data['oregsegi_nyugdijas'] == 'Igen') 
+            {
+              $kiva = 0;
+              $ret['ado_kiva'] = $kiva;
+            }
 
-        $ado_nav += $tb;
-        $ado_nav += $szja;
-
-        // Összes levonás bruttóból 
-        $levonas_bruttobol = $tb + $szja;
-        $ret['levonas_bruttobol'] = $levonas_bruttobol;
-
-        // Nettó
-        if( $data['mode'] == 'brutto' )
-        {
-          $netto = (float)$data['megbizasi_dij'] - $levonas_bruttobol;
-          $netto = ($netto < 0) ? 0 : $netto;
-          $netto = round($netto);
-        }
-
-        // KIVA
-        if( $data['ceg_kisvallalati_ado_alany'] == 'Igen' )
-        {
-          $kiva = $jovedelem * ($settings['ado_kisvallalati']/100);
-          $kiva = ($kiva < 0) ? 0 : $kiva;
-          $kiva = round($kiva);
-          $ret['ado_kiva'] = $kiva;
-
-          // Öregségi nyugdíjas @ 2021-02-08
-          if ($data['oregsegi_nyugdijas'] == 'Igen') 
+            $ado_raforditas = $brutto + $kiva;
+            $ado_nav += $kiva;
+          } 
+          else 
           {
-          $kiva = 0;
-          $ret['ado_kiva'] = $kiva;
+            $ret['ado_szocialis_hozzajarulas'] = $find['values']['params']['ado_szocialis_hozzajarulas'];
+            $ret['ado_szakkepzesi_hozzajarulas'] = $find['values']['params']['ado_szakkepzesi_hozzajarulas'];
+
+            // Öregségi nyugdíjas @ 2021-02-08
+            if ($data['oregsegi_nyugdijas'] == 'Igen') 
+            {
+              $ado_szocialis_hozzajarulas = 0;
+              $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
+
+              $ado_szakkepzesi_hozzajarulas = 0;
+              $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
+            }
+
+            $ado_raforditas = $brutto  + $ret['ado_szocialis_hozzajarulas'] + $ret['ado_szakkepzesi_hozzajarulas'];
+            $ado_nav += $ret['ado_szocialis_hozzajarulas'] + $ret['ado_szakkepzesi_hozzajarulas'];
           }
-
-          $ado_raforditas = (float)$data['megbizasi_dij'] + $kiva;
-          $ado_nav += $kiva;
-        } 
-        else 
-        {
-          $ado_szocialis_hozzajarulas = $jovedelem * ($settings['ado_szocialis_hozzajarulas']/100);
-          $ado_szocialis_hozzajarulas = ($ado_szocialis_hozzajarulas < 0) ? 0 : $ado_szocialis_hozzajarulas;
-          $ado_szocialis_hozzajarulas = round($ado_szocialis_hozzajarulas);
-          $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
-
-          $ado_szakkepzesi_hozzajarulas = $jovedelem * ($settings['ado_szakkepzesi_hozzajarulas']/100);
-          $ado_szakkepzesi_hozzajarulas = ($ado_szakkepzesi_hozzajarulas < 0) ? 0 : $ado_szakkepzesi_hozzajarulas;
-          $ado_szakkepzesi_hozzajarulas = round($ado_szakkepzesi_hozzajarulas);
-          $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
-
-          // Öregségi nyugdíjas @ 2021-02-08
-          if ($data['oregsegi_nyugdijas'] == 'Igen') 
-          {
-            $ado_szocialis_hozzajarulas = 0;
-            $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
-
-            $ado_szakkepzesi_hozzajarulas = 0;
-            $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
-          }
-
-          $ado_raforditas = (float)$data['megbizasi_dij'] + $ado_szocialis_hozzajarulas + $ado_szakkepzesi_hozzajarulas;
-          $ado_nav += $ado_szocialis_hozzajarulas + $ado_szakkepzesi_hozzajarulas;
         }
-        
+
+        // Teljes 
+        if( $data['mode'] == 'teljes' )
+        {
+          $teljes = (float)$data['megbizasi_dij'];
+          
+          $find = $this->findMegbizasiDijTeljes( $teljes, $data, $settings, $values );
+          $values['find'] = $find;
+          $brutto = $find['brutto'];
+
+          // Jövedelem
+           $jovedelem = (float)$find['values']['params']['jovedelem'];
+           $jovedelem = ($jovedelem < 0) ? 0 : $jovedelem;
+           $jovedelem = round($jovedelem);
+           $ret['jovedelem'] = $jovedelem;
+
+           // Napi jövedelem
+           $napi_jovedelem = (float)$brutto / (int)$data['nap'];
+           $napi_jovedelem = ($napi_jovedelem < 0) ? 0 : $napi_jovedelem;
+           $napi_jovedelem = round($napi_jovedelem);
+           $values['napi_jovedelem'] = $napi_jovedelem;
+
+           // Biztosítottság határa
+
+           $biztonsitottsag_hatara = $settings['minimalber'] / 30 * 0.3;
+           $values['biztonsitottsag_hatara'] = $biztonsitottsag_hatara;
+
+           // Biztosítottá válik
+
+           if( $napi_jovedelem >= $biztonsitottsag_hatara )
+           {
+             $biztositotta_valik = 'Igen';
+           }
+           $ret['biztositotta_valik'] = $biztositotta_valik;
+
+           // Szja
+
+           $szja = $jovedelem * ($settings['ado_szja']/100);
+           $szja = ($szja < 0) ? 0 : $szja;
+           $szja = round($szja);
+           $ret['ado_szja'] = $szja;
+
+           // TB
+           if( $biztositotta_valik == 'Igen' )
+           {
+             $tb = $jovedelem * ($settings['ado_tb']/100);
+             $tb = ($tb < 0) ? 0 : $tb;
+             $tb = round($tb);
+             $ret['ado_tb'] = $tb;
+
+             // Öregségi nyugdíjas @ 2021-02-08
+             if ($data['oregsegi_nyugdijas'] == 'Igen') 
+             {
+               $tb = 0;
+               $ret['ado_tb'] = $tb;
+             }
+
+           } else {          
+             $tb = 0;
+             $ret['ado_tb'] = $tb;
+           }
+
+           $ado_nav += $tb;
+           $ado_nav += $szja;
+
+           // Összes levonás bruttóból 
+           $levonas_bruttobol = $tb + $szja;
+           $ret['levonas_bruttobol'] = $levonas_bruttobol;
+
+           $netto = (float)$brutto - $levonas_bruttobol;
+           $netto = ($netto < 0) ? 0 : $netto;
+           $netto = round($netto);
+
+           // KIVA
+           if( $data['ceg_kisvallalati_ado_alany'] == 'Igen' )
+           {
+             $kiva = $jovedelem * ($settings['ado_kisvallalati']/100);
+             $kiva = ($kiva < 0) ? 0 : $kiva;
+             $kiva = round($kiva);
+             $ret['ado_kiva'] = $kiva;
+
+             // Öregségi nyugdíjas @ 2021-02-08
+             if ($data['oregsegi_nyugdijas'] == 'Igen') 
+             {
+               $kiva = 0;
+               $ret['ado_kiva'] = $kiva;
+             }
+
+             $ado_raforditas = (float)$brutto + $kiva;
+             $ado_nav += $kiva;
+           } 
+           else 
+           {
+             $ado_szocialis_hozzajarulas = $jovedelem * ($settings['ado_szocialis_hozzajarulas']/100);
+             $ado_szocialis_hozzajarulas = ($ado_szocialis_hozzajarulas < 0) ? 0 : $ado_szocialis_hozzajarulas;
+             $ado_szocialis_hozzajarulas = round($ado_szocialis_hozzajarulas);
+             $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
+
+             $ado_szakkepzesi_hozzajarulas = $jovedelem * ($settings['ado_szakkepzesi_hozzajarulas']/100);
+             $ado_szakkepzesi_hozzajarulas = ($ado_szakkepzesi_hozzajarulas < 0) ? 0 : $ado_szakkepzesi_hozzajarulas;
+             $ado_szakkepzesi_hozzajarulas = round($ado_szakkepzesi_hozzajarulas);
+             $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
+
+             // Öregségi nyugdíjas @ 2021-02-08
+             if ($data['oregsegi_nyugdijas'] == 'Igen') 
+             {
+               $ado_szocialis_hozzajarulas = 0;
+               $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
+
+               $ado_szakkepzesi_hozzajarulas = 0;
+               $ret['ado_szakkepzesi_hozzajarulas'] = $ado_szakkepzesi_hozzajarulas;
+             }
+
+             $ado_raforditas = (float)$brutto + $ado_szocialis_hozzajarulas + $ado_szakkepzesi_hozzajarulas;
+             $ado_nav += $ado_szocialis_hozzajarulas + $ado_szakkepzesi_hozzajarulas;
+           }
+
+        }
+
+        $ret['teljes'] = $teljes;
         $ret['brutto'] = $brutto;
         $ret['netto'] = $netto;
         $ret['ado_raforditas'] = $ado_raforditas;
