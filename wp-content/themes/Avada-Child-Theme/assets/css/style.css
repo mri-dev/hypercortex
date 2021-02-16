@@ -1994,7 +1994,7 @@ body.page:not(.home) .page-custom-title h1 img.ico {
 
 body.page:not(.home) main#main {
   background: #fffcf7;
-  padding: 0 0 4rem 0;
+  padding: 0 0 6rem 0;
 }
 
 body.page:not(.home) main#main > .fusion-row {
@@ -2162,7 +2162,7 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   }
   body.page:not(.home) main#main {
     background: #fffcf7;
-    padding: 0 0 4rem 0;
+    padding: 0 0 5.5rem 0;
   }
 }
 
