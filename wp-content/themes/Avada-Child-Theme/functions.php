@@ -346,6 +346,18 @@ function create_custom_posttypes()
   );
   */
 
+  
+  $file_metabox = new CustomMetabox(
+    'attachment',
+    __('Hozzáférési megkötések', 'hc'),
+    new AttachmentMetaboxSave(),
+    'attachment_restrict_settings',
+    array(
+      'class' => 'attachment-postbox',
+      'attachment' => true
+    )
+  );
+
 }
 
 function wpsites_query( $query ) {

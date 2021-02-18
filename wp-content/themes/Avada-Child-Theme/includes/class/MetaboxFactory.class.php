@@ -34,7 +34,12 @@ class CustomMetabox
 
   public function init_metabox() {
       add_action( 'add_meta_boxes', array( $this, 'add_metabox') );
-      add_action( 'save_post', array( $this, 'save_metabox' ), 10, 2 );
+      if( $this->settings['attachment'] === true )
+      {
+        add_action( 'edit_attachment', array( $this, 'edit_attachment_metabox' ), 10, 2 );
+      } else {
+        add_action( 'save_post', array( $this, 'save_metabox' ), 10, 2 );
+      }
   }
 
   public function add_metabox() {
@@ -66,11 +71,45 @@ class CustomMetabox
 
     include(locate_template( $this->template_root . $this->template_file .'.php' ));
   }
+  
+  public function edit_attachment_metabox( $post_id )
+  {
+    $nonce_name   = isset( $_POST[$this->nonce_key] ) ? $_POST[$this->nonce_key] : '';
+    $nonce_action = $this->nonce_key.'_action';
+
+    // Check if nonce is set.
+    if ( ! isset( $nonce_name ) ) {
+        return;
+    }
+
+    // Check if nonce is valid.
+    if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
+        return;
+    }
+
+    // Check if user has permissions to save data.
+    if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    // Check if not an autosave.
+    if ( wp_is_post_autosave( $post_id ) ) {
+        return;
+    }
+
+    // Check if not a revision.
+    if ( wp_is_post_revision( $post_id ) ) {
+        return;
+    }
+
+    $this->save_fnc->saving( $post_id, $post );
+  }
+
   public function save_metabox( $post_id, $post ) {
       // Add nonce for security and authentication.
+
       $nonce_name   = isset( $_POST[$this->nonce_key] ) ? $_POST[$this->nonce_key] : '';
       $nonce_action = $this->nonce_key.'_action';
-
 
       // Check if nonce is set.
       if ( ! isset( $nonce_name ) ) {
