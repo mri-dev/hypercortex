@@ -2129,6 +2129,49 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   padding: 10px !important;
 }
 
+.attachment-sub-info {
+  text-align: center;
+}
+
+.attachment-sub-info .doc-info {
+  background-color: #efeae4;
+  padding: 20px;
+  border-radius: 25px;
+  margin: 20px 0 10px 0;
+}
+
+.attachment-sub-info .doc-info h1 {
+  color: black !important;
+}
+
+.attachment-sub-info .subber {
+  margin: 20px auto;
+  width: 500px;
+  max-width: 500px;
+}
+
+.attachment-sub-info .subber .name label,
+.attachment-sub-info .subber .email label {
+  margin: 8px 0 5px 0;
+  display: block;
+}
+
+.attachment-sub-info .subber .cb {
+  font-size: 0.7rem;
+}
+
+.attachment-sub-info .subber .email {
+  margin: 0 0 10px 0 !important;
+}
+
+.attachment-sub-info .subber .btns {
+  margin: 10px 0 0 0;
+}
+
+.attachment-sub-info .subber .btns button {
+  font-size: 1.1rem !important;
+}
+
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
   0% {

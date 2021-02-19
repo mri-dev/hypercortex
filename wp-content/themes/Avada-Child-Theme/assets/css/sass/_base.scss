@@ -1807,6 +1807,51 @@ body.page-id-37{
   }
 }
 
+.attachment-sub-info{
+  text-align: center;
+
+  .doc-info{
+    background-color: #efeae4;
+    padding: 20px;
+    border-radius: 25px;
+    margin: 20px 0 10px 0;
+
+    h1{
+      color: black !important;
+    }
+  }
+
+  .subber{
+    margin: 20px auto;
+    width: 500px;
+    max-width: 500px;
+
+    .name,
+    .email
+    {
+      label {
+        margin: 8px 0 5px 0;
+        display: block;
+      }
+    }
+
+    .cb{
+      font-size: 0.7rem;
+    }
+
+    .email{
+      margin: 0 0 10px 0 !important;
+    }
+
+    .btns{
+      margin: 10px 0 0 0;
+      button {
+        font-size: 1.1rem !important;
+      }
+    }
+  }
+}
+
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
   0% {background-color: #75bf75;}

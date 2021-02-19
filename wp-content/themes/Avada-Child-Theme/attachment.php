@@ -36,20 +36,37 @@ function getSize($file)
   <div class="attachment-sub-info">
     <div class="wrapper">
       <?php 
-
-      $title = (!empty($post->post_excerpt)) ? $post->post_excerpt : $post->post_title; 
-      $size = getSize( get_attached_file( $post->ID ) );
-      $type = end(explode('.', $post->guid));
-
+        $title = (!empty($post->post_excerpt)) ? $post->post_excerpt : $post->post_title; 
+        $size = getSize( get_attached_file( $post->ID ) );
+        $type = end(explode('.', $post->guid));
       ?>
       <strong><?=__('A következő dokumentumhoz szeretne hozzáférni:', 'hc')?></strong>
-      <h1><?php echo $title; ?></h1>
-      <div class="info"><?php echo strtoupper($type); ?> <sub>*</sub> <?php echo $size; ?></div>
-      <h2><?=__('A dokumentum eléréséhez feliratkozás szükséges!')?></h2>      
+      <div class="doc-info">
+        <h1><?php echo $title; ?></h1>
+        <div class="info"><?php echo strtoupper($type); ?> <sub>*</sub> <?php echo $size; ?></div>
+      </div>
+      <h2><?=__('A dokumentum eléréséhez <strong>feliratkozás</strong> szükséges!')?></h2>
+      <strong><?=__('Adja meg a feliratkozáshoz szükséges adatokat, akkor is, ha korábban már feliratkozott.<br>A rendszer azonosítani fogja Önt és letölthetővé válik a dokumentum.','hc')?></strong>
       <div class="subber">
         <div class="wrapper">
-          <div>
-            <input type="text" name="name" value="">
+          <div class="name">
+            <label for="name"><?=__('Cégnév megadása', 'hc')?> *</label>
+            <input type="text" id="name" name="f_9" value="" required>
+          </div>
+          <div class="email">
+            <label for="email"><?=__('E-mail cím megadása', 'hc')?> *</label>
+            <input type="text" id="email" name="subscr" value="" required>
+          </div>
+          <div class="cb">
+            <input type="checkbox" name="f_12[]" id="adatvedelem" value="2"> 
+            <label for="adatvedelem">* <?=__('A feliratkozással elfogadja az Adatvédelmi Nyilatkozatot és hozzájárulok az adataim kezeléséhez.', 'hc')?></label>            
+          </div>
+          <div class="cb">
+            <input type="checkbox" name="f_11[]" id="marketing" value="1"> 
+            <label for="marketing">* <?=__('Hozzájárulok, hogy az általam megadott e-mail címre időközönként üzleti céllal elektronikus levelet küldhetnek!', 'hc')?></label>            
+          </div>
+          <div class="btns">
+            <button type="submit" class="grad-button" name="sub" value="1"><?=__('Feliratkozás', 'hc')?></button>
           </div>
         </div>
       </div>
