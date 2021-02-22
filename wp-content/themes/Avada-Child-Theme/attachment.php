@@ -16,6 +16,10 @@ if( !$subsecured )
 else 
 {
   $accept = false;
+  if( isset($_COOKIE['hcwg_subscribed']) && !empty($_COOKIE['hcwg_subscribed']) )
+  {
+    $accept = true;
+  }
 
   if( $accept )
   {
@@ -40,6 +44,7 @@ function getSize($file)
         $size = getSize( get_attached_file( $post->ID ) );
         $type = end(explode('.', $post->guid));
       ?>
+      <div class="lock-icon"><i class="fa fa-lock"></i></div>
       <strong><?=__('A következő dokumentumhoz szeretne hozzáférni:', 'hc')?></strong>
       <div class="doc-info">
         <h1><?php echo $title; ?></h1>
@@ -49,25 +54,27 @@ function getSize($file)
       <strong><?=__('Adja meg a feliratkozáshoz szükséges adatokat, akkor is, ha korábban már feliratkozott.<br>A rendszer azonosítani fogja Önt és letölthetővé válik a dokumentum.','hc')?></strong>
       <div class="subber">
         <div class="wrapper">
-          <div class="name">
-            <label for="name"><?=__('Cégnév megadása', 'hc')?> *</label>
-            <input type="text" id="name" name="f_9" value="" required>
-          </div>
-          <div class="email">
-            <label for="email"><?=__('E-mail cím megadása', 'hc')?> *</label>
-            <input type="text" id="email" name="subscr" value="" required>
-          </div>
-          <div class="cb">
-            <input type="checkbox" name="f_12[]" id="adatvedelem" value="2"> 
-            <label for="adatvedelem">* <?=__('A feliratkozással elfogadja az Adatvédelmi Nyilatkozatot és hozzájárulok az adataim kezeléséhez.', 'hc')?></label>            
-          </div>
-          <div class="cb">
-            <input type="checkbox" name="f_11[]" id="marketing" value="1"> 
-            <label for="marketing">* <?=__('Hozzájárulok, hogy az általam megadott e-mail címre időközönként üzleti céllal elektronikus levelet küldhetnek!', 'hc')?></label>            
-          </div>
-          <div class="btns">
-            <button type="submit" class="grad-button" name="sub" value="1"><?=__('Feliratkozás', 'hc')?></button>
-          </div>
+          <form id="subscriber" action="" method="post" onsubmit="return false;">
+            <div class="name">
+              <label for="name"><?=__('Cégnév megadása', 'hc')?> *</label>
+              <input type="text" id="name" name="f_9" value="" required>
+            </div>
+            <div class="email">
+              <label for="email"><?=__('E-mail cím megadása', 'hc')?> *</label>
+              <input type="text" id="email" name="subscr" value="" required>
+            </div>
+            <div class="cb">
+              <input type="checkbox" name="f_12[]" id="adatvedelem" value="2"> 
+              <label for="adatvedelem">* <?=__('A feliratkozással elfogadja az Adatvédelmi Nyilatkozatot és hozzájárulok az adataim kezeléséhez.', 'hc')?></label>            
+            </div>
+            <div class="cb">
+              <input type="checkbox" name="f_11[]" id="marketing" value="1"> 
+              <label for="marketing">* <?=__('Hozzájárulok, hogy az általam megadott e-mail címre időközönként üzleti céllal elektronikus levelet küldhetnek!', 'hc')?></label>            
+            </div>
+            <div class="btns">
+              <button type="button" class="grad-button" onclick="subscriber();" name="sub" value="1"><?=__('Feliratkozás', 'hc')?></button>
+            </div>
+          </form>          
         </div>
       </div>
     </div>

@@ -2133,11 +2133,25 @@ body.page-id-37 .post-content > div.fusion-fullwidth {
   text-align: center;
 }
 
+.attachment-sub-info .lock-icon {
+  text-align: center;
+  margin: 10px 0 15px 0;
+}
+
+.attachment-sub-info .lock-icon i {
+  font-size: 35px;
+  color: #e2c68a;
+}
+
+.attachment-sub-info h2 {
+  color: #8f1717 !important;
+}
+
 .attachment-sub-info .doc-info {
   background-color: #efeae4;
   padding: 20px;
   border-radius: 25px;
-  margin: 20px 0 10px 0;
+  margin: 20px 0 50px 0;
 }
 
 .attachment-sub-info .doc-info h1 {

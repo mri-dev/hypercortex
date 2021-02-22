@@ -10,11 +10,39 @@ function Calculator( action, form ) {
     'json'
   );
 }
-(function($){
+
+var $ = jQuery;
+
+function subscriber()
+{
+  var form = $('form#subscriber').serialize();
+
+  $.post(
+    "/wp-admin/admin-ajax.php?action=subscriber",
+    //"https://www.hypercortex.hu/wp-admin/admin-ajax.php?action=subscriber",
+    {
+      form: form
+    },function(d){
+      console.log(d);
+
+      if( d.data.subscribed !== false) 
+      {
+        Cookies.set( 'hcwg_subscribed', d.data.subscribed, { expires: 365, path: '/' } );
+        window.location.reload();
+      }      
+    },
+    'json'
+  );
+
+  return false;
+}
+
+(function($)
+{
   $(function(){
     autoResizeHeight();
   });
-
+  
   function autoResizeHeight() {
   	jQuery.each($('.autocorrett-height-by-width'), function(i,e){
       var ew = $(e).width();
@@ -36,7 +64,6 @@ function Calculator( action, form ) {
           height: th
         });
   		}
-
     });
   }
 })(jQuery);

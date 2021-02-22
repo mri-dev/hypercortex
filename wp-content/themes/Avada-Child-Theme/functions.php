@@ -97,7 +97,8 @@ function theme_enqueue_styles() {
     wp_enqueue_script( 'google-maps', '//maps.googleapis.com/maps/api/js?sensor=false&language='.get_locale().'&region=hu&libraries=places&key='.GOOGLE_API_KEY);
     wp_enqueue_script( 'recaptcha', '//www.google.com/recaptcha/api.js?render='.CAPTCHA_SITE_KEY);
     wp_enqueue_script( 'jquery-ui', '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array('jquery'), '1.12.1');
-    wp_enqueue_script( 'slick', IFROOT . '/assets/vendors/slick/slick.min.js');
+    wp_enqueue_script( 'slick', IFROOT . '/assets/vendors/slick/slick.min.js'); 
+    wp_enqueue_script( 'cookiejs', IFROOT . '/assets/vendors/js.cookie.min.js' );
     wp_enqueue_script( 'master', IFROOT . '/assets/js/master.js#asyncload');
     //wp_enqueue_script( 'jquery-ui-loc-hu', IFROOT . '/assets/js/jquery-ui-loc-hu.js');
     //wp_enqueue_script( 'fontasesome', '//use.fontawesome.com/releases/v5.0.6/js/all.js');
@@ -113,7 +114,7 @@ function theme_enqueue_styles() {
     //wp_enqueue_script( 'angualardatepick', IFROOT . '/assets/vendors/md-date-range-picker/md-date-range-picker.js?t=' . ( (DEVMODE === true) ? time() : '' ) );
     //wp_enqueue_script( 'angualar-timer-bower', IFROOT . '/assets/vendors/angular-timer/dist/assets/js/angular-timer-bower.js?t=' . ( (DEVMODE === true) ? time() : '' ) );
     //wp_enqueue_script( 'angualar-timer-all', IFROOT . '/assets/vendors/angular-timer/dist/assets/js/angular-timer-all.min.js?t=' . ( (DEVMODE === true) ? time() : '' ) );
-    wp_enqueue_script('hypercortex-ang', IFROOT . '/assets/js/calculators.ang.js?t=' . ( (DEVMODE === true) ? time() : '' ) );
+    wp_enqueue_script('hypercortex-ang', IFROOT . '/assets/js/calculators.ang.js?t=' . ( (DEVMODE === true) ? time() : '' ) );   
 }
 add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
 
@@ -386,6 +387,7 @@ function ajax_requests()
   $ajax->contact_form();
   $ajax->calc_api_interface();
   $ajax->calc_settings();
+  $ajax->subscriber();
 }
 add_action( 'init', 'ajax_requests' );
 

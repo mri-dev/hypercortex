@@ -1810,11 +1810,24 @@ body.page-id-37{
 .attachment-sub-info{
   text-align: center;
 
+  .lock-icon{
+    text-align: center;
+    margin: 10px 0 15px 0;
+    i{
+      font-size: 35px;
+      color: #e2c68a;
+    }
+  }
+
+  h2{
+    color: #8f1717 !important;
+  }
+
   .doc-info{
     background-color: #efeae4;
     padding: 20px;
     border-radius: 25px;
-    margin: 20px 0 10px 0;
+    margin: 20px 0 50px 0;
 
     h1{
       color: black !important;

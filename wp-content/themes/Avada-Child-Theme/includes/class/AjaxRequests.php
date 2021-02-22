@@ -30,6 +30,53 @@ class AjaxRequests
     add_action( 'wp_ajax_nopriv_'.__FUNCTION__, array( $this, 'CalcSettings'));
   }
 
+  public function subscriber()
+  { 
+    // Allow from any origin
+    if (isset($_SERVER['HTTP_ORIGIN'])) {
+      // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
+      // you want to allow, and if so:
+      header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+      header('Access-Control-Allow-Credentials: true');
+      header('Access-Control-Max-Age: 86400');    // cache for 1 day
+    }
+    
+    add_action( 'wp_ajax_'.__FUNCTION__, array( $this, 'subscriberRequest'));
+    add_action( 'wp_ajax_nopriv_'.__FUNCTION__, array( $this, 'subscriberRequest'));
+  }
+
+  public function subscriberRequest()
+  {
+    $form = [];
+
+    /*
+    f_9: "Cég neve"
+    f_11: ["1"] GDPR
+    f_12: ["2"] Hírlevél
+    subscr: "email cím"
+    */
+    parse_str($_POST['form'], $form );
+
+    $return = array(
+      'error' => 0,
+      'msg'   => '',
+      'missing_elements' => [],
+      'error_elements' => [],
+      'missing' => 0,
+      'passed_params' => false
+    );
+
+    $return['passed_params'] = $form;
+
+    $return['data'] = [
+      'subscribed' => $form['subscr']
+    ];
+    $this->returnJSON($return);
+
+    echo json_encode($return);
+    die();
+  }
+
   public function CalcSettings()
   {
     extract($_POST);
@@ -908,6 +955,5 @@ class AjaxRequests
     die();
 
   }
-
 }
 ?>
