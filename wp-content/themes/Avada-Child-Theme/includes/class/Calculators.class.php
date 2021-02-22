@@ -4218,7 +4218,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
     //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
 
     if ( !$anyak_gyerek4vagytobb ) {
-      $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
+      $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege-$szemelyi_kedvezmeny) * ($settings['ado_szja']/100));
       $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
       $ret['ado_szja'] = round($ret['ado_szja']);
     } else {
@@ -4352,12 +4352,12 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
     $napi_jovedelem = (float)$brutto / (int)$data['nap'];
     $napi_jovedelem = ($napi_jovedelem < 0) ? 0 : $napi_jovedelem;
     $napi_jovedelem = round($napi_jovedelem);
-    $values['napi_jovedelem'] = $napi_jovedelem;
+    $ret['napi_jovedelem'] = $napi_jovedelem;
 
     // Biztosítottság határa
 
     $biztonsitottsag_hatara = $settings['minimalber'] / 30 * 0.3;
-    $values['biztonsitottsag_hatara'] = $biztonsitottsag_hatara;
+    $ret['biztonsitottsag_hatara'] = $biztonsitottsag_hatara;
 
     // Biztosítottá válik
 
@@ -4546,7 +4546,6 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
   public function findMegbizasiDijBruttoFromNetto( $netto, $data, $settings )
   {
     $brutto = $netto * 1.5;
-    $allcalc = 0;
     $running = true;
     $step = 0;
     $szamolt_netto = 0;
@@ -4682,7 +4681,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
           //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
   
           if ( !$anyak_gyerek4vagytobb ) {
-            $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege) * ($settings['ado_szja']/100)) - $szemelyi_kedvezmeny;
+            $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege-$szemelyi_kedvezmeny) * ($settings['ado_szja']/100));
             $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
             $ret['ado_szja'] = round($ret['ado_szja']);
           } else {
@@ -5294,7 +5293,17 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
         $ret = array();
         $settings = $this->loadSettings( $calc );
         $ret['settings'] = $settings;
-        $szocho_ado_max = $settings['minimalber'] * 24;
+           /**
+         * Manuális minimálbér korrekció
+         * @since 2021-02-22
+         * 
+         * Gyursó Kitti:
+         * A NAV utólag módosította az osztalék esetén a SZOCHO maximumot. Ugyan úgy a 161.000 Ft-os minimálbérrel kell számolni, így az nem változott 167.400 Ft-ra.
+         */
+        // $szocho_ado_max = $settings['minimalber'] * 24;
+        $szocho_ado_max = 161000 * 24;
+        
+        
 
         $osszes_jovedelem = 0;
         $fizetendo_szja = 0;
@@ -5451,12 +5460,13 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
               /** Hozzáadva @ 2021-02-08 */
               if( time() <= $szochokiva_nemfizet_date )
               {
-                $szocho = 0;
+                // Kikapcsolva
+                //$szocho = 0;
               }
             }
 
             // Szakképzési
-            if ($data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0 && $hataron_felul) {
+            if ($data['ceg_kiva'] == 'Nem' && $adoalap_kiegeszites > 0 ) {
               $szkh = $adoalap_kiegeszites * ($settings['ado_szakkepzesi_hozzajarulas']/100);
               $szkh = ($szkh < 0) ? 0 : $szkh;
               $szkh = round($szkh);
@@ -5472,7 +5482,8 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
               /** Hozzáadva @ 2021-02-08 */
               if( time() <= $szochokiva_nemfizet_date )
               {
-                $kiva = 0;
+                // Kikapcsolva
+                // $kiva = 0;
               }
             }
           }
@@ -5609,13 +5620,15 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
         /** Hozzáadva @ 2021-02-08 */
         if( time() <= $szochokiva_nemfizet_date && $szocho != 0 && $jg['ID'] == 2 )
         {
-          $szocho = 0;
+          // Kikapcsolva
+          //$szocho = 0;
         }
 
         /** Hozzáadva @ 2021-02-08 */
         if( time() <= $szochokiva_nemfizet_date && $kiva != 0 && $jg['ID'] == 2 )
         {
-          $kiva = 0;
+          // Kikapcsolva
+          // $kiva = 0;
         }
 
         // Munkáltató adók

@@ -31,7 +31,7 @@
 
       <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('jovedelem')!==-1, error:error_elements['jovedelem']}">
         <div class="head">
-         Rendszeres havi <span ng-if="(form.mode=='brutto')">nettó</span><span ng-if="(form.mode=='netto')">bruttó</span> jövedelem (Ft) *
+         Rendszeres havi <span ng-if="(form.mode=='brutto')">nettó</span><span ng-if="(form.mode=='netto' || form.mode=='teljes')">bruttó</span> jövedelem (Ft) *
           <div class="error-hint" ng-if="error_elements.indexOf('jovedelem')!==-1">{{error_elements['jovedelem']}}</div>
         </div>
         <div class="val">
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('ceg_kisvallalati_ado_alany')!==-1, error:error_elements['ceg_kisvallalati_ado_alany']}">
+      <div ng-if="form.mode && form.mode == 'teljes'" class="line" ng-class="{missing:missing.indexOf('ceg_kisvallalati_ado_alany')!==-1, error:error_elements['ceg_kisvallalati_ado_alany']}">
         <div class="head">
           A cég Kisvállalati adó (KIVA) alanya? *
           <div class="error-hint" ng-if="error_elements.indexOf('ceg_kisvallalati_ado_alany')!==-1">{{error_elements['ceg_kisvallalati_ado_alany']}}</div>
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <div ng-if="form.mode" class="line two-line" ng-class="{missing:missing.indexOf('munkavallalo_kedvezmeny')!==-1, error:error_elements['munkavallalo_kedvezmeny']}">
+      <div ng-if="form.mode && form.mode == 'teljes'" class="line two-line" ng-class="{missing:missing.indexOf('munkavallalo_kedvezmeny')!==-1, error:error_elements['munkavallalo_kedvezmeny']}">
         <div class="head">
           A munkavállaló után a vállalkozás jogosult kedvezményre? *
           <div class="error-hint" ng-if="error_elements.indexOf('munkavallalo_kedvezmeny')!==-1">{{error_elements['munkavallalo_kedvezmeny']}}</div>
@@ -212,15 +212,15 @@
           </tr>
           <tr ng-if="(result.values.kiva_adoalany=='Nem' && result.mode=='teljes')" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szociális hozzájárulási adó</td>
-            <td class="v">+{{result.ado_szocialis_hozzajarulas|cash:'Ft':''}}</td>
+            <td class="v">{{result.ado_szocialis_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
           <tr ng-if="(result.values.kiva_adoalany=='Nem' && result.mode=='teljes')" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szakképzési hozzájárulás</td>
-            <td class="v">+{{result.ado_szakkepzesi_hozzajarulas|cash:'Ft':''}}</td>
+            <td class="v">{{result.ado_szakkepzesi_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
           <tr ng-if="(result.values.kiva_adoalany=='Igen' && result.mode=='teljes')" ng-class="{lt: result.values.kiva_adoalany=='Nem'}">
             <td class="h">Fizetendő kisvállalati adó</td>
-            <td class="v">+{{result.ado_kisvallalati|cash:'Ft':''}}</td>
+            <td class="v">{{result.ado_kisvallalati|cash:'Ft':''}}</td>
           </tr>
           <tr ng-if="(result.values.kiva_adoalany=='Nem' && result.mode=='teljes')" ng-class="{hl: result.values.kiva_adoalany=='Nem'}">
             <td class="h"><strong>Teljes bérköltség nem KIVA alany cég esetén</strong></td>

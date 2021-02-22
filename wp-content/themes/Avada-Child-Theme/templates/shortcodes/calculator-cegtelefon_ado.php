@@ -67,15 +67,15 @@
           </tr>
           <tr ng-if="(result.values.kiva_adoalany=='Nem')" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szociális hozzájárulási adó</td>
-            <td class="v">+{{result.ado_szocialis_hozzajarulas|cash:'Ft':''}}</td>
+            <td class="v">{{result.ado_szocialis_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
           <tr ng-if="(result.values.kiva_adoalany=='Nem')" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szakképzési hozzájárulás</td>
-            <td class="v">+{{result.ado_szakkepzesi_hozzajarulas|cash:'Ft':''}}</td>
+            <td class="v">{{result.ado_szakkepzesi_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
           <tr ng-if="(result.values.kiva_adoalany=='Igen')" ng-class="{lt: result.values.kiva_adoalany=='Nem'}">
             <td class="h">Fizetendő kisvállalati adó (KIVA)</td>
-            <td class="v">+{{result.ado_kisvallalati|cash:'Ft':''}}</td>
+            <td class="v">{{result.ado_kisvallalati|cash:'Ft':''}}</td>
           </tr>
           <tr class="hl" >
             <td class="h">Céget terhelő összes adó</td>
