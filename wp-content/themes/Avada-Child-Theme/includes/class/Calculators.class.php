@@ -4324,7 +4324,6 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
       'values' => $calced
     );
   }
-
   
   /**
    * Megbízási díjhoz levonás számítások
@@ -4349,7 +4348,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
 
     // Napi jövedelem
 
-    $napi_jovedelem = (float)$brutto / (int)$data['nap'];
+    $napi_jovedelem = (float)$jovedelem / (int)$data['nap'];
     $napi_jovedelem = ($napi_jovedelem < 0) ? 0 : $napi_jovedelem;
     $napi_jovedelem = round($napi_jovedelem);
     $ret['napi_jovedelem'] = $napi_jovedelem;
@@ -6051,6 +6050,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
         if( $data['mode'] == 'brutto')
         {
             $brutto = (float)$data['megbizasi_dij'];
+
            // Jövedelem
             $jovedelem = $data['megbizasi_dij'] * ( (100 - $data['koltseghanyad']) / 100 );
             $jovedelem = ($jovedelem < 0) ? 0 : $jovedelem;
@@ -6058,8 +6058,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
             $ret['jovedelem'] = $jovedelem;
 
             // Napi jövedelem
-
-            $napi_jovedelem = (float)$data['megbizasi_dij'] / (int)$data['nap'];
+            $napi_jovedelem = (float)$jovedelem / (int)$data['nap'];
             $napi_jovedelem = ($napi_jovedelem < 0) ? 0 : $napi_jovedelem;
             $napi_jovedelem = round($napi_jovedelem);
             $values['napi_jovedelem'] = $napi_jovedelem;
@@ -6239,7 +6238,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
            $ret['jovedelem'] = $jovedelem;
 
            // Napi jövedelem
-           $napi_jovedelem = (float)$brutto / (int)$data['nap'];
+           $napi_jovedelem = (float)$jovedelem / (int)$data['nap'];
            $napi_jovedelem = ($napi_jovedelem < 0) ? 0 : $napi_jovedelem;
            $napi_jovedelem = round($napi_jovedelem);
            $values['napi_jovedelem'] = $napi_jovedelem;
