@@ -17,22 +17,25 @@ function subscriber()
 {
   var form = $('form#subscriber').serialize();
 
+  $('#subscriber .btns button').hide();
+  /*
   $.post(
-    "/wp-admin/admin-ajax.php?action=subscriber",
-    //"https://www.hypercortex.hu/wp-admin/admin-ajax.php?action=subscriber",
+    //"/wp-admin/admin-ajax.php?action=subscriber",
+    "https://www.hypercortex.hu/wp-admin/admin-ajax.php?action=subscriber",
     {
       form: form
     },function(d){
       console.log(d);
 
-      if( d.data.subscribed !== false) 
+      if( d.data && d.data.subscribed && d.data.subscribed !== false) 
       {
         Cookies.set( 'hcwg_subscribed', d.data.subscribed, { expires: 365, path: '/' } );
         window.location.reload();
-      }      
+      }
     },
     'json'
   );
+  */
 
   return false;
 }

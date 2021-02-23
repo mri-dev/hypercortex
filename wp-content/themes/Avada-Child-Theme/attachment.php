@@ -57,11 +57,11 @@ function getSize($file)
           <form id="subscriber" action="" method="post" onsubmit="return false;">
             <div class="name">
               <label for="name"><?=__('Cégnév megadása', 'hc')?> *</label>
-              <input type="text" id="name" name="f_9" value="" required>
+              <input type="text" id="name" name="f_9" value="" __required>
             </div>
             <div class="email">
               <label for="email"><?=__('E-mail cím megadása', 'hc')?> *</label>
-              <input type="text" id="email" name="subscr" value="" required>
+              <input type="text" id="email" name="subscr" value="" __required>
             </div>
             <div class="cb">
               <input type="checkbox" name="f_12[]" id="adatvedelem" value="2"> 
