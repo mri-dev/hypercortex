@@ -72,6 +72,7 @@ function getSize($file)
               <label for="marketing">* <?=__('Hozzájárulok, hogy az általam megadott e-mail címre időközönként üzleti céllal elektronikus levelet küldhetnek!', 'hc')?></label>            
             </div>
             <div class="btns">
+              <div class="ajxmsg" style="display: none;"></div>
               <button type="button" class="grad-button" onclick="subscriber();" name="sub" value="1"><?=__('Feliratkozás', 'hc')?></button>
             </div>
           </form>          

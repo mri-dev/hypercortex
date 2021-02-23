@@ -5616,18 +5616,22 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
           }
         }
 
-        /** Hozzáadva @ 2021-02-08 */
-        if( time() <= $szochokiva_nemfizet_date && $szocho != 0 && $jg['ID'] == 2 )
+         /** Hozzáadva @ 2021-02-08 */
+        // Szakképzési hozzájárulás törlés egymegtarozós esetén [3] 06.30-ig
+        if( time() <= $szochokiva_nemfizet_date && $szkh != 0 && $jg['ID'] == 3 )
         {
-          // Kikapcsolva
-          //$szocho = 0;
+          // Bekapcsolva
+          $szkh = 0;
         }
 
         /** Hozzáadva @ 2021-02-08 */
-        if( time() <= $szochokiva_nemfizet_date && $kiva != 0 && $jg['ID'] == 2 )
+        // Szocho, kiva, szakho törlés szép kártyák esetén [2] 06.30-ig
+        if( time() <= $szochokiva_nemfizet_date && $jg['ID'] == 2 )
         {
-          // Kikapcsolva
-          // $kiva = 0;
+          // Bekapcsolva
+          $kiva = 0;
+          $szkh = 0;
+          $szocho = 0;
         }
 
         // Munkáltató adók
@@ -5654,6 +5658,24 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
           }
 
           $ado_munkaltato = $szocho + $szkh + $kiva;
+        }
+        
+        /** Hozzáadva @ 2021-02-08 */
+        // Szakképzési hozzájárulás törlés egymegtarozós esetén [3] 06.30-ig
+        if( time() <= $szochokiva_nemfizet_date && $szkh != 0 && $jg['ID'] == 3 )
+        {
+          // Bekapcsolva
+          $szkh = 0;
+        }
+
+        /** Hozzáadva @ 2021-02-08 */
+        // Szocho, kiva, szakho törlés szép kártyák esetén [2] 06.30-ig
+        if( time() <= $szochokiva_nemfizet_date && $jg['ID'] == 2 )
+        {
+          // Kikapcsolva
+          $kiva = 0;
+          $szkh = 0;
+          $szocho = 0;
         }
 
         $ret['adoalap_kiegeszites'] = $adoalap_kiegeszites;

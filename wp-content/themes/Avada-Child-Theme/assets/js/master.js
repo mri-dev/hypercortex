@@ -18,7 +18,9 @@ function subscriber()
   var form = $('form#subscriber').serialize();
 
   $('#subscriber .btns button').hide();
-  /*
+  $('#subscriber .ajxmsg').html('<strong style="color: #3ea83e;">Feliratkozás folyamatban...</strong>').show();
+
+  
   $.post(
     //"/wp-admin/admin-ajax.php?action=subscriber",
     "https://www.hypercortex.hu/wp-admin/admin-ajax.php?action=subscriber",
@@ -29,13 +31,31 @@ function subscriber()
 
       if( d.data && d.data.subscribed && d.data.subscribed !== false) 
       {
-        Cookies.set( 'hcwg_subscribed', d.data.subscribed, { expires: 365, path: '/' } );
-        window.location.reload();
+        if( d.error == 0 )
+        {
+          Cookies.set( 'hcwg_subscribed', d.data.subscribed, { expires: 365, path: '/' } );
+          $('#subscriber .ajxmsg').hide().html('<strong style="color: #3ea83e;">'+d.msg+'</strong>').show();
+
+          
+        } else {
+          $('#subscriber .ajxmsg').hide().html('<strong style="color: #3ea83e;">'+d.msg+'</strong>').show();
+        }
+
+        setTimeout(function(){
+          window.location.reload();
+        }, 5000 );
+      } else {
+        $('#subscriber .ajxmsg').hide().html('<strong style="color:red;">'+d.msg+'</strong>').show();
+        
+        setTimeout(function(){
+          $('#subscriber .btns button').show();
+          $('#subscriber .ajxmsg').html('').hide();
+        }, 5000 );
       }
     },
     'json'
   );
-  */
+
 
   return false;
 }
