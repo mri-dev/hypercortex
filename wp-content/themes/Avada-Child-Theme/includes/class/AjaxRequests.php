@@ -31,9 +31,10 @@ class AjaxRequests
   }
 
   public function subscriber()
-  { 
-    // Allow from any origin
-    if (isset($_SERVER['HTTP_ORIGIN'])) {
+  {
+     // Allow from any origin
+    if (isset($_SERVER['HTTP_ORIGIN'])) 
+    {
       // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
       // you want to allow, and if so:
       header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
@@ -48,6 +49,23 @@ class AjaxRequests
   public function subscriberRequest()
   {
     $form = [];
+
+    //$wgapi = get_stylesheet_directory().'/includes/class/wg7api.php';
+
+    //require $wgapi;
+
+    if( !class_exists('WG7_API') )
+    {
+      require_once $wgapi;
+    }
+
+    $db_host = "localhost"; // adatbázis kiszolgáló címe
+    $db_user = "webgalamb"; // adatbázis felhasználónév
+    $db_name = "webgalamb"; // adatbázis neve
+    $db_password = 'HDqeP2ijt??cCEnYt6GaYv3$X'; // felhasználó jelszava
+    $db_prefix = "wg7_"; // Webgalamb 7 prefix, alap telepítés esetén => wg7_
+
+    $wg = new WG7_API($db_prefix, $db_host, $db_name, $db_user, $db_password);
 
     /*
     f_9: "Cég neve"
@@ -65,18 +83,89 @@ class AjaxRequests
       'missing' => 0,
       'passed_params' => false
     );
-
+    
     $return['passed_params'] = $form;
+    
+    if( !isset($form['f_12']))
+    {
+      $return['error'] = true;
+      $return['msg'] = 'Az Adatvédelmi Nyilatkozat elolvasása és elfogadása kötelező!';
+      echo json_encode($return);
+      die();
+    }
+    
+    if( !isset($form['f_11']))
+    {
+      $return['error'] = true;
+      $return['msg'] = 'A feliratkozáshoz hozzá kell járulni, hogy időközönként üzleti jellegű egypercesek hirleveket kaphat!';
+      echo json_encode($return);
+      die();
+    }
+    
+    if( empty($form['subscr']) || empty($form['f_9']) )
+    {
+      $return['error'] = true;
+      $return['msg'] = 'A feliratkozáshoz adja meg a cég nevét és e-mail címét!';
+      echo json_encode($return);
+      die();
+    }
+    
+    if( $wg )
+    {      
+      // Rögzítendő adatok.
+      $subscriber_data = array (
+        // E-mail cím 
+        'mail' => $form['subscr'],
+        // Feliratkozási dátum, ha nincs megadva akkor az aktuális dátum kerül be.
+        //'datum' => '2013-03-10',	
 
-    $return['data'] = [
-      'subscribed' => $form['subscr']
-    ];
-    $this->returnJSON($return);
+        // Státusz: 1 -> aktív, 0 -> inaktív, 2 -> visszapattant
+        // Ha nincs megadva akkor aktív státusszal kerül be
+        'active' => 1,
+        'Cégnév' => $form['f_9'],
+        'Forrás' => 'Feliratkozás dokumentum hozzáférés miatt'
+      );
+      
+      $subscriber_data['Hozzájárulok, hogy az általam megadott e-mail címre időközönként üzleti céllal elektronikus levelet küldhetnek!'] = 'marketing';
+      $subscriber_data['A feliratkozással elfogadja az <a href="/adavedelmi-nyilatkozat/" target="_blank">Adatvédelmi Nyilatkozatot</a> és hozzájárulok az adataim kezeléséhez.'] = 'aszf';
+
+      // A feliratkozási csoport csoportazonosítója.
+      $group_id = 3; 
+
+      $result = $wg->InsertSubscriber($subscriber_data, $group_id);
+
+      if( $result > 0 )
+      {
+        $return['data']['subscribed'] = $result;
+        $return['msg'] = 'Sikeresen feliratkozott! 5 mp múlva átirányítjuk a dokumentumra...';
+      } else {
+        if( $result == -1 )
+        { 
+          $return['data']['subscribed'] = $form['subscr'];
+          $return['msg'] = 'Ön már korábban feliratkozott ezzel az e-mail címmel: '.$form['subscr'].'. 5 mp múlva átirányítjuk a dokumentumra...';
+        } else {
+          $return['error'] = $result;
+          
+          $msg = '';
+
+          switch( $result )
+          {
+            case -2:
+              $msg = 'Nem sikerült a feliratkozás. Hibás csoport azonosító. Jelezze ügyfélszolgálatunkon.';
+            break;
+            case -3:
+              $msg = 'Nem sikerült a feliratkozás. Hibás e-mail címet adott meg, kérjük, hogy ügyeljen a helyes e-mail formátumra.';
+            break;
+          }
+          $return['msg'] = $msg;
+        }       
+      }      
+    }
 
     echo json_encode($return);
     die();
   }
-
+  
   public function CalcSettings()
   {
     extract($_POST);
@@ -865,8 +954,7 @@ class AjaxRequests
       }
     }
 
-    $to = get_option('admin_email');
-    $to = 'server@web-pro.hu';
+    $to = get_option('admin_email');    
     $subject = sprintf(__('Új kapcsolat üzenet érkezett: %s - %s','hc'), $form['cegnev'], $form['contact_name']);
 
     ob_start();
