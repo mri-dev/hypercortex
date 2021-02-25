@@ -11,8 +11,14 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
   $scope.success = false;
   $scope.missing = [];
   $scope.error_elements = [];
+  $scope.tipus = 'kapcsolat';
   $scope.button_text = 'Üzenet küldése';
   $scope.button_class = 'grad-button';
+
+  $scope.init = ( tipus ) => 
+  {
+    $scope.tipus = tipus;
+  }
 
   $scope.send = function()
   {
@@ -23,6 +29,7 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
 
     var form = {};
     angular.copy($scope.form, form);
+    form.tipus = $scope.tipus;
 
     $http({
 			method: 'POST',
