@@ -5345,7 +5345,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
         $ret = array();
         $settings = $this->loadSettings( $calc );
         $ret['settings'] = $settings;
-        $szochokiva_nemfizet_date = strtotime('2021-06-30');
+        $szochokiva_nemfizet_date = strtotime('2021-12-31');
 
         $jg = $this->getCafeteriaGroupByTitle( $data['juttatas'] );
         $ret['juttatas_group'] = $jg;
@@ -5908,7 +5908,7 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
         $values = [];
         $settings = $this->loadSettings( $calc );
         $ret['settings'] = $settings;
-        $szakkh_nemfizet_date = strtotime('2021-06-30');
+        $szakkh_nemfizet_date = strtotime('2021-12-31');
 
         $szamla_brutto = (float)$data['szamla_brutto'];
         $ret['szamla_brutto'] = $szamla_brutto;
