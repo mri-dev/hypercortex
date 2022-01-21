@@ -69,7 +69,7 @@
             <td class="h">Fizetendő szociális hozzájárulási adó</td>
             <td class="v">+{{result.ado_szocialis_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-if="(result.values.kiva_adoalany=='Nem')" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
+          <tr ng-if="(result.values.kiva_adoalany=='Nem' && ['2022'].indexOf(result.version) === -1)" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szakképzési hozzájárulás</td>
             <td class="v">{{result.ado_szakkepzesi_hozzajarulas|cash:'Ft':''}}</td>
           </tr>

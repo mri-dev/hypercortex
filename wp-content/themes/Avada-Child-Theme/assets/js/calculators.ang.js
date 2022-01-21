@@ -205,6 +205,7 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
           $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
           $scope.form.anyak_4vagytobbgyermek = 'Nem';
           $scope.form.oregsegi_nyugdijas = 'Nem';
+          $scope.form.kor25ev_alatti = 'Nem';
         break;
         case 'belepo_szabadsag':
           $scope.settings.select_yesno = $scope.select_yesno();

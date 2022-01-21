@@ -94,7 +94,7 @@
             <td class="h">Szociális hozzájárulási adó</td>
             <td class="v">{{result.szocho|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm" ng-if="[1,3,4].indexOf(result.juttatas_group.ID)!==-1">
+          <tr class="sm" ng-if="[1,3,4].indexOf(result.juttatas_group.ID)!==-1 &&  && ['2022'].indexOf(result.version) === -1">
             <td class="h">Szakképzési hozzájárulás</td>
             <td class="v">{{result.szkh|cash:'Ft':''}}</td>
           </tr>

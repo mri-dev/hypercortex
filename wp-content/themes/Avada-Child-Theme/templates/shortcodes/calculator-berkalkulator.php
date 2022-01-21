@@ -81,6 +81,18 @@
         </div>
       </div>
 
+      <div ng-if="form.mode && ['2022'].indexOf(form.version) !== -1" class="line" ng-class="{missing:missing.indexOf('kor25ev_alatti')!==-1, error:error_elements['kor25ev_alatti']}">
+        <div class="head">
+          A munkavállaló 25 év alatti?
+          <div class="error-hint" ng-if="error_elements.indexOf('kor25ev_alatti')!==-1">{{error_elements['kor25ev_alatti']}}</div>
+        </div>
+        <div class="val">
+          <div class="inp-wrapper select-wrapper">
+            <select class="" ng-model="form.kor25ev_alatti" ng-options="item for item in settings.select_yesno"></select>
+          </div>
+        </div>
+      </div>
+
       <div ng-if="form.mode" class="line" ng-class="{missing:missing.indexOf('oregsegi_nyugdijas')!==-1, error:error_elements['oregsegi_nyugdijas']}">
         <div class="head">
           Öregségi nyugdíjas
@@ -214,7 +226,7 @@
             <td class="h">Fizetendő szociális hozzájárulási adó</td>
             <td class="v">{{result.ado_szocialis_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
-          <tr ng-if="(result.values.kiva_adoalany=='Nem' && result.mode=='teljes')" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
+          <tr ng-if="(result.values.kiva_adoalany=='Nem' && result.mode=='teljes' && ['2022'].indexOf(result.version) === -1)" ng-class="{lt: result.values.kiva_adoalany=='Igen'}">
             <td class="h">Fizetendő szakképzési hozzájárulás</td>
             <td class="v">{{result.ado_szakkepzesi_hozzajarulas|cash:'Ft':''}}</td>
           </tr>
