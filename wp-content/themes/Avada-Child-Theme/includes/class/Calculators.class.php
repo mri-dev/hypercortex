@@ -1152,6 +1152,7 @@ class CalculatorV2019 extends CalculatorBase implements CalculatorVersion
     $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
     $ret['ado_szja'] = round($ret['ado_szja']);
 
+
     $ret['ado_termeszetegeszseg'] = ($brutto_ber * ($settings['ado_termeszetegeszseg']/100)) - $ervenyesitheto_jarulekkedvezmeny;
     $ret['ado_termeszetegeszseg'] = ($ret['ado_termeszetegeszseg'] < 0) ? 0 : $ret['ado_termeszetegeszseg'];
     $ret['ado_termeszetegeszseg'] = round($ret['ado_termeszetegeszseg']);
@@ -6441,6 +6442,19 @@ class CalculatorV2022 extends CalculatorBase implements CalculatorVersion
       $szemelyi_kedvezmeny = $settings['minimalber'] / 3;
     }
 
+    /** 25 év alatti munkavállaló bruttó alap módosítás -> adómentesség */
+    if( $data['kor25ev_alatti'] == 'Igen' )
+    {
+      $prev_brutto_ber = $brutto_ber;
+
+      if( $brutto_ber <= $this->ado_ev25alatti_limit){
+        $brutto_ber = 0;
+      } else {
+        $brutto_ber = $brutto_ber - $this->ado_ev25alatti_limit;
+      }
+      $ret['calced_25evalatti_brutto'] = $brutto_ber;
+    }
+
     // Maradék családi kedvezmény alap
     if ( !$anyak_gyerek4vagytobb )
     {
@@ -6465,6 +6479,12 @@ class CalculatorV2022 extends CalculatorBase implements CalculatorVersion
       $ret['ado_szja'] = 0;
       $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
       $ret['ado_szja'] = round($ret['ado_szja']);
+    }
+      
+    // RESET : 25 év alatti munkavállaló bruttó alap módosítás -> adómentesség
+    if( $data['kor25ev_alatti'] == 'Igen' )
+    {
+      $brutto_ber = $prev_brutto_ber;
     }
 
     // TB járulék számítás
@@ -6899,6 +6919,19 @@ class CalculatorV2022 extends CalculatorBase implements CalculatorVersion
           if ($data['szemelyikedvezmeny_jogosult'] == 'Igen') {
             $szemelyi_kedvezmeny = $settings['minimalber'] / 3;
           }
+           
+          /** 25 év alatti munkavállaló bruttó alap módosítás -> adómentesség */
+          if( $data['kor25ev_alatti'] == 'Igen' )
+          {
+            $prev_brutto_ber = $brutto_ber;
+
+            if( $brutto_ber <= $this->ado_ev25alatti_limit){
+              $brutto_ber = 0;
+            } else {
+              $brutto_ber = $brutto_ber - $this->ado_ev25alatti_limit;
+            }
+            $ret['calced_25evalatti_brutto'] = $brutto_ber;
+          }
   
           // Maradék családi kedvezmény alap
           if ( !$anyak_gyerek4vagytobb )
@@ -6912,25 +6945,14 @@ class CalculatorV2022 extends CalculatorBase implements CalculatorVersion
   
           $ervenyesitheto_jarulekkedvezmeny = $csaladi_adokedvezmeny_maradekalap * 0.15;
           $ervenyesitheto_jarulekkedvezmeny = ($ervenyesitheto_jarulekkedvezmeny < 0) ? 0 : $ervenyesitheto_jarulekkedvezmeny;
+          $ervenyesitheto_jarulekkedvezmeny = round($ervenyesitheto_jarulekkedvezmeny);
   
           $ervenyesitheto_termeszetbeni_kedvezmeny = $ervenyesitheto_jarulekkedvezmeny - ($brutto_ber * ($settings['ado_termeszetegeszseg']/100));
           $ervenyesitheto_termeszetbeni_kedvezmeny = ($ervenyesitheto_termeszetbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_termeszetbeni_kedvezmeny;
   
           //$ervenyesitheto_penzbeni_kedvezmeny = $ervenyesitheto_termeszetbeni_kedvezmeny - ($brutto_ber * ($settings['ado_penzbeli_egeszseg']/100));
           //$ervenyesitheto_penzbeni_kedvezmeny = ($ervenyesitheto_penzbeni_kedvezmeny < 0) ? 0 : $ervenyesitheto_penzbeni_kedvezmeny;
-          
-          /** 25 év alatti munkavállaló bruttó alap módosítás -> adómentesség */
-          if( $data['kor25ev_alatti'] == 'Igen' )
-          {
-            $prev_brutto_ber = $brutto_ber;
-
-            if( $brutto_ber <= $this->ado_ev25alatti_limit){
-              $brutto_ber = 0;
-            } else {
-              $brutto_ber = $brutto_ber - $this->ado_ev25alatti_limit;
-            }
-            $ret['calced_25evalatti_brutto'] = $brutto_ber;
-          }
+         
           
           if ( !$anyak_gyerek4vagytobb ) {
             $ret['ado_szja'] = (($brutto_ber-$friss_hazasok_kedvezmeny-$csaladi_adokedvezmeny_osszege-$szemelyi_kedvezmeny) * ($settings['ado_szja']/100));
@@ -6941,17 +6963,19 @@ class CalculatorV2022 extends CalculatorBase implements CalculatorVersion
             $ret['ado_szja'] = ($ret['ado_szja'] < 0) ? 0 : $ret['ado_szja'];
             $ret['ado_szja'] = round($ret['ado_szja']);
           }
-
+          
           // RESET : 25 év alatti munkavállaló bruttó alap módosítás -> adómentesség
           if( $data['kor25ev_alatti'] == 'Igen' )
           {
             $brutto_ber = $prev_brutto_ber;
           }
-  
+          
           // TB járulék számítás
           $ret['ado_tb'] = ($brutto_ber * ($settings['ado_tb']/100)) - $ervenyesitheto_jarulekkedvezmeny;;
           $ret['ado_tb'] = ($ret['ado_tb'] < 0) ? 0 : $ret['ado_tb'];
           $ret['ado_tb'] = round($ret['ado_tb']);
+          $ret['settings'] = $settings;
+          
   
           // Öregségi nyugdíjas @ 2021-02-08
           if ($data['oregsegi_nyugdijas'] == 'Igen') {
