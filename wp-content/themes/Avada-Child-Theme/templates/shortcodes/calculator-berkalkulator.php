@@ -170,6 +170,7 @@
           <button type="button" ng-click="calculate('<?=$view?>')" name="button"><?=__('Kalkuláció indítása', 'hc')?></button>
         </div>
       </div>
+      
     </div>
   </div>
   <div class="result-view">

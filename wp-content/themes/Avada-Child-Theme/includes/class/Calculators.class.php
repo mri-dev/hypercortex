@@ -1011,45 +1011,94 @@ class CalculatorBase
   {
     $row = array();
 
-    $row[] = array(
-      'possible_emissions' => array('0','1','2','3','4'),
-      'kw_groups' => array(
-        array('min' => 0, 'max' => 50, 'value' => 16500),
-        array('min' => 51, 'max' => 90, 'value' => 22000),
-        array('min' => 91, 'max' => 120, 'value' => 33000),
-        array('min' => 121, 'max' => 999999999, 'value' => 44000),
-      )
-    );
-    $row[] = array(
-      'possible_emissions' => array('6','7','8','9','10'),
-      'kw_groups' => array(
-        array('min' => 0, 'max' => 50, 'value' => 8800),
-        array('min' => 51, 'max' => 90, 'value' => 11000),
-        array('min' => 91, 'max' => 120, 'value' => 22000),
-        array('min' => 121, 'max' => 999999999, 'value' => 33000),
-      )
-    );
-    $row[] = array(
-      'possible_emissions' => array('5','14','15'),
-      'kw_groups' => array(
-        array('min' => 0, 'max' => 50, 'value' => 7700),
-        array('min' => 51, 'max' => 90, 'value' => 8800),
-        array('min' => 91, 'max' => 120, 'value' => 11000),
-        array('min' => 121, 'max' => 999999999, 'value' => 22000),
-      )
-    );
-    $row[] = array(
-      'possible_emissions' => array('5E','5P','5Z', '5N'),
-      'kw_groups' => array(
-        array('min' => 0, 'max' => 50, 'value' => 0),
-        array('min' => 51, 'max' => 90, 'value' => 0),
-        array('min' => 91, 'max' => 120, 'value' => 0),
-        array('min' => 121, 'max' => 999999999, 'value' => 0),
-      )
-    );
+    
+
+    // EMELT időszaki gépjárműadó
+    if( 
+      time() >= strtotime(date('2022-07-01 00:00:00')) && 
+      time() < strtotime(date('2023-01-01 00:00:00'))
+    )
+    {
+      $row[] = array(
+        'possible_emissions' => array('0','1','2','3','4'),
+        'kw_groups' => array(
+          array('min' => 0, 'max' => 50, 'value' => 30500),
+          array('min' => 51, 'max' => 90, 'value' => 41000),
+          array('min' => 91, 'max' => 120, 'value' => 61000),
+          array('min' => 121, 'max' => 999999999, 'value' => 81000),
+        )
+      );
+      $row[] = array(
+        'possible_emissions' => array('6','7','8','9','10'),
+        'kw_groups' => array(
+          array('min' => 0, 'max' => 50, 'value' => 16000),
+          array('min' => 51, 'max' => 90, 'value' => 20000),
+          array('min' => 91, 'max' => 120, 'value' => 41000),
+          array('min' => 121, 'max' => 999999999, 'value' => 61000),
+        )
+      );
+      $row[] = array(
+        'possible_emissions' => array('5','14','15'),
+        'kw_groups' => array(
+          array('min' => 0, 'max' => 50, 'value' => 14000),
+          array('min' => 51, 'max' => 90, 'value' => 16000),
+          array('min' => 91, 'max' => 120, 'value' => 20000),
+          array('min' => 121, 'max' => 999999999, 'value' => 41000),
+        )
+      );
+      $row[] = array(
+        'possible_emissions' => array('5E','5P','5Z', '5N'),
+        'kw_groups' => array(
+          array('min' => 0, 'max' => 50, 'value' => 0),
+          array('min' => 51, 'max' => 90, 'value' => 0),
+          array('min' => 91, 'max' => 120, 'value' => 0),
+          array('min' => 121, 'max' => 999999999, 'value' => 0),
+        )
+      );
+    } else 
+    // ALAPÉRTELMEZETT
+    {
+      $row[] = array(
+        'possible_emissions' => array('0','1','2','3','4'),
+        'kw_groups' => array(
+          array('min' => 0, 'max' => 50, 'value' => 16500),
+          array('min' => 51, 'max' => 90, 'value' => 22000),
+          array('min' => 91, 'max' => 120, 'value' => 33000),
+          array('min' => 121, 'max' => 999999999, 'value' => 44000),
+        )
+      );
+      $row[] = array(
+        'possible_emissions' => array('6','7','8','9','10'),
+        'kw_groups' => array(
+          array('min' => 0, 'max' => 50, 'value' => 8800),
+          array('min' => 51, 'max' => 90, 'value' => 11000),
+          array('min' => 91, 'max' => 120, 'value' => 22000),
+          array('min' => 121, 'max' => 999999999, 'value' => 33000),
+        )
+      );
+      $row[] = array(
+        'possible_emissions' => array('5','14','15'),
+        'kw_groups' => array(
+          array('min' => 0, 'max' => 50, 'value' => 7700),
+          array('min' => 51, 'max' => 90, 'value' => 8800),
+          array('min' => 91, 'max' => 120, 'value' => 11000),
+          array('min' => 121, 'max' => 999999999, 'value' => 22000),
+        )
+      );
+      $row[] = array(
+        'possible_emissions' => array('5E','5P','5Z', '5N'),
+        'kw_groups' => array(
+          array('min' => 0, 'max' => 50, 'value' => 0),
+          array('min' => 51, 'max' => 90, 'value' => 0),
+          array('min' => 91, 'max' => 120, 'value' => 0),
+          array('min' => 121, 'max' => 999999999, 'value' => 0),
+        )
+      );
+    }
 
     return $row;
   }
+
   protected function loadGepjarmuKornyezetvedelmiOsztalyok()
   {
     $row = array();
@@ -8285,7 +8334,7 @@ class CalculatorV2022 extends CalculatorBase implements CalculatorVersion
         if( $data['ceg_kisvallalati_ado_alany'] == 'Nem' )
         {
           // Szocho
-          $ado_szocialis_hozzajarulas = ((float)$adoalap_kiegeszites) * ($settings['ado_szocialis_hozzajarulas'] / 100);
+          $ado_szocialis_hozzajarulas = ((float)$adoalap_kiegeszites) * 0.2 *  ($settings['ado_szocialis_hozzajarulas'] / 100);
           $ado_szocialis_hozzajarulas = ($ado_szocialis_hozzajarulas < 0) ? 0 : $ado_szocialis_hozzajarulas;
           $ado_szocialis_hozzajarulas = round($ado_szocialis_hozzajarulas);
           $ret['ado_szocialis_hozzajarulas'] = $ado_szocialis_hozzajarulas;
@@ -8308,7 +8357,7 @@ class CalculatorV2022 extends CalculatorBase implements CalculatorVersion
         else 
         {
           // KIVA 
-          $ado_kisvallalati = ((float)$szamla_brutto) * ($settings['ado_kisvallalati'] / 100);
+          $ado_kisvallalati = ((float)$szamla_brutto) * 0.2 * ($settings['ado_kisvallalati'] / 100);
           $ado_kisvallalati = ($ado_kisvallalati < 0) ? 0 : $ado_kisvallalati;
           $ado_kisvallalati = round($ado_kisvallalati);
           $ret['ado_kisvallalati'] = $ado_kisvallalati;

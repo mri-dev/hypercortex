@@ -60,7 +60,7 @@
             <td colspan="2" class="head">
               Cég által fizetendő költségek
             </td>
-          </tr>          
+          </tr>
           <tr class="sm">
             <td class="h">Fizetendő személyi jövedelem adó</td>
             <td class="v">{{result.ado_szja|cash:'Ft':''}}</td>
