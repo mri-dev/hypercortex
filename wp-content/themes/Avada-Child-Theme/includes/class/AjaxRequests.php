@@ -180,9 +180,15 @@ class AjaxRequests
     $return['passed_params'] = $_POST;
     $inputs = $_POST['input'];
 
-    $calculators = new Calculators();
+    $version = false;
+    if( @$_POST['calc'] == 'cegauto_ado' )
+    {
+      $version = '2022/2';
+    }
 
-    $result = $calculators->getSettings();
+    $calculators = new Calculators( $version );
+
+    $result = $calculators->getSettings( @$_POST['calc'] );
 
     $return['data'] = $result;
     $this->returnJSON($return);
@@ -203,7 +209,7 @@ class AjaxRequests
     $inputs = $_POST['input'];
 
     $calculators = new Calculators( $inputs['version'] );
-
+    
     switch ( $calculator )
     {
       case 'netto_ber':
@@ -441,6 +447,13 @@ class AjaxRequests
         unset($calculators);
       break;
       case 'cegauto_ado':
+
+        if( in_array($inputs['version'], ['2022/2', '2022/1'])) 
+        {
+          $calculators->rewrite_version = '2022';
+          $inputs['rewrite_version'] = $calculators->rewrite_version;
+        }
+
         // Require field validation
         if ( empty($inputs['emission']) ) {
           $return['error'] = 1;

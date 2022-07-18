@@ -91,13 +91,29 @@ class CalculatorBase
     }
   }
 
-  public function getSettings()
+  public function getSettings( $calc = false )
   {
     $data = array();
     $data['current_version'] = $this->getVersion();
-    $data['versions'] = $this->avaiable_versions;
+    $data['versions'] = $this->getVersionSet( $calc );
 
     return $data;
+  }
+
+  public function getVersionSet( $calc = false )
+  {
+    switch( $calc )
+    {
+      case 'cegauto_ado':
+
+        return array('2022/2', '2022/1', '2021','2020/2', '2020/1', '2019');
+      break;
+      default: 
+        return $this->avaiable_versions;
+      break;
+    }
+
+    return false;
   }
 
   function adminSettings()
@@ -1011,12 +1027,11 @@ class CalculatorBase
   {
     $row = array();
 
-    
-
     // EMELT időszaki gépjárműadó
     if( 
       time() >= strtotime(date('2022-07-01 00:00:00')) && 
-      time() < strtotime(date('2023-01-01 00:00:00'))
+      time() < strtotime(date('2023-01-01 00:00:00')) &&
+      $this->year_version == '2022/2'
     )
     {
       $row[] = array(
@@ -1123,6 +1138,7 @@ class CalculatorBase
 class Calculators extends CalculatorBase
 {
   public $setted_version = false;
+  public $rewrite_version = false;
 
   function __construct( $version = false )
   {
@@ -1136,17 +1152,16 @@ class Calculators extends CalculatorBase
   public function calc( $calc, $data )
   {
     $version = $this->getVersion();
-
+    if( $this->rewrite_version )
+    {
+      $version = $this->rewrite_version;
+    }
     $version = str_replace(array("/","."), array("_", ""), $version);
-
     $calcv = "CalculatorV".$version;
-
     if ( !class_exists($calcv) ) {
       return false;
     }
-
     $calc_class = new $calcv( $this->setted_version );
-
     return $calc_class->calculate($calc, $data);
   }
 }
@@ -3054,7 +3069,6 @@ class CalculatorV2020_1 extends CalculatorBase implements CalculatorVersion
     return false;
   }
 }
-
 
 /***********************************************
 * 2020/2-es jogszabályoknak megfelelő kalkulátor @since 2020-07-01 *
@@ -6432,7 +6446,6 @@ class CalculatorV2021 extends CalculatorBase implements CalculatorVersion
   } 
 }
 
-
 /***********************************************
 * 2022-es jogszabályoknak megfelelő kalkulátor @since 2022-01-20 *
 ************************************************/
@@ -8712,7 +8725,5 @@ class CalculatorV2022 extends CalculatorBase implements CalculatorVersion
     return false;
   } 
 }
-
-
 
 ?>

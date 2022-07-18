@@ -78,6 +78,19 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
     $scope.predefineFormSettings( calc );
   }
 
+  $scope.getVersions = function( calc )
+  {
+    var versions = [];
+    switch( calc )
+    {
+      case 'cegauto_ado':
+        versions = ['2018'];
+      break;
+    }
+
+    return versions;
+  }
+
   $scope.calculate = function( view )
   {
     $scope.loaded = false;
@@ -163,6 +176,7 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
 			url: '/wp-admin/admin-ajax.php?action=calc_settings',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			data: jQuery.param({
+        calc: calc
 			})
 		}).then(function successCallback(r)
     {
