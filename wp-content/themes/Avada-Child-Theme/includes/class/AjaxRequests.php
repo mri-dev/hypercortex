@@ -30,6 +30,142 @@ class AjaxRequests
     add_action( 'wp_ajax_nopriv_'.__FUNCTION__, array( $this, 'CalcSettings'));
   }
 
+  public function subscriber()
+  {
+     // Allow from any origin
+    if (isset($_SERVER['HTTP_ORIGIN'])) 
+    {
+      // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
+      // you want to allow, and if so:
+      header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+      header('Access-Control-Allow-Credentials: true');
+      header('Access-Control-Max-Age: 86400');    // cache for 1 day
+    }
+    
+    add_action( 'wp_ajax_'.__FUNCTION__, array( $this, 'subscriberRequest'));
+    add_action( 'wp_ajax_nopriv_'.__FUNCTION__, array( $this, 'subscriberRequest'));
+  }
+
+  public function subscriberRequest()
+  {
+    $form = [];
+
+    //$wgapi = get_stylesheet_directory().'/includes/class/wg7api.php';
+
+    //require $wgapi;
+
+    if( !class_exists('WG7_API') )
+    {
+      require_once $wgapi;
+    }
+
+    $db_host = "localhost"; // adatbázis kiszolgáló címe
+    $db_user = "webgalamb"; // adatbázis felhasználónév
+    $db_name = "webgalamb"; // adatbázis neve
+    $db_password = 'HDqeP2ijt??cCEnYt6GaYv3$X'; // felhasználó jelszava
+    $db_prefix = "wg7_"; // Webgalamb 7 prefix, alap telepítés esetén => wg7_
+
+    $wg = new WG7_API($db_prefix, $db_host, $db_name, $db_user, $db_password);
+
+    /*
+    f_9: "Cég neve"
+    f_11: ["1"] GDPR
+    f_12: ["2"] Hírlevél
+    subscr: "email cím"
+    */
+    parse_str($_POST['form'], $form );
+
+    $return = array(
+      'error' => 0,
+      'msg'   => '',
+      'missing_elements' => [],
+      'error_elements' => [],
+      'missing' => 0,
+      'passed_params' => false
+    );
+    
+    $return['passed_params'] = $form;
+    
+    if( !isset($form['f_12']))
+    {
+      $return['error'] = true;
+      $return['msg'] = 'Az Adatvédelmi Nyilatkozat elolvasása és elfogadása kötelező!';
+      echo json_encode($return);
+      die();
+    }
+    
+    if( !isset($form['f_11']))
+    {
+      $return['error'] = true;
+      $return['msg'] = 'A feliratkozáshoz hozzá kell járulni, hogy időközönként üzleti jellegű egypercesek hirleveket kaphat!';
+      echo json_encode($return);
+      die();
+    }
+    
+    if( empty($form['subscr']) || empty($form['f_9']) )
+    {
+      $return['error'] = true;
+      $return['msg'] = 'A feliratkozáshoz adja meg a cég nevét és e-mail címét!';
+      echo json_encode($return);
+      die();
+    }
+    
+    if( $wg )
+    {      
+      // Rögzítendő adatok.
+      $subscriber_data = array (
+        // E-mail cím 
+        'mail' => $form['subscr'],
+        // Feliratkozási dátum, ha nincs megadva akkor az aktuális dátum kerül be.
+        //'datum' => '2013-03-10',	
+
+        // Státusz: 1 -> aktív, 0 -> inaktív, 2 -> visszapattant
+        // Ha nincs megadva akkor aktív státusszal kerül be
+        'active' => 1,
+        'Cégnév' => $form['f_9'],
+        'Forrás' => 'Feliratkozás dokumentum hozzáférés miatt'
+      );
+      
+      $subscriber_data['Hozzájárulok, hogy az általam megadott e-mail címre időközönként üzleti céllal elektronikus levelet küldhetnek!'] = 'marketing';
+      $subscriber_data['A feliratkozással elfogadja az <a href="/adavedelmi-nyilatkozat/" target="_blank">Adatvédelmi Nyilatkozatot</a> és hozzájárulok az adataim kezeléséhez.'] = 'aszf';
+
+      // A feliratkozási csoport csoportazonosítója.
+      $group_id = 3; 
+
+      $result = $wg->InsertSubscriber($subscriber_data, $group_id);
+
+      if( $result > 0 )
+      {
+        $return['data']['subscribed'] = $result;
+        $return['msg'] = 'Sikeresen feliratkozott! 5 mp múlva átirányítjuk a dokumentumra...';
+      } else {
+        if( $result == -1 )
+        { 
+          $return['data']['subscribed'] = $form['subscr'];
+          $return['msg'] = 'Ön már korábban feliratkozott ezzel az e-mail címmel: '.$form['subscr'].'. 5 mp múlva átirányítjuk a dokumentumra...';
+        } else {
+          $return['error'] = $result;
+          
+          $msg = '';
+
+          switch( $result )
+          {
+            case -2:
+              $msg = 'Nem sikerült a feliratkozás. Hibás csoport azonosító. Jelezze ügyfélszolgálatunkon.';
+            break;
+            case -3:
+              $msg = 'Nem sikerült a feliratkozás. Hibás e-mail címet adott meg, kérjük, hogy ügyeljen a helyes e-mail formátumra.';
+            break;
+          }
+          $return['msg'] = $msg;
+        }       
+      }      
+    }
+
+    echo json_encode($return);
+    die();
+  }
+  
   public function CalcSettings()
   {
     extract($_POST);
@@ -44,9 +180,15 @@ class AjaxRequests
     $return['passed_params'] = $_POST;
     $inputs = $_POST['input'];
 
-    $calculators = new Calculators();
+    $version = false;
+    if( @$_POST['calc'] == 'cegauto_ado' )
+    {
+      $version = '2022/2';
+    }
 
-    $result = $calculators->getSettings();
+    $calculators = new Calculators( $version );
+
+    $result = $calculators->getSettings( @$_POST['calc'] );
 
     $return['data'] = $result;
     $this->returnJSON($return);
@@ -67,7 +209,7 @@ class AjaxRequests
     $inputs = $_POST['input'];
 
     $calculators = new Calculators( $inputs['version'] );
-
+    
     switch ( $calculator )
     {
       case 'netto_ber':
@@ -213,11 +355,11 @@ class AjaxRequests
       break;
 
       // teljes bérköltség alapja
-      case 'teljes_berkoltseg':
-        if ( empty($inputs['brutto_ber']) ) {
+      case 'berkalkulator':
+        if ( empty($inputs['jovedelem']) ) {
           $return['error'] = 1;
-          $return['missing_elements'][] = 'brutto_ber';
-          $return['error_elements']['brutto_ber'] = 'Írja be a bruttó bérét a kalkulációhoz!';
+          $return['missing_elements'][] = 'jovedelem';
+          $return['error_elements']['brutto_ber'] = 'Írja be a rendszeres havi jövedelmet a kalkulációhoz!';
         }
 
         if ( $inputs['csaladkedvezmenyre_jogosult'] == 'Igen' && empty($inputs['csalad_eltartott_gyermek']) ) {
@@ -305,6 +447,13 @@ class AjaxRequests
         unset($calculators);
       break;
       case 'cegauto_ado':
+
+        if( in_array($inputs['version'], ['2022/2', '2022/1'])) 
+        {
+          $calculators->rewrite_version = '2022';
+          $inputs['rewrite_version'] = $calculators->rewrite_version;
+        }
+
         // Require field validation
         if ( empty($inputs['emission']) ) {
           $return['error'] = 1;
@@ -352,7 +501,6 @@ class AjaxRequests
         unset($result);
         unset($calculators);
       break;
-
       case 'ingatlan_ertekesites':
         // Require field validation
 
@@ -516,10 +664,10 @@ class AjaxRequests
           $return['error_elements']['szuletesi_ev'] = 'Pótolja a születési évét a kalkulációhoz!';
         }
 
-        if ( empty($inputs['munkaviszony_kezedete']) ) {
+        if ( empty($inputs['munkaviszony_kezdete']) ) {
           $return['error'] = 1;
-          $return['missing_elements'][] = 'munkaviszony_kezedete';
-          $return['error_elements']['munkaviszony_kezedete'] = 'Pótolja a munkaviszony kezdete időpontot a kalkulációhoz!';
+          $return['missing_elements'][] = 'munkaviszony_kezdete';
+          $return['error_elements']['munkaviszony_kezdete'] = 'Pótolja a munkaviszony kezdete időpontot a kalkulációhoz!';
         }
 
         if ( empty($inputs['szules_ideje']) ) {
@@ -570,6 +718,131 @@ class AjaxRequests
         unset($result);
         unset($calculators);
       break;
+      case 'reprezentacio_ado':
+
+        if ( empty($inputs['szamla_brutto'])) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'szamla_brutto';
+        }
+
+        // Error fields
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calc( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
+
+
+        unset($return);
+        unset($result);
+        unset($calculators);
+      break;
+      case 'cegtelefon_ado':
+
+        if ( empty($inputs['szamla_brutto'])) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'szamla_brutto';
+        }
+
+        // Error fields
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calc( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
+
+
+        unset($return);
+        unset($result);
+        unset($calculators);
+      break;
+      
+      case 'megbizasi_dij':
+
+        if ( empty($inputs['megbizasi_dij']) ) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'megbizasi_dij';
+        }
+        
+        if ( empty($inputs['nap'])) {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'nap';
+        }
+
+        if ( $inputs['koltseghanyad'] == '') {
+          $return['error'] = 1;
+          $return['missing_elements'][] = 'koltseghanyad';
+        }
+
+        // Error fields
+        // Handling missing
+        if (!empty($return['missing_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>A kalkuláció nem futott le az alábbi okok miatt:</strong></div>';
+          $return['msg'] .= '- Hiányzó kötelező mezők: '.count($return['missing_elements']).' db<br>';
+        }
+
+        // Handling error
+        if (!empty($return['error_elements'])) {
+          $return['msg'] .= '<div class="head"><strong>Hiba a kalkuláció során:</strong></div>';
+          foreach ((array)$return['error_elements'] as $key => $value) {
+            $return['msg'] .= '- '.$value.'<br>';
+          }
+        }
+
+        if ($return['error'] == 1) {
+          $this->returnJSON($return);
+          exit;
+        }
+
+        if ($return['error'] == 0) {
+          $result = $calculators->calc( $calculator, $inputs );
+          $return['data'] = $result;
+          $this->returnJSON($return);
+        }
+
+
+        unset($return);
+        unset($result);
+        unset($calculators);
+      break;
       default:
         // code...
       break;
@@ -593,33 +866,42 @@ class AjaxRequests
 
     $return['passed_params'] = $_POST;
 
+    $tipus = $form['tipus'];
+
     // Require field validation
     if ( empty($form['cegnev']) ) { $return['missing_elements'][] = 'cegnev'; }
-    if ( empty($form['munkavallalo_letszam']) ) { $return['missing_elements'][] = 'munkavallalo_letszam'; }
-    if ( $form['munkavallalo_letszam'] < 100 && empty($form['munkavallalo_meghalad100']) ) { $return['missing_elements'][] = 'munkavallalo_meghalad100'; }
 
-    if ( empty($form['almalmi_munkavallalok']) ) { $return['missing_elements'][] = 'almalmi_munkavallalok'; }
-    if ( empty($form['megbizasi_jogviszonyu_szemelyek']) ) { $return['missing_elements'][] = 'megbizasi_jogviszonyu_szemelyek'; }
-    if ( empty($form['berenkivuli_juttatas']) ) { $return['missing_elements'][] = 'berenkivuli_juttatas'; }
-    if ( empty($form['specialis_foglalkoztatasi_modozatok']) ) { $return['missing_elements'][] = 'specialis_foglalkoztatasi_modozatok'; }
-    if ( empty($form['kikuldetes']) ) { $return['missing_elements'][] = 'kikuldetes'; }
+    if( $tipus == 'kapcsolat' )
+    {
+      if ( empty($form['munkavallalo_letszam']) ) { $return['missing_elements'][] = 'munkavallalo_letszam'; }
+      if ( $form['munkavallalo_letszam'] < 100 && empty($form['munkavallalo_meghalad100']) ) { $return['missing_elements'][] = 'munkavallalo_meghalad100'; }
 
-
-    if ( empty($form['feladat_kapcsolatfelvetel']) ) { $return['missing_elements'][] = 'feladat_kapcsolatfelvetel'; }
-    if ( empty($form['feladat_nav_bejelentes']) ) { $return['missing_elements'][] = 'feladat_nav_bejelentes'; }
-    if ( empty($form['feladat_hokozi_szamfejtes']) ) { $return['missing_elements'][] = 'feladat_hokozi_szamfejtes'; }
-    if ( empty($form['feladat_konyveles_feladas']) ) { $return['missing_elements'][] = 'feladat_konyveles_feladas'; }
-    if ( empty($form['feladat_eveleji_szja_beker']) ) { $return['missing_elements'][] = 'feladat_eveleji_szja_beker'; }
-    if ( empty($form['feladat_jovedelemigazolas']) ) { $return['missing_elements'][] = 'feladat_jovedelemigazolas'; }
-    if ( empty($form['feladat_munkaszerzodes']) ) { $return['missing_elements'][] = 'feladat_munkaszerzodes'; }
-    if ( empty($form['feladat_ksh_adatszolgaltatas']) ) { $return['missing_elements'][] = 'feladat_ksh_adatszolgaltatas'; }
-
-    if ( empty($form['integralt_rendszer_hasznalat']) ) { $return['missing_elements'][] = 'integralt_rendszer_hasznalat'; }
-    if ( $form['integralt_rendszer_hasznalat'] == 'igen' && empty($form['integralt_rendszer']) ) { $return['missing_elements'][] = 'integralt_rendszer'; }
-    if ( $form['integralt_rendszer_hasznalat'] == 'igen' && empty($form['integralt_rendszer_hasznalat_jovoben']) ) { $return['missing_elements'][] = 'integralt_rendszer_hasznalat_jovoben'; }
-    if ( $form['integralt_rendszer_hasznalat'] == 'igen' && empty($form['integralt_rendszer_hasznalat_hozzaferes']) ) { $return['missing_elements'][] = 'integralt_rendszer_hasznalat_hozzaferes'; }
-
-    if ( empty($form['berkifizetes_datum']) ) { $return['missing_elements'][] = 'berkifizetes_datum'; }
+      if ( empty($form['almalmi_munkavallalok']) ) { $return['missing_elements'][] = 'almalmi_munkavallalok'; }
+      if ( empty($form['megbizasi_jogviszonyu_szemelyek']) ) { $return['missing_elements'][] = 'megbizasi_jogviszonyu_szemelyek'; }
+      if ( empty($form['berenkivuli_juttatas']) ) { $return['missing_elements'][] = 'berenkivuli_juttatas'; }
+      if ( empty($form['specialis_foglalkoztatasi_modozatok']) ) { $return['missing_elements'][] = 'specialis_foglalkoztatasi_modozatok'; }
+      if ( empty($form['kikuldetes']) ) { $return['missing_elements'][] = 'kikuldetes'; }
+  
+      if ( empty($form['feladat_kapcsolatfelvetel']) ) { $return['missing_elements'][] = 'feladat_kapcsolatfelvetel'; }
+      if ( empty($form['feladat_nav_bejelentes']) ) { $return['missing_elements'][] = 'feladat_nav_bejelentes'; }
+      if ( empty($form['feladat_hokozi_szamfejtes']) ) { $return['missing_elements'][] = 'feladat_hokozi_szamfejtes'; }
+      if ( empty($form['feladat_konyveles_feladas']) ) { $return['missing_elements'][] = 'feladat_konyveles_feladas'; }
+      if ( empty($form['feladat_eveleji_szja_beker']) ) { $return['missing_elements'][] = 'feladat_eveleji_szja_beker'; }
+      if ( empty($form['feladat_jovedelemigazolas']) ) { $return['missing_elements'][] = 'feladat_jovedelemigazolas'; }
+      if ( empty($form['feladat_munkaszerzodes']) ) { $return['missing_elements'][] = 'feladat_munkaszerzodes'; }
+      if ( empty($form['feladat_ksh_adatszolgaltatas']) ) { $return['missing_elements'][] = 'feladat_ksh_adatszolgaltatas'; }
+  
+      if ( empty($form['integralt_rendszer_hasznalat']) ) { $return['missing_elements'][] = 'integralt_rendszer_hasznalat'; }
+      if ( $form['integralt_rendszer_hasznalat'] == 'igen' && empty($form['integralt_rendszer']) ) { $return['missing_elements'][] = 'integralt_rendszer'; }
+      if ( $form['integralt_rendszer_hasznalat'] == 'igen' && empty($form['integralt_rendszer_hasznalat_jovoben']) ) { $return['missing_elements'][] = 'integralt_rendszer_hasznalat_jovoben'; }
+      if ( $form['integralt_rendszer_hasznalat'] == 'igen' && empty($form['integralt_rendszer_hasznalat_hozzaferes']) ) { $return['missing_elements'][] = 'integralt_rendszer_hasznalat_hozzaferes'; }
+  
+      if ( empty($form['berkifizetes_datum']) ) { $return['missing_elements'][] = 'berkifizetes_datum'; }
+    } 
+    else if( $tipus == 'simple' )
+    {
+      if ( empty($form['megjegyzes']) ) { $return['missing_elements'][] = 'megjegyzes'; }
+    }
 
     if ( empty($form['contact_name']) ) { $return['missing_elements'][] = 'contact_name'; }
     if ( empty($form['contact_phone']) ) { $return['missing_elements'][] = 'contact_phone'; }
@@ -685,11 +967,20 @@ class AjaxRequests
       }
     }
 
-    $to = get_option('admin_email');
+    $to = get_option('admin_email');    
     $subject = sprintf(__('Új kapcsolat üzenet érkezett: %s - %s','hc'), $form['cegnev'], $form['contact_name']);
 
     ob_start();
-  	  include(locate_template('templates/mails/contactform.php'));
+      if( $tipus == 'kapcsolat')
+      {
+        include(locate_template('templates/mails/contactform.php'));
+      }
+
+      if( $tipus == 'simple')
+      {
+        include(locate_template('templates/mails/simplecontactform.php'));
+      }
+  	  
       $message = ob_get_contents();
 		ob_end_clean();
 
@@ -784,6 +1075,5 @@ class AjaxRequests
     die();
 
   }
-
 }
 ?>

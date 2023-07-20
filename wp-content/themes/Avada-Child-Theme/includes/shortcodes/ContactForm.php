@@ -32,7 +32,7 @@ class ContactFormSC
         $attr = shortcode_atts( $defaults, $attr );
         $pass_data = array();
 
-        if ($attr['tipus'] == 'kapcsolat') {
+        if ($attr['tipus'] == 'kapcsolat' || $attr['tipus'] == 'simple') {
           $button_text = 'Üzenet elküldése';
           $whatisit = 'Kapcsolat üzenet';
         }

@@ -239,78 +239,11 @@ h4 { font-size: 1.4rem !important; }
     }
   }
 
-  &.search-results{    
-    max-width: 100%;
+  &.search-results{
     width: 100%;
+    max-width: 100%;
     & > .wrapper > div{
       flex-basis: calc(100% / 3);
-    }
-  }
-}
-
-.site-buttons{
-  position: absolute;
-  right: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1000;
-
-  .site{
-    background-color: #cbbe9b;
-    padding: 10px 50px 10px 20px;
-    text-align: center;
-    width: 250px;
-    height: 80px;
-    position: relative;
-
-    .inside{      
-      width: 100%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    img {
-      width: 65%;
-    }
-  }
-
-  .site.irisz{    
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#e9d08f+0,d5ba73+39,d5ba73+62,e9d08f+100 */
-background: #e9d08f; /* Old browsers */
-background: -moz-linear-gradient(left,  #e9d08f 0%, #d5ba73 39%, #d5ba73 62%, #e9d08f 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left,  #e9d08f 0%,#d5ba73 39%,#d5ba73 62%,#e9d08f 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right,  #e9d08f 0%,#d5ba73 39%,#d5ba73 62%,#e9d08f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9d08f', endColorstr='#e9d08f',GradientType=1 ); /* IE6-9 */
-
-    transform: skewX(-15deg);
-    border: 1px solid #b1916b;
-    border-bottom: none;
-    border-right: none;
-    .inside{      
-      transform: translate(-50%, -50%) skewX(15deg);
-    }
-    
-  }
-  .site.eco{    
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#b59b65+0,eacc8f+39,eacc8f+62,b59b65+100 */
-background: #b59b65; /* Old browsers */
-background: -moz-linear-gradient(left,  #b59b65 0%, #eacc8f 39%, #eacc8f 62%, #b59b65 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left,  #b59b65 0%,#eacc8f 39%,#eacc8f 62%,#b59b65 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right,  #b59b65 0%,#eacc8f 39%,#eacc8f 62%,#b59b65 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b59b65', endColorstr='#b59b65',GradientType=1 ); /* IE6-9 */
-
-    transform: skewX(15deg);    
-    border: 1px solid #b1916b;
-    border-top: none;
-    border-right: none;
-    .inside{      
-      transform: translate(-50%, -50%) skewX(-15deg);
-    }
-
-    img {
-      width: 60%;
     }
   }
 }
@@ -1310,10 +1243,6 @@ footer .fusion-columns{
             color: #fffbfb !important;
             font-size: 1.05rem;
           }
-
-          input[type=radio]:disabled + label {
-            background: #d2ccbe;
-          }
         }
       }
     }
@@ -1482,54 +1411,6 @@ footer .fusion-columns{
       border: 2px solid #ffc5c5;
     }
   }
-  
-  .line-switcher{
-    background: transparent !important;
-    border: none !important;
-    .head{
-      flex-basis: 100%;
-      text-align: center;
-      font-weight: bold;
-      padding: 25px 15px;
-      font-size: 1.15rem;
-    }
-    .val {
-      flex-basis: 100%;
-      .inp-wrapper{
-        border: none;
-        background: transparent !important;
-
-        .radio-switch{
-          display: flex;
-          align-items: center;
-          width: 100%;
-
-          input[type=radio]{
-            display: none;
-          }
-
-          input[type=radio] + label {
-            background: white;
-            cursor: pointer;
-            padding: 10px;
-            flex-basis: calc(100% / 3);
-            text-align: center;
-            font-weight: bold;
-            font-size: 0.84rem;
-            border-left: 1px solid #eae4d6;
-          }
-          input[type=radio]:first-child + label {
-            border-left: none;
-          }
-
-          input[type=radio]:checked + label {
-            background: #712322;
-            color: white;
-          }
-        }
-      }
-    }
-  }
   .error-hint{
     color: #ef1212;
     font-size: 0.7rem;
@@ -1676,7 +1557,7 @@ body.page:not(.home){
   }
   main#main{
     background: #fffcf7;
-    padding: 0 0 6rem 0;
+    padding: 0 0 4rem 0;
     & > .fusion-row{
       width: 100%;
       max-width: initial;
@@ -1807,64 +1688,6 @@ body.page-id-37{
   }
 }
 
-.attachment-sub-info{
-  text-align: center;
-
-  .lock-icon{
-    text-align: center;
-    margin: 10px 0 15px 0;
-    i{
-      font-size: 35px;
-      color: #e2c68a;
-    }
-  }
-
-  h2{
-    color: #8f1717 !important;
-  }
-
-  .doc-info{
-    background-color: #efeae4;
-    padding: 20px;
-    border-radius: 25px;
-    margin: 20px 0 50px 0;
-
-    h1{
-      color: black !important;
-    }
-  }
-
-  .subber{
-    margin: 20px auto;
-    width: 500px;
-    max-width: 500px;
-
-    .name,
-    .email
-    {
-      label {
-        margin: 8px 0 5px 0;
-        display: block;
-      }
-    }
-
-    .cb{
-      font-size: 0.7rem;
-    }
-
-    .email{
-      margin: 0 0 10px 0 !important;
-    }
-
-    .btns{
-      margin: 10px 0 0 0;
-      button {
-        font-size: 1.1rem !important;
-      }
-    }
-  }
-}
-
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes loaderbgchange {
   0% {background-color: #75bf75;}
@@ -1886,6 +1709,6 @@ body.page-id-37{
   }
   body.page:not(.home) main#main {
     background: #fffcf7;
-    padding: 0 0 5.5rem 0;
+    padding: 0 0 4rem 0;
   }
 }

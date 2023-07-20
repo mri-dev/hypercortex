@@ -1,5 +1,5 @@
 <a name="_form"></a>
-<div class="contact-form" ng-app="Hypercortex" ng-controller="ContactForm" ng-init="">
+<div class="contact-form" ng-app="Hypercortex" ng-controller="ContactForm" ng-init="init('<?=$tipus?>')">
   <div class="wrapper">
     <div class="line">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('cegnev')!==-1, error:error_elements['cegnev']}">
@@ -10,8 +10,8 @@
         </div>
       </div>
     </div>
-    <div class="divider"></div>
-    <div class="line">
+    <div class="divider" ng-if="(tipus=='kapcsolat')"></div>
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('munkavallalo_letszam')!==-1, error:error_elements['munkavallalo_letszam']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="munkavallalo_letszam"><?=__('Mennyi a munkavállalók átlagos létszáma?')?></label></div>
@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="line" ng-if="(form.munkavallalo_letszam && form.munkavallalo_letszam<100)">
+    <div class="line" ng-if="(form.munkavallalo_letszam && form.munkavallalo_letszam<100 && tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('munkavallalo_meghalad100')!==-1, error:error_elements['munkavallalo_meghalad100']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="munkavallalo_meghalad100"><?=__('Várható-e, hogy a közeljövőben meghaladja a létszám a 100 főt?')?></label></div>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('almalmi_munkavallalok')!==-1, error:error_elements['almalmi_munkavallalok']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="almalmi_munkavallalok"><?=__('Vannak-e alkalmi munkavállalók a cégben?')?></label></div>
@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('megbizasi_jogviszonyu_szemelyek')!==-1, error:error_elements['megbizasi_jogviszonyu_szemelyek']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="megbizasi_jogviszonyu_szemelyek"><?=__('Vannak-e megbízási jogviszonyban foglalkoztatott személyek?')?></label></div>
@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('berenkivuli_juttatas')!==-1, error:error_elements['berenkivuli_juttatas']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="berenkivuli_juttatas"><?=__('Előfordul-e béren kívüli juttatás, cafetéria, reprezentáció?')?></label></div>
@@ -74,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('specialis_foglalkoztatasi_modozatok')!==-1, error:error_elements['specialis_foglalkoztatasi_modozatok']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="specialis_foglalkoztatasi_modozatok"><?=__('Vannak-e Önöknél speciális foglalkoztatási módozatok, pl. munkaidőkeret?')?></label></div>
@@ -87,7 +87,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('kikuldetes')!==-1, error:error_elements['kikuldetes']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="kikuldetes"><?=__('Előfordul-e kiküldetés a cégnél?')?></label></div>
@@ -100,8 +100,8 @@
         </div>
       </div>
     </div>
-    <div class="divider-text"><?=__('Szükség lenne az alábbi feladatok elvégzésére?', 'hc')?></div>
-    <div class="line">
+    <div class="divider-text" ng-if="(tipus=='kapcsolat')"><?=__('Szükség lenne az alábbi feladatok elvégzésére?', 'hc')?></div>
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('feladat_kapcsolatfelvetel')!==-1, error:error_elements['feladat_kapcsolatfelvetel']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="feladat_kapcsolatfelvetel">- <?=__('kapcsolatfelvétel az új munkavállalóval,  bekérni a szerződéshez és egyéb dokumentációhoz szükséges személyes adatokat')?></label></div>
@@ -114,7 +114,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('feladat_nav_bejelentes')!==-1, error:error_elements['feladat_nav_bejelentes']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="feladat_nav_bejelentes">- <?=__('belépő / kilépő dolgozók jogviszony változásának bejelentése a NAV felé, illetve a szükséges aláírandó nyilatkozatok, dokumentumok elkészítése')?></label></div>
@@ -127,7 +127,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('feladat_hokozi_szamfejtes')!==-1, error:error_elements['feladat_hokozi_szamfejtes']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="feladat_hokozi_szamfejtes">- <?=__('hóközi számfejtés készítése')?></label></div>
@@ -140,7 +140,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('feladat_konyveles_feladas')!==-1, error:error_elements['feladat_konyveles_feladas']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="feladat_konyveles_feladas">- <?=__('feladás előkészítése a könyvelés számára')?></label></div>
@@ -153,7 +153,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('feladat_eveleji_szja_beker')!==-1, error:error_elements['feladat_eveleji_szja_beker']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="feladat_eveleji_szja_beker">- <?=__('év elején a személyi jövedelemadóval, társadalombiztosítással kapcsolatos nyilatkozatok bekérése a munkavállalóktól és év végén az M30-as igazolások elkészítése a munkavállalók részére')?></label></div>
@@ -166,7 +166,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('feladat_jovedelemigazolas')!==-1, error:error_elements['feladat_jovedelemigazolas']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="feladat_jovedelemigazolas">- <?=__('jövedelemigazolások készítése')?></label></div>
@@ -179,7 +179,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('feladat_munkaszerzodes')!==-1, error:error_elements['feladat_munkaszerzodes']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="feladat_munkaszerzodes">- <?=__('munkaszerződések elkészítése, karbantartása, módosítások elkészítése')?></label></div>
@@ -192,7 +192,7 @@
         </div>
       </div>
     </div>
-    <div class="line">
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('feladat_ksh_adatszolgaltatas')!==-1, error:error_elements['feladat_ksh_adatszolgaltatas']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="feladat_ksh_adatszolgaltatas">- <?=__('KSH felé adatszolgáltatás')?></label></div>
@@ -205,8 +205,8 @@
         </div>
       </div>
     </div>
-    <div class="divider"></div>
-    <div class="line">
+    <div class="divider" ng-if="(tipus=='kapcsolat')"></div>
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('integralt_rendszer_hasznalat')!==-1, error:error_elements['integralt_rendszer_hasznalat']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="integralt_rendszer_hasznalat"><?=__('Használnak-e olyan integrált rendszert, melynek része a munkaidő nyilvántartás / bérszámfejtő modul?')?></label></div>
@@ -219,7 +219,7 @@
         </div>
       </div>
     </div>
-    <div class="line" ng-if="form.integralt_rendszer_hasznalat=='igen'">
+    <div class="line" ng-if="form.integralt_rendszer_hasznalat=='igen' && tipus=='kapcsolat'">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('integralt_rendszer')!==-1, error:error_elements['integralt_rendszer']}">
         <div class="flextbl">
           <div class="h"><label for="integralt_rendszer"><?=__('Melyik programot használják?')?></label></div>
@@ -227,7 +227,7 @@
         </div>
       </div>
     </div>
-    <div class="line" ng-if="form.integralt_rendszer_hasznalat=='igen'">
+    <div class="line" ng-if="form.integralt_rendszer_hasznalat=='igen' && tipus=='kapcsolat'">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('integralt_rendszer_hasznalat_jovoben')!==-1, error:error_elements['integralt_rendszer_hasznalat_jovoben']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="integralt_rendszer_hasznalat_jovoben"><?=__('Továbbra is szeretnék azt használni?')?></label></div>
@@ -242,7 +242,7 @@
         </div>
       </div>
     </div>
-    <div class="line" ng-if="form.integralt_rendszer_hasznalat=='igen'">
+    <div class="line" ng-if="form.integralt_rendszer_hasznalat=='igen' && tipus=='kapcsolat'">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('integralt_rendszer_hasznalat_hozzaferes')!==-1, error:error_elements['integralt_rendszer_hasznalat_hozzaferes']}">
         <div class="flextbl auto-width">
           <div class="h"><label for="integralt_rendszer_hasznalat_hozzaferes"><?=__('Tudnak majd biztosítani hozzáférést, hogy mi is tudjunk benne dolgozni?')?></label></div>
@@ -256,8 +256,8 @@
         </div>
       </div>
     </div>
-    <div class="divider"></div>
-    <div class="line">
+    <div class="divider" ng-if="(tipus=='kapcsolat')"></div>
+    <div class="line" ng-if="(tipus=='kapcsolat')">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('berkifizetes_datum')!==-1, error:error_elements['berkifizetes_datum']}">
         <label for="berkifizetes_datum"><?=__('Általában mikor történik Önöknél a bérek kifizetése?')?></label>
         <input type="text" ng-model="form.berkifizetes_datum" id="berkifizetes_datum" class="form-control" value=""><div class="error-hint" ng-if="error_elements.indexOf('berkifizetes_datum')!==-1">{{error_elements['berkifizetes_datum']}}</div>
@@ -266,7 +266,8 @@
     <div class="divider"></div>
     <div class="line">
       <div class="form-input-holder" ng-class="{missing:missing.indexOf('megjegyzes')!==-1, error:error_elements['megjegyzes']}">
-        <label for="megjegyzes"><?=__('Megjegyzés')?></label>
+        <label for="megjegyzes" ng-if="(tipus=='kapcsolat')"><?=__('Megjegyzés')?></label>
+        <label for="megjegyzes" ng-if="(tipus!='kapcsolat')"><?=__('Az Ön üzenete')?></label>
         <textarea class="form-control" id="megjegyzes" ng-model="form.megjegyzes"></textarea><div class="error-hint" ng-if="error_elements.indexOf('megjegyzes')!==-1">{{error_elements['megjegyzes']}}</div>
       </div>
     </div>

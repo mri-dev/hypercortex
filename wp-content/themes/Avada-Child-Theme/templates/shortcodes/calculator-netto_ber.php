@@ -110,9 +110,7 @@
     <div class="loader" ng-if="loading">Eredmény kiértékelése folyamatban...</div>
     <div class="error-msg" ng-if="error" ng-bind-html="error|unsafe"></div>
     <div class="result-body" ng-if="loaded && result!==false">
-      <div class="result-jog-text">
-        Az eredmény kiszámítása a(z) {{form.version}}. évi jogszabályok alkalmazásával történt.
-      </div>
+      <div class="result-jog-text">{{result.result_comment}}</div>
       <table class="result-table">
         <tbody>
           <tr>
@@ -123,21 +121,25 @@
             <td class="h">- Személyi jövedelemadó</td>
             <td class="v">{{result.ado_szja|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm">
+          <tr class="sm" ng-if="result.vi < 3">
             <td class="h">- Természetbeni egészségbiztosítási járulék</td>
             <td class="v">{{result.ado_termeszetegeszseg|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm">
+          <tr class="sm" ng-if="result.vi < 3">
             <td class="h">- Pénzbeli egészségbiztosítási járulék</td>
             <td class="v">{{result.ado_penzbeli_egeszseg|cash:'Ft':''}}</td>
-          </tr class="sm">
-          <tr>
-            <td class="h">- Nyugdíjjárulék</td>
+          </tr>
+          <tr class="sm" ng-if="result.vi < 3">
+            <td class="h" >- Nyugdíjjárulék</td>
             <td class="v">{{result.ado_nyugdij|cash:'Ft':''}}</td>
           </tr>
-          <tr class="sm">
+          <tr class="sm" ng-if="result.vi < 3">
             <td class="h">- Munkaerő piaci hozzájárulás</td>
             <td class="v">{{result.ado_munkaerppiac|cash:'Ft':''}}</td>
+          </tr>
+          <tr class="sm" ng-if="result.vi >= 3">
+            <td class="h">- TB járulék</td>
+            <td class="v">{{result.ado_tb|cash:'Ft':''}}</td>
           </tr>
           <tr>
             <td class="h"><strong>Összes levonás bruttó bérből</strong></td>
