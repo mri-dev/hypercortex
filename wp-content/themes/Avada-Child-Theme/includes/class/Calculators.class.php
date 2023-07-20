@@ -149,6 +149,7 @@ class CalculatorBase
     $settings[] = $this->getVersion(true).'ado_nyugdij';
     $settings[] = $this->getVersion(true).'ado_termeszetegeszseg';
     $settings[] = $this->getVersion(true).'ado_penzbeli_egeszseg';
+    $settings[] = $this->getVersion(true).'ado_min_jarulekfizetes_hatar';
 
     $settings[] = $this->getVersion(true).'ado_munkaerppiac';
     $settings[] = $this->getVersion(true).'ado_szocialis_hozzajarulas';
