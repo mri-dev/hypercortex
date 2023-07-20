@@ -11,8 +11,14 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
   $scope.success = false;
   $scope.missing = [];
   $scope.error_elements = [];
+  $scope.tipus = 'kapcsolat';
   $scope.button_text = 'Üzenet küldése';
   $scope.button_class = 'grad-button';
+
+  $scope.init = ( tipus ) => 
+  {
+    $scope.tipus = tipus;
+  }
 
   $scope.send = function()
   {
@@ -23,6 +29,7 @@ app.controller('ContactForm', ['$scope', '$http', function($scope, $http)
 
     var form = {};
     angular.copy($scope.form, form);
+    form.tipus = $scope.tipus;
 
     $http({
 			method: 'POST',
@@ -71,6 +78,19 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
     $scope.predefineFormSettings( calc );
   }
 
+  $scope.getVersions = function( calc )
+  {
+    var versions = [];
+    switch( calc )
+    {
+      case 'cegauto_ado':
+        versions = ['2018'];
+      break;
+    }
+
+    return versions;
+  }
+
   $scope.calculate = function( view )
   {
     $scope.loaded = false;
@@ -93,10 +113,10 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
 
     if ( view == 'anyak_szabadsaga' )
     {
-      if ( typeof $scope.form.munkaviszony_kezedete !== 'undefined') {
-        var date = new Date($scope.form.munkaviszony_kezedete);
-        var munkaviszony_kezedete = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
-        form.munkaviszony_kezedete = munkaviszony_kezedete;
+      if ( typeof $scope.form.munkaviszony_kezdete !== 'undefined') {
+        var date = new Date($scope.form.munkaviszony_kezdete);
+        var munkaviszony_kezdete = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+        form.munkaviszony_kezdete = munkaviszony_kezdete;
       }
 
       if ( typeof $scope.form.szules_ideje !== 'undefined') {
@@ -156,6 +176,7 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
 			url: '/wp-admin/admin-ajax.php?action=calc_settings',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			data: jQuery.param({
+        calc: calc
 			})
 		}).then(function successCallback(r)
     {
@@ -163,12 +184,21 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
 
       if ( settings_data.data ) {
         $scope.settings = settings_data.data;
-        $scope.form.version = parseInt($scope.settings.current_version);
+        $scope.form.version = $scope.settings.current_version;
       }
 
       $scope.$watch('form.version', function(n, o, s) {
         if (Object.keys(s.result).length !== 0) {
           s.calculate( s.loaded_calc );
+        }
+      });
+
+      $scope.$watch('form.mode', function(n, o, s) {
+        if( typeof n !== 'undefined' )
+        {
+          if (Object.keys(s.result).length !== 0) {
+            s.calculate( s.loaded_calc );
+          }
         }
       });
 
@@ -181,13 +211,16 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
           $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
           $scope.form.anyak_4vagytobbgyermek = 'Nem';
         break;
-        case 'teljes_berkoltseg':
+        case 'berkalkulator': case 'teljes_berkoltseg':
           $scope.settings.select_yesno = $scope.select_yesno();
           $scope.form.csaladkedvezmenyre_jogosult = 'Nem';
           $scope.form.frisshazas_jogosult = 'Nem';
           $scope.form.szemelyikedvezmeny_jogosult = 'Nem';
           $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
           $scope.form.anyak_4vagytobbgyermek = 'Nem';
+          $scope.form.oregsegi_nyugdijas = 'Nem';
+          $scope.form.kor25ev_alatti = 'Nem';
+          $scope.form.kor30ev_alatti_anya = 'Nem';
         break;
         case 'belepo_szabadsag':
           $scope.settings.select_yesno = $scope.select_yesno();
@@ -263,6 +296,23 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
             s.form.kw = n / xs;
           });
         break;
+        case 'reprezentacio_ado':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          
+          $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
+        break;
+        case 'cegtelefon_ado':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          
+          $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
+        break;
+        case 'megbizasi_dij':
+          $scope.settings.select_yesno = $scope.select_yesno();
+          
+          $scope.form.ceg_kisvallalati_ado_alany = 'Nem';
+          $scope.form.oregsegi_nyugdijas = 'Nem';
+          $scope.form.koltseghanyad = 10;
+        break;
       }
 
       console.log($scope.form);
@@ -320,6 +370,10 @@ app.controller('Calculators', ['$scope', '$http', '$locale', function($scope, $h
     yn.push('Munkahelyi étkeztetés');
     yn.push('Iskolakezdési támogatás');
     yn.push('Üdülési szolgáltatás');
+
+    yn.sort(function(a, b){
+      return a.localeCompare(b);
+    });
 
     return yn;
   }
